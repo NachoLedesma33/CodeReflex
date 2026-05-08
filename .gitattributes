@@ -1,0 +1,22 @@
+# Force LF line endings for all text files
+* text=auto eol=lf
+
+# Explicitly define line endings for specific file types
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+
+# Binary files should not be converted
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
