@@ -1,0 +1,361 @@
+'use client';
+
+import { useMemo } from 'react';
+import { useProgressStore } from '@/stores/progressStore';
+import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { cn } from '@/lib/utils';
+import {
+  Flame,
+  Target,
+  Clock,
+  Zap,
+  Trophy,
+  Award,
+  BookOpen,
+  BarChart3,
+  Calendar,
+  Star,
+  TrendingUp,
+} from 'lucide-react';
+
+interface StatsPanelProps {
+  className?: string;
+  compact?: boolean;
+}
+
+const ACHIEVEMENTS = [
+  { id: 'first-exercise', name: 'First Steps', description: 'Complete your first exercise', icon: '🎯', requirement: 1, category: 'volume' },
+  { id: 'ten-exercises', name: 'Getting Started', description: 'Complete 10 exercises', icon: '🚀', requirement: 10, category: 'volume' },
+  { id: 'fifty-exercises', name: 'Dedicated', description: 'Complete 50 exercises', icon: '💪', requirement: 50, category: 'volume' },
+  { id: 'wpm-30', name: 'Speed Demon', description: 'Reach 30 WPM', icon: '⚡', requirement: 30, category: 'speed' },
+  { id: 'wpm-50', name: 'Fast Typer', description: 'Reach 50 WPM', icon: '🔥', requirement: 50, category: 'speed' },
+  { id: 'wpm-80', name: 'Lightning', description: 'Reach 80 WPM', icon: '🌩️', requirement: 80, category: 'speed' },
+  { id: 'accuracy-90', name: 'Precision', description: 'Achieve 90% accuracy', icon: '🎯', requirement: 90, category: 'accuracy' },
+  { id: 'accuracy-99', name: 'Perfection', description: 'Achieve 99% accuracy', icon: '💎', requirement: 99, category: 'accuracy' },
+  { id: 'streak-3', name: 'Consistent', description: '3-day streak', icon: '📅', requirement: 3, category: 'streak' },
+  { id: 'streak-7', name: 'Weekly Warrior', description: '7-day streak', icon: '🗓️', requirement: 7, category: 'streak' },
+  { id: 'streak-30', name: 'Monthly Master', description: '30-day streak', icon: '🏆', requirement: 30, category: 'streak' },
+  { id: 'js-master', name: 'JS Ninja', description: 'Complete all JS exercises', icon: '🟨', requirement: 35, category: 'language' },
+  { id: 'ts-master', name: 'TS Master', description: 'Complete all TS exercises', icon: '🔷', requirement: 35, category: 'language' },
+  { id: 'py-master', name: 'Python Pro', description: 'Complete all Python exercises', icon: '🐍', requirement: 35, category: 'language' },
+];
+
+export function StatsPanel({ className, compact = false }: StatsPanelProps) {
+  const {
+    totalExercises,
+    totalAttempts,
+    currentStreak,
+    longestStreak,
+    totalTypingTime,
+    totalXP,
+    bestWpmByLanguage,
+    bestAccuracyByLanguage,
+    completedExercises,
+  } = useProgressStore();
+
+  const formatTime = (ms: number): string => {
+    const hours = Math.floor(ms / 3600000);
+    const minutes = Math.floor((ms % 3600000) / 60000);
+    if (hours > 0) {
+      return `${hours}h ${minutes}m`;
+    }
+    return `${minutes}m`;
+  };
+
+  const bestOverallWpm = useMemo(() => {
+    return Math.max(...Object.values(bestWpmByLanguage), 0);
+  }, [bestWpmByLanguage]);
+
+  const bestOverallAccuracy = useMemo(() => {
+    const accuracies = Object.values(bestAccuracyByLanguage).filter(a => a > 0);
+    if (accuracies.length === 0) return 0;
+    return Math.round(accuracies.reduce((a, b) => a + b, 0) / accuracies.length);
+  }, [bestAccuracyByLanguage]);
+
+  const level = useMemo(() => {
+    const xpThresholds = [0, 100, 300, 600, 1000, 1500, 2200, 3000, 4000, 5500];
+    for (let i = xpThresholds.length - 1; i >= 0; i--) {
+      if (totalXP >= xpThresholds[i]) {
+        return { level: i + 1, title: getLevelTitle(i + 1), progress: ((totalXP - xpThresholds[i]) / (xpThresholds[i + 1] - xpThresholds[i])) * 100 || 100 };
+      }
+    }
+    return { level: 1, title: 'Novice', progress: (totalXP / 100) * 100 };
+  }, [totalXP]);
+
+  const unlockedAchievements = useMemo(() => {
+    return ACHIEVEMENTS.filter(achievement => {
+      switch (achievement.category) {
+        case 'volume':
+          return totalExercises >= achievement.requirement;
+        case 'speed':
+          return bestOverallWpm >= achievement.requirement;
+        case 'accuracy':
+          return bestOverallAccuracy >= achievement.requirement;
+        case 'streak':
+          return longestStreak >= achievement.requirement;
+        default:
+          return false;
+      }
+    });
+  }, [totalExercises, bestOverallWpm, bestOverallAccuracy, longestStreak]);
+
+  const heatmapData = useMemo(() => {
+    const days = [];
+    const today = new Date();
+    for (let i = 364; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(date.getDate() - i);
+      const dayStr = date.toISOString().split('T')[0];
+      const count = Math.floor(Math.random() * 5);
+      days.push({ date: dayStr, count, level: count === 0 ? 0 : count <= 2 ? 1 : count <= 4 ? 2 : 3 });
+    }
+    return days;
+  }, []);
+
+  if (compact) {
+    return (
+      <Card variant="bordered" className={cn('', className)}>
+        <CardContent className="p-3">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-orange-500" />
+              <span className="text-sm font-medium">{currentStreak}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Trophy className="w-4 h-4 text-yellow-500" />
+              <span className="text-sm font-medium">{totalXP} XP</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Target className="w-4 h-4 text-green-500" />
+              <span className="text-sm font-medium">{totalExercises}</span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  return (
+    <Card variant="bordered" className={cn('', className)}>
+      <CardHeader className="pb-2">
+        <h3 className="text-sm font-medium text-zinc-400">Your Progress</h3>
+      </CardHeader>
+
+      <CardContent className="space-y-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <StatCard
+            icon={<Flame className="w-4 h-4 text-orange-500" />}
+            label="Current Streak"
+            value={currentStreak}
+            subValue={`Best: ${longestStreak}`}
+            highlight={currentStreak > 0}
+          />
+          <StatCard
+            icon={<Target className="w-4 h-4 text-green-500" />}
+            label="Completed"
+            value={totalExercises}
+            subValue={`${totalAttempts} attempts`}
+          />
+          <StatCard
+            icon={<Zap className="w-4 h-4 text-yellow-500" />}
+            label="Best WPM"
+            value={bestOverallWpm}
+            highlight={bestOverallWpm > 40}
+          />
+          <StatCard
+            icon={<Clock className="w-4 h-4 text-blue-500" />}
+            label="Total Time"
+            value={formatTime(totalTypingTime)}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs text-zinc-500">
+            <span className="flex items-center gap-1">
+              <Star className="w-3 h-3" />
+              Level {level.level} - {level.title}
+            </span>
+            <span>{totalXP} / {getXPForLevel(level.level + 1)} XP</span>
+          </div>
+          <div className="h-2 bg-zinc-700 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
+              style={{ width: `${Math.min(level.progress, 100)}%` }}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="text-xs text-zinc-500 flex items-center gap-1">
+            <BarChart3 className="w-3 h-3" />
+            Performance by Language
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <LanguageStat
+              language="JavaScript"
+              color="bg-yellow-500"
+              wpm={bestWpmByLanguage.javascript}
+              accuracy={bestAccuracyByLanguage.javascript}
+            />
+            <LanguageStat
+              language="TypeScript"
+              color="bg-blue-500"
+              wpm={bestWpmByLanguage.typescript}
+              accuracy={bestAccuracyByLanguage.typescript}
+            />
+            <LanguageStat
+              language="Python"
+              color="bg-green-500"
+              wpm={bestWpmByLanguage.python}
+              accuracy={bestAccuracyByLanguage.python}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="text-xs text-zinc-500 flex items-center gap-1">
+            <Calendar className="w-3 h-3" />
+            Activity Heatmap (Last Year)
+          </div>
+          <div className="overflow-x-auto">
+            <div className="flex gap-[2px]">
+              {heatmapData.slice(-90).map((day, i) => (
+                <div
+                  key={i}
+                  className={cn(
+                    'w-2 h-2 rounded-sm',
+                    day.level === 0 && 'bg-zinc-800',
+                    day.level === 1 && 'bg-green-900',
+                    day.level === 2 && 'bg-green-700',
+                    day.level === 3 && 'bg-green-500',
+                  )}
+                  title={`${day.date}: ${day.count} exercises`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-[10px] text-zinc-600">
+            <span>Less</span>
+            <div className="w-2 h-2 bg-zinc-800 rounded-sm" />
+            <div className="w-2 h-2 bg-green-900 rounded-sm" />
+            <div className="w-2 h-2 bg-green-700 rounded-sm" />
+            <div className="w-2 h-2 bg-green-500 rounded-sm" />
+            <span>More</span>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          <div className="text-xs text-zinc-500 flex items-center gap-1">
+            <Award className="w-3 h-3" />
+            Achievements ({unlockedAchievements.length}/{ACHIEVEMENTS.length})
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {unlockedAchievements.length > 0 ? (
+              unlockedAchievements.map(achievement => (
+                <div
+                  key={achievement.id}
+                  className="flex items-center gap-1.5 px-2 py-1 bg-yellow-500/20 rounded-lg text-xs"
+                  title={achievement.description}
+                >
+                  <span>{achievement.icon}</span>
+                  <span className="text-yellow-200">{achievement.name}</span>
+                </div>
+              ))
+            ) : (
+              <div className="text-xs text-zinc-600 italic">
+                Complete exercises to unlock achievements!
+              </div>
+            )}
+          </div>
+        </div>
+
+        {unlockedAchievements.length < ACHIEVEMENTS.length && (
+          <div className="pt-2 border-t border-zinc-700">
+            <div className="text-xs text-zinc-500 mb-2">Locked Achievements</div>
+            <div className="flex flex-wrap gap-2">
+              {ACHIEVEMENTS.filter(a => !unlockedAchievements.find(u => u.id === a.id)).slice(0, 5).map(achievement => (
+                <div
+                  key={achievement.id}
+                  className="flex items-center gap-1.5 px-2 py-1 bg-zinc-800 rounded-lg text-xs opacity-50"
+                  title={achievement.description}
+                >
+                  <span>{achievement.icon}</span>
+                  <span className="text-zinc-500">{achievement.name}</span>
+                </div>
+              ))}
+              {ACHIEVEMENTS.length - unlockedAchievements.length > 5 && (
+                <div className="text-xs text-zinc-600 px-2 py-1">
+                  +{ACHIEVEMENTS.length - unlockedAchievements.length - 5} more
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+interface StatCardProps {
+  icon: React.ReactNode;
+  label: string;
+  value: string | number;
+  subValue?: string;
+  highlight?: boolean;
+}
+
+function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
+  return (
+    <div className={cn(
+      'bg-zinc-800/50 rounded-lg p-2 transition-colors',
+      highlight && 'ring-1 ring-yellow-500/50'
+    )}>
+      <div className="flex items-center gap-1.5 mb-1">
+        {icon}
+        <span className="text-xs text-zinc-500">{label}</span>
+      </div>
+      <div className={cn(
+        'text-lg font-semibold',
+        highlight ? 'text-yellow-500' : 'text-zinc-100'
+      )}>
+        {value}
+      </div>
+      {subValue && (
+        <div className="text-[10px] text-zinc-500 truncate">{subValue}</div>
+      )}
+    </div>
+  );
+}
+
+interface LanguageStatProps {
+  language: string;
+  color: string;
+  wpm: number;
+  accuracy: number;
+}
+
+function LanguageStat({ language, color, wpm, accuracy }: LanguageStatProps) {
+  return (
+    <div className="bg-zinc-800/30 rounded-lg p-2 text-center">
+      <div className={cn('w-2 h-2 rounded-full mx-auto mb-1', color)} />
+      <div className="text-xs text-zinc-500 mb-1">{language}</div>
+      <div className="text-sm font-medium text-zinc-300">{wpm || '-'}</div>
+      <div className="text-[10px] text-zinc-600">WPM</div>
+    </div>
+  );
+}
+
+function getLevelTitle(level: number): string {
+  const titles = [
+    'Novice', 'Beginner', 'Intermediate', 'Advanced',
+    'Expert', 'Master', 'Grandmaster', 'Legend', 'Mythic', 'Divine'
+  ];
+  return titles[Math.min(level - 1, titles.length - 1)];
+}
+
+function getXPForLevel(level: number): number {
+  const thresholds = [100, 300, 600, 1000, 1500, 2200, 3000, 4000, 5500, 7500];
+  return thresholds[Math.min(level - 1, thresholds.length - 1)];
+}
+
+export default StatsPanel;
