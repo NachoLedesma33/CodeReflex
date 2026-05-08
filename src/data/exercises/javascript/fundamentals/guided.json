@@ -1,0 +1,260 @@
+{
+  "language": "javascript",
+  "level": "fundamentals",
+  "type": "guided-problems",
+  "problems": [
+    {
+      "id": "js-fund-gp-001",
+      "title": "Invertir un string",
+      "description": "Crea una función que invierta un string sin usar reverse().",
+      "context": "La inversión de strings es un problema clásico de entrevista. Entiende cómo trabajar con strings y arrays.",
+      "starterCode": "function reverseString(str) {\n  // Tu código aquí\n}",
+      "solution": "function reverseString(str) {\n  return str.split('').reverse().join('');\n}",
+      "explanation": "1. split('') convierte el string en array de caracteres\n2. reverse() invierte el array\n3. join('') convierte el array de nuevo a string",
+      "tags": ["strings", "arrays", "classic"],
+      "concepts": ["string-methods", "array-methods", "split-join"],
+      "prerequisites": ["string-split", "array-reverse"],
+      "hints": [
+        { "id": "h1", "text": "Usa split('') para convertir el string en array", "order": 1 },
+        { "id": "h2", "text": "Usa reverse() para invertir el array", "order": 2 },
+        { "id": "h3", "text": "Usa join('') para convertir el array de nuevo a string", "order": 3 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "reverseString('hello')", "expected": "'olleh'", "description": "Debe invertir 'hello'" },
+        { "id": "t2", "input": "reverseString('JavaScript')", "expected": "'tpircSavaJ'", "description": "Debe invertir 'JavaScript'" },
+        { "id": "t3", "input": "reverseString('')", "expected": "''", "description": "String vacío retorna vacío" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "estimatedDuration": 300,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-002",
+      "title": "Encontrar el número mayor",
+      "description": "Encuentra el número mayor en un array sin usar Math.max().",
+      "context": "El problema de valor máximo es fundamental. Aprende a iterar y comparar.",
+      "starterCode": "function findMax(arr) {\n  // Tu código aquí\n}",
+      "solution": "function findMax(arr) {\n  if (arr.length === 0) return undefined;\n  let max = arr[0];\n  for (let i = 1; i < arr.length; i++) {\n    if (arr[i] > max) max = arr[i];\n  }\n  return max;\n}",
+      "explanation": "1. Maneja el caso de array vacío\n2. Inicializa max con el primer elemento\n3. Itera desde el índice 1 comparando cada elemento\n4. Actualiza max si encuentra uno mayor",
+      "tags": ["arrays", "algorithms"],
+      "concepts": ["iteration", "comparison", "linear-scan"],
+      "prerequisites": ["for-loops"],
+      "hints": [
+        { "id": "h1", "text": "Inicializa una variable con el primer elemento del array", "order": 1 },
+        { "id": "h2", "text": "Itera desde el índice 1 hasta el final", "order": 2 },
+        { "id": "h3", "text": "Compara cada elemento con el máximo actual", "order": 3 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "findMax([1, 5, 3, 9, 2])", "expected": "9", "description": "Debe retornar 9" },
+        { "id": "t2", "input": "findMax([-1, -5, -3])", "expected": "-1", "description": "Debe funcionar con números negativos" },
+        { "id": "t3", "input": "findMax([42])", "expected": "42", "description": "Array de un elemento" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "estimatedDuration": 300,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-003",
+      "title": "Contar vocales",
+      "description": "Cuenta el número de vocales (a, e, i, o, u) en un string.",
+      "context": "Este ejercicio practica string iteration y conditionals.",
+      "starterCode": "function countVowels(str) {\n  // Tu código aquí\n}",
+      "solution": "function countVowels(str) {\n  const vowels = 'aeiouAEIOU';\n  let count = 0;\n  for (const char of str) {\n    if (vowels.includes(char)) {\n      count++;\n    }\n  }\n  return count;\n}",
+      "explanation": "1. Define string con todas las vocales (mayúsculas y minúsculas)\n2. Itera sobre cada carácter del string\n3. Verifica si el carácter es una vocal usando includes()\n4. Incrementa el contador si es vocal",
+      "tags": ["strings", "iteration"],
+      "concepts": ["string-iteration", "includes", "counters"],
+      "prerequisites": ["for-of-loop", "string-includes"],
+      "hints": [
+        { "id": "h1", "text": "Crea un string con todas las vocales: 'aeiouAEIOU'", "order": 1 },
+        { "id": "h2", "text": "Usa un loop para iterar sobre cada carácter", "order": 2 },
+        { "id": "h3", "text": "Usa includes() para verificar si es vocal", "order": 3 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "countVowels('hello')", "expected": "2", "description": "hola tiene 2 vocales" },
+        { "id": "t2", "input": "countVowels('AEIOU')", "expected": "5", "description": "Debe contar mayúsculas" },
+        { "id": "t3", "input": "countVowels('xyz')", "expected": "0", "description": "Sin vocales" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "estimatedDuration": 300,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-004",
+      "title": "Eliminar duplicados",
+      "description": "Elimina los elementos duplicados de un array.",
+      "context": "Los duplicates son un problema común. Aprende múltiples soluciones.",
+      "starterCode": "function removeDuplicates(arr) {\n  // Tu código aquí\n}",
+      "solution": "function removeDuplicates(arr) {\n  return [...new Set(arr)];\n}",
+      "explanation": "1. new Set(arr) crea un Set que elimina duplicados automáticamente\n2. El spread operator (...) convierte el Set de vuelta a array",
+      "tags": ["arrays", "sets"],
+      "concepts": ["set", "spread-operator", "unique-values"],
+      "prerequisites": ["set-basics", "spread-operator"],
+      "hints": [
+        { "id": "h1", "text": "Un Set automáticamente elimina duplicados", "order": 1 },
+        { "id": "h2", "text": "Usa el spread operator para convertir Set a array", "order": 2 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "removeDuplicates([1, 2, 2, 3, 3, 3])", "expected": "[1,2,3]", "description": "Elimina duplicados" },
+        { "id": "t2", "input": "removeDuplicates(['a', 'b', 'a'])", "expected": "['a','b']", "description": "Funciona con strings" },
+        { "id": "t3", "input": "removeDuplicates([])", "expected": "[]", "description": "Array vacío retorna vacío" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "estimatedDuration": 240,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-005",
+      "title": "Verificar palindrome",
+      "description": "Determina si un string es un palindrome (se lee igual al revés).",
+      "context": "Palindrome es un problema clásico de entrevistas. Practica string manipulation.",
+      "starterCode": "function isPalindrome(str) {\n  // Tu código aquí\n}",
+      "solution": "function isPalindrome(str) {\n  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, '');\n  return cleaned === cleaned.split('').reverse().join('');\n}",
+      "explanation": "1. Limpia el string: lowercase y remove non-alphanumeric\n2. Compara el string limpio con su versión invertida\n3. Si son iguales, es un palindrome",
+      "tags": ["strings", "algorithms", "classic"],
+      "concepts": ["string-cleaning", "reversal", "comparison"],
+      "prerequisites": ["string-methods", "array-methods"],
+      "hints": [
+        { "id": "h1", "text": "Primero limpia el string: toLowerCase() y replace()", "order": 1 },
+        { "id": "h2", "text": "Invierte el string limpio y compáralo con el original", "order": 2 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "isPalindrome('racecar')", "expected": "true", "description": "Palindrome simple" },
+        { "id": "t2", "input": "isPalindrome('A man a plan a canal Panama')", "expected": "true", "description": "Con espacios y mayúsculas" },
+        { "id": "t3", "input": "isPalindrome('hello')", "expected": "false", "description": "No es palindrome" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "estimatedDuration": 360,
+      "difficultyScore": 3
+    },
+    {
+      "id": "js-fund-gp-006",
+      "title": "FizzBuzz clásico",
+      "description": "Implementa FizzBuzz: múltiplos de 3='Fizz', 5='Buzz', 15='FizzBuzz'.",
+      "context": "FizzBuzz es el problema más famoso de entrevistas. Practica conditionals y loops.",
+      "starterCode": "function fizzBuzz(n) {\n  // Tu código aquí\n}",
+      "solution": "function fizzBuzz(n) {\n  const result = [];\n  for (let i = 1; i <= n; i++) {\n    if (i % 15 === 0) result.push('FizzBuzz');\n    else if (i % 3 === 0) result.push('Fizz');\n    else if (i % 5 === 0) result.push('Buzz');\n    else result.push(String(i));\n  }\n  return result;\n}",
+      "explanation": "1. Itera desde 1 hasta n\n2. Verifica múltiplos en orden: 15 primero (3 y 5), luego 3, luego 5\n3. Agrega el string apropiado o el número",
+      "tags": ["algorithms", "conditionals", "classic"],
+      "concepts": ["modulo", "conditional-chaining", "fizzbuzz"],
+      "prerequisites": ["for-loops", "modulo-operator"],
+      "hints": [
+        { "id": "h1", "text": "Verifica múltiplo de 15 primero (antes que 3 o 5)", "order": 1 },
+        { "id": "h2", "text": "Usa el operador módulo (%) para verificar divisibilidad", "order": 2 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "fizzBuzz(5)", "expected": "['1','2','Fizz','4','Buzz']", "description": "Primeros 5 números" },
+        { "id": "t2", "input": "fizzBuzz(15).slice(-3)", "expected": "['Fizz','Buzz','FizzBuzz']", "description": "Verifica FizzBuzz" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "estimatedDuration": 300,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-007",
+      "title": "Encontrar segundo mayor",
+      "description": "Encuentra el segundo número más grande en un array.",
+      "context": "Practica manejo de múltiples valores y seguimiento de límites.",
+      "starterCode": "function findSecondMax(arr) {\n  // Tu código aquí\n}",
+      "solution": "function findSecondMax(arr) {\n  if (arr.length < 2) return undefined;\n  let max = -Infinity, secondMax = -Infinity;\n  for (const num of arr) {\n    if (num > max) {\n      secondMax = max;\n      max = num;\n    } else if (num > secondMax && num !== max) {\n      secondMax = num;\n    }\n  }\n  return secondMax;\n}",
+      "explanation": "1. Maneja arrays menores a 2 elementos\n2. Usa dos variables: max y secondMax\n3. Actualiza ambas en cada iteración",
+      "tags": ["arrays", "algorithms"],
+      "concepts": ["two-pass-tracking", "max-finding"],
+      "prerequisites": ["for-of-loop", "comparison"],
+      "hints": [
+        { "id": "h1", "text": "Usa dos variables: una para el mayor y otra para el segundo mayor", "order": 1 },
+        { "id": "h2", "text": "Si el número actual es mayor que max, segundoMax = max y max = número", "order": 2 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "findSecondMax([5, 1, 9, 3, 7])", "expected": "7", "description": "Segundo mayor es 7" },
+        { "id": "t2", "input": "findSecondMax([1, 2])", "expected": "1", "description": "Dos elementos" },
+        { "id": "t3", "input": "findSecondMax([5, 5, 5])", "expected": "5", "description": "Con duplicados" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "estimatedDuration": 360,
+      "difficultyScore": 3
+    },
+    {
+      "id": "js-fund-gp-008",
+      "title": "Sumar elementos pares",
+      "description": "Suma todos los números pares en un array.",
+      "context": "Practica filtering y accumulate simultáneamente.",
+      "starterCode": "function sumEven(arr) {\n  // Tu código aquí\n}",
+      "solution": "function sumEven(arr) {\n  return arr.reduce((sum, num) => sum + (num % 2 === 0 ? num : 0), 0);\n}",
+      "explanation": "1. Usa reduce para acumular\n2. En cada iteración, verifica si el número es par (num % 2 === 0)\n3. Agrega el número al acumulador si es par, si no agrega 0",
+      "tags": ["arrays", "functional", "reduce"],
+      "concepts": ["reduce", "modulo", "filtering"],
+      "prerequisites": ["reduce-basics", "modulo"],
+      "hints": [
+        { "id": "h1", "text": "Usa reduce con acumulador inicial de 0", "order": 1 },
+        { "id": "h2", "text": "Usa num % 2 === 0 para verificar si es par", "order": 2 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "sumEven([1, 2, 3, 4, 5, 6])", "expected": "12", "description": "2 + 4 + 6 = 12" },
+        { "id": "t2", "input": "sumEven([1, 3, 5])", "expected": "0", "description": "Sin números pares" },
+        { "id": "t3", "input": "sumEven([2, 4, 6, 8])", "expected": "20", "description": "Todos pares" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "estimatedDuration": 240,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-009",
+      "title": "Capitalizar primera letra",
+      "description": "Convierte la primera letra de cada palabra en mayúscula.",
+      "context": "Practica string manipulation y split/join.",
+      "starterCode": "function capitalizeWords(str) {\n  // Tu código aquí\n}",
+      "solution": "function capitalizeWords(str) {\n  return str\n    .split(' ')\n    .map(word => word.charAt(0).toUpperCase() + word.slice(1))\n    .join(' ');\n}",
+      "explanation": "1. split(' ') divide el string en palabras\n2. map transforma cada palabra: primera letra mayúscula + resto\n3. join(' ') une las palabras de nuevo",
+      "tags": ["strings", "transformations"],
+      "concepts": ["split-join", "map", "charAt", "slice"],
+      "prerequisites": ["split-join", "map"],
+      "hints": [
+        { "id": "h1", "text": "Usa split(' ') para obtener un array de palabras", "order": 1 },
+        { "id": "h2", "text": "Usa map para transformar cada palabra", "order": 2 },
+        { "id": "h3", "text": "Para cada palabra: charAt(0).toUpperCase() + word.slice(1)", "order": 3 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "capitalizeWords('hello world')", "expected": "'Hello World'", "description": "Dos palabras" },
+        { "id": "t2", "input": "capitalizeWords('javaScript is awesome')", "expected": "'JavaScript Is Awesome'", "description": "Múltiples palabras" }
+      ],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "estimatedDuration": 300,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-010",
+      "title": "Fusionar dos arrays ordenados",
+      "description": "Dado dos arrays ordenados, fusiónalos en uno solo ordenado.",
+      "context": "Este algoritmo es fundamental para mergesort. Practica two-pointer technique.",
+      "starterCode": "function mergeSortedArrays(arr1, arr2) {\n  // Tu código aquí\n}",
+      "solution": "function mergeSortedArrays(arr1, arr2) {\n  const result = [];\n  let i = 0, j = 0;\n  while (i < arr1.length && j < arr2.length) {\n    if (arr1[i] <= arr2[j]) {\n      result.push(arr1[i]);\n      i++;\n    } else {\n      result.push(arr2[j]);\n      j++;\n    }\n  }\n  while (i < arr1.length) result.push(arr1[i++]);\n  while (j < arr2.length) result.push(arr2[j++]);\n  return result;\n}",
+      "explanation": "1. Usa dos índices, uno para cada array\n2. Compara elementos actuales y agrega el menor\n3. Cuando un array se agota, agrega los restantes del otro",
+      "tags": ["arrays", "algorithms", "merge"],
+      "concepts": ["two-pointers", "merge-algorithm", "sorted-arrays"],
+      "prerequisites": ["while-loops", "array-access"],
+      "hints": [
+        { "id": "h1", "text": "Usa dos índices, uno para cada array", "order": 1 },
+        { "id": "h2", "text": "Compara arr1[i] con arr2[j] y agrega el menor", "order": 2 },
+        { "id": "h3", "text": "Agrega los elementos restantes cuando un array termine", "order": 3 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "mergeSortedArrays([1,3,5], [2,4,6])", "expected": "[1,2,3,4,5,6]", "description": "Merge básico" },
+        { "id": "t2", "input": "mergeSortedArrays([1,2,3], [4,5,6])", "expected": "[1,2,3,4,5,6]", "description": "Sin overlap" },
+        { "id": "t3", "input": "mergeSortedArrays([1], [2,3])", "expected": "[1,2,3]", "description": "Diferentes tamaños" }
+      ],
+      "timeComplexity": "O(n + m)",
+      "spaceComplexity": "O(n + m)",
+      "estimatedDuration": 420,
+      "difficultyScore": 4
+    }
+  ]
+}

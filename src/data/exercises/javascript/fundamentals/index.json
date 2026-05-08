@@ -1,0 +1,10 @@
+{
+  "language": "javascript",
+  "level": "fundamentals",
+  "reflexCount": 35,
+  "guidedCount": 35,
+  "totalCount": 70,
+  "tags": ["functions", "arrays", "strings", "objects", "classes", "async", "es6", "loops", "conditionals"],
+  "concepts": ["arrow-functions", "destructuring", "spread-operator", "map", "filter", "reduce", "async-await", "classes", "promises", "modules"],
+  "lastUpdated": "2026-05-08T12:00:00Z"
+}
