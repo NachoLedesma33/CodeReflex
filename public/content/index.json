@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "generatedAt": "2026-05-08T00:00:00.000Z",
+  "languages": ["javascript", "typescript", "python"],
+  "levels": ["fundamentals", "intermediate", "interview", "advanced"],
+  "types": ["reflex-snippets", "guided-problems"],
+  "totalFiles": 0,
+  "exercises": {
+    "javascript-fundamentals-reflex": 0,
+    "javascript-fundamentals-guided": 0,
+    "typescript-fundamentals-reflex": 0,
+    "typescript-fundamentals-guided": 0,
+    "python-fundamentals-reflex": 0,
+    "python-fundamentals-guided": 0
+  }
+}

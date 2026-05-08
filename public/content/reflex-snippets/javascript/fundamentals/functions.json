@@ -1,0 +1,65 @@
+{
+  "category": "functions",
+  "snippets": [
+    {
+      "id": "js-fund-rt-006",
+      "title": "Function declaration",
+      "description": "Declare a named function",
+      "context": "Function declarations are hoisted",
+      "codeSnippet": "function greet(name) { return `Hello, ${name}`; }",
+      "typingStyle": "full",
+      "tags": ["functions", "declaration"],
+      "concepts": ["function-declaration", "return-statement"],
+      "estimatedDuration": 25,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-rt-007",
+      "title": "Arrow function with block",
+      "description": "Arrow function with multiple statements",
+      "context": "Arrow functions with blocks need explicit return",
+      "codeSnippet": "const multiply = (a, b) => { return a * b; };",
+      "typingStyle": "full",
+      "tags": ["functions", "arrow-functions"],
+      "concepts": ["arrow-functions", "block-body"],
+      "estimatedDuration": 25,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-rt-008",
+      "title": "Default parameters",
+      "description": "Use default parameter values",
+      "context": "Default parameters are used when arguments are undefined",
+      "codeSnippet": "function greet(name = 'World') { return `Hello, ${name}`; }",
+      "typingStyle": "full",
+      "tags": ["functions", "default-parameters"],
+      "concepts": ["default-values", "parameters"],
+      "estimatedDuration": 30,
+      "difficultyScore": 3
+    },
+    {
+      "id": "js-fund-rt-009",
+      "title": "Rest parameters",
+      "description": "Collect remaining arguments into an array",
+      "context": "Rest parameters allow variable number of arguments",
+      "codeSnippet": "const sum = (...numbers) => numbers.reduce((a, b) => a + b, 0);",
+      "typingStyle": "full",
+      "tags": ["functions", "rest-parameters"],
+      "concepts": ["rest-parameters", "variadic-functions"],
+      "estimatedDuration": 35,
+      "difficultyScore": 4
+    },
+    {
+      "id": "js-fund-rt-010",
+      "title": "Callback pattern",
+      "description": "Pass a function as callback",
+      "context": "Callbacks are fundamental to async JavaScript",
+      "codeSnippet": "array.forEach(item => console.log(item));",
+      "typingStyle": "full",
+      "tags": ["functions", "callbacks", "arrays"],
+      "concepts": ["callbacks", "higher-order-functions"],
+      "estimatedDuration": 30,
+      "difficultyScore": 3
+    }
+  ]
+}

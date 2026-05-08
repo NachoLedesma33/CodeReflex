@@ -1,0 +1,65 @@
+{
+  "category": "variables",
+  "snippets": [
+    {
+      "id": "js-fund-rt-001",
+      "title": "Declare a constant",
+      "description": "Use const to declare a constant value",
+      "context": "Constants are used for values that should not change",
+      "codeSnippet": "const PI = 3.14159;",
+      "typingStyle": "full",
+      "tags": ["variables", "const"],
+      "concepts": ["constants", "declaration"],
+      "estimatedDuration": 15,
+      "difficultyScore": 1
+    },
+    {
+      "id": "js-fund-rt-002",
+      "title": "Declare a let variable",
+      "description": "Use let to declare a mutable variable",
+      "context": "Use let for values that will change",
+      "codeSnippet": "let count = 0;",
+      "typingStyle": "full",
+      "tags": ["variables", "let"],
+      "concepts": ["variables", "mutation"],
+      "estimatedDuration": 15,
+      "difficultyScore": 1
+    },
+    {
+      "id": "js-fund-rt-003",
+      "title": "Template literal",
+      "description": "Use template literals for string interpolation",
+      "context": "Template literals allow embedding expressions in strings",
+      "codeSnippet": "const greeting = `Hello, ${name}!`;",
+      "typingStyle": "full",
+      "tags": ["strings", "template-literals"],
+      "concepts": ["string-interpolation", "template-literals"],
+      "estimatedDuration": 20,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-rt-004",
+      "title": "Arrow function basic",
+      "description": "Write a simple arrow function",
+      "context": "Arrow functions provide a concise syntax",
+      "codeSnippet": "const add = (a, b) => a + b;",
+      "typingStyle": "full",
+      "tags": ["functions", "arrow-functions"],
+      "concepts": ["arrow-functions", "concise-syntax"],
+      "estimatedDuration": 20,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-rt-005",
+      "title": "Array destructuring",
+      "description": "Destructure an array into variables",
+      "context": "Destructuring simplifies extracting values",
+      "codeSnippet": "const [first, second] = items;",
+      "typingStyle": "full",
+      "tags": ["arrays", "destructuring"],
+      "concepts": ["array-destructuring", "pattern-matching"],
+      "estimatedDuration": 25,
+      "difficultyScore": 3
+    }
+  ]
+}

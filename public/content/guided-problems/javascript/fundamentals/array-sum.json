@@ -1,0 +1,78 @@
+{
+  "category": "arrays",
+  "problems": [
+    {
+      "id": "js-fund-gp-001",
+      "title": "Sum of Array Elements",
+      "description": "Write a function that calculates the sum of all elements in an array of numbers.",
+      "context": "Array reduction is a common operation in JavaScript. The reduce method is powerful but can be confusing for beginners.",
+      "starterCode": "function sumArray(numbers) {\n  // Your code here\n}",
+      "solution": "function sumArray(numbers) {\n  return numbers.reduce((acc, num) => acc + num, 0);\n}",
+      "explanation": "We use the reduce method which takes a callback with two parameters: the accumulator (acc) and the current element (num). The second argument (0) is the initial value. We add each number to the accumulator, returning the total at the end.",
+      "technicalNotes": [
+        {
+          "id": "tn1",
+          "title": "Reduce Method",
+          "description": "The reduce() method executes a reducer function on each element, resulting in a single value.",
+          "codeExample": "const sum = [1, 2, 3].reduce((a, b) => a + b, 0); // 6"
+        },
+        {
+          "id": "tn2",
+          "title": "Initial Value",
+          "description": "Always provide an initial value for reduce to avoid unexpected results with empty arrays."
+        }
+      ],
+      "hints": [
+        { "id": "h1", "text": "Think about how you would add numbers on paper - you start with 0 and keep adding each number", "order": 1 },
+        { "id": "h2", "text": "The reduce method is perfect for this - it iterates through the array while keeping track of a running total", "order": 2 },
+        { "id": "h3", "text": "Use .reduce((accumulator, current) => accumulator + current, 0)", "order": 3 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "[1, 2, 3, 4, 5]", "expected": "15", "description": "Sum of 1 to 5" },
+        { "id": "t2", "input": "[]", "expected": "0", "description": "Empty array" },
+        { "id": "t3", "input": "[10]", "expected": "10", "description": "Single element" },
+        { "id": "t4", "input": "[-1, 1]", "expected": "0", "description": "Positive and negative" }
+      ],
+      "tags": ["arrays", "reduce", "fundamentals"],
+      "concepts": ["array-reduce", "accumulation-pattern"],
+      "prerequisites": ["basic-arrays", "functions"],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(1)",
+      "estimatedDuration": 300,
+      "difficultyScore": 2
+    },
+    {
+      "id": "js-fund-gp-002",
+      "title": "Find Maximum Value",
+      "description": "Write a function that finds the largest number in an array.",
+      "context": "Finding the maximum is a classic interview question that can be solved in multiple ways.",
+      "starterCode": "function findMax(numbers) {\n  // Your code here\n}",
+      "solution": "function findMax(numbers) {\n  if (numbers.length === 0) return undefined;\n  return Math.max(...numbers);\n}",
+      "explanation": "We use the spread operator (...) to pass all array elements as separate arguments to Math.max(). For an empty array, we return undefined.",
+      "technicalNotes": [
+        {
+          "id": "tn1",
+          "title": "Spread Operator",
+          "description": "The spread operator expands an array into individual elements",
+          "codeExample": "Math.max(...[1, 2, 3]) // Same as Math.max(1, 2, 3)"
+        }
+      ],
+      "hints": [
+        { "id": "h1", "text": "Consider what should happen with an empty array", "order": 1 },
+        { "id": "h2", "text": "Math.max can find the maximum of multiple numbers", "order": 2 }
+      ],
+      "tests": [
+        { "id": "t1", "input": "[1, 5, 3, 9, 2]", "expected": "9", "description": "Basic case" },
+        { "id": "t2", "input": "[]", "expected": "undefined", "description": "Empty array" },
+        { "id": "t3", "input": "[42]", "expected": "42", "description": "Single element" }
+      ],
+      "tags": ["arrays", "math", "fundamentals"],
+      "concepts": ["spread-operator", "math-max"],
+      "prerequisites": ["basic-arrays", "spread-syntax"],
+      "timeComplexity": "O(n)",
+      "spaceComplexity": "O(n)",
+      "estimatedDuration": 240,
+      "difficultyScore": 2
+    }
+  ]
+}
