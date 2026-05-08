@@ -51,6 +51,18 @@ export function CodeEditor({
   const decorationsRef = useRef<string[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
 
+  const checkCompletion = useCallback((code: string) => {
+    if (isCompleted) return;
+
+    const normalizedExpected = expectedCode.replace(/\s+/g, ' ').trim();
+    const normalizedCode = code.replace(/\s+/g, ' ').trim();
+
+    if (normalizedCode === normalizedExpected) {
+      setIsCompleted(true);
+      onComplete?.(true);
+    }
+  }, [expectedCode, isCompleted, onComplete]);
+
   // Store integrations
   const { 
     theme, 
@@ -121,22 +133,6 @@ export function CodeEditor({
       checkCompletion(value);
     });
   }, [theme, onChange]);
-
-  // ============================================
-  // COMPLETION CHECK
-  // ============================================
-
-  const checkCompletion = useCallback((code: string) => {
-    if (isCompleted) return;
-
-    const normalizedExpected = expectedCode.replace(/\s+/g, ' ').trim();
-    const normalizedCode = code.replace(/\s+/g, ' ').trim();
-
-    if (normalizedCode === normalizedExpected) {
-      setIsCompleted(true);
-      onComplete?.(true);
-    }
-  }, [expectedCode, isCompleted, onComplete]);
 
   // ============================================
   // UPDATE DECORATIONS

@@ -285,7 +285,7 @@ export function ExerciseInfo({
               ))}
               {revealedHints === 0 && (
                 <div className="text-xs text-zinc-600 italic">
-                  Click "Reveal Hint" if you get stuck
+                  Click &quot;Reveal Hint&quot; if you get stuck
                 </div>
               )}
             </div>
