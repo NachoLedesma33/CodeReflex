@@ -215,3 +215,15 @@ export interface ExerciseIndex {
   byLanguage: Record<ProgrammingLanguage, number>;
   byLevel: Record<DifficultyLevel, number>;
 }
+
+export interface TypingMetrics {
+  wpm: number;
+  accuracy: number;
+  totalKeystrokes: number;
+  correctKeystrokes: number;
+  errors: number;
+  corrections: number;
+  elapsedTime: number;
+  charactersTyped: number;
+  charactersRemaining: number;
+}
