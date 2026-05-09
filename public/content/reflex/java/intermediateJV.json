@@ -1,0 +1,152 @@
+[
+  {
+    "id": "java-intermediate-011",
+    "title": "ArrayList Usage",
+    "description": "Work with dynamic lists using ArrayList.",
+    "context": "Common replacement for arrays in real Java applications.",
+    "difficultyScore": 30,
+    "typingStyle": "full",
+    "tags": ["java", "collections"],
+    "concepts": ["ArrayList", "dynamic data structures"],
+    "technicalNotes": [
+      "ArrayList grows dynamically",
+      "Part of Java Collections Framework"
+    ],
+    "codeSnippet": "import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<String> names = new ArrayList<>();\n\n        names.add(\"Nacho\");\n        names.add(\"Maria\");\n\n        for (String n : names) {\n            System.out.println(n);\n        }\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-012",
+    "title": "HashMap Basics",
+    "description": "Store key-value pairs using HashMap.",
+    "context": "Core structure for caching and fast lookup systems.",
+    "difficultyScore": 33,
+    "typingStyle": "full",
+    "tags": ["java", "map"],
+    "concepts": ["hash tables"],
+    "technicalNotes": [
+      "Keys are unique",
+      "Fast O(1) average lookup"
+    ],
+    "codeSnippet": "import java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        HashMap<String, Integer> map = new HashMap<>();\n\n        map.put(\"a\", 1);\n        map.put(\"b\", 2);\n\n        System.out.println(map.get(\"a\"));\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-013",
+    "title": "Inheritance Basics",
+    "description": "Use class inheritance in Java.",
+    "context": "Fundamental OOP concept for code reuse.",
+    "difficultyScore": 35,
+    "typingStyle": "full",
+    "tags": ["java", "oop"],
+    "concepts": ["inheritance"],
+    "technicalNotes": [
+      "extends keyword used",
+      "Child inherits parent behavior"
+    ],
+    "codeSnippet": "class Animal {\n    void sound() {\n        System.out.println(\"Animal sound\");\n    }\n}\n\nclass Dog extends Animal {\n    void bark() {\n        System.out.println(\"Bark\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Dog d = new Dog();\n        d.sound();\n        d.bark();\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-014",
+    "title": "Polymorphism Basics",
+    "description": "Use method overriding and polymorphism.",
+    "context": "Essential for scalable OOP design.",
+    "difficultyScore": 36,
+    "typingStyle": "full",
+    "tags": ["java", "oop"],
+    "concepts": ["polymorphism"],
+    "technicalNotes": [
+      "Same method behaves differently",
+      "Runtime behavior selection"
+    ],
+    "codeSnippet": "class Animal {\n    void sound() {\n        System.out.println(\"Animal sound\");\n    }\n}\n\nclass Dog extends Animal {\n    @Override\n    void sound() {\n        System.out.println(\"Bark\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.sound();\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-015",
+    "title": "Interfaces Basics",
+    "description": "Define and implement interfaces.",
+    "context": "Core abstraction tool in Java architecture.",
+    "difficultyScore": 38,
+    "typingStyle": "full",
+    "tags": ["java", "interfaces"],
+    "concepts": ["abstraction"],
+    "technicalNotes": [
+      "Defines contract",
+      "Multiple implementations possible"
+    ],
+    "codeSnippet": "interface Vehicle {\n    void move();\n}\n\nclass Car implements Vehicle {\n    public void move() {\n        System.out.println(\"Car moving\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Vehicle v = new Car();\n        v.move();\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-016",
+    "title": "Abstract Classes",
+    "description": "Use abstract classes to define shared behavior.",
+    "context": "Common OOP pattern for base class design.",
+    "difficultyScore": 42,
+    "typingStyle": "full",
+    "tags": ["java", "oop", "abstraction"],
+    "concepts": ["abstract classes"],
+    "technicalNotes": [
+      "Cannot be instantiated directly",
+      "Used as base templates"
+    ],
+    "codeSnippet": "abstract class Animal {\n    abstract void sound();\n\n    void sleep() {\n        System.out.println(\"Sleeping\");\n    }\n}\n\nclass Dog extends Animal {\n    void sound() {\n        System.out.println(\"Bark\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.sound();\n        a.sleep();\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-017",
+    "title": "Exception Propagation",
+    "description": "Understand how exceptions propagate through methods.",
+    "context": "Important for debugging backend systems.",
+    "difficultyScore": 44,
+    "typingStyle": "full",
+    "tags": ["java", "exceptions"],
+    "concepts": ["exception flow"],
+    "technicalNotes": [
+      "Exceptions bubble up call stack",
+      "Must be handled or declared"
+    ],
+    "codeSnippet": "public class Main {\n\n    static void level3() {\n        int x = 10 / 0;\n    }\n\n    static void level2() {\n        level3();\n    }\n\n    static void level1() {\n        level2();\n    }\n\n    public static void main(String[] args) {\n        try {\n            level1();\n        } catch (Exception e) {\n            System.out.println(\"Error caught\");\n        }\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-018",
+    "title": "Working with Sets",
+    "description": "Use HashSet to store unique values.",
+    "context": "Used for deduplication and fast lookup.",
+    "difficultyScore": 40,
+    "typingStyle": "full",
+    "tags": ["java", "collections"],
+    "concepts": ["sets"],
+    "technicalNotes": [
+      "No duplicates allowed",
+      "Unordered collection"
+    ],
+    "codeSnippet": "import java.util.HashSet;\n\npublic class Main {\n    public static void main(String[] args) {\n        HashSet<String> set = new HashSet<>();\n\n        set.add(\"A\");\n        set.add(\"A\");\n        set.add(\"B\");\n\n        System.out.println(set);\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-019",
+    "title": "Static Keyword Usage",
+    "description": "Understand static variables and methods.",
+    "context": "Used for shared state and utility functions.",
+    "difficultyScore": 39,
+    "typingStyle": "full",
+    "tags": ["java", "static"],
+    "concepts": ["class-level members"],
+    "technicalNotes": [
+      "Static belongs to class, not instance",
+      "Shared across objects"
+    ],
+    "codeSnippet": "class Counter {\n    static int count = 0;\n\n    Counter() {\n        count++;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        new Counter();\n        new Counter();\n\n        System.out.println(Counter.count);\n    }\n}\n"
+  },
+  {
+    "id": "java-intermediate-020",
+    "title": "Basic Threading",
+    "description": "Create and run simple threads in Java.",
+    "context": "Introduction to concurrency in Java applications.",
+    "difficultyScore": 48,
+    "typingStyle": "full",
+    "tags": ["java", "threads"],
+    "concepts": ["multithreading"],
+    "technicalNotes": [
+      "Threads run in parallel",
+      "Extends Thread or implements Runnable"
+    ],
+    "codeSnippet": "class MyThread extends Thread {\n    public void run() {\n        System.out.println(\"Thread running\");\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        MyThread t = new MyThread();\n        t.start();\n    }\n}\n"
+  }
+]

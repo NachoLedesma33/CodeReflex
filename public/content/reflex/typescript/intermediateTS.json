@@ -1,0 +1,152 @@
+[
+  {
+    "id": "ts-intermediate-011",
+    "title": "Generic API Response Wrapper",
+    "description": "Create a reusable generic type for API responses.",
+    "context": "Used in frontend-backend communication to standardize API responses.",
+    "difficultyScore": 32,
+    "typingStyle": "full",
+    "tags": ["typescript", "generics", "api"],
+    "concepts": ["generics", "api typing"],
+    "technicalNotes": [
+      "Generics allow reusable response structures",
+      "Common in REST APIs"
+    ],
+    "codeSnippet": "type ApiResponse<T> = {\n  success: boolean;\n  data: T;\n  error?: string;\n};\n\nconst response: ApiResponse<{ name: string }> = {\n  success: true,\n  data: {\n    name: 'Nacho'\n  }\n};\n\nconsole.log(response.data.name);\n"
+  },
+  {
+    "id": "ts-intermediate-012",
+    "title": "Function Overloads",
+    "description": "Define multiple function signatures for different input types.",
+    "context": "Used when functions behave differently based on input types.",
+    "difficultyScore": 35,
+    "typingStyle": "full",
+    "tags": ["typescript", "overloads"],
+    "concepts": ["function overloading"],
+    "technicalNotes": [
+      "Multiple signatures improve flexibility",
+      "Implementation handles all cases"
+    ],
+    "codeSnippet": "function format(input: string): string;\nfunction format(input: number): string;\n\nfunction format(input: any): string {\n  return String(input);\n}\n\nconsole.log(format('hello'));\nconsole.log(format(123));\n"
+  },
+  {
+    "id": "ts-intermediate-013",
+    "title": "Mapped Types",
+    "description": "Transform existing types into new ones dynamically.",
+    "context": "Used in large-scale systems to generate derived types.",
+    "difficultyScore": 38,
+    "typingStyle": "full",
+    "tags": ["typescript", "mapped-types"],
+    "concepts": ["type transformation"],
+    "technicalNotes": [
+      "Mapped types iterate over keys",
+      "Useful for DTO transformations"
+    ],
+    "codeSnippet": "type User = {\n  id: number;\n  name: string;\n};\n\ntype ReadonlyUser = {\n  readonly [K in keyof User]: User[K];\n};\n\nconst user: ReadonlyUser = {\n  id: 1,\n  name: 'Nacho'\n};\n\nconsole.log(user);\n"
+  },
+  {
+    "id": "ts-intermediate-014",
+    "title": "Async Function Typing",
+    "description": "Type asynchronous functions correctly using Promise.",
+    "context": "Essential for API calls and async workflows.",
+    "difficultyScore": 36,
+    "typingStyle": "full",
+    "tags": ["typescript", "async", "promises"],
+    "concepts": ["async typing"],
+    "technicalNotes": [
+      "Async functions always return Promise",
+      "Type returned value inside Promise"
+    ],
+    "codeSnippet": "async function fetchData(): Promise<string> {\n  return 'data loaded';\n}\n\nfetchData().then(console.log);\n"
+  },
+  {
+    "id": "ts-intermediate-015",
+    "title": "Type Guards with Custom Functions",
+    "description": "Create custom type guards to refine union types.",
+    "context": "Used when dealing with complex runtime data validation.",
+    "difficultyScore": 40,
+    "typingStyle": "full",
+    "tags": ["typescript", "type-guards"],
+    "concepts": ["custom type guards"],
+    "technicalNotes": [
+      "Type guards return type predicates",
+      "Improves runtime safety"
+    ],
+    "codeSnippet": "type Dog = { bark: () => void };\ntype Cat = { meow: () => void };\n\nfunction isDog(animal: Dog | Cat): animal is Dog {\n  return (animal as Dog).bark !== undefined;\n}\n\nconst pet: Dog | Cat = { bark: () => console.log('woof') };\n\nif (isDog(pet)) {\n  pet.bark();\n}\n"
+  },
+{
+    "id": "ts-intermediate-016",
+    "title": "Conditional Types Basics",
+    "description": "Use conditional types to derive types based on conditions.",
+    "context": "Common in utility libraries like React props manipulation.",
+    "difficultyScore": 42,
+    "typingStyle": "full",
+    "tags": ["typescript", "conditional-types"],
+    "concepts": ["conditional types"],
+    "technicalNotes": [
+      "Conditional types use extends keyword",
+      "Enable advanced type logic"
+    ],
+    "codeSnippet": "type IsString<T> = T extends string ? true : false;\n\ntype A = IsString<string>;\ntype B = IsString<number>;\n\nconst a: A = true;\nconst b: B = false;\n"
+  },
+  {
+    "id": "ts-intermediate-017",
+    "title": "Index Signatures",
+    "description": "Allow dynamic object keys with typed values.",
+    "context": "Useful for dictionaries, caches, and maps.",
+    "difficultyScore": 37,
+    "typingStyle": "full",
+    "tags": ["typescript", "index-signature"],
+    "concepts": ["dynamic keys"],
+    "technicalNotes": [
+      "Index signatures define flexible object shapes",
+      "Common in state stores"
+    ],
+    "codeSnippet": "type Cache = {\n  [key: string]: string;\n};\n\nconst cache: Cache = {};\n\ncache['user'] = 'Nacho';\ncache['token'] = 'abc123';\n\nconsole.log(cache);\n"
+  },
+  {
+    "id": "ts-intermediate-018",
+    "title": "Tuple Types",
+    "description": "Work with fixed-length arrays with strict types.",
+    "context": "Used in coordinate systems, hooks, and structured returns.",
+    "difficultyScore": 39,
+    "typingStyle": "full",
+    "tags": ["typescript", "tuples"],
+    "concepts": ["tuples"],
+    "technicalNotes": [
+      "Tuples enforce order and type per index",
+      "Used in React hooks like useState"
+    ],
+    "codeSnippet": "type Coordinates = [number, number];\n\nconst point: Coordinates = [10, 20];\n\nconsole.log(point[0], point[1]);\n"
+  },
+  {
+    "id": "ts-intermediate-019",
+    "title": "Enums in TypeScript",
+    "description": "Define a set of named constants.",
+    "context": "Used for status codes, roles, and fixed options.",
+    "difficultyScore": 34,
+    "typingStyle": "full",
+    "tags": ["typescript", "enums"],
+    "concepts": ["enumerations"],
+    "technicalNotes": [
+      "Enums group related constants",
+      "Improve code readability"
+    ],
+    "codeSnippet": "enum Status {\n  Loading,\n  Success,\n  Error\n}\n\nconst current: Status = Status.Success;\n\nconsole.log(current);\n"
+  },
+  {
+    "id": "ts-intermediate-020",
+    "title": "Utility Types Partial & Pick",
+    "description": "Use built-in utility types to transform interfaces.",
+    "context": "Used in update operations and API payloads.",
+    "difficultyScore": 41,
+    "typingStyle": "full",
+    "tags": ["typescript", "utility-types"],
+    "concepts": ["partial", "pick"],
+    "technicalNotes": [
+      "Partial makes fields optional",
+      "Pick selects subset of properties"
+    ],
+    "codeSnippet": "interface User {\n  id: number;\n  name: string;\n  email: string;\n}\n\ntype UserUpdate = Partial<User>;\ntype UserPreview = Pick<User, 'id' | 'name'>;\n\nconst update: UserUpdate = {\n  name: 'Updated Name'\n};\n\nconst preview: UserPreview = {\n  id: 1,\n  name: 'Nacho'\n};\n\nconsole.log(update, preview);\n"
+  }
+]

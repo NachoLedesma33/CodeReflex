@@ -1,0 +1,417 @@
+[{
+  "metadata": {
+    "language": "javascript",
+    "mode": "reflex-typing",
+    "version": "1.0.0",
+    "lastUpdated": "2026-05-08",
+    "totalExercises": 15
+  },
+  "exercises": [
+    {
+      "id": "js-interview-system-design-cache-001",
+      "title": "Distributed Cache Simulation",
+      "description": "Simulate a distributed cache layer with node balancing and key distribution.",
+      "context": "Distributed caches are used in scalable backend systems, CDNs, and high-performance APIs.",
+      "category": "system-design",
+      "difficultyScore": 82,
+      "estimatedDuration": 210,
+      "typingStyle": "full",
+      "tags": [
+        "distributed-systems",
+        "cache",
+        "backend",
+        "scalability"
+      ],
+      "concepts": [
+        "consistent-hashing",
+        "distributed-cache",
+        "system-design"
+      ],
+      "technicalNotes": [
+        "Distributed caches reduce database load.",
+        "Keys are distributed across nodes.",
+        "Scalable systems rely on cache balancing."
+      ],
+      "codeSnippet": "class CacheNode {\n  constructor(name) {\n    this.name = name;\n    this.storage = new Map();\n  }\n\n  set(key, value) {\n    this.storage.set(key, value);\n  }\n\n  get(key) {\n    return this.storage.get(key);\n  }\n}\n\nclass DistributedCache {\n  constructor(nodes) {\n    this.nodes = nodes;\n  }\n\n  getNode(key) {\n    const index = key.length % this.nodes.length;\n\n    return this.nodes[index];\n  }\n\n  set(key, value) {\n    const node = this.getNode(key);\n\n    node.set(key, value);\n  }\n\n  get(key) {\n    const node = this.getNode(key);\n\n    return node.get(key);\n  }\n}\n\nconst cache = new DistributedCache([\n  new CacheNode('Node-A'),\n  new CacheNode('Node-B')\n]);\n\ncache.set('user:1', 'Nacho');\n\nconsole.log(cache.get('user:1'));\n"
+    },
+    {
+      "id": "js-interview-load-balancer-002",
+      "title": "Round Robin Load Balancer",
+      "description": "Implement a simplified round-robin load balancing strategy.",
+      "context": "Load balancers distribute traffic between servers in scalable infrastructures.",
+      "category": "system-design",
+      "difficultyScore": 78,
+      "estimatedDuration": 195,
+      "typingStyle": "full",
+      "tags": [
+        "load-balancer",
+        "backend",
+        "infrastructure",
+        "scalability"
+      ],
+      "concepts": [
+        "round-robin",
+        "request-distribution",
+        "server-balancing"
+      ],
+      "technicalNotes": [
+        "Load balancers distribute traffic evenly.",
+        "Round-robin cycles through servers sequentially.",
+        "Essential in scalable infrastructures."
+      ],
+      "codeSnippet": "class LoadBalancer {\n  constructor(servers) {\n    this.servers = servers;\n    this.current = 0;\n  }\n\n  getServer() {\n    const server = this.servers[this.current];\n\n    this.current = (this.current + 1) % this.servers.length;\n\n    return server;\n  }\n}\n\nconst balancer = new LoadBalancer([\n  'Server-1',\n  'Server-2',\n  'Server-3'\n]);\n\nconsole.log(balancer.getServer());\nconsole.log(balancer.getServer());\nconsole.log(balancer.getServer());\n"
+    },
+    {
+      "id": "js-interview-realtime-chat-003",
+      "title": "Realtime Chat Room Engine",
+      "description": "Build the core logic behind a realtime multi-room chat system.",
+      "context": "Realtime messaging systems power chats, collaboration platforms, and multiplayer systems.",
+      "category": "realtime",
+      "difficultyScore": 84,
+      "estimatedDuration": 220,
+      "typingStyle": "full",
+      "tags": [
+        "chat",
+        "realtime",
+        "websockets",
+        "backend"
+      ],
+      "concepts": [
+        "rooms",
+        "subscriptions",
+        "message-broadcasting"
+      ],
+      "technicalNotes": [
+        "Chat systems organize users into rooms.",
+        "Broadcasting distributes messages to subscribers.",
+        "Realtime systems require efficient event handling."
+      ],
+      "codeSnippet": "class ChatRoom {\n  constructor(name) {\n    this.name = name;\n    this.users = [];\n  }\n\n  join(username) {\n    this.users.push(username);\n\n    console.log(`${username} joined ${this.name}`);\n  }\n\n  sendMessage(username, message) {\n    this.users.forEach((user) => {\n      console.log(`[${this.name}] ${username} -> ${user}: ${message}`);\n    });\n  }\n}\n\nconst room = new ChatRoom('developers');\n\nroom.join('Nacho');\nroom.join('Lucas');\n\nroom.sendMessage('Nacho', 'Deployment completed');\n"
+    },
+    {
+      "id": "js-interview-job-queue-004",
+      "title": "Priority Background Job Queue",
+      "description": "Design a scalable background processing queue with priorities.",
+      "context": "Job queues are critical in scalable backend architectures and distributed systems.",
+      "category": "backend-architecture",
+      "difficultyScore": 86,
+      "estimatedDuration": 225,
+      "typingStyle": "full",
+      "tags": [
+        "queues",
+        "background-jobs",
+        "backend",
+        "scalability"
+      ],
+      "concepts": [
+        "priority-queues",
+        "background-processing",
+        "worker-systems"
+      ],
+      "technicalNotes": [
+        "Background queues process tasks asynchronously.",
+        "Priority systems optimize critical workflows.",
+        "Worker systems improve scalability."
+      ],
+      "codeSnippet": "class JobQueue {\n  constructor() {\n    this.jobs = [];\n  }\n\n  add(job, priority) {\n    this.jobs.push({ job, priority });\n\n    this.jobs.sort((a, b) => {\n      return b.priority - a.priority;\n    });\n  }\n\n  process() {\n    while (this.jobs.length > 0) {\n      const currentJob = this.jobs.shift();\n\n      currentJob.job();\n    }\n  }\n}\n\nconst jobs = new JobQueue();\n\njobs.add(() => {\n  console.log('Send email confirmation');\n}, 1);\n\njobs.add(() => {\n  console.log('Process payment');\n}, 10);\n\njobs.process();\n"
+    },
+    {
+      "id": "js-interview-api-gateway-005",
+      "title": "API Gateway Request Router",
+      "description": "Simulate an API Gateway responsible for routing requests to services.",
+      "context": "API gateways centralize authentication, routing, and monitoring in microservice architectures.",
+      "category": "microservices",
+      "difficultyScore": 88,
+      "estimatedDuration": 230,
+      "typingStyle": "full",
+      "tags": [
+        "api-gateway",
+        "microservices",
+        "routing",
+        "backend"
+      ],
+      "concepts": [
+        "service-routing",
+        "gateway-pattern",
+        "request-forwarding"
+      ],
+      "technicalNotes": [
+        "API gateways centralize traffic management.",
+        "Routing directs requests to services.",
+        "Microservice architectures rely heavily on gateways."
+      ],
+      "codeSnippet": "class APIGateway {\n  constructor() {\n    this.routes = {};\n  }\n\n  register(path, handler) {\n    this.routes[path] = handler;\n  }\n\n  handleRequest(path, payload) {\n    const routeHandler = this.routes[path];\n\n    if (!routeHandler) {\n      console.log('Route not found');\n\n      return;\n    }\n\n    return routeHandler(payload);\n  }\n}\n\nconst gateway = new APIGateway();\n\ngateway.register('/users', () => {\n  return 'Users Service';\n});\n\nconsole.log(gateway.handleRequest('/users'));\n"
+    },
+    {
+      "id": "js-interview-event-bus-006",
+      "title": "Microservice Event Bus",
+      "description": "Implement a lightweight event bus for communication between services.",
+      "context": "Event buses are used in microservices, realtime architectures, and scalable distributed systems.",
+      "category": "distributed-systems",
+      "difficultyScore": 89,
+      "estimatedDuration": 235,
+      "typingStyle": "full",
+      "tags": [
+        "event-bus",
+        "microservices",
+        "events",
+        "backend"
+      ],
+      "concepts": [
+        "pub-sub",
+        "event-driven-architecture",
+        "service-communication"
+      ],
+      "technicalNotes": [
+        "Pub/Sub decouples services.",
+        "Event-driven systems improve scalability.",
+        "Event buses centralize communication."
+      ],
+      "codeSnippet": "class EventBus {\n  constructor() {\n    this.listeners = {};\n  }\n\n  subscribe(eventName, listener) {\n    if (!this.listeners[eventName]) {\n      this.listeners[eventName] = [];\n    }\n\n    this.listeners[eventName].push(listener);\n  }\n\n  publish(eventName, payload) {\n    const eventListeners = this.listeners[eventName] || [];\n\n    eventListeners.forEach((listener) => {\n      listener(payload);\n    });\n  }\n}\n\nconst bus = new EventBus();\n\nbus.subscribe('user.created', (user) => {\n  console.log(`Sending welcome email to ${user.username}`);\n});\n\nbus.publish('user.created', {\n  username: 'NachoDev'\n});\n"
+    },
+    {
+      "id": "js-interview-session-store-007",
+      "title": "Distributed Session Store",
+      "description": "Create a scalable session storage layer for authenticated users.",
+      "context": "Session stores are fundamental in authentication systems and scalable web applications.",
+      "category": "authentication",
+      "difficultyScore": 83,
+      "estimatedDuration": 215,
+      "typingStyle": "full",
+      "tags": [
+        "sessions",
+        "authentication",
+        "backend",
+        "security"
+      ],
+      "concepts": [
+        "session-storage",
+        "authentication-state",
+        "token-management"
+      ],
+      "technicalNotes": [
+        "Session stores maintain authenticated state.",
+        "Distributed systems require shared session access.",
+        "Security systems depend on session management."
+      ],
+      "codeSnippet": "class SessionStore {\n  constructor() {\n    this.sessions = new Map();\n  }\n\n  create(sessionId, userData) {\n    this.sessions.set(sessionId, {\n      userData,\n      createdAt: Date.now()\n    });\n  }\n\n  get(sessionId) {\n    return this.sessions.get(sessionId);\n  }\n\n  remove(sessionId) {\n    this.sessions.delete(sessionId);\n  }\n}\n\nconst store = new SessionStore();\n\nstore.create('abc123', {\n  username: 'NachoDev'\n});\n\nconsole.log(store.get('abc123'));\n"
+    },
+    {
+      "id": "js-interview-search-index-008",
+      "title": "Inverted Search Index",
+      "description": "Build a simplified inverted index for fast keyword searching.",
+      "context": "Search engines and document systems use inverted indexes for fast lookups.",
+      "category": "search",
+      "difficultyScore": 91,
+      "estimatedDuration": 245,
+      "typingStyle": "full",
+      "tags": [
+        "search-engine",
+        "indexing",
+        "backend",
+        "algorithms"
+      ],
+      "concepts": [
+        "inverted-index",
+        "text-search",
+        "tokenization"
+      ],
+      "technicalNotes": [
+        "Inverted indexes map words to documents.",
+        "Search engines optimize keyword retrieval.",
+        "Tokenization splits searchable text."
+      ],
+      "codeSnippet": "class SearchIndex {\n  constructor() {\n    this.index = {};\n  }\n\n  add(documentId, content) {\n    const words = content.toLowerCase().split(' ');\n\n    words.forEach((word) => {\n      if (!this.index[word]) {\n        this.index[word] = new Set();\n      }\n\n      this.index[word].add(documentId);\n    });\n  }\n\n  search(word) {\n    return [...(this.index[word.toLowerCase()] || [])];\n  }\n}\n\nconst searchEngine = new SearchIndex();\n\nsearchEngine.add('doc-1', 'javascript backend architecture');\nsearchEngine.add('doc-2', 'typescript frontend patterns');\n\nconsole.log(searchEngine.search('backend'));\n"
+    },
+    {
+      "id": "js-interview-message-broker-009",
+      "title": "Reliable Message Broker",
+      "description": "Implement a basic reliable message broker with acknowledgements.",
+      "context": "Message brokers coordinate communication between distributed services.",
+      "category": "distributed-systems",
+      "difficultyScore": 92,
+      "estimatedDuration": 250,
+      "typingStyle": "full",
+      "tags": [
+        "message-broker",
+        "queues",
+        "distributed-systems",
+        "backend"
+      ],
+      "concepts": [
+        "message-queues",
+        "acknowledgements",
+        "distributed-processing"
+      ],
+      "technicalNotes": [
+        "Message brokers guarantee delivery reliability.",
+        "Acknowledgements confirm successful processing.",
+        "Queues decouple backend services."
+      ],
+      "codeSnippet": "class MessageBroker {\n  constructor() {\n    this.queue = [];\n  }\n\n  publish(message) {\n    this.queue.push({\n      message,\n      acknowledged: false\n    });\n  }\n\n  consume() {\n    const item = this.queue.find((entry) => {\n      return entry.acknowledged === false;\n    });\n\n    if (!item) {\n      return;\n    }\n\n    item.acknowledged = true;\n\n    return item.message;\n  }\n}\n\nconst broker = new MessageBroker();\n\nbroker.publish('Deploy notification');\n\nconsole.log(broker.consume());\n"
+    },
+    {
+      "id": "js-interview-service-discovery-010",
+      "title": "Service Discovery Registry",
+      "description": "Create a registry where services can register and be discovered dynamically.",
+      "context": "Service discovery is a core concept in cloud-native and microservice infrastructures.",
+      "category": "cloud-architecture",
+      "difficultyScore": 90,
+      "estimatedDuration": 240,
+      "typingStyle": "full",
+      "tags": [
+        "service-discovery",
+        "microservices",
+        "cloud",
+        "backend"
+      ],
+      "concepts": [
+        "service-registry",
+        "dynamic-discovery",
+        "cloud-patterns"
+      ],
+      "technicalNotes": [
+        "Service discovery enables dynamic scaling.",
+        "Registries centralize service metadata.",
+        "Cloud infrastructures depend on discovery mechanisms."
+      ],
+      "codeSnippet": "class ServiceRegistry {\n  constructor() {\n    this.services = {};\n  }\n\n  register(serviceName, address) {\n    this.services[serviceName] = address;\n  }\n\n  discover(serviceName) {\n    return this.services[serviceName];\n  }\n}\n\nconst registry = new ServiceRegistry();\n\nregistry.register('auth-service', 'http://localhost:4000');\nregistry.register('payment-service', 'http://localhost:5000');\n\nconsole.log(registry.discover('payment-service'));\n"
+    },
+    {
+      "id": "js-interview-circuit-breaker-011",
+      "title": "Circuit Breaker Pattern",
+      "description": "Protect services from cascading failures using a circuit breaker mechanism.",
+      "context": "Circuit breakers are essential in resilient distributed systems and microservice architectures.",
+      "category": "resilience",
+      "difficultyScore": 93,
+      "estimatedDuration": 255,
+      "typingStyle": "full",
+      "tags": [
+        "circuit-breaker",
+        "microservices",
+        "fault-tolerance",
+        "backend"
+      ],
+      "concepts": [
+        "failure-detection",
+        "service-protection",
+        "resilience-patterns"
+      ],
+      "technicalNotes": [
+        "Circuit breakers prevent repeated failing requests.",
+        "Resilience patterns improve system stability.",
+        "Distributed systems require fault tolerance."
+      ],
+      "codeSnippet": "class CircuitBreaker {\n  constructor(limit) {\n    this.limit = limit;\n    this.failures = 0;\n    this.open = false;\n  }\n\n  async execute(action) {\n    if (this.open) {\n      console.log('Circuit is open');\n\n      return;\n    }\n\n    try {\n      const result = await action();\n\n      this.failures = 0;\n\n      return result;\n    } catch (error) {\n      this.failures++;\n\n      if (this.failures >= this.limit) {\n        this.open = true;\n      }\n\n      console.log('Request failed');\n    }\n  }\n}\n\nconst breaker = new CircuitBreaker(3);\n\nbreaker.execute(async () => {\n  throw new Error('Server unavailable');\n});\n"
+    },
+    {
+      "id": "js-interview-token-bucket-012",
+      "title": "Token Bucket Rate Limiter",
+      "description": "Implement a token bucket algorithm for API request limiting.",
+      "context": "Token bucket algorithms are widely used in APIs, gateways, and cloud infrastructures.",
+      "category": "security",
+      "difficultyScore": 87,
+      "estimatedDuration": 225,
+      "typingStyle": "full",
+      "tags": [
+        "rate-limiting",
+        "token-bucket",
+        "apis",
+        "backend"
+      ],
+      "concepts": [
+        "rate-control",
+        "token-bucket",
+        "request-limiting"
+      ],
+      "technicalNotes": [
+        "Token buckets regulate traffic bursts.",
+        "Rate limiting protects infrastructure.",
+        "APIs use these algorithms for stability."
+      ],
+      "codeSnippet": "class TokenBucket {\n  constructor(capacity, refillRate) {\n    this.capacity = capacity;\n    this.tokens = capacity;\n    this.refillRate = refillRate;\n\n    setInterval(() => {\n      this.tokens = Math.min(\n        this.capacity,\n        this.tokens + this.refillRate\n      );\n    }, 1000);\n  }\n\n  consume() {\n    if (this.tokens <= 0) {\n      console.log('Rate limit exceeded');\n\n      return false;\n    }\n\n    this.tokens--;\n\n    console.log('Request accepted');\n\n    return true;\n  }\n}\n\nconst limiter = new TokenBucket(5, 1);\n\nlimiter.consume();\n"
+    },
+    {
+      "id": "js-interview-distributed-lock-013",
+      "title": "Distributed Lock Manager",
+      "description": "Simulate a distributed locking system for shared resources.",
+      "context": "Distributed locks prevent race conditions in scalable backend systems.",
+      "category": "distributed-systems",
+      "difficultyScore": 94,
+      "estimatedDuration": 260,
+      "typingStyle": "full",
+      "tags": [
+        "distributed-locks",
+        "concurrency",
+        "backend",
+        "synchronization"
+      ],
+      "concepts": [
+        "locking",
+        "race-conditions",
+        "distributed-coordination"
+      ],
+      "technicalNotes": [
+        "Locks coordinate shared resource access.",
+        "Distributed systems require synchronization.",
+        "Race conditions can corrupt shared state."
+      ],
+      "codeSnippet": "class LockManager {\n  constructor() {\n    this.locks = new Set();\n  }\n\n  acquire(resource) {\n    if (this.locks.has(resource)) {\n      console.log('Resource is locked');\n\n      return false;\n    }\n\n    this.locks.add(resource);\n\n    console.log(`Lock acquired for ${resource}`);\n\n    return true;\n  }\n\n  release(resource) {\n    this.locks.delete(resource);\n\n    console.log(`Lock released for ${resource}`);\n  }\n}\n\nconst manager = new LockManager();\n\nmanager.acquire('payment-service');\nmanager.release('payment-service');\n"
+    },
+    {
+      "id": "js-interview-stream-processor-014",
+      "title": "Realtime Stream Processor",
+      "description": "Process realtime event streams with filtering and transformations.",
+      "context": "Stream processors power analytics pipelines, monitoring systems, and realtime platforms.",
+      "category": "realtime",
+      "difficultyScore": 90,
+      "estimatedDuration": 245,
+      "typingStyle": "full",
+      "tags": [
+        "stream-processing",
+        "analytics",
+        "events",
+        "backend"
+      ],
+      "concepts": [
+        "event-streams",
+        "data-pipelines",
+        "realtime-processing"
+      ],
+      "technicalNotes": [
+        "Streams process continuous data flows.",
+        "Realtime analytics depend on stream pipelines.",
+        "Filtering transforms incoming events."
+      ],
+      "codeSnippet": "class StreamProcessor {\n  constructor() {\n    this.handlers = [];\n  }\n\n  use(handler) {\n    this.handlers.push(handler);\n  }\n\n  process(event) {\n    return this.handlers.reduce((current, handler) => {\n      return handler(current);\n    }, event);\n  }\n}\n\nconst processor = new StreamProcessor();\n\nprocessor.use((event) => {\n  return {\n    ...event,\n    processed: true\n  };\n});\n\nconsole.log(processor.process({\n  type: 'USER_LOGIN'\n}));\n"
+    },
+    {
+      "id": "js-interview-auth-provider-015",
+      "title": "Authentication Provider Simulator",
+      "description": "Create a simplified authentication provider with token validation.",
+      "context": "Authentication providers are core components in modern SaaS platforms and APIs.",
+      "category": "authentication",
+      "difficultyScore": 88,
+      "estimatedDuration": 235,
+      "typingStyle": "full",
+      "tags": [
+        "authentication",
+        "tokens",
+        "security",
+        "backend"
+      ],
+      "concepts": [
+        "token-validation",
+        "authentication-flows",
+        "session-security"
+      ],
+      "technicalNotes": [
+        "Auth providers validate user identity.",
+        "Tokens secure authenticated requests.",
+        "Modern APIs rely heavily on token systems."
+      ],
+      "codeSnippet": "class AuthProvider {\n  constructor() {\n    this.tokens = new Map();\n  }\n\n  generateToken(userId) {\n    const token = `${userId}-${Date.now()}`;\n\n    this.tokens.set(token, userId);\n\n    return token;\n  }\n\n  validate(token) {\n    return this.tokens.has(token);\n  }\n}\n\nconst auth = new AuthProvider();\n\nconst token = auth.generateToken('user-1');\n\nconsole.log(auth.validate(token));\n"
+    }
+  ]
+}
+]

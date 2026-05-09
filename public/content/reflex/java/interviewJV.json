@@ -1,0 +1,77 @@
+[
+  {
+    "id": "java-interview-021",
+    "title": "Implement LRU Cache",
+    "description": "Design an LRU (Least Recently Used) cache.",
+    "context": "Classic interview problem for backend roles requiring data structure knowledge.",
+    "difficultyScore": 70,
+    "typingStyle": "full",
+    "tags": ["java", "cache", "interview"],
+    "concepts": ["hashmap", "doubly linked list"],
+    "technicalNotes": [
+      "Must achieve O(1) get and put",
+      "Combines HashMap + LinkedList conceptually"
+    ],
+    "codeSnippet": "import java.util.*;\n\nclass LRUCache {\n    private final int capacity;\n    private final LinkedHashMap<Integer, Integer> cache;\n\n    public LRUCache(int capacity) {\n        this.capacity = capacity;\n        this.cache = new LinkedHashMap<>(capacity, 0.75f, true) {\n            protected boolean removeEldestEntry(Map.Entry eldest) {\n                return size() > capacity;\n            }\n        };\n    }\n\n    public int get(int key) {\n        return cache.getOrDefault(key, -1);\n    }\n\n    public void put(int key, int value) {\n        cache.put(key, value);\n    }\n}\n"
+  },
+  {
+    "id": "java-interview-022",
+    "title": "Thread-Safe Counter",
+    "description": "Implement a thread-safe counter.",
+    "context": "Used in concurrent backend systems and metrics tracking.",
+    "difficultyScore": 72,
+    "typingStyle": "full",
+    "tags": ["java", "concurrency"],
+    "concepts": ["synchronization", "race conditions"],
+    "technicalNotes": [
+      "Use synchronized or AtomicInteger",
+      "Avoid race conditions"
+    ],
+    "codeSnippet": "import java.util.concurrent.atomic.AtomicInteger;\n\nclass Counter {\n    private AtomicInteger count = new AtomicInteger(0);\n\n    public void increment() {\n        count.incrementAndGet();\n    }\n\n    public int get() {\n        return count.get();\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Counter c = new Counter();\n        c.increment();\n        System.out.println(c.get());\n    }\n}\n"
+  },
+  {
+    "id": "java-interview-023",
+    "title": "Producer Consumer Problem",
+    "description": "Implement producer-consumer using BlockingQueue.",
+    "context": "Common concurrency problem in backend systems.",
+    "difficultyScore": 75,
+    "typingStyle": "full",
+    "tags": ["java", "concurrency"],
+    "concepts": ["thread communication"],
+    "technicalNotes": [
+      "BlockingQueue handles synchronization",
+      "Avoids manual wait/notify complexity"
+    ],
+    "codeSnippet": "import java.util.concurrent.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        BlockingQueue<Integer> queue = new ArrayBlockingQueue<>(5);\n\n        new Thread(() -> {\n            try {\n                queue.put(1);\n                System.out.println(\"Produced\");\n            } catch (Exception ignored) {}\n        }).start();\n\n        new Thread(() -> {\n            try {\n                System.out.println(queue.take());\n            } catch (Exception ignored) {}\n        }).start();\n    }\n}\n"
+  },
+  {
+    "id": "java-interview-024",
+    "title": "Singleton Pattern",
+    "description": "Implement a thread-safe singleton.",
+    "context": "Very common design pattern question in interviews.",
+    "difficultyScore": 68,
+    "typingStyle": "full",
+    "tags": ["java", "design-patterns"],
+    "concepts": ["singleton"],
+    "technicalNotes": [
+      "Ensure single instance",
+      "Thread-safe initialization"
+    ],
+    "codeSnippet": "class Singleton {\n    private static Singleton instance;\n\n    private Singleton() {}\n\n    public static synchronized Singleton getInstance() {\n        if (instance == null) {\n            instance = new Singleton();\n        }\n        return instance;\n    }\n}\n"
+  },
+  {
+    "id": "java-interview-025",
+    "title": "Basic Rate Limiter",
+    "description": "Implement a simple rate limiter using timestamps.",
+    "context": "Used in APIs to prevent abuse.",
+    "difficultyScore": 74,
+    "typingStyle": "full",
+    "tags": ["java", "system-design"],
+    "concepts": ["throttling"],
+    "technicalNotes": [
+      "Time-window based limiting",
+      "Core API protection mechanism"
+    ],
+    "codeSnippet": "import java.util.*;\n\nclass RateLimiter {\n    private final Queue<Long> requests = new LinkedList<>();\n\n    public boolean allow() {\n        long now = System.currentTimeMillis();\n\n        while (!requests.isEmpty() && now - requests.peek() > 1000) {\n            requests.poll();\n        }\n\n        if (requests.size() < 5) {\n            requests.add(now);\n            return true;\n        }\n\n        return false;\n    }\n}\n"
+  }
+]

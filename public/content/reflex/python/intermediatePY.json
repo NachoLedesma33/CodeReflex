@@ -1,0 +1,152 @@
+[
+  {
+    "id": "py-intermediate-011",
+    "title": "Lambda Functions",
+    "description": "Use anonymous functions for short operations.",
+    "context": "Common in data transformations and functional programming patterns.",
+    "difficultyScore": 32,
+    "typingStyle": "full",
+    "tags": ["python", "lambda", "functions"],
+    "concepts": ["anonymous functions"],
+    "technicalNotes": [
+      "Lambda functions are single-expression functions",
+      "Used for quick transformations"
+    ],
+    "codeSnippet": "add = lambda a, b: a + b\n\nprint(add(2, 3))\n"
+  },
+  {
+    "id": "py-intermediate-012",
+    "title": "Map Function",
+    "description": "Apply a function to all elements in an iterable.",
+    "context": "Used in functional-style transformations.",
+    "difficultyScore": 34,
+    "typingStyle": "full",
+    "tags": ["python", "map"],
+    "concepts": ["functional programming"],
+    "technicalNotes": [
+      "map returns an iterator",
+      "Often combined with lambda"
+    ],
+    "codeSnippet": "numbers = [1, 2, 3, 4]\n\nresult = list(map(lambda x: x * 2, numbers))\n\nprint(result)\n"
+  },
+  {
+    "id": "py-intermediate-013",
+    "title": "Filter Function",
+    "description": "Filter elements from a list based on a condition.",
+    "context": "Used for data cleaning and filtering pipelines.",
+    "difficultyScore": 35,
+    "typingStyle": "full",
+    "tags": ["python", "filter"],
+    "concepts": ["functional programming"],
+    "technicalNotes": [
+      "filter returns iterator",
+      "Keeps elements that evaluate to True"
+    ],
+    "codeSnippet": "numbers = [1, 2, 3, 4, 5]\n\neven = list(filter(lambda x: x % 2 == 0, numbers))\n\nprint(even)\n"
+  },
+  {
+    "id": "py-intermediate-014",
+    "title": "Dictionary Comprehensions",
+    "description": "Create dictionaries using compact syntax.",
+    "context": "Used for transforming datasets efficiently.",
+    "difficultyScore": 36,
+    "typingStyle": "full",
+    "tags": ["python", "dict", "comprehension"],
+    "concepts": ["dictionary generation"],
+    "technicalNotes": [
+      "Similar to list comprehensions",
+      "Produces key-value pairs"
+    ],
+    "codeSnippet": "numbers = [1, 2, 3]\n\nsquares = {x: x*x for x in numbers}\n\nprint(squares)\n"
+  },
+  {
+    "id": "py-intermediate-015",
+    "title": "Working with Files",
+    "description": "Read and write files using Python.",
+    "context": "Used in backend systems and data processing pipelines.",
+    "difficultyScore": 38,
+    "typingStyle": "full",
+    "tags": ["python", "files"],
+    "concepts": ["file handling"],
+    "technicalNotes": [
+      "Use open() with context manager",
+      "Automatically closes file"
+    ],
+    "codeSnippet": "with open('file.txt', 'w') as f:\n    f.write('Hello world')\n\nwith open('file.txt', 'r') as f:\n    content = f.read()\n\nprint(content)\n"
+  },
+  {
+    "id": "py-intermediate-016",
+    "title": "Generators Basics",
+    "description": "Use generators to create memory-efficient iterators.",
+    "context": "Used in large-scale data processing and streaming pipelines.",
+    "difficultyScore": 42,
+    "typingStyle": "full",
+    "tags": ["python", "generators"],
+    "concepts": ["yield", "lazy evaluation"],
+    "technicalNotes": [
+      "Generators produce values on demand",
+      "Reduce memory usage"
+    ],
+    "codeSnippet": "def count_up_to(n):\n    i = 1\n    while i <= n:\n        yield i\n        i += 1\n\nfor num in count_up_to(5):\n    print(num)\n"
+  },
+  {
+    "id": "py-intermediate-017",
+    "title": "Decorators Basics",
+    "description": "Modify function behavior using decorators.",
+    "context": "Used in logging, authentication, and middleware patterns.",
+    "difficultyScore": 45,
+    "typingStyle": "full",
+    "tags": ["python", "decorators"],
+    "concepts": ["higher-order functions"],
+    "technicalNotes": [
+      "Decorators wrap functions",
+      "Common in frameworks like Flask and Django"
+    ],
+    "codeSnippet": "def decorator(func):\n    def wrapper():\n        print('Before')\n        func()\n        print('After')\n    return wrapper\n\n@decorator\ndef hello():\n    print('Hello')\n\nhello()\n"
+  },
+  {
+    "id": "py-intermediate-018",
+    "title": "Sorting with Key Functions",
+    "description": "Sort complex structures using custom keys.",
+    "context": "Used in ranking systems and data organization.",
+    "difficultyScore": 40,
+    "typingStyle": "full",
+    "tags": ["python", "sorting"],
+    "concepts": ["custom sorting"],
+    "technicalNotes": [
+      "sorted() accepts key function",
+      "Useful for objects and dicts"
+    ],
+    "codeSnippet": "users = [\n    {'name': 'A', 'age': 30},\n    {'name': 'B', 'age': 20}\n]\n\nsorted_users = sorted(users, key=lambda x: x['age'])\n\nprint(sorted_users)\n"
+  },
+  {
+    "id": "py-intermediate-019",
+    "title": "Exception Chaining",
+    "description": "Handle and re-raise exceptions properly.",
+    "context": "Used in robust backend systems for debugging.",
+    "difficultyScore": 44,
+    "typingStyle": "full",
+    "tags": ["python", "exceptions"],
+    "concepts": ["error propagation"],
+    "technicalNotes": [
+      "Preserve original error context",
+      "Useful for debugging layers"
+    ],
+    "codeSnippet": "try:\n    int('abc')\nexcept ValueError as e:\n    raise RuntimeError('Conversion failed') from e\n"
+  },
+  {
+    "id": "py-intermediate-020",
+    "title": "Context Managers",
+    "description": "Create custom context managers using __enter__ and __exit__.",
+    "context": "Used for resource management like files, DB connections.",
+    "difficultyScore": 48,
+    "typingStyle": "full",
+    "tags": ["python", "context-manager"],
+    "concepts": ["resource management"],
+    "technicalNotes": [
+      "Ensures cleanup after execution",
+      "Used with 'with' statement"
+    ],
+    "codeSnippet": "class MyContext:\n    def __enter__(self):\n        print('Start')\n        return self\n\n    def __exit__(self, exc_type, exc_value, traceback):\n        print('End')\n\nwith MyContext():\n    print('Inside')\n"
+  }
+]

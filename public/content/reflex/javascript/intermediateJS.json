@@ -1,0 +1,282 @@
+[{
+  "metadata": {
+    "language": "javascript",
+    "mode": "reflex-typing",
+    "version": "1.0.0",
+    "lastUpdated": "2026-05-08",
+    "totalExercises": 10
+  },
+  "exercises": [
+    {
+      "id": "js-intermediate-custom-hook-simulation-001",
+      "title": "Custom State Listener",
+      "description": "Simulate a lightweight custom state listener system similar to frontend reactive behavior.",
+      "context": "Reactive patterns are heavily used in frameworks like React, Vue, and state management libraries.",
+      "category": "state-management",
+      "difficultyScore": 34,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "state-management",
+        "listeners",
+        "reactivity",
+        "frontend"
+      ],
+      "concepts": [
+        "closures",
+        "callbacks",
+        "observer-pattern"
+      ],
+      "technicalNotes": [
+        "Closures preserve internal state.",
+        "Callbacks allow reactive updates.",
+        "Observer patterns are common in frontend architectures."
+      ],
+      "codeSnippet": "function createStore(initialValue) {\n  let state = initialValue;\n  const listeners = [];\n\n  function subscribe(listener) {\n    listeners.push(listener);\n  }\n\n  function setState(newValue) {\n    state = newValue;\n\n    listeners.forEach((listener) => {\n      listener(state);\n    });\n  }\n\n  function getState() {\n    return state;\n  }\n\n  return {\n    subscribe,\n    setState,\n    getState\n  };\n}\n\nconst counterStore = createStore(0);\n\ncounterStore.subscribe((value) => {\n  console.log('Updated value:', value);\n});\n\ncounterStore.setState(1);\n"
+    },
+    {
+      "id": "js-intermediate-promise-all-002",
+      "title": "Load Multiple APIs",
+      "description": "Use Promise.all to load multiple asynchronous resources simultaneously.",
+      "context": "Concurrent API loading is common in dashboards, analytics systems, and frontend data aggregation.",
+      "category": "async",
+      "difficultyScore": 38,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "async",
+        "Promise.all",
+        "apis",
+        "concurrency"
+      ],
+      "concepts": [
+        "Promise.all",
+        "async-await",
+        "parallel-requests"
+      ],
+      "technicalNotes": [
+        "Promise.all runs promises concurrently.",
+        "Execution fails if one promise rejects.",
+        "Improves loading performance."
+      ],
+      "codeSnippet": "async function loadDashboardData() {\n  try {\n    const [users, posts, comments] = await Promise.all([\n      fetch('https://jsonplaceholder.typicode.com/users').then((response) => response.json()),\n      fetch('https://jsonplaceholder.typicode.com/posts').then((response) => response.json()),\n      fetch('https://jsonplaceholder.typicode.com/comments').then((response) => response.json())\n    ]);\n\n    console.log(users.length);\n    console.log(posts.length);\n    console.log(comments.length);\n  } catch (error) {\n    console.error('Failed to load dashboard data:', error);\n  }\n}\n\nloadDashboardData();\n"
+    },
+    {
+      "id": "js-intermediate-array-grouping-003",
+      "title": "Group Orders By Status",
+      "description": "Group ecommerce orders dynamically using reduce.",
+      "context": "Grouping data is common in dashboards, admin systems, analytics tools, and reporting platforms.",
+      "category": "data-processing",
+      "difficultyScore": 36,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "reduce",
+        "grouping",
+        "orders",
+        "analytics"
+      ],
+      "concepts": [
+        "array-reduce",
+        "dynamic-objects",
+        "data-grouping"
+      ],
+      "technicalNotes": [
+        "reduce can dynamically construct objects.",
+        "Grouping improves data organization.",
+        "Dynamic keys are useful for analytics systems."
+      ],
+      "codeSnippet": "const orders = [\n  { id: 1, status: 'pending' },\n  { id: 2, status: 'completed' },\n  { id: 3, status: 'pending' },\n  { id: 4, status: 'cancelled' }\n];\n\nconst groupedOrders = orders.reduce((groups, order) => {\n  const key = order.status;\n\n  if (!groups[key]) {\n    groups[key] = [];\n  }\n\n  groups[key].push(order);\n\n  return groups;\n}, {});\n\nconsole.log(groupedOrders);\n"
+    },
+    {
+      "id": "js-intermediate-basic-event-bus-004",
+      "title": "Simple Event Bus",
+      "description": "Build a lightweight publish/subscribe event system.",
+      "context": "Event-driven systems are used in frontend architectures, game engines, and plugin systems.",
+      "category": "architecture",
+      "difficultyScore": 42,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "events",
+        "pub-sub",
+        "architecture",
+        "frontend"
+      ],
+      "concepts": [
+        "publish-subscribe",
+        "callbacks",
+        "event-driven"
+      ],
+      "technicalNotes": [
+        "Publish/subscribe decouples application logic.",
+        "Listeners respond to emitted events.",
+        "Useful for scalable frontend systems."
+      ],
+      "codeSnippet": "function createEventBus() {\n  const listeners = {};\n\n  function subscribe(eventName, callback) {\n    if (!listeners[eventName]) {\n      listeners[eventName] = [];\n    }\n\n    listeners[eventName].push(callback);\n  }\n\n  function emit(eventName, payload) {\n    const eventListeners = listeners[eventName] || [];\n\n    eventListeners.forEach((listener) => {\n      listener(payload);\n    });\n  }\n\n  return {\n    subscribe,\n    emit\n  };\n}\n\nconst eventBus = createEventBus();\n\neventBus.subscribe('notification', (message) => {\n  console.log(message);\n});\n\neventBus.emit('notification', 'New notification received');\n"
+    },
+    {
+      "id": "js-intermediate-basic-memoization-005",
+      "title": "Memoized Calculation",
+      "description": "Cache expensive function results using memoization.",
+      "context": "Memoization improves performance in frontend rendering, calculations, and data-heavy applications.",
+      "category": "performance",
+      "difficultyScore": 45,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "memoization",
+        "performance",
+        "cache",
+        "optimization"
+      ],
+      "concepts": [
+        "closures",
+        "caching",
+        "memoization"
+      ],
+      "technicalNotes": [
+        "Memoization stores previous results.",
+        "Closures maintain cache persistence.",
+        "Useful for performance optimization."
+      ],
+      "codeSnippet": "function memoize(callback) {\n  const cache = {};\n\n  return function (...args) {\n    const key = JSON.stringify(args);\n\n    if (cache[key]) {\n      return cache[key];\n    }\n\n    const result = callback(...args);\n\n    cache[key] = result;\n\n    return result;\n  };\n}\n\nconst multiply = memoize((a, b) => {\n  console.log('Calculating result...');\n\n  return a * b;\n});\n\nconsole.log(multiply(5, 10));\nconsole.log(multiply(5, 10));\n"
+    },
+    {
+      "id": "js-intermediate-basic-retry-system-006",
+      "title": "Retry Failed Requests",
+      "description": "Implement a retry mechanism for unstable asynchronous requests.",
+      "context": "Retry systems are common in production APIs, payment systems, and cloud services where temporary failures may occur.",
+      "category": "async",
+      "difficultyScore": 48,
+      "estimatedDuration": 125,
+      "typingStyle": "full",
+      "tags": [
+        "async",
+        "retry",
+        "apis",
+        "error-handling"
+      ],
+      "concepts": [
+        "async-await",
+        "retry-pattern",
+        "error-recovery"
+      ],
+      "technicalNotes": [
+        "Retries improve reliability in unstable environments.",
+        "Loops can control retry attempts.",
+        "Error handling is essential in asynchronous systems."
+      ],
+      "codeSnippet": "async function fetchWithRetry(request, retries = 3) {\n  for (let attempt = 1; attempt <= retries; attempt++) {\n    try {\n      const response = await request();\n\n      return response;\n    } catch (error) {\n      console.log(`Attempt ${attempt} failed`);\n\n      if (attempt === retries) {\n        throw error;\n      }\n    }\n  }\n}\n\nfetchWithRetry(() => {\n  return fetch('https://jsonplaceholder.typicode.com/users');\n})\n  .then((response) => response.json())\n  .then((data) => console.log(data.length))\n  .catch((error) => console.error(error));\n"
+    },
+    {
+      "id": "js-intermediate-basic-throttle-007",
+      "title": "Throttle Scroll Events",
+      "description": "Limit how often a function executes using throttle logic.",
+      "context": "Throttling is widely used in scroll tracking, resize listeners, and high-frequency browser events.",
+      "category": "performance",
+      "difficultyScore": 44,
+      "estimatedDuration": 115,
+      "typingStyle": "full",
+      "tags": [
+        "performance",
+        "throttle",
+        "events",
+        "optimization"
+      ],
+      "concepts": [
+        "throttle",
+        "timers",
+        "event-optimization"
+      ],
+      "technicalNotes": [
+        "Throttle limits repeated executions.",
+        "Useful for high-frequency browser events.",
+        "Improves frontend performance."
+      ],
+      "codeSnippet": "function throttle(callback, delay) {\n  let waiting = false;\n\n  return (...args) => {\n    if (waiting) {\n      return;\n    }\n\n    callback(...args);\n\n    waiting = true;\n\n    setTimeout(() => {\n      waiting = false;\n    }, delay);\n  };\n}\n\nconst handleScroll = throttle(() => {\n  console.log('Scrolling detected');\n}, 1000);\n\nwindow.addEventListener('scroll', handleScroll);\n"
+    },
+    {
+      "id": "js-intermediate-basic-queue-system-008",
+      "title": "Simple Task Queue",
+      "description": "Build a lightweight queue system for sequential task processing.",
+      "context": "Queues are used in job systems, uploads, notifications, and asynchronous workflows.",
+      "category": "architecture",
+      "difficultyScore": 46,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "queue",
+        "architecture",
+        "tasks",
+        "async"
+      ],
+      "concepts": [
+        "queues",
+        "task-processing",
+        "array-management"
+      ],
+      "technicalNotes": [
+        "Queues process tasks in order.",
+        "FIFO behavior is common in backend systems.",
+        "Sequential execution improves predictability."
+      ],
+      "codeSnippet": "class TaskQueue {\n  constructor() {\n    this.queue = [];\n  }\n\n  add(task) {\n    this.queue.push(task);\n  }\n\n  process() {\n    while (this.queue.length > 0) {\n      const currentTask = this.queue.shift();\n\n      currentTask();\n    }\n  }\n}\n\nconst queue = new TaskQueue();\n\nqueue.add(() => {\n  console.log('Processing image upload');\n});\n\nqueue.add(() => {\n  console.log('Sending notification');\n});\n\nqueue.process();\n"
+    },
+    {
+      "id": "js-intermediate-basic-pagination-009",
+      "title": "Paginate Product Results",
+      "description": "Create a reusable pagination utility for large datasets.",
+      "context": "Pagination is fundamental in ecommerce sites, dashboards, APIs, and search systems.",
+      "category": "data-processing",
+      "difficultyScore": 39,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "pagination",
+        "arrays",
+        "dashboard",
+        "frontend"
+      ],
+      "concepts": [
+        "slice",
+        "pagination",
+        "array-processing"
+      ],
+      "technicalNotes": [
+        "Pagination improves performance and usability.",
+        "slice helps isolate chunks of data.",
+        "Useful for large collections."
+      ],
+      "codeSnippet": "function paginate(items, currentPage, itemsPerPage) {\n  const startIndex = (currentPage - 1) * itemsPerPage;\n  const endIndex = startIndex + itemsPerPage;\n\n  return items.slice(startIndex, endIndex);\n}\n\nconst products = [\n  'Laptop',\n  'Keyboard',\n  'Monitor',\n  'Headphones',\n  'Mouse',\n  'Webcam'\n];\n\nconst visibleProducts = paginate(products, 1, 3);\n\nconsole.log(visibleProducts);\n"
+    },
+    {
+      "id": "js-intermediate-basic-function-composition-010",
+      "title": "Compose Utility Functions",
+      "description": "Combine multiple functions into a reusable processing pipeline.",
+      "context": "Function composition is widely used in functional programming, middleware systems, and utility libraries.",
+      "category": "functional-programming",
+      "difficultyScore": 50,
+      "estimatedDuration": 130,
+      "typingStyle": "full",
+      "tags": [
+        "functional-programming",
+        "composition",
+        "utilities",
+        "pipelines"
+      ],
+      "concepts": [
+        "function-composition",
+        "reduce",
+        "functional-patterns"
+      ],
+      "technicalNotes": [
+        "Composition combines multiple functions together.",
+        "Functions become reusable processing blocks.",
+        "Functional programming improves modularity."
+      ],
+      "codeSnippet": "function compose(...functions) {\n  return (value) => {\n    return functions.reduceRight((currentValue, currentFunction) => {\n      return currentFunction(currentValue);\n    }, value);\n  };\n}\n\nconst trim = (text) => text.trim();\nconst lowercase = (text) => text.toLowerCase();\nconst addPrefix = (text) => `user:${text}`;\n\nconst formatUsername = compose(addPrefix, lowercase, trim);\n\nconsole.log(formatUsername('   NachoDev   '));\n"
+    }
+  ]
+}
+]

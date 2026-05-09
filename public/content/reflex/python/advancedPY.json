@@ -1,0 +1,77 @@
+[
+  {
+    "id": "py-advanced-026",
+    "title": "Async Task Queue System",
+    "description": "Design a simplified asynchronous task queue system.",
+    "context": "Used in backend systems for background processing (emails, jobs, workers).",
+    "difficultyScore": 88,
+    "typingStyle": "full",
+    "tags": ["python", "async", "queue", "backend"],
+    "concepts": ["asyncio", "task scheduling"],
+    "technicalNotes": [
+      "Simulates worker-based architecture",
+      "Useful for background job systems"
+    ],
+    "codeSnippet": "import asyncio\n\nclass TaskQueue:\n    def __init__(self):\n        self.queue = asyncio.Queue()\n\n    async def add_task(self, task):\n        await self.queue.put(task)\n\n    async def worker(self):\n        while True:\n            task = await self.queue.get()\n            print(f'Processing {task}')\n            await asyncio.sleep(1)\n\nasync def main():\n    q = TaskQueue()\n\n    asyncio.create_task(q.worker())\n\n    await q.add_task('job-1')\n\nasyncio.run(main())\n"
+  },
+  {
+    "id": "py-advanced-027",
+    "title": "Microservice Communication Layer",
+    "description": "Simulate communication between microservices.",
+    "context": "Used in distributed backend systems and cloud architectures.",
+    "difficultyScore": 90,
+    "typingStyle": "full",
+    "tags": ["python", "microservices"],
+    "concepts": ["service communication"],
+    "technicalNotes": [
+      "Services communicate via message passing",
+      "Can simulate REST or event-based systems"
+    ],
+    "codeSnippet": "class ServiceA:\n    def process(self, data):\n        return f'Processed by A: {data}'\n\nclass ServiceB:\n    def __init__(self, service_a):\n        self.service_a = service_a\n\n    def handle(self, data):\n        result = self.service_a.process(data)\n        return f'B received -> {result}'\n\nservice_a = ServiceA()\nservice_b = ServiceB(service_a)\n\nprint(service_b.handle('data'))\n"
+  },
+  {
+    "id": "py-advanced-028",
+    "title": "Event-Driven Architecture Core",
+    "description": "Implement a simple event-driven system.",
+    "context": "Used in scalable backend systems and real-time applications.",
+    "difficultyScore": 91,
+    "typingStyle": "full",
+    "tags": ["python", "events", "architecture"],
+    "concepts": ["pub-sub model"],
+    "technicalNotes": [
+      "Decouples producers and consumers",
+      "Core of reactive systems"
+    ],
+    "codeSnippet": "class EventBus:\n    def __init__(self):\n        self.listeners = {}\n\n    def subscribe(self, event, fn):\n        self.listeners.setdefault(event, []).append(fn)\n\n    def emit(self, event, data):\n        for fn in self.listeners.get(event, []):\n            fn(data)\n\nbus = EventBus()\n\nbus.subscribe('user_created', lambda d: print(f'User: {d}'))\nbus.emit('user_created', {'id': 1})\n"
+  },
+  {
+    "id": "py-advanced-029",
+    "title": "Simple ORM Layer",
+    "description": "Build a minimal ORM abstraction layer.",
+    "context": "Core concept behind frameworks like Django ORM or SQLAlchemy.",
+    "difficultyScore": 93,
+    "typingStyle": "full",
+    "tags": ["python", "orm", "database"],
+    "concepts": ["object-relational mapping"],
+    "technicalNotes": [
+      "Maps objects to database tables",
+      "Abstracts SQL complexity"
+    ],
+    "codeSnippet": "class Model:\n    def save(self):\n        print(f'Saving {self.__dict__}')\n\nclass User(Model):\n    def __init__(self, name):\n        self.name = name\n\nu = User('Nacho')\nu.save()\n"
+  },
+  {
+    "id": "py-advanced-030",
+    "title": "Distributed Cache Simulator",
+    "description": "Simulate a distributed caching system.",
+    "context": "Used in scalable backend architectures like Redis clusters.",
+    "difficultyScore": 95,
+    "typingStyle": "full",
+    "tags": ["python", "cache", "distributed-systems"],
+    "concepts": ["caching", "distributed systems"],
+    "technicalNotes": [
+      "Improves performance via memory storage",
+      "Simulates multi-node cache behavior"
+    ],
+    "codeSnippet": "class CacheNode:\n    def __init__(self):\n        self.store = {}\n\n    def set(self, key, value):\n        self.store[key] = value\n\n    def get(self, key):\n        return self.store.get(key)\n\nnode1 = CacheNode()\nnode1.set('a', 1)\n\nprint(node1.get('a'))\n"
+  }
+]

@@ -1,0 +1,154 @@
+[
+  {
+    "id": "java-fundamentals-001",
+    "title": "Basic Class Structure",
+    "description": "Define a simple Java class with fields and a method.",
+    "context": "Core concept of object-oriented programming in Java.",
+    "difficultyScore": 12,
+    "typingStyle": "full",
+    "tags": ["java", "oop", "classes"],
+    "concepts": ["classes", "objects"],
+    "technicalNotes": [
+      "Java is strictly object-oriented",
+      "Everything must be inside a class"
+    ],
+    "codeSnippet": "public class User {\n    String name;\n\n    public User(String name) {\n        this.name = name;\n    }\n\n    public void greet() {\n        System.out.println(\"Hello \" + name);\n    }\n\n    public static void main(String[] args) {\n        User u = new User(\"Nacho\");\n        u.greet();\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-002",
+    "title": "Variables and Types",
+    "description": "Understand primitive types and variable declaration.",
+    "context": "Fundamental concept in Java syntax and memory handling.",
+    "difficultyScore": 10,
+    "typingStyle": "full",
+    "tags": ["java", "variables"],
+    "concepts": ["primitives"],
+    "technicalNotes": [
+      "Java is statically typed",
+      "Types must be declared explicitly"
+    ],
+    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        int age = 25;\n        String name = \"Nacho\";\n        boolean isDev = true;\n\n        System.out.println(name);\n        System.out.println(age);\n        System.out.println(isDev);\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-003",
+    "title": "If-Else Control Flow",
+    "description": "Use conditional logic in Java.",
+    "context": "Basic decision-making structure in programming.",
+    "difficultyScore": 14,
+    "typingStyle": "full",
+    "tags": ["java", "conditionals"],
+    "concepts": ["control flow"],
+    "technicalNotes": [
+      "Java uses braces for blocks",
+      "Conditions must evaluate to boolean"
+    ],
+    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        int age = 20;\n\n        if (age >= 18) {\n            System.out.println(\"Adult\");\n        } else {\n            System.out.println(\"Minor\");\n        }\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-004",
+    "title": "Loops (for and while)",
+    "description": "Iterate over data using loops.",
+    "context": "Used in almost every Java application.",
+    "difficultyScore": 15,
+    "typingStyle": "full",
+    "tags": ["java", "loops"],
+    "concepts": ["iteration"],
+    "technicalNotes": [
+      "for loops are common for fixed iterations",
+      "while loops depend on conditions"
+    ],
+    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        for (int i = 0; i < 5; i++) {\n            System.out.println(i);\n        }\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-005",
+    "title": "Arrays Basics",
+    "description": "Work with fixed-size arrays.",
+    "context": "Fundamental data structure in Java.",
+    "difficultyScore": 16,
+    "typingStyle": "full",
+    "tags": ["java", "arrays"],
+    "concepts": ["data structures"],
+    "technicalNotes": [
+      "Arrays have fixed size",
+      "Indexed starting from 0"
+    ],
+    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4};\n\n        for (int n : numbers) {\n            System.out.println(n);\n        }\n    }\n}\n"
+  }
+,
+  {
+    "id": "java-fundamentals-006",
+    "title": "Methods Basics",
+    "description": "Define and use methods in Java.",
+    "context": "Core concept for reusable logic in object-oriented programming.",
+    "difficultyScore": 18,
+    "typingStyle": "full",
+    "tags": ["java", "methods"],
+    "concepts": ["functions", "modularity"],
+    "technicalNotes": [
+      "Methods must belong to a class",
+      "Return types are explicit"
+    ],
+    "codeSnippet": "public class Main {\n\n    public static int sum(int a, int b) {\n        return a + b;\n    }\n\n    public static void main(String[] args) {\n        int result = sum(2, 3);\n        System.out.println(result);\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-007",
+    "title": "String Handling",
+    "description": "Work with strings and basic operations.",
+    "context": "Strings are heavily used in backend and UI systems.",
+    "difficultyScore": 17,
+    "typingStyle": "full",
+    "tags": ["java", "strings"],
+    "concepts": ["string manipulation"],
+    "technicalNotes": [
+      "Strings are immutable",
+      "Use built-in methods for operations"
+    ],
+    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        String name = \"Nacho\";\n\n        System.out.println(name.length());\n        System.out.println(name.toUpperCase());\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-008",
+    "title": "Basic Input (Scanner)",
+    "description": "Read user input from console.",
+    "context": "Used in CLI applications and simple programs.",
+    "difficultyScore": 19,
+    "typingStyle": "full",
+    "tags": ["java", "input"],
+    "concepts": ["console input"],
+    "technicalNotes": [
+      "Scanner reads from System.in",
+      "Must import java.util.Scanner"
+    ],
+    "codeSnippet": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        System.out.println(\"Enter name:\");\n        String name = sc.nextLine();\n\n        System.out.println(\"Hello \" + name);\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-009",
+    "title": "Basic OOP Encapsulation",
+    "description": "Use private fields with getters and setters.",
+    "context": "Core principle of object-oriented programming.",
+    "difficultyScore": 20,
+    "typingStyle": "full",
+    "tags": ["java", "oop"],
+    "concepts": ["encapsulation"],
+    "technicalNotes": [
+      "Fields should be private",
+      "Access via methods"
+    ],
+    "codeSnippet": "public class User {\n    private String name;\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public static void main(String[] args) {\n        User u = new User();\n        u.setName(\"Nacho\");\n        System.out.println(u.getName());\n    }\n}\n"
+  },
+  {
+    "id": "java-fundamentals-010",
+    "title": "Basic Exception Handling",
+    "description": "Handle runtime errors using try-catch.",
+    "context": "Prevents application crashes in production systems.",
+    "difficultyScore": 22,
+    "typingStyle": "full",
+    "tags": ["java", "exceptions"],
+    "concepts": ["error handling"],
+    "technicalNotes": [
+      "Try block contains risky code",
+      "Catch handles exceptions"
+    ],
+    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        try {\n            int result = 10 / 0;\n        } catch (ArithmeticException e) {\n            System.out.println(\"Error: division by zero\");\n        }\n    }\n}\n"
+  }
+
+]

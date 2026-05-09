@@ -1,0 +1,153 @@
+[
+  {
+    "id": "ts-interview-021",
+    "title": "Implement a Deep Partial Utility",
+    "description": "Create a recursive Partial type that makes nested properties optional.",
+    "context": "Common interview question to test advanced TypeScript knowledge and recursive types.",
+    "difficultyScore": 65,
+    "typingStyle": "full",
+    "tags": ["typescript", "advanced-types", "interview"],
+    "concepts": ["recursive types", "utility types"],
+    "technicalNotes": [
+      "Recursion in types allows deep transformations",
+      "Used in form editing systems and patch APIs"
+    ],
+    "codeSnippet": "type DeepPartial<T> = {\n  [K in keyof T]?: T[K] extends object\n    ? DeepPartial<T[K]>\n    : T[K];\n};\n\ninterface User {\n  id: number;\n  profile: {\n    name: string;\n    age: number;\n  };\n}\n\nconst update: DeepPartial<User> = {\n  profile: {\n    name: 'Nacho'\n  }\n};\n\nconsole.log(update);\n"
+  },
+  {
+    "id": "ts-interview-022",
+    "title": "Implement a Type-Safe Event Emitter",
+    "description": "Build a strongly typed event emitter system.",
+    "context": "Frequently asked in backend/frontend architecture interviews.",
+    "difficultyScore": 68,
+    "typingStyle": "full",
+    "tags": ["typescript", "events", "architecture"],
+    "concepts": ["generics", "event systems"],
+    "technicalNotes": [
+      "Generics enforce event payload correctness",
+      "Core pattern in scalable systems"
+    ],
+    "codeSnippet": "type Events = {\n  login: { userId: number };\n  logout: void;\n};\n\nclass EventEmitter<T> {\n  private listeners: { [K in keyof T]?: Function[] } = {};\n\n  on<K extends keyof T>(event: K, callback: (payload: T[K]) => void) {\n    this.listeners[event] = this.listeners[event] || [];\n    this.listeners[event]!.push(callback);\n  }\n\n  emit<K extends keyof T>(event: K, payload: T[K]) {\n    this.listeners[event]?.forEach(fn => fn(payload));\n  }\n}\n\nconst emitter = new EventEmitter<Events>();\n\nemitter.on('login', (data) => {\n  console.log(data.userId);\n});\n\nemitter.emit('login', { userId: 1 });\n"
+  },
+  {
+    "id": "ts-interview-023",
+    "title": "Build a Typed Dependency Injection Container",
+    "description": "Design a DI container with strict type safety.",
+    "context": "Used in enterprise backend systems and frameworks like NestJS.",
+    "difficultyScore": 72,
+    "typingStyle": "full",
+    "tags": ["typescript", "dependency-injection"],
+    "concepts": ["DI container", "inversion of control"],
+    "technicalNotes": [
+      "DI improves modularity",
+      "Used heavily in backend frameworks"
+    ],
+    "codeSnippet": "class Container {\n  private services = new Map();\n\n  register<T>(key: string, value: T) {\n    this.services.set(key, value);\n  }\n\n  get<T>(key: string): T {\n    return this.services.get(key);\n  }\n}\n\nconst container = new Container();\n\ncontainer.register('logger', console);\n\nconst logger = container.get<Console>('logger');\n\nlogger.log('Hello DI');\n"
+  },
+  {
+    "id": "ts-interview-024",
+    "title": "Implement a Typed Middleware Pipeline",
+    "description": "Create a middleware chain system with typed context.",
+    "context": "Used in Express-like frameworks and backend request pipelines.",
+    "difficultyScore": 70,
+    "typingStyle": "full",
+    "tags": ["typescript", "middleware", "backend"],
+    "concepts": ["pipeline", "composition"],
+    "technicalNotes": [
+      "Middleware executes sequentially",
+      "Each step can modify context"
+    ],
+    "codeSnippet": "type Context = {\n  user?: string;\n};\n\ntype Middleware = (ctx: Context, next: () => void) => void;\n\nclass Pipeline {\n  private middlewares: Middleware[] = [];\n\n  use(fn: Middleware) {\n    this.middlewares.push(fn);\n  }\n\n  execute(ctx: Context) {\n    let index = 0;\n\n    const next = () => {\n      const fn = this.middlewares[index++];\n      if (fn) fn(ctx, next);\n    };\n\n    next();\n  }\n}\n\nconst app = new Pipeline();\n\napp.use((ctx, next) => {\n  ctx.user = 'Nacho';\n  next();\n});\n\napp.execute({});\n"
+  },
+  {
+    "id": "ts-interview-025",
+    "title": "Build a Type-Safe Query Builder",
+    "description": "Design a SQL-like query builder with type safety.",
+    "context": "Common in backend systems and ORMs like Prisma or TypeORM.",
+    "difficultyScore": 75,
+    "typingStyle": "full",
+    "tags": ["typescript", "query-builder", "orm"],
+    "concepts": ["fluent API", "type safety"],
+    "technicalNotes": [
+      "Fluent APIs improve readability",
+      "Type safety prevents invalid queries"
+    ],
+    "codeSnippet": "class QueryBuilder {\n  private query: string = '';\n\n  select(fields: string) {\n    this.query += `SELECT ${fields} `;\n    return this;\n  }\n\n  from(table: string) {\n    this.query += `FROM ${table} `;\n    return this;\n  }\n\n  build() {\n    return this.query;\n  }\n}\n\nconst query = new QueryBuilder()\n  .select('*')\n  .from('users')\n  .build();\n\nconsole.log(query);\n"
+  },
+
+  {
+    "id": "ts-interview-026",
+    "title": "Implement a Type-Safe Promise.all",
+    "description": "Recreate Promise.all with strong TypeScript typing support.",
+    "context": "Common interview task to test async handling and tuple inference.",
+    "difficultyScore": 78,
+    "typingStyle": "full",
+    "tags": ["typescript", "async", "promises"],
+    "concepts": ["tuple inference", "async types"],
+    "technicalNotes": [
+      "Promise.all preserves order",
+      "Type inference is key for tuple inputs"
+    ],
+    "codeSnippet": "function promiseAll<T extends any[]>(promises: [...T]): Promise<T> {\n  return Promise.all(promises) as any;\n}\n\nconst result = promiseAll([\n  Promise.resolve(1),\n  Promise.resolve('hello')\n]);\n\nresult.then(console.log);\n"
+  },
+  {
+    "id": "ts-interview-027",
+    "title": "Implement a Typed Memoization Utility",
+    "description": "Create a memoization function that preserves function types.",
+    "context": "Used in performance optimization for expensive computations.",
+    "difficultyScore": 76,
+    "typingStyle": "full",
+    "tags": ["typescript", "performance", "memoization"],
+    "concepts": ["higher-order functions"],
+    "technicalNotes": [
+      "Caching improves performance",
+      "Type preservation is critical"
+    ],
+    "codeSnippet": "function memoize<T extends (...args: any[]) => any>(fn: T) {\n  const cache = new Map();\n\n  return function (...args: Parameters<T>): ReturnType<T> {\n    const key = JSON.stringify(args);\n\n    if (cache.has(key)) return cache.get(key);\n\n    const result = fn(...args);\n\n    cache.set(key, result);\n\n    return result;\n  };\n}\n\nconst add = memoize((a: number, b: number) => a + b);\n\nconsole.log(add(2, 3));\n"
+  },
+  {
+    "id": "ts-interview-028",
+    "title": "Build a Typed State Machine",
+    "description": "Create a fully typed finite state machine.",
+    "context": "Used in UI frameworks and workflow engines.",
+    "difficultyScore": 80,
+    "typingStyle": "full",
+    "tags": ["typescript", "state-machine"],
+    "concepts": ["finite states", "transitions"],
+    "technicalNotes": [
+      "State machines enforce valid transitions",
+      "Common in UI and backend workflows"
+    ],
+    "codeSnippet": "type State = 'idle' | 'loading' | 'success' | 'error';\n\ntype Transition = {\n  idle: 'loading';\n  loading: 'success' | 'error';\n  success: 'idle';\n  error: 'idle';\n};\n\nclass Machine {\n  state: State = 'idle';\n\n  transition(next: State) {\n    this.state = next;\n  }\n}\n\nconst m = new Machine();\n\nm.transition('loading');\nconsole.log(m.state);\n"
+  },
+  {
+    "id": "ts-interview-029",
+    "title": "Design a Typed Plugin System",
+    "description": "Create a plugin architecture with strict type safety.",
+    "context": "Used in extensible systems like editors or backend frameworks.",
+    "difficultyScore": 82,
+    "typingStyle": "full",
+    "tags": ["typescript", "plugins", "architecture"],
+    "concepts": ["plugin systems", "extensibility"],
+    "technicalNotes": [
+      "Plugins extend core functionality",
+      "Type safety prevents runtime errors"
+    ],
+    "codeSnippet": "type Plugin = {\n  name: string;\n  execute: () => void;\n};\n\nclass PluginSystem {\n  private plugins: Plugin[] = [];\n\n  register(plugin: Plugin) {\n    this.plugins.push(plugin);\n  }\n\n  run() {\n    this.plugins.forEach(p => p.execute());\n  }\n}\n\nconst system = new PluginSystem();\n\nsystem.register({\n  name: 'logger',\n  execute: () => console.log('logging...')\n});\n\nsystem.run();\n"
+  },
+  {
+    "id": "ts-interview-030",
+    "title": "Build a Typed Event Bus with Async Support",
+    "description": "Create an event bus that supports async event handlers.",
+    "context": "Used in microservices and event-driven systems.",
+    "difficultyScore": 85,
+    "typingStyle": "full",
+    "tags": ["typescript", "event-bus", "async"],
+    "concepts": ["event-driven architecture"],
+    "technicalNotes": [
+      "Async event handling improves scalability",
+      "Decouples system components"
+    ],
+    "codeSnippet": "type Events = {\n  message: string;\n};\n\nclass EventBus {\n  private listeners: { [K in keyof Events]?: Function[] } = {};\n\n  on<K extends keyof Events>(event: K, cb: (payload: Events[K]) => Promise<void> | void) {\n    this.listeners[event] = this.listeners[event] || [];\n    this.listeners[event]!.push(cb);\n  }\n\n  async emit<K extends keyof Events>(event: K, payload: Events[K]) {\n    const handlers = this.listeners[event] || [];\n\n    await Promise.all(handlers.map(h => h(payload)));\n  }\n}\n\nconst bus = new EventBus();\n\nbus.on('message', async (msg) => {\n  console.log(msg);\n});\n\nbus.emit('message', 'hello world');\n"
+  }
+]

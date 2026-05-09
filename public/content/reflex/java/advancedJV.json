@@ -1,0 +1,77 @@
+[
+  {
+    "id": "java-advanced-026",
+    "title": "Event-Driven Architecture Core",
+    "description": "Implement a basic event bus system.",
+    "context": "Used in scalable backend systems and reactive architectures.",
+    "difficultyScore": 88,
+    "typingStyle": "full",
+    "tags": ["java", "events", "architecture"],
+    "concepts": ["pub-sub pattern"],
+    "technicalNotes": [
+      "Decouples producers and consumers",
+      "Foundation of reactive systems"
+    ],
+    "codeSnippet": "import java.util.*;\n\nclass EventBus {\n    private Map<String, List<Consumer>> listeners = new HashMap<>();\n\n    interface Consumer {\n        void accept(String data);\n    }\n\n    public void subscribe(String event, Consumer c) {\n        listeners.computeIfAbsent(event, k -> new ArrayList<>()).add(c);\n    }\n\n    public void emit(String event, String data) {\n        if (listeners.containsKey(event)) {\n            for (Consumer c : listeners.get(event)) {\n                c.accept(data);\n            }\n        }\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        EventBus bus = new EventBus();\n\n        bus.subscribe(\"user_created\", data -> System.out.println(\"Event: \" + data));\n\n        bus.emit(\"user_created\", \"User 1\");\n    }\n}\n"
+  },
+  {
+    "id": "java-advanced-027",
+    "title": "In-Memory Cache System",
+    "description": "Build a simple caching layer with expiration logic.",
+    "context": "Used in backend optimization (similar to Redis concept).",
+    "difficultyScore": 90,
+    "typingStyle": "full",
+    "tags": ["java", "cache", "systems"],
+    "concepts": ["TTL", "caching"],
+    "technicalNotes": [
+      "Stores key-value pairs",
+      "Supports expiration time"
+    ],
+    "codeSnippet": "import java.util.*;\n\nclass Cache {\n    private class Item {\n        String value;\n        long expiry;\n\n        Item(String value, long ttl) {\n            this.value = value;\n            this.expiry = System.currentTimeMillis() + ttl;\n        }\n    }\n\n    private Map<String, Item> store = new HashMap<>();\n\n    public void set(String key, String value, long ttl) {\n        store.put(key, new Item(value, ttl));\n    }\n\n    public String get(String key) {\n        Item item = store.get(key);\n        if (item == null || System.currentTimeMillis() > item.expiry) {\n            return null;\n        }\n        return item.value;\n    }\n}\n"
+  },
+  {
+    "id": "java-advanced-028",
+    "title": "Thread Pool Executor System",
+    "description": "Simulate a thread pool executor.",
+    "context": "Core concept in high-performance backend systems.",
+    "difficultyScore": 92,
+    "typingStyle": "full",
+    "tags": ["java", "concurrency"],
+    "concepts": ["thread pools"],
+    "technicalNotes": [
+      "Reuses threads efficiently",
+      "Avoids thread creation overhead"
+    ],
+    "codeSnippet": "import java.util.concurrent.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        ExecutorService executor = Executors.newFixedThreadPool(2);\n\n        executor.submit(() -> System.out.println(\"Task 1\"));\n        executor.submit(() -> System.out.println(\"Task 2\"));\n\n        executor.shutdown();\n    }\n}\n"
+  },
+  {
+    "id": "java-advanced-029",
+    "title": "Basic ORM Simulation Layer",
+    "description": "Simulate mapping objects to storage layer.",
+    "context": "Foundation of frameworks like Hibernate.",
+    "difficultyScore": 93,
+    "typingStyle": "full",
+    "tags": ["java", "orm", "backend"],
+    "concepts": ["object mapping"],
+    "technicalNotes": [
+      "Abstracts persistence layer",
+      "Simulates database behavior"
+    ],
+    "codeSnippet": "class Model {\n    public void save() {\n        System.out.println(\"Saving: \" + this.getClass().getSimpleName());\n    }\n}\n\nclass User extends Model {\n    String name;\n\n    User(String name) {\n        this.name = name;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        User u = new User(\"Nacho\");\n        u.save();\n    }\n}\n"
+  },
+  {
+    "id": "java-advanced-030",
+    "title": "Distributed Task Scheduler (Simulation)",
+    "description": "Simulate distributed task execution system.",
+    "context": "Used in large-scale backend systems and job orchestration.",
+    "difficultyScore": 95,
+    "typingStyle": "full",
+    "tags": ["java", "distributed-systems"],
+    "concepts": ["task scheduling"],
+    "technicalNotes": [
+      "Simulates worker nodes",
+      "Core system design concept"
+    ],
+    "codeSnippet": "import java.util.*;\n\nclass Scheduler {\n    private Queue<String> tasks = new LinkedList<>();\n\n    public void addTask(String task) {\n        tasks.add(task);\n    }\n\n    public void run() {\n        while (!tasks.isEmpty()) {\n            System.out.println(\"Executing: \" + tasks.poll());\n        }\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Scheduler s = new Scheduler();\n        s.addTask(\"Job 1\");\n        s.addTask(\"Job 2\");\n\n        s.run();\n    }\n}\n"
+  }
+]

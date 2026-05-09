@@ -1,0 +1,153 @@
+[
+  {
+    "id": "ts-fundamentals-001",
+    "title": "Typed User Object",
+    "description": "Define a strongly typed user object using interfaces.",
+    "context": "Used in frontend apps to enforce consistent user data structures.",
+    "difficultyScore": 15,
+    "typingStyle": "full",
+    "tags": ["typescript", "interfaces", "basics"],
+    "concepts": ["interfaces", "type-safety"],
+    "technicalNotes": [
+      "Interfaces define object shape",
+      "Prevent runtime property errors"
+    ],
+    "codeSnippet": "interface User {\n  id: number;\n  name: string;\n  email: string;\n}\n\nconst user: User = {\n  id: 1,\n  name: 'John',\n  email: 'john@mail.com'\n};\n\nconsole.log(user.name);\n"
+  },
+  {
+    "id": "ts-fundamentals-002",
+    "title": "Function Type Annotations",
+    "description": "Type function parameters and return values explicitly.",
+    "context": "Ensures predictable function behavior in large codebases.",
+    "difficultyScore": 17,
+    "typingStyle": "full",
+    "tags": ["typescript", "functions"],
+    "concepts": ["function typing", "return types"],
+    "technicalNotes": [
+      "Always annotate inputs and outputs",
+      "Improves autocomplete and safety"
+    ],
+    "codeSnippet": "function add(a: number, b: number): number {\n  return a + b;\n}\n\nconst result = add(2, 3);\nconsole.log(result);\n"
+  },
+  {
+    "id": "ts-fundamentals-003",
+    "title": "Optional Properties",
+    "description": "Use optional properties in interfaces.",
+    "context": "Useful for partial API responses or forms.",
+    "difficultyScore": 18,
+    "typingStyle": "full",
+    "tags": ["typescript", "optional", "interfaces"],
+    "concepts": ["optional fields"],
+    "technicalNotes": [
+      "Use '?' for optional properties",
+      "Avoid undefined errors"
+    ],
+    "codeSnippet": "interface Product {\n  id: number;\n  name: string;\n  description?: string;\n}\n\nconst p: Product = {\n  id: 1,\n  name: 'Laptop'\n};\n\nconsole.log(p);\n"
+  },
+  {
+    "id": "ts-fundamentals-004",
+    "title": "Union Types",
+    "description": "Handle multiple possible types in a variable.",
+    "context": "Common in API responses or dynamic inputs.",
+    "difficultyScore": 19,
+    "typingStyle": "full",
+    "tags": ["typescript", "union-types"],
+    "concepts": ["type unions"],
+    "technicalNotes": [
+      "Use | to define multiple types",
+      "Requires type narrowing"
+    ],
+    "codeSnippet": "function printId(id: string | number) {\n  console.log('ID:', id);\n}\n\nprintId(123);\nprintId('ABC');\n"
+  },
+  {
+    "id": "ts-fundamentals-005",
+    "title": "Type Aliases",
+    "description": "Create reusable type definitions.",
+    "context": "Used to simplify complex type structures.",
+    "difficultyScore": 20,
+    "typingStyle": "full",
+    "tags": ["typescript", "types"],
+    "concepts": ["type aliases"],
+    "technicalNotes": [
+      "type keyword defines aliases",
+      "Improves readability"
+    ],
+    "codeSnippet": "type ID = string | number;\n\ntype User = {\n  id: ID;\n  name: string;\n};\n\nconst user: User = {\n  id: 1,\n  name: 'Anna'\n};\n\nconsole.log(user);\n"
+  }
+,
+  {
+    "id": "ts-fundamentals-006",
+    "title": "Interface Extension",
+    "description": "Extend existing interfaces to build reusable structures.",
+    "context": "Common in scalable frontend architectures where entities share base properties.",
+    "difficultyScore": 22,
+    "typingStyle": "full",
+    "tags": ["typescript", "interfaces", "inheritance"],
+    "concepts": ["interface extension"],
+    "technicalNotes": [
+      "Use extends to reuse structures",
+      "Reduces duplication"
+    ],
+    "codeSnippet": "interface BaseEntity {\n  id: number;\n  createdAt: Date;\n}\n\ninterface User extends BaseEntity {\n  name: string;\n}\n\nconst user: User = {\n  id: 1,\n  createdAt: new Date(),\n  name: 'Nacho'\n};\n\nconsole.log(user);\n"
+  },
+  {
+    "id": "ts-fundamentals-007",
+    "title": "Type Narrowing",
+    "description": "Narrow union types using conditional logic.",
+    "context": "Used when handling dynamic API responses.",
+    "difficultyScore": 23,
+    "typingStyle": "full",
+    "tags": ["typescript", "narrowing"],
+    "concepts": ["type guards"],
+    "technicalNotes": [
+      "Use typeof for primitive narrowing",
+      "Ensures safe access"
+    ],
+    "codeSnippet": "function format(value: string | number) {\n  if (typeof value === 'string') {\n    return value.toUpperCase();\n  }\n\n  return value.toFixed(2);\n}\n\nconsole.log(format('hello'));\nconsole.log(format(42));\n"
+  },
+  {
+    "id": "ts-fundamentals-008",
+    "title": "Readonly Properties",
+    "description": "Prevent modification of object properties.",
+    "context": "Useful in immutable state patterns.",
+    "difficultyScore": 24,
+    "typingStyle": "full",
+    "tags": ["typescript", "readonly"],
+    "concepts": ["immutability"],
+    "technicalNotes": [
+      "Readonly prevents mutation",
+      "Helps maintain predictable state"
+    ],
+    "codeSnippet": "interface Config {\n  readonly apiUrl: string;\n}\n\nconst config: Config = {\n  apiUrl: 'https://api.dev'\n};\n\nconsole.log(config.apiUrl);\n"
+  },
+  {
+    "id": "ts-fundamentals-009",
+    "title": "Literal Types",
+    "description": "Restrict values to specific literals.",
+    "context": "Used in strict state machines and UI modes.",
+    "difficultyScore": 25,
+    "typingStyle": "full",
+    "tags": ["typescript", "literals"],
+    "concepts": ["literal types"],
+    "technicalNotes": [
+      "Restricts values to exact strings/numbers",
+      "Improves correctness"
+    ],
+    "codeSnippet": "type Role = 'admin' | 'user' | 'guest';\n\nfunction checkRole(role: Role) {\n  console.log('Role:', role);\n}\n\ncheckRole('admin');\n"
+  },
+  {
+    "id": "ts-fundamentals-010",
+    "title": "Basic Generics",
+    "description": "Create reusable functions using generics.",
+    "context": "Core concept for reusable TypeScript utilities.",
+    "difficultyScore": 27,
+    "typingStyle": "full",
+    "tags": ["typescript", "generics"],
+    "concepts": ["generic functions"],
+    "technicalNotes": [
+      "Generics allow flexible typing",
+      "Improve reusability"
+    ],
+    "codeSnippet": "function identity<T>(value: T): T {\n  return value;\n}\n\nconsole.log(identity<string>('Hello'));\nconsole.log(identity<number>(123));\n"
+  }
+]

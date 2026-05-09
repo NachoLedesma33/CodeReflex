@@ -1,0 +1,77 @@
+[
+  {
+    "id": "py-interview-021",
+    "title": "Implement LRU Cache",
+    "description": "Design a Least Recently Used (LRU) cache from scratch.",
+    "context": "Classic interview problem for backend and system design roles.",
+    "difficultyScore": 70,
+    "typingStyle": "full",
+    "tags": ["python", "cache", "interview"],
+    "concepts": ["hashmap", "doubly linked list"],
+    "technicalNotes": [
+      "LRU evicts least recently used items",
+      "Requires O(1) get and set"
+    ],
+    "codeSnippet": "class LRUCache:\n    def __init__(self, capacity):\n        self.capacity = capacity\n        self.cache = {}\n\n    def get(self, key):\n        if key in self.cache:\n            return self.cache[key]\n        return -1\n\n    def put(self, key, value):\n        if len(self.cache) >= self.capacity:\n            self.cache.pop(next(iter(self.cache)))\n        self.cache[key] = value\n"
+  },
+  {
+    "id": "py-interview-022",
+    "title": "Thread-Safe Counter",
+    "description": "Implement a counter safe for concurrent threads.",
+    "context": "Used in backend systems handling concurrency.",
+    "difficultyScore": 72,
+    "typingStyle": "full",
+    "tags": ["python", "concurrency"],
+    "concepts": ["thread safety", "locks"],
+    "technicalNotes": [
+      "Avoid race conditions",
+      "Use threading.Lock"
+    ],
+    "codeSnippet": "import threading\n\nclass Counter:\n    def __init__(self):\n        self.value = 0\n        self.lock = threading.Lock()\n\n    def increment(self):\n        with self.lock:\n            self.value += 1\n\ncounter = Counter()\ncounter.increment()\nprint(counter.value)\n"
+  },
+  {
+    "id": "py-interview-023",
+    "title": "Producer-Consumer Queue",
+    "description": "Implement a thread-safe producer-consumer system.",
+    "context": "Common backend and distributed systems interview question.",
+    "difficultyScore": 75,
+    "typingStyle": "full",
+    "tags": ["python", "concurrency", "queue"],
+    "concepts": ["producer-consumer pattern"],
+    "technicalNotes": [
+      "Use Queue for synchronization",
+      "Avoid busy waiting"
+    ],
+    "codeSnippet": "import queue\nimport threading\n\nq = queue.Queue()\n\ndef producer():\n    q.put('item')\n\ndef consumer():\n    item = q.get()\n    print(item)\n\nthreading.Thread(target=producer).start()\nthreading.Thread(target=consumer).start()\n"
+  },
+  {
+    "id": "py-interview-024",
+    "title": "Rate Limiter",
+    "description": "Design a simple rate limiter.",
+    "context": "Used in APIs to prevent abuse and overload.",
+    "difficultyScore": 78,
+    "typingStyle": "full",
+    "tags": ["python", "rate-limiting"],
+    "concepts": ["throttling", "time windows"],
+    "technicalNotes": [
+      "Track requests per time window",
+      "Common in API gateways"
+    ],
+    "codeSnippet": "import time\n\nclass RateLimiter:\n    def __init__(self):\n        self.requests = []\n\n    def allow(self):\n        now = time.time()\n        self.requests = [r for r in self.requests if now - r < 1]\n\n        if len(self.requests) < 5:\n            self.requests.append(now)\n            return True\n        return False\n"
+  },
+  {
+    "id": "py-interview-025",
+    "title": "Simple In-Memory Database",
+    "description": "Build a basic in-memory key-value store.",
+    "context": "Simulates backend storage systems used in caching layers.",
+    "difficultyScore": 73,
+    "typingStyle": "full",
+    "tags": ["python", "database", "storage"],
+    "concepts": ["key-value store"],
+    "technicalNotes": [
+      "Core concept of Redis-like systems",
+      "Fast lookup via dictionary"
+    ],
+    "codeSnippet": "class Database:\n    def __init__(self):\n        self.store = {}\n\n    def set(self, key, value):\n        self.store[key] = value\n\n    def get(self, key):\n        return self.store.get(key)\n\n\ndb = Database()\ndb.set('name', 'Nacho')\nprint(db.get('name'))\n"
+  }
+]

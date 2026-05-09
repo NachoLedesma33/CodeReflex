@@ -1,0 +1,77 @@
+[
+  {
+    "id": "ts-advanced-031",
+    "title": "Design a Type-Safe Dependency Injection Container",
+    "description": "Build a fully typed DI container with generics and key-based resolution.",
+    "context": "Used in backend frameworks like NestJS for modular architecture.",
+    "difficultyScore": 88,
+    "typingStyle": "full",
+    "tags": ["typescript", "architecture", "dependency-injection"],
+    "concepts": ["ioc container", "generics", "service registry"],
+    "technicalNotes": [
+      "Enables decoupled architecture",
+      "Type-safe service resolution"
+    ],
+    "codeSnippet": "type Constructor<T> = new (...args: any[]) => T;\n\nclass Container {\n  private services = new Map();\n\n  register<T>(key: string, value: Constructor<T>) {\n    this.services.set(key, value);\n  }\n\n  resolve<T>(key: string): T {\n    const Service = this.services.get(key);\n    return new Service();\n  }\n}\n\nclass Logger {\n  log(msg: string) {\n    console.log(msg);\n  }\n}\n\nconst container = new Container();\ncontainer.register('logger', Logger);\n\nconst logger = container.resolve<Logger>('logger');\nlogger.log('DI working');\n"
+  },
+  {
+    "id": "ts-advanced-032",
+    "title": "Build a Type-Safe Plugin Runtime System",
+    "description": "Create a sandboxed plugin system with strict typing and isolation.",
+    "context": "Used in extensible platforms like IDEs or SaaS products.",
+    "difficultyScore": 90,
+    "typingStyle": "full",
+    "tags": ["typescript", "plugins", "runtime"],
+    "concepts": ["sandboxing", "extensibility"],
+    "technicalNotes": [
+      "Plugins extend core runtime safely",
+      "Isolation prevents system corruption"
+    ],
+    "codeSnippet": "type PluginAPI = {\n  log: (msg: string) => void;\n};\n\ntype Plugin = (api: PluginAPI) => void;\n\nclass Runtime {\n  private plugins: Plugin[] = [];\n\n  register(plugin: Plugin) {\n    this.plugins.push(plugin);\n  }\n\n  run() {\n    const api: PluginAPI = {\n      log: console.log\n    };\n\n    this.plugins.forEach(p => p(api));\n  }\n}\n\nconst runtime = new Runtime();\n\nruntime.register((api) => {\n  api.log('Plugin executed');\n});\n\nruntime.run();\n"
+  },
+  {
+    "id": "ts-advanced-033",
+    "title": "Implement a Type-Safe Event Sourcing System",
+    "description": "Design an event sourcing architecture with strict event typing.",
+    "context": "Used in distributed systems and financial applications.",
+    "difficultyScore": 92,
+    "typingStyle": "full",
+    "tags": ["typescript", "event-sourcing", "architecture"],
+    "concepts": ["event store", "state reconstruction"],
+    "technicalNotes": [
+      "State is derived from events",
+      "Ensures auditability"
+    ],
+    "codeSnippet": "type Event =\n  | { type: 'created'; payload: { id: number } }\n  | { type: 'updated'; payload: { id: number; value: string } };\n\nclass EventStore {\n  private events: Event[] = [];\n\n  append(event: Event) {\n    this.events.push(event);\n  }\n\n  getAll() {\n    return this.events;\n  }\n}\n\nconst store = new EventStore();\n\nstore.append({ type: 'created', payload: { id: 1 } });\nstore.append({ type: 'updated', payload: { id: 1, value: 'ok' } });\n\nconsole.log(store.getAll());\n"
+  },
+  {
+    "id": "ts-advanced-034",
+    "title": "Build a Typed Query Builder Engine",
+    "description": "Create a fluent SQL-like query builder with full type safety.",
+    "context": "Used in ORMs and database abstraction layers.",
+    "difficultyScore": 89,
+    "typingStyle": "full",
+    "tags": ["typescript", "orm", "query-builder"],
+    "concepts": ["fluent API", "type inference"],
+    "technicalNotes": [
+      "Fluent chaining improves DX",
+      "Prevents invalid query construction"
+    ],
+    "codeSnippet": "class QueryBuilder {\n  private query = '';\n\n  select(fields: string) {\n    this.query += `SELECT ${fields} `;\n    return this;\n  }\n\n  from(table: string) {\n    this.query += `FROM ${table} `;\n    return this;\n  }\n\n  where(condition: string) {\n    this.query += `WHERE ${condition} `;\n    return this;\n  }\n\n  build() {\n    return this.query;\n  }\n}\n\nconst query = new QueryBuilder()\n  .select('*')\n  .from('users')\n  .where('id = 1')\n  .build();\n\nconsole.log(query);\n"
+  },
+  {
+    "id": "ts-advanced-035",
+    "title": "Design a Distributed Task Scheduler (Type-Level Model)",
+    "description": "Model a distributed scheduler system with typed workers and tasks.",
+    "context": "Used in backend systems like job queues and microservices orchestration.",
+    "difficultyScore": 95,
+    "typingStyle": "full",
+    "tags": ["typescript", "distributed-systems", "scheduler"],
+    "concepts": ["task orchestration", "workers"],
+    "technicalNotes": [
+      "Simulates distributed execution",
+      "Useful for backend architecture design interviews"
+    ],
+    "codeSnippet": "type Task = {\n  id: string;\n  payload: unknown;\n};\n\nclass Scheduler {\n  private queue: Task[] = [];\n\n  add(task: Task) {\n    this.queue.push(task);\n  }\n\n  run() {\n    this.queue.forEach(task => {\n      console.log('Executing task', task.id);\n    });\n  }\n}\n\nconst scheduler = new Scheduler();\n\nscheduler.add({ id: 'task-1', payload: {} });\n\nscheduler.run();\n"
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "id": "py-fundamentals-001",
+    "title": "Basic Variables and Types",
+    "description": "Understand Python variables and dynamic typing.",
+    "context": "Fundamental concept used in every Python application.",
+    "difficultyScore": 10,
+    "typingStyle": "full",
+    "tags": ["python", "basics", "variables"],
+    "concepts": ["dynamic typing"],
+    "technicalNotes": [
+      "Python is dynamically typed",
+      "No need to declare types explicitly"
+    ],
+    "codeSnippet": "name = 'Nacho'\nage = 25\nis_dev = True\n\nprint(name)\nprint(age)\nprint(is_dev)\n"
+  },
+  {
+    "id": "py-fundamentals-002",
+    "title": "Basic Functions",
+    "description": "Define and call simple functions in Python.",
+    "context": "Core building block of reusable logic.",
+    "difficultyScore": 12,
+    "typingStyle": "full",
+    "tags": ["python", "functions"],
+    "concepts": ["function definition"],
+    "technicalNotes": [
+      "Use def keyword",
+      "Indentation is mandatory"
+    ],
+    "codeSnippet": "def greet(name):\n    return f'Hello {name}'\n\nprint(greet('Nacho'))\n"
+  },
+  {
+    "id": "py-fundamentals-003",
+    "title": "Lists and Iteration",
+    "description": "Work with lists and loops.",
+    "context": "Used in data processing and backend logic.",
+    "difficultyScore": 14,
+    "typingStyle": "full",
+    "tags": ["python", "lists", "loops"],
+    "concepts": ["iteration"],
+    "technicalNotes": [
+      "Lists are mutable",
+      "for loops are commonly used"
+    ],
+    "codeSnippet": "numbers = [1, 2, 3, 4]\n\nfor n in numbers:\n    print(n * 2)\n"
+  },
+  {
+    "id": "py-fundamentals-004",
+    "title": "Dictionaries Basics",
+    "description": "Use dictionaries to store key-value data.",
+    "context": "Core structure for JSON-like data handling.",
+    "difficultyScore": 15,
+    "typingStyle": "full",
+    "tags": ["python", "dict"],
+    "concepts": ["key-value structures"],
+    "technicalNotes": [
+      "Dictionaries are mutable",
+      "Access via keys"
+    ],
+    "codeSnippet": "user = {\n    'id': 1,\n    'name': 'Nacho'\n}\n\nprint(user['name'])\n"
+  },
+  {
+    "id": "py-fundamentals-005",
+    "title": "Basic Conditionals",
+    "description": "Use if, elif and else statements.",
+    "context": "Fundamental control flow structure.",
+    "difficultyScore": 16,
+    "typingStyle": "full",
+    "tags": ["python", "conditionals"],
+    "concepts": ["control flow"],
+    "technicalNotes": [
+      "Indentation defines blocks",
+      "No parentheses required"
+    ],
+    "codeSnippet": "age = 20\n\nif age >= 18:\n    print('Adult')\nelse:\n    print('Minor')\n"
+  },
+  {
+    "id": "py-fundamentals-006",
+    "title": "String Formatting (f-strings)",
+    "description": "Use f-strings for readable string interpolation.",
+    "context": "Modern Python standard for formatting output.",
+    "difficultyScore": 17,
+    "typingStyle": "full",
+    "tags": ["python", "strings"],
+    "concepts": ["string interpolation"],
+    "technicalNotes": [
+      "f-strings are evaluated at runtime",
+      "More readable than concatenation"
+    ],
+    "codeSnippet": "name = 'Nacho'\nage = 25\n\nprint(f'My name is {name} and I am {age} years old')\n"
+  },
+  {
+    "id": "py-fundamentals-007",
+    "title": "List Comprehensions",
+    "description": "Create lists using compact syntax.",
+    "context": "Used in data processing and clean Python code.",
+    "difficultyScore": 20,
+    "typingStyle": "full",
+    "tags": ["python", "comprehension"],
+    "concepts": ["list generation"],
+    "technicalNotes": [
+      "More efficient than loops in many cases",
+      "Readable once understood"
+    ],
+    "codeSnippet": "numbers = [1, 2, 3, 4]\nsquares = [n * n for n in numbers]\n\nprint(squares)\n"
+  },
+  {
+    "id": "py-fundamentals-008",
+    "title": "Simple Classes",
+    "description": "Define basic object-oriented structures.",
+    "context": "Foundation of OOP in Python.",
+    "difficultyScore": 22,
+    "typingStyle": "full",
+    "tags": ["python", "oop"],
+    "concepts": ["classes", "objects"],
+    "technicalNotes": [
+      "Classes define blueprints",
+      "self refers to instance"
+    ],
+    "codeSnippet": "class User:\n    def __init__(self, name):\n        self.name = name\n\n    def greet(self):\n        return f'Hello {self.name}'\n\nu = User('Nacho')\nprint(u.greet())\n"
+  },
+  {
+    "id": "py-fundamentals-009",
+    "title": "Error Handling (try/except)",
+    "description": "Handle runtime errors safely.",
+    "context": "Used to prevent application crashes.",
+    "difficultyScore": 21,
+    "typingStyle": "full",
+    "tags": ["python", "errors"],
+    "concepts": ["exception handling"],
+    "technicalNotes": [
+      "try block executes risky code",
+      "except catches errors"
+    ],
+    "codeSnippet": "try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print('Cannot divide by zero')\n"
+  },
+  {
+    "id": "py-fundamentals-010",
+    "title": "Working with Modules",
+    "description": "Import and use Python modules.",
+    "context": "Core concept for structuring larger projects.",
+    "difficultyScore": 19,
+    "typingStyle": "full",
+    "tags": ["python", "modules"],
+    "concepts": ["imports"],
+    "technicalNotes": [
+      "Modules split code into files",
+      "Use import keyword"
+    ],
+    "codeSnippet": "import math\n\nprint(math.sqrt(16))\n"
+  }
+]
