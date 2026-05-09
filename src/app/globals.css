@@ -24,3 +24,28 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Monaco Editor Typing Decorations */
+.monaco-editor .correct-char {
+  background-color: rgba(34, 197, 94, 0.4) !important;
+  border-radius: 2px;
+}
+
+.monaco-editor .error-char {
+  background-color: rgba(239, 68, 68, 0.5) !important;
+  border-radius: 2px;
+}
+
+.monaco-editor .ghost-char {
+  color: rgba(113, 113, 122, 0.35) !important;
+}
+
+/* Force LTR direction for editor content */
+.monaco-editor .view-lines {
+  direction: ltr !important;
+  unicode-bidi: plaintext !important;
+}
+
+.monaco-editor .overflow-guard {
+  direction: ltr !important;
+}

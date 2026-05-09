@@ -3,8 +3,8 @@
     "language": "javascript",
     "mode": "reflex-typing",
     "version": "1.0.0",
-    "lastUpdated": "2026-05-08",
-    "totalExercises": 10
+    "lastUpdated": "2026-05-09",
+    "totalExercises": 16
   },
   "exercises": [
     {
@@ -276,6 +276,168 @@
         "Functional programming improves modularity."
       ],
       "codeSnippet": "function compose(...functions) {\n  return (value) => {\n    return functions.reduceRight((currentValue, currentFunction) => {\n      return currentFunction(currentValue);\n    }, value);\n  };\n}\n\nconst trim = (text) => text.trim();\nconst lowercase = (text) => text.toLowerCase();\nconst addPrefix = (text) => `user:${text}`;\n\nconst formatUsername = compose(addPrefix, lowercase, trim);\n\nconsole.log(formatUsername('   NachoDev   '));\n"
+    },
+    {
+      "id": "js-intermediate-class-user-011",
+      "title": "User Class with Methods",
+      "description": "Create a User class with properties and methods for a typical application.",
+      "context": "Classes are fundamental in object-oriented programming for creating reusable components and data models in applications.",
+      "category": "classes",
+      "difficultyScore": 32,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "classes",
+        "oop",
+        "methods",
+        "constructor"
+      ],
+      "concepts": [
+        "class-definition",
+        "constructor",
+        "instance-methods"
+      ],
+      "technicalNotes": [
+        "Classes provide a template for creating objects.",
+        "The constructor initializes object properties.",
+        "Methods define behavior on class instances."
+      ],
+      "codeSnippet": "class User {\n  constructor(name, email) {\n    this.name = name;\n    this.email = email;\n    this.isActive = true;\n    this.createdAt = new Date();\n  }\n\n  activate() {\n    this.isActive = true;\n    return `${this.name} is now active`;\n  }\n\n  deactivate() {\n    this.isActive = false;\n    return `${this.name} is now inactive`;\n  }\n\n  getInfo() {\n    return `User: ${this.name}, Email: ${this.email}, Active: ${this.isActive}`;\n  }\n}\n\nconst user = new User('Nacho', 'nacho@example.com');\nconsole.log(user.getInfo());\nconsole.log(user.activate());\n"
+    },
+    {
+      "id": "js-intermediate-class-product-012",
+      "title": "Product Class with Static Method",
+      "description": "Build a Product class with static methods for inventory management.",
+      "context": "Static methods are used for utility functions and factory methods in class-based architectures.",
+      "category": "classes",
+      "difficultyScore": 35,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "classes",
+        "static",
+        "factory",
+        "inventory"
+      ],
+      "concepts": [
+        "static-methods",
+        "class-properties",
+        "factory-pattern"
+      ],
+      "technicalNotes": [
+        "Static methods belong to the class, not instances.",
+        "Factory methods create instances with specific configs.",
+        "Static properties shared across all instances."
+      ],
+      "codeSnippet": "class Product {\n  static count = 0;\n  static inventory = [];\n\n  constructor(name, price, stock) {\n    this.id = ++Product.count;\n    this.name = name;\n    this.price = price;\n    this.stock = stock;\n  }\n\n  static addProduct(product) {\n    Product.inventory.push(product);\n    return `Added ${product.name} to inventory`;\n  }\n\n  static getTotalValue() {\n    return Product.inventory.reduce((total, p) => total + (p.price * p.stock), 0);\n  }\n\n  updateStock(quantity) {\n    this.stock += quantity;\n    return `Stock updated: ${this.stock} units`;\n  }\n}\n\nconst laptop = new Product('Laptop', 999, 10);\nconst phone = new Product('Phone', 499, 25);\n\nconsole.log(Product.addProduct(laptop));\nconsole.log(Product.addProduct(phone));\nconsole.log(`Total inventory value: $${Product.getTotalValue()}`);\n"
+    },
+    {
+      "id": "js-intermediate-algorithms-binary-011",
+      "title": "Binary Search Implementation",
+      "description": "Implement binary search algorithm for finding elements in sorted arrays.",
+      "context": "Binary search is essential for efficient lookups in sorted data, used in databases, search engines, and debugging.",
+      "category": "algorithms",
+      "difficultyScore": 38,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "algorithms",
+        "binary-search",
+        "searching",
+        "optimization"
+      ],
+      "concepts": [
+        "divide-and-conquer",
+        "time-complexity",
+        "recursion"
+      ],
+      "technicalNotes": [
+        "Binary search requires sorted arrays.",
+        "Time complexity is O(log n) vs O(n) for linear.",
+        "Space complexity is O(1) for iterative approach."
+      ],
+      "codeSnippet": "function binarySearch(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n\n    if (arr[mid] === target) {\n      return mid;\n    } else if (arr[mid] < target) {\n      left = mid + 1;\n    } else {\n      right = mid - 1;\n    }\n  }\n\n  return -1;\n}\n\nconst sortedNumbers = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];\n\nconsole.log(binarySearch(sortedNumbers, 9));\nconsole.log(binarySearch(sortedNumbers, 6));\nconsole.log(binarySearch(sortedNumbers, 19));\n"
+    },
+    {
+      "id": "js-intermediate-algorithms-fibonacci-012",
+      "title": "Fibonacci with Memoization",
+      "description": "Optimized Fibonacci using memoization to avoid recalculating values.",
+      "context": "Memoization is critical for dynamic programming problems, used in game AI, pathfinding, and optimization.",
+      "category": "algorithms",
+      "difficultyScore": 36,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "algorithms",
+        "memoization",
+        "dynamic-programming",
+        "optimization"
+      ],
+      "concepts": [
+        "memoization",
+        "time-complexity",
+        "optimization"
+      ],
+      "technicalNotes": [
+        "Naive Fibonacci is O(2^n), memoized is O(n).",
+        "Cache stores computed results for reuse.",
+        "Space-time tradeoff improves performance."
+      ],
+      "codeSnippet": "function fibonacciMemo(n, memo = {}) {\n  if (n in memo) return memo[n];\n  if (n <= 1) return n;\n\n  memo[n] = fibonacciMemo(n - 1, memo) + fibonacciMemo(n - 2, memo);\n  return memo[n];\n}\n\nfunction fibonacciTable(n) {\n  const table = new Array(n + 1).fill(0);\n  table[1] = 1;\n\n  for (let i = 2; i <= n; i++) {\n    table[i] = table[i - 1] + table[i - 2];\n  }\n\n  return table[n];\n}\n\nconsole.log(fibonacciMemo(10));\nconsole.log(fibonacciMemo(30));\nconsole.log(fibonacciTable(10));\n"
+    },
+    {
+      "id": "js-intermediate-data-structures-queue-011",
+      "title": "Queue Implementation",
+      "description": "Implement a queue data structure using JavaScript arrays with enqueue and dequeue operations.",
+      "context": "Queues are fundamental for task scheduling, BFS algorithms, message processing, and handling async operations.",
+      "category": "data-structures",
+      "difficultyScore": 33,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "data-structures",
+        "queue",
+        "fifo",
+        "collections"
+      ],
+      "concepts": [
+        "fifo-principle",
+        "enqueue-dequeue",
+        "linear-data-structure"
+      ],
+      "technicalNotes": [
+        "Queue follows First-In-First-Out principle.",
+        "Array push() is O(1), shift() is O(n) - use index pointer for efficiency.",
+        "Used in breadth-first search and task queues."
+      ],
+      "codeSnippet": "class Queue {\n  constructor() {\n    this.items = [];\n    this.front = 0;\n    this.rear = 0;\n  }\n\n  enqueue(element) {\n    this.items.push(element);\n    this.rear++;\n    return `Enqueued: ${element}`;\n  }\n\n  dequeue() {\n    if (this.isEmpty()) return 'Queue is empty';\n    const element = this.items[this.front];\n    this.front++;\n    return `Dequeued: ${element}`;\n  }\n\n  peek() {\n    if (this.isEmpty()) return 'Queue is empty';\n    return this.items[this.front];\n  }\n\n  isEmpty() {\n    return this.rear - this.front === 0;\n  }\n\n  size() {\n    return this.rear - this.front;\n  }\n}\n\nconst queue = new Queue();\nqueue.enqueue('task1');\nqueue.enqueue('task2');\nqueue.enqueue('task3');\nconsole.log(queue.dequeue());\nconsole.log(queue.peek());\nconsole.log(queue.size());\n"
+    },
+    {
+      "id": "js-intermediate-data-structures-hashmap-012",
+      "title": "Hash Map Implementation",
+      "description": "Build a hash map with basic operations like put, get, and handle collisions.",
+      "context": "Hash maps are the most common data structure for key-value storage, used in databases, caches, and language implementations.",
+      "category": "data-structures",
+      "difficultyScore": 37,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "data-structures",
+        "hashmap",
+        "key-value",
+        "hashing"
+      ],
+      "concepts": [
+        "hash-function",
+        "collision-handling",
+        "key-value-storage"
+      ],
+      "technicalNotes": [
+        "Hash functions map keys to array indices.",
+        "Chaining handles collisions with linked lists.",
+        "Average case O(1) for insert, search, delete."
+      ],
+      "codeSnippet": "class HashMap {\n  constructor(size = 10) {\n    this.size = size;\n    this.buckets = new Array(size).fill(null).map(() => []);\n  }\n\n  hash(key) {\n    let hash = 0;\n    for (let i = 0; i < key.length; i++) {\n      hash = (hash + key.charCodeAt(i) * (i + 1)) % this.size;\n    }\n    return hash;\n  }\n\n  put(key, value) {\n    const index = this.hash(key);\n    const bucket = this.buckets[index];\n    \n    for (let i = 0; i < bucket.length; i++) {\n      if (bucket[i].key === key) {\n        bucket[i].value = value;\n        return;\n      }\n    }\n    \n    bucket.push({ key, value });\n  }\n\n  get(key) {\n    const index = this.hash(key);\n    const bucket = this.buckets[index];\n    \n    for (const pair of bucket) {\n      if (pair.key === key) return pair.value;\n    }\n    \n    return undefined;\n  }\n}\n\nconst map = new HashMap();\nmap.put('name', 'Nacho');\nmap.put('age', '25');\nmap.put('city', 'Buenos Aires');\nconsole.log(map.get('name'));\nconsole.log(map.get('age'));\nconsole.log(map.get('country'));\n"
     }
   ]
 }

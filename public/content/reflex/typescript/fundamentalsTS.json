@@ -4,6 +4,7 @@
     "title": "Typed User Object",
     "description": "Define a strongly typed user object using interfaces.",
     "context": "Used in frontend apps to enforce consistent user data structures.",
+    "category": "interfaces",
     "difficultyScore": 15,
     "typingStyle": "full",
     "tags": ["typescript", "interfaces", "basics"],

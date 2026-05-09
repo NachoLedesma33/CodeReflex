@@ -90,6 +90,8 @@ export function ReflexTyping({
     metrics,
     isComplete,
     reset: resetValidator,
+    getErrorPositions,
+    getCorrectPositions,
   } = useTypingValidator({
     expectedCode,
     blanks,
@@ -106,6 +108,9 @@ export function ReflexTyping({
     enabled: sessionState === 'running',
     cursorPosition: currentCode.length,
   });
+
+  const errorPositions = getErrorPositions();
+  const correctPositions = getCorrectPositions();
 
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === filteredExercises.length - 1;
@@ -168,7 +173,11 @@ export function ReflexTyping({
   }, [resetValidator]);
 
   const handleCodeChange = useCallback((code: string) => {
-    if (sessionState !== 'running') return;
+    if (sessionState === 'idle' && code.length > 0) {
+      setSessionState('running');
+      setStartTime(Date.now());
+    }
+    if (sessionState !== 'running' && sessionState !== 'idle') return;
     setCurrentCode(code);
   }, [sessionState]);
 
@@ -242,8 +251,9 @@ export function ReflexTyping({
           </div>
         )}
 
-        <CardContent className="flex-1 min-h-0 p-2">
-          <div className="h-full min-h-[300px]">
+        <CardContent className="flex-1 min-h-0 p-2 relative bg-zinc-950">
+          {/* User typing layer */}
+          <div className="h-full min-h-[300px] relative z-10">
             <CodeEditor
               expectedCode={expectedCode}
               currentCode={currentCode}
@@ -253,9 +263,11 @@ export function ReflexTyping({
               mode={sessionState === 'completed' ? 'read' : 'write'}
               onChange={handleCodeChange}
               onComplete={handleEditorComplete}
-              showGhostText={sessionState === 'running'}
+              showGhostText={true}
               highlightErrors={true}
-              className="h-full"
+              correctPositions={correctPositions}
+              errorPositions={errorPositions}
+              className="h-full bg-transparent"
             />
           </div>
         </CardContent>
@@ -291,10 +303,9 @@ export function ReflexTyping({
                 </div>
 
                 {sessionState === 'idle' && (
-                  <Button onClick={startSession} size="md">
-                    <Play className="w-4 h-4 mr-2" />
-                    Start
-                  </Button>
+                  <div className="text-sm text-zinc-400">
+                    Start typing to begin...
+                  </div>
                 )}
                 {sessionState === 'running' && (
                   <Button onClick={pauseSession} variant="secondary" size="md">

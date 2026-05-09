@@ -2,7 +2,7 @@
 // ENUMS Y TIPOS BÁSICOS
 // ============================================
 
-export type ProgrammingLanguage = 'javascript' | 'typescript' | 'python';
+export type ProgrammingLanguage = 'javascript' | 'typescript' | 'python' | 'java';
 
 export type DifficultyLevel = 'fundamentals' | 'intermediate' | 'interview' | 'advanced';
 
@@ -15,11 +15,36 @@ export type ExerciseCategory =
   | 'strings'
   | 'objects'
   | 'functions'
+  | 'loops'
+  | 'browser-api'
   | 'classes'
   | 'algorithms'
   | 'data-structures'
   | 'async'
+  | 'state-management'
+  | 'data-processing'
+  | 'architecture'
+  | 'performance'
+  | 'functional-programming'
   | 'patterns'
+  | 'system-design'
+  | 'api-design'
+  | 'concurrency'
+  | 'security'
+  | 'distributed-systems'
+  | 'databases'
+  | 'monitoring'
+  | 'infrastructure'
+  | 'automation'
+  | 'validation'
+  | 'runtime-systems'
+  | 'realtime'
+  | 'backend-architecture'
+  | 'microservices'
+  | 'authentication'
+  | 'search'
+  | 'cloud-architecture'
+  | 'resilience'
   | 'testing';
 
 // ============================================

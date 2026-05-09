@@ -3,8 +3,8 @@
     "language": "javascript",
     "mode": "reflex-typing",
     "version": "1.0.0",
-    "lastUpdated": "2026-05-08",
-    "totalExercises": 10
+    "lastUpdated": "2026-05-09",
+    "totalExercises": 15
   },
   "exercises": [
     {
@@ -276,6 +276,141 @@
         "Numeric sorting requires subtraction logic."
       ],
       "codeSnippet": "const products = [\n  { name: 'Laptop', price: 1200 },\n  { name: 'Headphones', price: 150 },\n  { name: 'Monitor', price: 450 }\n];\n\nproducts.sort((a, b) => {\n  return a.price - b.price;\n});\n\nconsole.log(products);\n"
+    },
+    {
+      "id": "js-fundamentals-class-person-011",
+      "title": "Basic Class Definition",
+      "description": "Create a simple class with constructor and methods.",
+      "context": "Classes are fundamental in JavaScript for creating blueprints for objects and organizing code.",
+      "category": "classes",
+      "difficultyScore": 20,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "classes",
+        "oop",
+        "constructor",
+        "methods"
+      ],
+      "concepts": [
+        "class-basics",
+        "constructor",
+        "instance"
+      ],
+      "technicalNotes": [
+        "Classes are templates for creating objects.",
+        "The constructor runs when creating a new instance.",
+        "Methods define behavior on instances."
+      ],
+      "codeSnippet": "class Person {\n  constructor(name, age) {\n    this.name = name;\n    this.age = age;\n  }\n\n  greet() {\n    return `Hello, my name is ${this.name}`;\n  }\n\n  celebrateBirthday() {\n    this.age++;\n    return `Happy birthday! Now I am ${this.age}`;\n  }\n}\n\nconst person1 = new Person('Nacho', 25);\nconsole.log(person1.greet());\nconsole.log(person1.celebrateBirthday());\n"
+    },
+    {
+      "id": "js-fundamentals-class-car-012",
+      "title": "Car Class with Properties",
+      "description": "Build a Car class with properties to track its state.",
+      "context": "Classes are used to model real-world objects with properties and behaviors in applications.",
+      "category": "classes",
+      "difficultyScore": 22,
+      "estimatedDuration": 60,
+      "typingStyle": "full",
+      "tags": [
+        "classes",
+        "properties",
+        "oop",
+        "state"
+      ],
+      "concepts": [
+        "this-keyword",
+        "object-properties",
+        "state-management"
+      ],
+      "technicalNotes": [
+        "Properties store object state.",
+        "Use 'this' to reference the instance.",
+        "Methods can modify properties."
+      ],
+      "codeSnippet": "class Car {\n  constructor(brand, model, year) {\n    this.brand = brand;\n    this.model = model;\n    this.year = year;\n    this.mileage = 0;\n    this.isRunning = false;\n  }\n\n  start() {\n    this.isRunning = true;\n    return `${this.brand} ${this.model} is now running`;\n  }\n\n  stop() {\n    this.isRunning = false;\n    return `${this.brand} ${this.model} stopped`;\n  }\n\n  drive(distance) {\n    if (this.isRunning) {\n      this.mileage += distance;\n      return `Drove ${distance}km. Total: ${this.mileage}km`;\n    }\n    return 'Start the car first!';\n  }\n}\n\nconst myCar = new Car('Toyota', 'Corolla', 2023);\nconsole.log(myCar.start());\nconsole.log(myCar.drive(50));\nconsole.log(myCar.drive(30));\n"
+    },
+    {
+      "id": "js-fundamentals-testing-assert-011",
+      "title": "Basic Test Assertions",
+      "description": "Write basic assertions for testing functions.",
+      "context": "Testing is essential for ensuring code works correctly and catching bugs early.",
+      "category": "testing",
+      "difficultyScore": 18,
+      "estimatedDuration": 50,
+      "typingStyle": "full",
+      "tags": [
+        "testing",
+        "assertions",
+        "validation",
+        "quality"
+      ],
+      "concepts": [
+        "assertions",
+        "test-cases",
+        "validation"
+      ],
+      "technicalNotes": [
+        "Assertions check if values are as expected.",
+        "Each test should verify one behavior.",
+        "Good tests are repeatable and independent."
+      ],
+      "codeSnippet": "function assert(condition, message) {\n  if (!condition) {\n    throw new Error(`Assertion failed: ${message}`);\n  }\n  console.log(`✓ ${message}`);\n}\n\nfunction add(a, b) {\n  return a + b;\n}\n\nfunction multiply(a, b) {\n  return a * b;\n}\n\nfunction isEven(num) {\n  return num % 2 === 0;\n}\n\nassert(add(2, 3) === 5, 'add(2, 3) should equal 5');\nassert(add(0, 0) === 0, 'add(0, 0) should equal 0');\nassert(add(-1, 1) === 0, 'add(-1, 1) should equal 0');\n\nassert(multiply(3, 4) === 12, 'multiply(3, 4) should equal 12');\nassert(multiply(0, 5) === 0, 'multiply(0, 5) should equal 0');\n\nassert(isEven(4) === true, 'isEven(4) should be true');\nassert(isEven(7) === false, 'isEven(7) should be false');\n"
+    },
+    {
+      "id": "js-fundamentals-testing-validate-012",
+      "title": "Form Validation Tests",
+      "description": "Write validation functions with test cases.",
+      "context": "Input validation is critical for security and data integrity in web applications.",
+      "category": "testing",
+      "difficultyScore": 21,
+      "estimatedDuration": 58,
+      "typingStyle": "full",
+      "tags": [
+        "testing",
+        "validation",
+        "forms",
+        "input-checking"
+      ],
+      "concepts": [
+        "validation-logic",
+        "regex",
+        "error-handling"
+      ],
+      "technicalNotes": [
+        "Validate before processing data.",
+        "Check for empty, format, and range.",
+        "Return meaningful error messages."
+      ],
+      "codeSnippet": "function validateEmail(email) {\n  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return regex.test(email);\n}\n\nfunction validatePassword(password) {\n  return password.length >= 8;\n}\n\nfunction validateAge(age) {\n  return age >= 0 && age <= 150;\n}\n\nconst tests = [\n  { fn: validateEmail, input: 'nacho@example.com', expected: true },\n  { fn: validateEmail, input: 'invalid', expected: false },\n  { fn: validateEmail, input: 'test@test', expected: false },\n  { fn: validatePassword, input: 'password123', expected: true },\n  { fn: validatePassword, input: 'short', expected: false },\n  { fn: validateAge, input: 25, expected: true },\n  { fn: validateAge, input: -5, expected: false },\n  { fn: validateAge, input: 200, expected: false },\n];\n\ntests.forEach(({ fn, input, expected }) => {\n  const result = fn(input);\n  console.log(result === expected ? '✓ PASS' : '✗ FAIL', fn.name, input);\n});\n"
+    },
+    {
+      "id": "js-fundamentals-patterns-module-011",
+      "title": "Module Pattern",
+      "description": "Use JavaScript modules to encapsulate code.",
+      "context": "Modules keep code organized, prevent global pollution, and enable code reuse.",
+      "category": "patterns",
+      "difficultyScore": 19,
+      "estimatedDuration": 52,
+      "typingStyle": "full",
+      "tags": [
+        "patterns",
+        "modules",
+        "encapsulation",
+        "namespaces"
+      ],
+      "concepts": [
+        "iife",
+        "namespace",
+        "private-variables"
+      ],
+      "technicalNotes": [
+        "IIFE creates private scope.",
+        "Revealing module shows only public API.",
+        "Keeps global namespace clean."
+      ],
+      "codeSnippet": "const Calculator = (function() {\n  let result = 0;\n\n  function add(num) {\n    result += num;\n    return this;\n  }\n\n  function subtract(num) {\n    result -= num;\n    return this;\n  }\n\n  function multiply(num) {\n    result *= num;\n    return this;\n  }\n\n  function getResult() {\n    return result;\n  }\n\n  function reset() {\n    result = 0;\n    return this;\n  }\n\n  return { add, subtract, multiply, getResult, reset };\n})();\n\nCalculator.add(10).multiply(2).subtract(5);\nconsole.log(Calculator.getResult());\n\nCalculator.reset().add(100).subtract(50);\nconsole.log(Calculator.getResult());\n"
     }
   ]
 }

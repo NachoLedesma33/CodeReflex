@@ -4,8 +4,8 @@
     "language": "javascript",
     "mode": "reflex-typing",
     "version": "1.0.0",
-    "lastUpdated": "2026-05-08",
-    "totalExercises": 20
+    "lastUpdated": "2026-05-09",
+    "totalExercises": 28
   },
   "exercises": [
     {
@@ -547,6 +547,223 @@
         "Collaborative editors require efficient syncing."
       ],
       "codeSnippet": "class CollaborativeDocument {\n  constructor(content = '') {\n    this.content = content;\n    this.operations = [];\n  }\n\n  applyOperation(user, operation) {\n    this.operations.push({\n      user,\n      operation\n    });\n\n    this.content += operation.text;\n  }\n\n  getContent() {\n    return this.content;\n  }\n}\n\nconst documentEngine = new CollaborativeDocument();\n\ndocumentEngine.applyOperation('Nacho', {\n  text: 'Hello '\n});\n\ndocumentEngine.applyOperation('Lucas', {\n  text: 'World'\n});\n\nconsole.log(documentEngine.getContent());\n"
+    },
+    {
+      "id": "js-advanced-class-singleton-021",
+      "title": "Singleton Pattern Implementation",
+      "description": "Implement the Singleton pattern for creating a single instance across the application.",
+      "context": "Singletons are used for configuration managers, connection pools, and global state management in large applications.",
+      "category": "classes",
+      "difficultyScore": 45,
+      "estimatedDuration": 130,
+      "typingStyle": "full",
+      "tags": [
+        "classes",
+        "singleton",
+        "design-patterns",
+        "oop"
+      ],
+      "concepts": [
+        "single-instance",
+        "private-constructor",
+        "global-access"
+      ],
+      "technicalNotes": [
+        "Ensures only one instance exists.",
+        "Provides global access point.",
+        "Lazy initialization defers creation until needed."
+      ],
+      "codeSnippet": "class DatabaseConnection {\n  constructor() {\n    if (DatabaseConnection.instance) {\n      throw new Error('Use DatabaseConnection.getInstance()');\n    }\n    this.connected = false;\n    this.connectionString = '';\n  }\n\n  static getInstance() {\n    if (!DatabaseConnection.instance) {\n      DatabaseConnection.instance = new DatabaseConnection();\n    }\n    return DatabaseConnection.instance;\n  }\n\n  connect(connectionString) {\n    this.connectionString = connectionString;\n    this.connected = true;\n    return `Connected to ${connectionString}`;\n  }\n\n  disconnect() {\n    this.connected = false;\n    return 'Disconnected';\n  }\n\n  query(sql) {\n    if (!this.connected) return 'Not connected';\n    return `Executing: ${sql}`;\n  }\n}\n\nconst db1 = DatabaseConnection.getInstance();\nconst db2 = DatabaseConnection.getInstance();\n\nconsole.log(db1 === db2);\nconsole.log(db1.connect('postgres://localhost/mydb'));\nconsole.log(db2.query('SELECT * FROM users'));\n"
+    },
+    {
+      "id": "js-advanced-class-decorator-022",
+      "title": "Decorator Pattern",
+      "description": "Implement the Decorator pattern for adding behavior to objects dynamically.",
+      "context": "Decorators are used in React higher-order components, middleware patterns, and feature extensions.",
+      "category": "classes",
+      "difficultyScore": 48,
+      "estimatedDuration": 140,
+      "typingStyle": "full",
+      "tags": [
+        "classes",
+        "decorator",
+        "design-patterns",
+        "composition"
+      ],
+      "concepts": [
+        "dynamic-behavior",
+        "composition",
+        "wrapper-pattern"
+      ],
+      "technicalNotes": [
+        "Adds behavior without modifying original class.",
+        "Follows composition over inheritance.",
+        "Chain multiple decorators together."
+      ],
+      "codeSnippet": "class Coffee {\n  getCost() { return 5; }\n  getDescription() { return 'Coffee'; }\n}\n\nclass CoffeeDecorator {\n  constructor(coffee) {\n    this.coffee = coffee;\n  }\n\n  getCost() { return this.coffee.getCost(); }\n  getDescription() { return this.coffee.getDescription(); }\n}\n\nclass Milk extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 2; }\n  getDescription() { return this.coffee.getDescription() + ', Milk'; }\n}\n\nclass Sugar extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 1; }\n  getDescription() { return this.coffee.getDescription() + ', Sugar'; }\n}\n\nclass WhippedCream extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 3; }\n  getDescription() { return this.coffee.getDescription() + ', Whipped Cream'; }\n}\n\nlet myCoffee = new Coffee();\nmyCoffee = new Milk(myCoffee);\nmyCoffee = new Sugar(myCoffee);\nmyCoffee = new WhippedCream(myCoffee);\n\nconsole.log(`${myCoffee.getDescription()} = $${myCoffee.getCost()}`);\n"
+    },
+    {
+      "id": "js-advanced-data-structures-graph-021",
+      "title": "Graph with Adjacency List",
+      "description": "Implement a graph data structure using adjacency list representation with BFS and DFS.",
+      "context": "Graphs model social networks, road maps, web page links, and dependency relationships in software.",
+      "category": "data-structures",
+      "difficultyScore": 52,
+      "estimatedDuration": 150,
+      "typingStyle": "full",
+      "tags": [
+        "data-structures",
+        "graph",
+        "bfs",
+        "dfs",
+        "adjacency"
+      ],
+      "concepts": [
+        "vertices-edges",
+        "traversal-algorithms",
+        "graph-representation"
+      ],
+      "technicalNotes": [
+        "Adjacency list is memory efficient for sparse graphs.",
+        "BFS uses queue, DFS uses recursion/stack.",
+        "Both O(V + E) time complexity."
+      ],
+      "codeSnippet": "class Graph {\n  constructor() {\n    this.adjacencyList = new Map();\n  }\n\n  addVertex(vertex) {\n    if (!this.adjacencyList.has(vertex)) {\n      this.adjacencyList.set(vertex, []);\n    }\n  }\n\n  addEdge(v1, v2) {\n    this.adjacencyList.get(v1).push(v2);\n    this.adjacencyList.get(v2).push(v1);\n  }\n\n  bfs(start) {\n    const visited = new Set();\n    const queue = [start];\n    const result = [];\n\n    while (queue.length > 0) {\n      const vertex = queue.shift();\n      if (!visited.has(vertex)) {\n        visited.add(vertex);\n        result.push(vertex);\n        \n        for (const neighbor of this.adjacencyList.get(vertex)) {\n          if (!visited.has(neighbor)) {\n            queue.push(neighbor);\n          }\n        }\n      }\n    }\n    return result;\n  }\n\n  dfs(start) {\n    const visited = new Set();\n    const result = [];\n\n    const dfsHelper = (vertex) => {\n      visited.add(vertex);\n      result.push(vertex);\n      \n      for (const neighbor of this.adjacencyList.get(vertex)) {\n        if (!visited.has(neighbor)) {\n          dfsHelper(neighbor);\n        }\n      }\n    };\n\n    dfsHelper(start);\n    return result;\n  }\n}\n\nconst g = new Graph();\n['A', 'B', 'C', 'D', 'E'].forEach(v => g.addVertex(v));\ng.addEdge('A', 'B');\ng.addEdge('A', 'C');\ng.addEdge('B', 'D');\ng.addEdge('C', 'E');\n\nconsole.log('BFS:', g.bfs('A'));\nconsole.log('DFS:', g.dfs('A'));\n"
+    },
+    {
+      "id": "js-advanced-data-structures-trie-022",
+      "title": "Trie Data Structure",
+      "description": "Implement a Trie for efficient prefix-based string operations and autocomplete.",
+      "context": "Tries are used in search engines, autocomplete systems, spell checkers, and IP routing.",
+      "category": "data-structures",
+      "difficultyScore": 50,
+      "estimatedDuration": 145,
+      "typingStyle": "full",
+      "tags": [
+        "data-structures",
+        "trie",
+        "prefix-tree",
+        "autocomplete"
+      ],
+      "concepts": [
+        "prefix-matching",
+        "efficient-search",
+        "tree-structure"
+      ],
+      "technicalNotes": [
+        "Time complexity O(m) where m is word length.",
+        "Space efficient for shared prefixes.",
+        "Supports fast prefix searches."
+      ],
+      "codeSnippet": "class TrieNode {\n  constructor() {\n    this.children = new Map();\n    this.isEndOfWord = false;\n  }\n}\n\nclass Trie {\n  constructor() {\n    this.root = new TrieNode();\n  }\n\n  insert(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children.has(char)) {\n        node.children.set(char, new TrieNode());\n      }\n      node = node.children.get(char);\n    }\n    node.isEndOfWord = true;\n  }\n\n  search(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children.has(char)) {\n        return false;\n      }\n      node = node.children.get(char);\n    }\n    return node.isEndOfWord;\n  }\n\n  startsWith(prefix) {\n    let node = this.root;\n    for (const char of prefix) {\n      if (!node.children.has(char)) {\n        return false;\n      }\n      node = node.children.get(char);\n    }\n    return true;\n  }\n\n  getSuggestions(prefix) {\n    let node = this.root;\n    for (const char of prefix) {\n      if (!node.children.has(char)) {\n        return [];\n      }\n      node = node.children.get(char);\n    }\n    \n    const suggestions = [];\n    const dfs = (n, path) => {\n      if (n.isEndOfWord) suggestions.push(path);\n      for (const [char, child] of n.children) {\n        dfs(child, path + char);\n      }\n    };\n    \n    dfs(node, prefix);\n    return suggestions;\n  }\n}\n\nconst trie = new Trie();\n['hello', 'help', 'her', 'hi', 'world', 'work'].forEach(w => trie.insert(w));\n\nconsole.log(trie.search('hello'));\nconsole.log(trie.startsWith('he'));\nconsole.log(trie.getSuggestions('he'));\n"
+    },
+    {
+      "id": "js-advanced-algorithms-dijkstra-021",
+      "title": "Dijkstra's Shortest Path",
+      "description": "Implement Dijkstra's algorithm for finding shortest paths in weighted graphs.",
+      "context": "Dijkstra is used in GPS navigation, network routing, flight scheduling, and game pathfinding.",
+      "category": "algorithms",
+      "difficultyScore": 55,
+      "estimatedDuration": 160,
+      "typingStyle": "full",
+      "tags": [
+        "algorithms",
+        "dijkstra",
+        "shortest-path",
+        "graph"
+      ],
+      "concepts": [
+        "weighted-graphs",
+        "priority-queue",
+        "greedy-algorithm"
+      ],
+      "technicalNotes": [
+        "Time complexity O((V + E) log V) with priority queue.",
+        "Works only with non-negative weights.",
+        "Can be optimized with Fibonacci heap."
+      ],
+      "codeSnippet": "class PriorityQueue {\n  constructor() {\n    this.values = [];\n  }\n\n  enqueue(val, priority) {\n    this.values.push({ val, priority });\n    this.sort();\n  }\n\n  dequeue() {\n    return this.values.shift();\n  }\n\n  sort() {\n    this.values.sort((a, b) => a.priority - b.priority);\n  }\n\n  isEmpty() {\n    return this.values.length === 0;\n  }\n}\n\nfunction dijkstra(graph, start) {\n  const distances = {};\n  const pq = new PriorityQueue();\n\n  for (const vertex in graph) {\n    distances[vertex] = vertex === start ? 0 : Infinity;\n  }\n\n  pq.enqueue(start, 0);\n\n  while (!pq.isEmpty()) {\n    const { val: current } = pq.dequeue();\n\n    for (const [neighbor, weight] of Object.entries(graph[current] || {})) {\n      const newDist = distances[current] + weight;\n      if (newDist < distances[neighbor]) {\n        distances[neighbor] = newDist;\n        pq.enqueue(neighbor, newDist);\n      }\n    }\n  }\n\n  return distances;\n}\n\nconst graph = {\n  A: { B: 4, C: 2 },\n  B: { A: 4, C: 1, D: 5 },\n  C: { A: 2, B: 1, D: 8 },\n  D: { B: 5, C: 8, E: 3 },\n  E: { D: 3 }\n};\n\nconsole.log(dijkstra(graph, 'A'));\n"
+    },
+    {
+      "id": "js-advanced-algorithms-topological-sort-022",
+      "title": "Topological Sort",
+      "description": "Implement topological sorting for directed acyclic graphs (DAGs).",
+      "context": "Topological sort is used in build systems, task scheduling, dependency resolution, and course planning.",
+      "category": "algorithms",
+      "difficultyScore": 53,
+      "estimatedDuration": 155,
+      "typingStyle": "full",
+      "tags": [
+        "algorithms",
+        "topological-sort",
+        "dag",
+        "dependencies"
+      ],
+      "concepts": [
+        "dependency-ordering",
+        "graph-cycles",
+        " Kahn's-algorithm"
+      ],
+      "technicalNotes": [
+        "Only works on DAGs (no cycles).",
+        "Used for dependency resolution.",
+        "Multiple valid orderings possible."
+      ],
+      "codeSnippet": "function topologicalSort(numCourses, prerequisites) {\n  const graph = {};\n  const inDegree = {};\n\n  for (let i = 0; i < numCourses; i++) {\n    graph[i] = [];\n    inDegree[i] = 0;\n  }\n\n  for (const [course, prereq] of prerequisites) {\n    graph[prereq].push(course);\n    inDegree[course]++;\n  }\n\n  const queue = [];\n  for (let i = 0; i < numCourses; i++) {\n    if (inDegree[i] === 0) queue.push(i);\n  }\n\n  const result = [];\n  while (queue.length > 0) {\n    const course = queue.shift();\n    result.push(course);\n\n    for (const next of graph[course]) {\n      inDegree[next]--;\n      if (inDegree[next] === 0) {\n        queue.push(next);\n      }\n    }\n  }\n\n  return result.length === numCourses ? result : [];\n}\n\nconst numCourses = 4;\nconst prerequisites = [[1, 0], [2, 1], [3, 2], [2, 0]];\n\nconsole.log(topologicalSort(numCourses, prerequisites));\n"
+    },
+    {
+      "id": "js-advanced-state-management-redux-021",
+      "title": "Redux-like State Management",
+      "description": "Implement a Redux-like state management system with actions, reducers, and store.",
+      "context": "Redux pattern is fundamental in React applications, Vuex, NgRx, and centralized state management.",
+      "category": "state-management",
+      "difficultyScore": 54,
+      "estimatedDuration": 155,
+      "typingStyle": "full",
+      "tags": [
+        "state-management",
+        "redux",
+        "store",
+        "actions"
+      ],
+      "concepts": [
+        "unidirectional-data",
+        "immutable-state",
+        "action-reducer"
+      ],
+      "technicalNotes": [
+        "Single source of truth for state.",
+        "State is read-only, changes via actions.",
+        "Reducers must be pure functions."
+      ],
+      "codeSnippet": "function createStore(reducer, initialState) {\n  let state = initialState;\n  const listeners = [];\n\n  const getState = () => state;\n\n  const dispatch = (action) => {\n    state = reducer(state, action);\n    listeners.forEach(listener => listener());\n  };\n\n  const subscribe = (listener) => {\n    listeners.push(listener);\n    return () => {\n      const index = listeners.indexOf(listener);\n      listeners.splice(index, 1);\n    };\n  };\n\n  return { getState, dispatch, subscribe };\n}\n\nconst initialState = { count: 0, user: null };\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case 'INCREMENT':\n      return { ...state, count: state.count + 1 };\n    case 'DECREMENT':\n      return { ...state, count: state.count - 1 };\n    case 'SET_USER':\n      return { ...state, user: action.payload };\n    default:\n      return state;\n  }\n}\n\nconst store = createStore(reducer, initialState);\n\nstore.subscribe(() => console.log('State:', store.getState()));\n\nstore.dispatch({ type: 'INCREMENT' });\nstore.dispatch({ type: 'INCREMENT' });\nstore.dispatch({ type: 'SET_USER', payload: { name: 'Nacho' } });\nstore.dispatch({ type: 'DECREMENT' });\n"
+    },
+    {
+      "id": "js-advanced-state-management-observer-022",
+      "title": "Observer Pattern with Subjects",
+      "description": "Implement the Observer pattern for reactive state changes and event handling.",
+      "context": "Observer pattern is used in event systems, reactive frameworks, and pub/sub messaging architectures.",
+      "category": "state-management",
+      "difficultyScore": 51,
+      "estimatedDuration": 145,
+      "typingStyle": "full",
+      "tags": [
+        "state-management",
+        "observer",
+        "pub-sub",
+        "events"
+      ],
+      "concepts": [
+        "subject-observers",
+        "event-handling",
+        "reactive-pattern"
+      ],
+      "technicalNotes": [
+        "Subjects maintain list of observers.",
+        "Observers are notified of state changes.",
+        "Decouples subject from observers."
+      ],
+      "codeSnippet": "class Subject {\n  constructor() {\n    this.observers = [];\n  }\n\n  subscribe(observer) {\n    this.observers.push(observer);\n  }\n\n  unsubscribe(observer) {\n    const index = this.observers.indexOf(observer);\n    if (index > -1) this.observers.splice(index, 1);\n  }\n\n  notify(data) {\n    this.observers.forEach(observer => observer.update(data));\n  }\n}\n\nclass Observer {\n  constructor(name) {\n    this.name = name;\n  }\n\n  update(data) {\n    console.log(`${this.name} received:`, data);\n  }\n}\n\nclass WeatherStation extends Subject {\n  constructor() {\n    super();\n    this.temperature = 0;\n  }\n\n  setTemperature(temp) {\n    this.temperature = temp;\n    this.notify({ temp, timestamp: Date.now() });\n  }\n}\n\nconst station = new WeatherStation();\nconst display1 = new Observer('Display 1');\nconst display2 = new Observer('Display 2');\n\nstation.subscribe(display1);\nstation.subscribe(display2);\n\nstation.setTemperature(25);\nstation.setTemperature(28);\n"
     }
   ]
 }

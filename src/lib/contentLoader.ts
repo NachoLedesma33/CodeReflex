@@ -65,8 +65,7 @@ export class ContentLoader {
 
   private getReflexFileName(language: ProgrammingLanguage, level: DifficultyLevel): string {
     const suffix = LANGUAGE_FILE_MAP[language] || 'JS';
-    const levelCapitalized = level.charAt(0).toUpperCase() + level.slice(1);
-    return `${levelCapitalized}${suffix}.json`;
+    return `${level}${suffix}.json`;
   }
 
   async loadReflexSnippets(
@@ -81,9 +80,9 @@ export class ContentLoader {
 
     try {
       const fileName = this.getReflexFileName(language, level);
-      const response = await fetch(
-        `${CONTENT_BASE}/reflex/${language}/${fileName}`
-      );
+      const url = `${CONTENT_BASE}/reflex/${language}/${fileName}`;
+      console.log('[ContentLoader] Loading reflex from:', url);
+      const response = await fetch(url);
       
       if (!response.ok) {
         console.warn(`No file found for ${language}/${level}/reflex: ${fileName}, returning empty array`);
@@ -101,6 +100,7 @@ export class ContentLoader {
               title: exercise.title,
               description: exercise.description,
               context: exercise.context,
+              category: exercise.category,
               codeSnippet: exercise.codeSnippet,
               typingStyle: exercise.typingStyle || 'full',
               tags: exercise.tags || [],
@@ -135,35 +135,9 @@ export class ContentLoader {
     }
 
     try {
-      const response = await fetch(
-        `${CONTENT_BASE}/guided-problems/${language}/${level}/index.json`
-      );
-      
-      if (!response.ok) {
-        console.warn(`No index found for ${language}/${level}/guided, returning empty array`);
-        return [];
-      }
-
-      const index = validateContentIndex(await response.json());
-      const problems: GuidedProblem[] = [];
-
-      for (const tag of index.tags) {
-        try {
-          const tagResponse = await fetch(
-            `${CONTENT_BASE}/guided-problems/${language}/${level}/${tag}.json`
-          );
-          if (tagResponse.ok) {
-            const data = await tagResponse.json();
-            const validated = data.problems.map(validateGuidedProblem);
-            problems.push(...validated);
-          }
-        } catch (e) {
-          console.warn(`Failed to load tag ${tag}:`, e);
-        }
-      }
-
-      this.cache[key] = { data: problems, timestamp: Date.now() };
-      return problems;
+      // Guided problems not yet implemented - skip silently
+      console.log('[ContentLoader] Guided problems not available yet, skipping');
+      return [];
     } catch (error) {
       console.error('Error loading guided problems:', error);
       return [];

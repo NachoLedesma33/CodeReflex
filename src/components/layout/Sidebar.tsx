@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { useExerciseStore } from '@/stores/exerciseStore';
 import { useProgressStore } from '@/stores/progressStore';
+import { useUIStore } from '@/stores/uiStore';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ProgrammingLanguage, DifficultyLevel, ExerciseType, Exercise, ExerciseCategory } from '@/types';
@@ -35,6 +36,7 @@ const LANGUAGES: { value: ProgrammingLanguage; label: string; icon: string }[] =
   { value: 'javascript', label: 'JavaScript', icon: '🟨' },
   { value: 'typescript', label: 'TypeScript', icon: '🔷' },
   { value: 'python', label: 'Python', icon: '🐍' },
+  { value: 'java', label: 'Java', icon: '☕' },
 ];
 
 const LEVELS: { value: DifficultyLevel; label: string; color: string }[] = [
@@ -54,11 +56,20 @@ const CATEGORIES: { value: ExerciseCategory; label: string }[] = [
   { value: 'strings', label: 'Strings' },
   { value: 'objects', label: 'Objects' },
   { value: 'functions', label: 'Functions' },
+  { value: 'loops', label: 'Loops' },
+  { value: 'async', label: 'Async' },
+  { value: 'browser-api', label: 'Browser API' },
   { value: 'classes', label: 'Classes' },
   { value: 'algorithms', label: 'Algorithms' },
   { value: 'data-structures', label: 'Data Structures' },
-  { value: 'async', label: 'Async' },
+  { value: 'state-management', label: 'State Mgmt' },
+  { value: 'data-processing', label: 'Data Processing' },
+  { value: 'architecture', label: 'Architecture' },
+  { value: 'performance', label: 'Performance' },
+  { value: 'functional-programming', label: 'FP' },
   { value: 'patterns', label: 'Patterns' },
+  { value: 'system-design', label: 'System Design' },
+  { value: 'api-design', label: 'API Design' },
   { value: 'testing', label: 'Testing' },
 ];
 
@@ -69,7 +80,6 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
     currentIndex,
     languageFilter,
     levelFilter,
-    typeFilter,
     categoryFilter,
     setLanguageFilter,
     setLevelFilter,
@@ -87,6 +97,8 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
     isCompleted,
     getExerciseStats,
   } = useProgressStore();
+
+  const { mode, setMode } = useUIStore();
 
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showFilters, setShowFilters] = useState(true);
@@ -269,22 +281,19 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 <div className="space-y-1.5">
                   <div className="text-xs text-zinc-600">Mode</div>
                   <div className="flex gap-1">
-                    {MODES.map(mode => (
+                    {MODES.map(m => (
                       <button
-                        key={mode.value}
-                        onClick={() => {
-                          const newType = typeFilter === mode.value ? null : mode.value;
-                          useExerciseStore.getState().setCurrentType(newType as ExerciseType);
-                        }}
+                        key={m.value}
+                        onClick={() => setMode(m.value)}
                         className={cn(
                           'flex items-center gap-1.5 px-2 py-1 text-xs rounded-md transition-colors',
-                          typeFilter === mode.value
+                          mode === m.value
                             ? 'bg-purple-500/20 text-purple-400'
                             : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
                         )}
                       >
-                        {mode.icon}
-                        {mode.label}
+                        {m.icon}
+                        {m.label}
                       </button>
                     ))}
                   </div>
@@ -293,24 +302,28 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 <div className="space-y-1.5">
                   <div className="text-xs text-zinc-600">Category</div>
                   <div className="flex flex-wrap gap-1 max-h-20 overflow-y-auto">
-                    {CATEGORIES.map(cat => (
-                      <button
-                        key={cat.value}
-                        onClick={() => setCategoryFilter(categoryFilter === cat.value ? null : cat.value)}
-                        className={cn(
-                          'px-2 py-0.5 text-xs rounded-md transition-colors',
-                          categoryFilter === cat.value
-                            ? 'bg-cyan-500/20 text-cyan-400'
-                            : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
-                        )}
-                      >
-                        {cat.label}
-                      </button>
-                    ))}
+                    {(() => {
+                      const availableCategories = [...new Set(filteredExercises.map(e => e.category).filter(Boolean))] as string[];
+                      const visibleCategories = CATEGORIES.filter(cat => availableCategories.includes(cat.value));
+                      return visibleCategories.map(cat => (
+                        <button
+                          key={cat.value}
+                          onClick={() => setCategoryFilter(categoryFilter === cat.value ? null : cat.value)}
+                          className={cn(
+                            'px-2 py-0.5 text-xs rounded-md transition-colors',
+                            categoryFilter === cat.value
+                              ? 'bg-cyan-500/20 text-cyan-400'
+                              : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
+                          )}
+                        >
+                          {cat.label}
+                        </button>
+                      ));
+                    })()}
                   </div>
                 </div>
 
-                {(languageFilter || levelFilter || typeFilter || categoryFilter) && (
+                {(languageFilter || levelFilter || categoryFilter) && (
                   <Button
                     variant="ghost"
                     size="sm"
@@ -493,10 +506,10 @@ function ExerciseItem({
   const levelColor = LEVELS.find(l => l.value === exercise.level)?.color || '';
 
   return (
-    <button
+    <div
       onClick={onClick}
       className={cn(
-        'w-full text-left p-2 rounded-lg transition-colors group',
+        'w-full text-left p-2 rounded-lg transition-colors group cursor-pointer',
         isActive ? 'bg-blue-500/20 border border-blue-500/30' : 'hover:bg-zinc-800/50'
       )}
     >
@@ -547,7 +560,7 @@ function ExerciseItem({
           </button>
         )}
       </div>
-    </button>
+    </div>
   );
 }
 

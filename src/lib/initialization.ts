@@ -155,6 +155,7 @@ export function useProgressSync() {
       javascript: 0,
       typescript: 0,
       python: 0,
+      java: 0,
     };
 
     const stats = useProgressStore.getState();

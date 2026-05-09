@@ -31,7 +31,7 @@ export const loadExerciseIndex = async (): Promise<ExerciseIndex> => {
       levels: ['fundamentals', 'intermediate', 'interview', 'advanced'],
       categories: ['arrays', 'strings', 'objects', 'functions'],
       totalCount: 0,
-      byLanguage: { javascript: 0, typescript: 0, python: 0 },
+      byLanguage: { javascript: 0, typescript: 0, python: 0, java: 0 },
       byLevel: { fundamentals: 0, intermediate: 0, interview: 0, advanced: 0 },
     };
   }

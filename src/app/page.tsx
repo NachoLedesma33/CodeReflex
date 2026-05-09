@@ -37,7 +37,6 @@ export default function Home() {
     isLoading,
     error,
     setCurrentExercise,
-    currentType,
   } = useExerciseStore();
 
   const { isCompleted } = useProgressStore();
@@ -48,6 +47,7 @@ export default function Home() {
     toggleStatsPanel,
     sidebarCollapsed,
     toggleSidebar,
+    mode,
   } = useUIStore();
 
   const [showStats, setShowStats] = useState(false);
@@ -127,7 +127,7 @@ export default function Home() {
           <div className="flex-1 flex flex-col min-w-0">
             {currentExercise ? (
               <Suspense fallback={<LoadingFallback />}>
-                {currentType === 'reflex-typing' ? (
+                {mode === 'reflex-typing' ? (
                   <ReflexTyping
                     exercise={currentExercise}
                     className="flex-1"
@@ -143,7 +143,7 @@ export default function Home() {
               <div className="flex-1 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4 text-center">
                   <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center">
-                    {currentType === 'reflex-typing' ? (
+                    {mode === 'reflex-typing' ? (
                       <Keyboard className="w-8 h-8 text-zinc-500" />
                     ) : (
                       <BookOpen className="w-8 h-8 text-zinc-500" />
@@ -166,7 +166,7 @@ export default function Home() {
                 <Suspense fallback={<LoadingFallback />}>
                   <ExerciseInfo
                     exercise={currentExercise}
-                    showHints={currentType === 'guided-problem'}
+                    showHints={mode === 'guided-problem'}
                     className="p-4"
                   />
                 </Suspense>

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { Exercise, ProgrammingLanguage, DifficultyLevel, ExerciseCategory, ExerciseType } from '@/types';
+import { contentLoader } from '@/lib/contentLoader';
 
 interface ExerciseCache {
   [key: string]: {
@@ -105,21 +106,57 @@ const fetchFromRepo = async (
   level?: DifficultyLevel
 ): Promise<Exercise[]> => {
   try {
-    const response = await fetch('/content/exercises/all.json');
-    if (!response.ok) throw new Error('Failed to fetch');
+    const lang = language || 'javascript';
+    const lvl = level || 'fundamentals';
     
-    const data = await response.json();
-    let exercises = data.exercises || [];
+    const reflexSnippets = await contentLoader.loadReflexSnippets(lang as ProgrammingLanguage, lvl as DifficultyLevel);
+    const guidedProblems = await contentLoader.loadGuidedProblems(lang as ProgrammingLanguage, lvl as DifficultyLevel);
     
-    if (language) {
-      exercises = exercises.filter((e: Exercise) => e.language === language);
-    }
-    if (level) {
-      exercises = exercises.filter((e: Exercise) => e.level === level);
-    }
+    const reflexExercises: Exercise[] = reflexSnippets.map(snippet => ({
+      id: snippet.id,
+      language: lang as ProgrammingLanguage,
+      level: lvl as DifficultyLevel,
+      exerciseType: 'reflex-typing' as ExerciseType,
+      category: (snippet.category || snippet.tags?.[0] || 'general') as ExerciseCategory,
+      title: snippet.title,
+      description: snippet.description,
+      context: snippet.context || '',
+      tags: snippet.tags || [],
+      concepts: snippet.concepts || [],
+      prerequisites: [],
+      codeSnippet: snippet.codeSnippet,
+      typingStyle: snippet.typingStyle,
+      blanks: snippet.blanks,
+      estimatedDuration: snippet.estimatedDuration,
+      difficultyScore: snippet.difficultyScore,
+    }));
     
-    return exercises;
-  } catch {
+    const guidedExercises: Exercise[] = guidedProblems.map(problem => ({
+      id: problem.id,
+      language: lang as ProgrammingLanguage,
+      level: lvl as DifficultyLevel,
+      exerciseType: 'guided-problem' as ExerciseType,
+      category: (problem.category || problem.tags?.[0] || 'general') as ExerciseCategory,
+      title: problem.title,
+      description: problem.description,
+      context: problem.context || '',
+      tags: problem.tags || [],
+      concepts: problem.concepts || [],
+      prerequisites: problem.prerequisites || [],
+      solution: problem.solution,
+      explanation: problem.explanation,
+      technicalNotes: problem.technicalNotes,
+      hints: problem.hints,
+      tests: problem.tests,
+      estimatedDuration: problem.estimatedDuration,
+      difficultyScore: problem.difficultyScore,
+      timeComplexity: problem.timeComplexity,
+      spaceComplexity: problem.spaceComplexity,
+    }));
+    
+    return [...reflexExercises, ...guidedExercises];
+  } catch (error) {
+    console.error('Error loading exercises:', error);
     return [];
   }
 };
@@ -347,14 +384,18 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
   },
 
   // === FILTROS ===
-  setLanguageFilter: (language) => {
-    set({ languageFilter: language });
+  setLanguageFilter: async (language) => {
+    set({ languageFilter: language, isLoading: true });
     get().applyFilters();
+    await get().loadExercises(language || undefined, undefined);
+    set({ isLoading: false });
   },
 
-  setLevelFilter: (level) => {
-    set({ levelFilter: level });
+  setLevelFilter: async (level) => {
+    set({ levelFilter: level, isLoading: true });
     get().applyFilters();
+    await get().loadExercises(undefined, level || undefined);
+    set({ isLoading: false });
   },
 
   setCategoryFilter: (category) => {

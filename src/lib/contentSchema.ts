@@ -5,6 +5,7 @@ export const ReflexSnippetSchema = z.object({
   title: z.string(),
   description: z.string(),
   context: z.string(),
+  category: z.string().optional(),
   codeSnippet: z.string(),
   typingStyle: z.enum(['full', 'fill-blanks', 'complete-function']).default('full'),
   blanks: z.array(z.object({
@@ -26,6 +27,7 @@ export const GuidedProblemSchema = z.object({
   title: z.string(),
   description: z.string(),
   context: z.string(),
+  category: z.string().optional(),
   starterCode: z.string(),
   solution: z.string(),
   explanation: z.string(),
