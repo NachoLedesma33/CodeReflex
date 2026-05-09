@@ -17,10 +17,28 @@ interface ContentCache {
   };
 }
 
+interface ReflexFileContent {
+  metadata: {
+    language: string;
+    mode: string;
+    version: string;
+    lastUpdated: string;
+    totalExercises: number;
+  };
+  exercises: ReflexSnippet[];
+}
+
 const CACHE_TTL = 5 * 60 * 1000;
 const CONTENT_BASE = '/content';
 
 const contentCache: ContentCache = {};
+
+const LANGUAGE_FILE_MAP: Record<string, string> = {
+  javascript: 'JS',
+  typescript: 'TS',
+  python: 'PY',
+  java: 'JV',
+};
 
 export class ContentLoader {
   private static instance: ContentLoader;
@@ -45,6 +63,12 @@ export class ContentLoader {
     return Date.now() - entry.timestamp < CACHE_TTL;
   }
 
+  private getReflexFileName(language: ProgrammingLanguage, level: DifficultyLevel): string {
+    const suffix = LANGUAGE_FILE_MAP[language] || 'JS';
+    const levelCapitalized = level.charAt(0).toUpperCase() + level.slice(1);
+    return `${levelCapitalized}${suffix}.json`;
+  }
+
   async loadReflexSnippets(
     language: ProgrammingLanguage, 
     level: DifficultyLevel
@@ -56,30 +80,39 @@ export class ContentLoader {
     }
 
     try {
+      const fileName = this.getReflexFileName(language, level);
       const response = await fetch(
-        `${CONTENT_BASE}/reflex-snippets/${language}/${level}/index.json`
+        `${CONTENT_BASE}/reflex/${language}/${fileName}`
       );
       
       if (!response.ok) {
-        console.warn(`No index found for ${language}/${level}/reflex, returning empty array`);
+        console.warn(`No file found for ${language}/${level}/reflex: ${fileName}, returning empty array`);
         return [];
       }
 
-      const index = validateContentIndex(await response.json());
+      const fileData: ReflexFileContent[] = await response.json();
       const snippets: ReflexSnippet[] = [];
 
-      for (const tag of index.tags) {
-        try {
-          const tagResponse = await fetch(
-            `${CONTENT_BASE}/reflex-snippets/${language}/${level}/${tag}.json`
-          );
-          if (tagResponse.ok) {
-            const data = await tagResponse.json();
-            const validated = data.snippets.map(validateReflexSnippet);
-            snippets.push(...validated);
+      for (const file of fileData) {
+        if (file.exercises) {
+          for (const exercise of file.exercises) {
+            const snippet: ReflexSnippet = {
+              id: exercise.id,
+              title: exercise.title,
+              description: exercise.description,
+              context: exercise.context,
+              codeSnippet: exercise.codeSnippet,
+              typingStyle: exercise.typingStyle || 'full',
+              tags: exercise.tags || [],
+              concepts: exercise.concepts || [],
+              estimatedDuration: exercise.estimatedDuration || 60,
+              difficultyScore: exercise.difficultyScore || 5,
+            };
+            if (exercise.blanks) {
+              snippet.blanks = exercise.blanks;
+            }
+            snippets.push(snippet);
           }
-        } catch (e) {
-          console.warn(`Failed to load tag ${tag}:`, e);
         }
       }
 
