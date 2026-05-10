@@ -259,36 +259,62 @@ export function ReflexTyping({
 
           {/* Completion Modal with blur */}
           {sessionState === 'completed' && sessionSummary && (
-            <div className="absolute inset-0 z-50 flex items-center justify-center bg-zinc-900/60 backdrop-blur-sm">
-              <div className="bg-zinc-800 border border-zinc-600 rounded-xl p-6 shadow-2xl max-w-md w-full mx-4">
-                <div className="flex items-center justify-center mb-4">
-                  <Trophy className="w-12 h-12 text-yellow-500" />
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-zinc-950/90 backdrop-blur-md animate-in fade-in duration-500">
+              <div className="bg-zinc-900 border border-zinc-700 rounded-2xl p-8 shadow-2xl max-w-md w-full mx-4 transform animate-in zoom-in slide-in-from-bottom-4 duration-500">
+                <div className="flex items-center justify-center mb-6">
+                  <div className="relative">
+                    <Trophy className="w-16 h-16 text-yellow-500" />
+                    <div className="absolute -inset-1 bg-yellow-500/20 blur-xl rounded-full" />
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold text-center text-zinc-100 mb-6">Exercise Complete!</h2>
+                <h2 className="text-2xl font-bold text-center text-zinc-100 mb-8">¡Ejercicio Completado!</h2>
                 
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold text-yellow-500">{sessionSummary.wpm}</div>
-                    <div className="text-xs text-zinc-500">WPM</div>
+                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">WPM</div>
                   </div>
-                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                  <div className="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold text-green-500">{sessionSummary.accuracy}%</div>
-                    <div className="text-xs text-zinc-500">Accuracy</div>
+                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Precisión</div>
                   </div>
-                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                  <div className="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-4 text-center">
                     <div className="text-3xl font-bold text-blue-500">{formatTime(sessionSummary.timeSpent)}</div>
-                    <div className="text-xs text-zinc-500">Time</div>
+                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Tiempo</div>
                   </div>
-                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
-                    <div className="text-3xl font-bold text-zinc-300">{sessionSummary.errors}</div>
-                    <div className="text-xs text-zinc-500">Errors</div>
+                  <div className="bg-zinc-800/50 border border-zinc-700/50 rounded-xl p-4 text-center">
+                    <div className="text-3xl font-bold text-red-400">{sessionSummary.errors}</div>
+                    <div className="text-[10px] text-zinc-500 uppercase tracking-wider mt-1">Errores</div>
                   </div>
                 </div>
 
-                <Button onClick={resetSession} className="w-full">
-                  <RotateCcw className="w-4 h-4 mr-2" />
-                  Try Again
-                </Button>
+                <div className="flex flex-col gap-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button 
+                      variant="outline" 
+                      onClick={onPrevious || (() => getPreviousExercise())}
+                      disabled={isFirst}
+                      className="border-zinc-700 hover:bg-zinc-800"
+                    >
+                      <ChevronLeft className="w-4 h-4 mr-2" />
+                      Anterior
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={onNext || (() => getNextExercise())}
+                      disabled={isLast}
+                      className="border-zinc-700 hover:bg-zinc-800"
+                    >
+                      Siguiente
+                      <ChevronRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
+                  
+                  <Button onClick={resetSession} className="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-semibold py-6">
+                    <RotateCcw className="w-4 h-4 mr-2" />
+                    Reintentar
+                  </Button>
+                </div>
               </div>
             </div>
           )}
@@ -358,64 +384,44 @@ export function ReflexTyping({
               </div>
             </>
           ) : (
-            <div className="w-full">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-yellow-500" />
-                  <span className="font-semibold text-zinc-100">Exercise Complete!</span>
-                </div>
-                <Button onClick={resetSession} variant="ghost" size="sm">
-                  <RotateCcw className="w-4 h-4 mr-1" />
-                  Retry
-                </Button>
+            <div className="w-full flex items-center justify-between pt-2">
+              <div className="flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-yellow-500" />
+                <span className="font-semibold text-zinc-100">¡Reto Superado!</span>
               </div>
-
-              {sessionSummary && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                    <div className="text-2xl font-bold text-yellow-500">{sessionSummary.wpm}</div>
-                    <div className="text-xs text-zinc-500">WPM</div>
-                  </div>
-                  <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                    <div className="text-2xl font-bold text-green-500">{sessionSummary.accuracy}%</div>
-                    <div className="text-xs text-zinc-500">Accuracy</div>
-                  </div>
-                  <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                    <div className="text-2xl font-bold text-blue-500">{formatTime(sessionSummary.timeSpent)}</div>
-                    <div className="text-xs text-zinc-500">Time</div>
-                  </div>
-                  <div className="bg-zinc-800 rounded-lg p-3 text-center">
-                    <div className="text-2xl font-bold text-zinc-300">{sessionSummary.errors}</div>
-                    <div className="text-xs text-zinc-500">Errors</div>
-                  </div>
-                </div>
-              )}
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-zinc-500">
+                  {currentIndex + 1} / {filteredExercises.length}
+                </span>
+              </div>
             </div>
           )}
 
-          <div className="flex items-center justify-between w-full pt-2 border-t border-zinc-700">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onPrevious || (() => getPreviousExercise())}
-              disabled={isFirst}
-            >
-              <ChevronLeft className="w-4 h-4 mr-1" />
-              Previous
-            </Button>
-            <span className="text-xs text-zinc-500">
-              {currentIndex + 1} / {filteredExercises.length}
-            </span>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onNext || (() => getNextExercise())}
-              disabled={isLast}
-            >
-              Next
-              <ChevronRight className="w-4 h-4 ml-1" />
-            </Button>
-          </div>
+          {sessionState !== 'completed' && (
+            <div className="flex items-center justify-between w-full pt-2 border-t border-zinc-700">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onPrevious || (() => getPreviousExercise())}
+                disabled={isFirst}
+              >
+                <ChevronLeft className="w-4 h-4 mr-1" />
+                Previous
+              </Button>
+              <span className="text-xs text-zinc-500">
+                {currentIndex + 1} / {filteredExercises.length}
+              </span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onNext || (() => getNextExercise())}
+                disabled={isLast}
+              >
+                Next
+                <ChevronRight className="w-4 h-4 ml-1" />
+              </Button>
+            </div>
+          )}
         </CardFooter>
       </Card>
     </div>
