@@ -54,7 +54,12 @@ export function CodeEditor({
   const editorRef = useRef<Parameters<OnMount>[0] | null>(null);
   const monacoRef = useRef<Parameters<OnMount>[1] | null>(null);
   const decorationsRef = useRef<string[]>([]);
+  const modeRef = useRef(mode);
   const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    modeRef.current = mode;
+  }, [mode]);
 
   const checkCompletion = useCallback((code: string) => {
     if (isCompleted) return;
@@ -83,11 +88,65 @@ export function CodeEditor({
   // EDITOR MOUNT
   // ============================================
 
+  const normalizedExpectedRef = useRef('');
+
+  useEffect(() => {
+    normalizedExpectedRef.current = expectedCode.replace(/\r\n/g, '\n').replace(/\t/g, '  ');
+  }, [expectedCode]);
+
+  const updateDecorations = useCallback((overrideCode?: string) => {
+    if (!editorRef.current || !monacoRef.current) return;
+    
+    const editor = editorRef.current;
+    const monaco = monacoRef.current;
+    const model = editor.getModel();
+    if (!model) return;
+
+    if (modeRef.current !== 'write') return;
+
+    // Use LF to ensure consistent indexing with our normalized expected code
+    const modelValue = model.getValue(monaco.editor.EndOfLinePreference.LF);
+    const normalizedExpected = normalizedExpectedRef.current;
+    
+    const decorations: monaco.editor.IModelDeltaDecoration[] = [];
+    const len = Math.min(modelValue.length, normalizedExpected.length);
+
+    for (let i = 0; i < len; i++) {
+      const isCorrect = modelValue[i] === normalizedExpected[i];
+      if (!isCorrect && !highlightErrors) continue;
+
+      const startPos = model.getPositionAt(i);
+      const endPos = model.getPositionAt(i + 1);
+      
+      if (!startPos || !endPos) continue;
+      
+      decorations.push({
+        range: new monaco.Range(
+          startPos.lineNumber,
+          startPos.column,
+          endPos.lineNumber,
+          endPos.column
+        ),
+        options: {
+          inlineClassName: isCorrect ? 'correct-char' : 'error-char',
+          stickiness: monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges
+        },
+      });
+    }
+
+    const oldDecorations = decorationsRef.current;
+    decorationsRef.current = editor.deltaDecorations(oldDecorations, decorations);
+  }, [highlightErrors]);
+
+  // ============================================
+  // EDITOR MOUNT
+  // ============================================
+
   const handleEditorMount: OnMount = useCallback((editor, monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
 
-    // Define custom themes
+    // ... (themes)
     monaco.editor.defineTheme('codereflex-dark', {
       base: 'vs-dark',
       inherit: true,
@@ -126,7 +185,12 @@ export function CodeEditor({
       },
     });
 
-    // Set theme
+    // Force LF line endings for consistent indexing
+    const model = editor.getModel();
+    if (model) {
+      model.setEOL(monaco.editor.EndOfLineSequence.LF);
+    }
+
     editor.updateOptions({
       theme: theme === 'dark' ? 'codereflex-dark' : 'codereflex-light',
     });
@@ -136,8 +200,41 @@ export function CodeEditor({
       const value = editor.getValue();
       onChange?.(value);
       checkCompletion(value);
+      
+      // Usar requestAnimationFrame para asegurar que el modelo se ha estabilizado
+      requestAnimationFrame(() => {
+        updateDecorations();
+      });
     });
-}, [theme, onChange]);
+
+    // Prevent paste in write mode (Keyboard - most robust)
+    editor.onKeyDown((e) => {
+      if (modeRef.current === 'write' && (e.ctrlKey || e.metaKey) && e.keyCode === monaco.KeyCode.KeyV) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    // Handle any paste that gets through (e.g. right click)
+    editor.onDidPaste(() => {
+      if (modeRef.current === 'write') {
+        editor.trigger('keyboard', 'undo', null);
+      }
+    });
+
+    // Prevent paste in write mode (DOM/Context Menu)
+    const editorDomNode = editor.getDomNode();
+    if (editorDomNode) {
+      const handlePaste = (e: ClipboardEvent) => {
+        if (modeRef.current === 'write') {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      };
+      
+      editorDomNode.addEventListener('paste', handlePaste as any, true);
+    }
+  }, [theme, onChange, checkCompletion, updateDecorations]);
 
   // Handle content - read mode shows expected, write mode shows current + ghost
   useEffect(() => {
@@ -152,79 +249,15 @@ export function CodeEditor({
       const currentValue = editorRef.current.getValue();
       if (currentValue !== currentCode) {
         editorRef.current.setValue(currentCode || '');
+        // Forzar actualización de decoraciones al cambiar el código desde afuera
+        updateDecorations(currentCode || '');
       }
     }
-  }, [expectedCode, mode, currentCode]);
-
-  // ============================================
-  // UPDATE DECORATIONS - for typing feedback
-  // ============================================
-
-  const updateDecorations = useCallback(() => {
-    if (!editorRef.current || !monacoRef.current) return;
-    
-    const editor = editorRef.current;
-    const monaco = monacoRef.current;
-    const model = editor.getModel();
-    if (!model) return;
-
-    const decorations: Parameters<typeof monaco.editor.IModelDeltaDecoration>[] = [];
-    
-    if (mode !== 'write') return;
-
-// Highlight correct characters in green (if available from hook)
-    if (correctPositions.length > 0) {
-      for (let i = 0; i < correctPositions.length; i++) {
-        const pos = correctPositions[i];
-        const position = model.getPositionAt(pos);
-        if (!position) continue;
-        
-        decorations.push({
-          range: new monaco.Range(
-            position.lineNumber,
-            position.column,
-            position.lineNumber,
-            position.column + 1
-          ),
-          options: {
-            inlineClassName: 'correct-char',
-          },
-        });
-      }
-    }
-
-    // Highlight errors in red
-    if (highlightErrors && errorPositions.length > 0) {
-      for (let i = 0; i < errorPositions.length; i++) {
-        const pos = errorPositions[i];
-        const position = model.getPositionAt(pos);
-        if (!position) continue;
-        
-        decorations.push({
-          range: new monaco.Range(
-            position.lineNumber,
-            position.column,
-            position.lineNumber,
-            position.column + 1
-          ),
-          options: {
-            inlineClassName: 'error-char',
-          },
-        });
-      }
-    }
-
-    const oldDecorations = decorationsRef.current;
-    decorationsRef.current = editor.deltaDecorations(oldDecorations, decorations);
-  }, [expectedCode, currentCode, mode, showGhostText, highlightErrors, isCompleted, correctPositions, errorPositions]);
-
-  // ============================================
-  // EFFECTS
-  // ============================================
+  }, [expectedCode, mode, currentCode, updateDecorations]);
 
   useEffect(() => {
     updateDecorations();
-  }, [currentCode, expectedCode, updateDecorations]);
+  }, [updateDecorations]);
 
   useEffect(() => {
     if (editorRef.current) {

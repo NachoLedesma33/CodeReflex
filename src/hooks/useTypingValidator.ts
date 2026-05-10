@@ -51,6 +51,7 @@ interface UseTypingValidatorReturn {
   handleKeyPress: (key: string, currentText: string, position: number) => void;
   handlePaste: (text: string) => boolean;
   reset: () => void;
+  syncText: (text: string) => void;
   getErrorPositions: () => number[];
   getCorrectPositions: () => number[];
   forceValidation: () => void;
@@ -121,46 +122,78 @@ export function useTypingValidator({
   const [totalKeystrokes, setTotalKeystrokes] = useState(0);
   const [correctKeystrokes, setCorrectKeystrokes] = useState(0);
   const [corrections, setCorrections] = useState(0);
+  const [totalErrors, setTotalErrors] = useState(0);
   const [currentPosition, setCurrentPosition] = useState(0);
 
   const isCompleteRef = useRef(false);
   const lastEventTimeRef = useRef(0);
   const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const validatorRef = useRef(createOptimizedValidator(expectedCode, blanks));
+  const normalizedExpectedCode = useMemo(() => {
+    return expectedCode.replace(/\r\n/g, '\n').replace(/\t/g, '  ');
+  }, [expectedCode]);
+
+  const validatorRef = useRef(createOptimizedValidator(normalizedExpectedCode, blanks));
 
   useEffect(() => {
-    validatorRef.current = createOptimizedValidator(expectedCode, blanks);
-  }, [expectedCode, blanks]);
+    validatorRef.current = createOptimizedValidator(normalizedExpectedCode, blanks);
+  }, [normalizedExpectedCode, blanks]);
 
   const [isPending, startTransition] = useTransition();
+
+  const [liveElapsedTime, setLiveElapsedTime] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (enabled && startTime && !isCompleteRef.current) {
+      timerRef.current = setInterval(() => {
+        setLiveElapsedTime(Date.now() - startTime);
+      }, 100);
+    } else {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    }
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [enabled, startTime]);
 
   const validationResult = useMemo<ValidationResult>(() => {
     return validatorRef.current.validate(typedText);
   }, [typedText]);
 
   const metrics = useMemo<TypingMetrics>(() => {
-    const elapsedTime = startTime ? Date.now() - startTime : 0;
+    const elapsedTime = liveElapsedTime;
     const elapsedMinutes = elapsedTime / 60000;
     const words = typedText.length / 5;
     const wpm = elapsedMinutes > 0 ? Math.round(words / elapsedMinutes) : 0;
-    const accuracy = totalKeystrokes > 0 ? Math.round((correctKeystrokes / totalKeystrokes) * 100) : 100;
+    
+    // Accuracy based on total keystrokes and total errors
+    // If totalErrors > totalKeystrokes (rare but possible with backspaces), clamp it
+    const accuracy = totalKeystrokes > 0 
+      ? Math.max(0, Math.round(((totalKeystrokes - totalErrors) / totalKeystrokes) * 100)) 
+      : 100;
 
     return {
       wpm,
       accuracy: Math.min(100, accuracy),
       totalKeystrokes,
       correctKeystrokes,
-      errors: errors.size,
+      errors: totalErrors, // Persistent error count
       corrections,
       elapsedTime,
       charactersTyped: typedText.length,
-      charactersRemaining: expectedCode.length - typedText.length,
+      charactersRemaining: Math.max(0, normalizedExpectedCode.length - typedText.length),
     };
-  }, [typedText, startTime, totalKeystrokes, correctKeystrokes, errors.size, corrections, expectedCode.length]);
+  }, [typedText, liveElapsedTime, totalKeystrokes, correctKeystrokes, totalErrors, corrections, normalizedExpectedCode.length]);
 
   const isComplete = useMemo(() => {
-    return typedText.length >= expectedCode.length && validationResult.isValid;
-  }, [typedText, expectedCode, validationResult.isValid]);
+    return typedText.length >= normalizedExpectedCode.length && validationResult.isValid;
+  }, [typedText, normalizedExpectedCode.length, validationResult.isValid]);
 
   useEffect(() => {
     if (isComplete && !isCompleteRef.current) {
@@ -282,6 +315,47 @@ export function useTypingValidator({
     return errorCount === 0;
   }, [enabled, startTime, expectedCode, typedText.length, errors, emitEvent, debouncedValidation]);
 
+  const syncText = useCallback((newText: string) => {
+    const normalizedNewText = newText.replace(/\r\n/g, '\n').replace(/\t/g, '  ');
+    
+    setStartTime(prev => {
+      if (!prev && normalizedNewText.length > 0) return Date.now();
+      return prev;
+    });
+
+    setTypedText(prev => {
+      if (normalizedNewText === prev) return prev;
+
+      // Calculate keystrokes and corrections based on the difference
+      if (normalizedNewText.length > prev.length) {
+        const diff = normalizedNewText.length - prev.length;
+        setTotalKeystrokes(k => k + diff);
+        
+        // Check if the added characters are correct
+        let addedCorrect = 0;
+        let addedErrors = 0;
+        for (let i = prev.length; i < normalizedNewText.length; i++) {
+          if (normalizedNewText[i] === normalizedExpectedCode[i]) {
+            addedCorrect++;
+          } else {
+            addedErrors++;
+          }
+        }
+        setCorrectKeystrokes(k => k + addedCorrect);
+        if (addedErrors > 0) {
+          setTotalErrors(e => e + addedErrors);
+        }
+      } else if (normalizedNewText.length < prev.length) {
+        setCorrections(c => c + (prev.length - normalizedNewText.length));
+      }
+
+      return normalizedNewText;
+    });
+
+    setCurrentPosition(normalizedNewText.length);
+    debouncedValidation(normalizedNewText);
+  }, [normalizedExpectedCode, debouncedValidation]);
+
   const reset = useCallback(() => {
     if (debounceTimerRef.current) {
       clearTimeout(debounceTimerRef.current);
@@ -289,9 +363,11 @@ export function useTypingValidator({
     setTypedText('');
     setErrors(new Map());
     setStartTime(null);
+    setLiveElapsedTime(0);
     setTotalKeystrokes(0);
     setCorrectKeystrokes(0);
     setCorrections(0);
+    setTotalErrors(0);
     setCurrentPosition(0);
     isCompleteRef.current = false;
   }, []);
@@ -302,18 +378,24 @@ export function useTypingValidator({
   }, [typedText]);
 
   const getErrorPositions = useCallback((): number[] => {
-    return Array.from(errors.keys());
-  }, [errors]);
+    const errorPos: number[] = [];
+    for (let i = 0; i < typedText.length; i++) {
+      if (typedText[i] !== normalizedExpectedCode[i]) {
+        errorPos.push(i);
+      }
+    }
+    return errorPos;
+  }, [typedText, normalizedExpectedCode]);
 
   const getCorrectPositions = useCallback((): number[] => {
     const correct: number[] = [];
     for (let i = 0; i < typedText.length; i++) {
-      if (!errors.has(i)) {
+      if (typedText[i] === normalizedExpectedCode[i]) {
         correct.push(i);
       }
     }
     return correct;
-  }, [typedText, errors]);
+  }, [typedText, normalizedExpectedCode]);
 
   return {
     typedText,
@@ -323,6 +405,7 @@ export function useTypingValidator({
     currentPosition,
     handleKeyPress,
     handlePaste,
+    syncText,
     reset,
     getErrorPositions,
     getCorrectPositions,

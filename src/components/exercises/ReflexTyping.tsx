@@ -53,9 +53,6 @@ export function ReflexTyping({
   const [sessionState, setSessionState] = useState<SessionState>('idle');
   const [currentCode, setCurrentCode] = useState('');
   const [sessionSummary, setSessionSummary] = useState<SessionSummary | null>(null);
-  const [startTime, setStartTime] = useState<number | null>(null);
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const isCompleteRef = useRef(false);
 
   const { getNextExercise, getPreviousExercise, currentIndex, filteredExercises } = useExerciseStore();
@@ -90,6 +87,7 @@ export function ReflexTyping({
     metrics,
     isComplete,
     reset: resetValidator,
+    syncText,
     getErrorPositions,
     getCorrectPositions,
   } = useTypingValidator({
@@ -97,7 +95,7 @@ export function ReflexTyping({
     blanks,
     enabled: sessionState === 'running',
     onComplete: handleExerciseComplete,
-    debounceMs: 100,
+    debounceMs: 50,
     throttleMs: 30,
   });
 
@@ -115,65 +113,29 @@ export function ReflexTyping({
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === filteredExercises.length - 1;
 
-  useEffect(() => {
-    if (sessionState === 'running' && startTime) {
-      timerRef.current = setInterval(() => {
-        setElapsedTime(Date.now() - startTime);
-      }, 100);
-    } else {
-      // Clear timer when not running (idle, paused, completed)
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    }
-
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [sessionState, startTime]);
+  // Timer logic is now handled internally by useTypingValidator metrics
+  // but we might want to trigger a re-render for the timer display if needed.
+  // Actually, metrics is already updating, so it should be fine.
 
   useEffect(() => {
     // Check for completion only when isComplete changes to true
     if (isComplete && sessionState === 'running' && !isCompleteRef.current) {
+      isCompleteRef.current = true;
       setSessionState('completed');
-      // Stop the timer
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-      // Get metrics at completion time
-      const finalMetrics = {
-        wpm: metrics.wpm,
-        accuracy: metrics.accuracy,
-        elapsedTime: elapsedTime,
-        totalKeystrokes: metrics.totalKeystrokes,
-        correctKeystrokes: metrics.correctKeystrokes,
-        errors: metrics.errors,
-        corrections: metrics.corrections,
-        charactersTyped: currentCode.length,
-        charactersRemaining: expectedCode.length - currentCode.length,
-      };
-      handleExerciseComplete(finalMetrics);
+      handleExerciseComplete(metrics);
     }
-  }, [isComplete]);
+  }, [isComplete, sessionState, metrics, handleExerciseComplete]);
 
   useEffect(() => {
     setCurrentCode('');
     setSessionState('idle');
     setSessionSummary(null);
-    setElapsedTime(0);
-    setStartTime(null);
     resetValidator();
     isCompleteRef.current = false;
   }, [exercise.id, resetValidator]);
 
   const startSession = useCallback(() => {
     setSessionState('running');
-    setStartTime(Date.now());
   }, []);
 
   const pauseSession = useCallback(() => {
@@ -187,26 +149,26 @@ export function ReflexTyping({
   const resetSession = useCallback(() => {
     setSessionState('idle');
     setCurrentCode('');
-    setElapsedTime(0);
-    setStartTime(null);
     setSessionSummary(null);
     resetValidator();
   }, [resetValidator]);
 
   const handleCodeChange = useCallback((code: string) => {
+    if (sessionState === 'completed') return;
+    
     if (sessionState === 'idle' && code.length > 0) {
       setSessionState('running');
-      setStartTime(Date.now());
     }
-    if (sessionState !== 'running' && sessionState !== 'idle') return;
+    
     setCurrentCode(code);
-  }, [sessionState]);
+    syncText(code);
+  }, [sessionState, syncText]);
 
   const handleEditorComplete = useCallback((success: boolean) => {
-    if (success && sessionState === 'running') {
+    if (success) {
       handleExerciseComplete(metrics);
     }
-  }, [sessionState, handleExerciseComplete, metrics]);
+  }, [handleExerciseComplete, metrics]);
 
   const formatTime = (ms: number): string => {
     const seconds = Math.floor(ms / 1000);
@@ -349,7 +311,7 @@ export function ReflexTyping({
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-blue-500" />
-                    <span className="text-sm font-medium">{formatTime(elapsedTime)}</span>
+                    <span className="text-sm font-medium">{formatTime(metrics.elapsedTime)}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <div className="w-24 h-2 bg-zinc-700 rounded-full overflow-hidden">
