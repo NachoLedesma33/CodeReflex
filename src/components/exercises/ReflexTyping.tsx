@@ -109,8 +109,8 @@ export function ReflexTyping({
     cursorPosition: currentCode.length,
   });
 
-  const errorPositions = getErrorPositions();
-  const correctPositions = getCorrectPositions();
+  const errorPositions: number[] = getErrorPositions();
+  const correctPositions: number[] = getCorrectPositions();
 
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === filteredExercises.length - 1;
@@ -121,24 +121,45 @@ export function ReflexTyping({
         setElapsedTime(Date.now() - startTime);
       }, 100);
     } else {
+      // Clear timer when not running (idle, paused, completed)
       if (timerRef.current) {
         clearInterval(timerRef.current);
+        timerRef.current = null;
       }
     }
 
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
+        timerRef.current = null;
       }
     };
   }, [sessionState, startTime]);
 
   useEffect(() => {
+    // Check for completion only when isComplete changes to true
     if (isComplete && sessionState === 'running' && !isCompleteRef.current) {
-      isCompleteRef.current = true;
-      handleExerciseComplete(metrics);
+      setSessionState('completed');
+      // Stop the timer
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      // Get metrics at completion time
+      const finalMetrics = {
+        wpm: metrics.wpm,
+        accuracy: metrics.accuracy,
+        elapsedTime: elapsedTime,
+        totalKeystrokes: metrics.totalKeystrokes,
+        correctKeystrokes: metrics.correctKeystrokes,
+        errors: metrics.errors,
+        corrections: metrics.corrections,
+        charactersTyped: currentCode.length,
+        charactersRemaining: expectedCode.length - currentCode.length,
+      };
+      handleExerciseComplete(finalMetrics);
     }
-  }, [isComplete, sessionState, metrics, handleExerciseComplete]);
+  }, [isComplete]);
 
   useEffect(() => {
     setCurrentCode('');
@@ -196,7 +217,10 @@ export function ReflexTyping({
 
   const getProgress = (): number => {
     if (!expectedCode) return 0;
-    return Math.round((currentCode.length / expectedCode.length) * 100);
+    const expectedLen = expectedCode.length;
+    const currentLen = currentCode.length;
+    const progress = Math.min((currentLen / expectedLen) * 100, 100);
+    return Math.round(progress);
   };
 
   return (
@@ -263,13 +287,49 @@ export function ReflexTyping({
               mode={sessionState === 'completed' ? 'read' : 'write'}
               onChange={handleCodeChange}
               onComplete={handleEditorComplete}
-              showGhostText={true}
+              showGhostText={sessionState !== 'completed'}
               highlightErrors={true}
               correctPositions={correctPositions}
               errorPositions={errorPositions}
               className="h-full bg-transparent"
             />
           </div>
+
+          {/* Completion Modal with blur */}
+          {sessionState === 'completed' && sessionSummary && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-zinc-900/60 backdrop-blur-sm">
+              <div className="bg-zinc-800 border border-zinc-600 rounded-xl p-6 shadow-2xl max-w-md w-full mx-4">
+                <div className="flex items-center justify-center mb-4">
+                  <Trophy className="w-12 h-12 text-yellow-500" />
+                </div>
+                <h2 className="text-xl font-bold text-center text-zinc-100 mb-6">Exercise Complete!</h2>
+                
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                    <div className="text-3xl font-bold text-yellow-500">{sessionSummary.wpm}</div>
+                    <div className="text-xs text-zinc-500">WPM</div>
+                  </div>
+                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                    <div className="text-3xl font-bold text-green-500">{sessionSummary.accuracy}%</div>
+                    <div className="text-xs text-zinc-500">Accuracy</div>
+                  </div>
+                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                    <div className="text-3xl font-bold text-blue-500">{formatTime(sessionSummary.timeSpent)}</div>
+                    <div className="text-xs text-zinc-500">Time</div>
+                  </div>
+                  <div className="bg-zinc-900 rounded-lg p-3 text-center">
+                    <div className="text-3xl font-bold text-zinc-300">{sessionSummary.errors}</div>
+                    <div className="text-xs text-zinc-500">Errors</div>
+                  </div>
+                </div>
+
+                <Button onClick={resetSession} className="w-full">
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Try Again
+                </Button>
+              </div>
+            </div>
+          )}
         </CardContent>
 
         <CardFooter className="flex-col gap-4">

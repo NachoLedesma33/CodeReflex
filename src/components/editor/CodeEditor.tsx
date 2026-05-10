@@ -172,21 +172,13 @@ export function CodeEditor({
     
     if (mode !== 'write') return;
 
-    const normalizedExpected = expectedCode.replace(/\s+/g, ' ').trim();
-    const normalizedCurrent = currentCode.replace(/\s+/g, ' ').trim();
-
-    // Use passed positions or calculate internally
-    const errorSet = new Set(errorPositions);
-    const correctSet = new Set(correctPositions);
-
-    // Highlight correct characters in green
-    for (let i = 0; i < normalizedCurrent.length; i++) {
-      const isCorrect = correctPositions.length > 0 
-        ? correctSet.has(i) 
-        : (i < normalizedExpected.length && normalizedCurrent[i] === normalizedExpected[i]);
-      
-      if (isCorrect) {
-        const position = model.getPositionAt(i);
+// Highlight correct characters in green (if available from hook)
+    if (correctPositions.length > 0) {
+      for (let i = 0; i < correctPositions.length; i++) {
+        const pos = correctPositions[i];
+        const position = model.getPositionAt(pos);
+        if (!position) continue;
+        
         decorations.push({
           range: new monaco.Range(
             position.lineNumber,
@@ -202,40 +194,11 @@ export function CodeEditor({
     }
 
     // Highlight errors in red
-    if (highlightErrors) {
-      for (let i = 0; i < normalizedCurrent.length && i < normalizedExpected.length; i++) {
-        const isError = errorPositions.length > 0 
-          ? errorSet.has(i) 
-          : (normalizedCurrent[i] !== normalizedExpected[i]);
-        
-        if (isError) {
-          const position = model.getPositionAt(i);
-          decorations.push({
-            range: new monaco.Range(
-              position.lineNumber,
-              position.column,
-              position.lineNumber,
-              position.column + 1
-            ),
-            options: {
-              inlineClassName: 'error-char',
-            },
-          });
-        }
-      }
-    }
-
-    // Ghost text for remaining characters - show as inline text after cursor
-    if (showGhostText && !isCompleted && normalizedCurrent.length < normalizedExpected.length) {
-      const remaining = normalizedExpected.slice(normalizedCurrent.length);
-      
-      // Show ghost text character by character after current position
-      let charIndex = 0;
-      let pos = normalizedCurrent.length;
-      
-      while (charIndex < remaining.length && charIndex < 50) {
+    if (highlightErrors && errorPositions.length > 0) {
+      for (let i = 0; i < errorPositions.length; i++) {
+        const pos = errorPositions[i];
         const position = model.getPositionAt(pos);
-        if (!position) break;
+        if (!position) continue;
         
         decorations.push({
           range: new monaco.Range(
@@ -245,13 +208,9 @@ export function CodeEditor({
             position.column + 1
           ),
           options: {
-            inlineClassName: 'ghost-char',
-            stickiness: monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges,
+            inlineClassName: 'error-char',
           },
         });
-        
-        pos++;
-        charIndex++;
       }
     }
 
@@ -282,97 +241,80 @@ export function CodeEditor({
   const getMonacoLanguage = () => LANGUAGE_MAP[language] || 'javascript';
   const getFontFamily = () => FONT_FAMILY_MAP[editorFontFamily] || FONT_FAMILY_MAP.monaco;
 
-  // Generate ghost text HTML - characters already typed are transparent, remaining are gray
   return (
     <div 
-      className={cn('relative flex flex-col rounded-lg border border-zinc-700 bg-transparent', className)}
+      className={cn('relative flex flex-col rounded-lg border border-zinc-700 bg-transparent overflow-hidden', className)}
       style={{ direction: 'ltr' }}
     >
-      {/* Ghost text reference - shown above editor */}
-      {mode === 'write' && showGhostText && (
-        <div 
-          className="flex-shrink-0 px-4 py-3 bg-zinc-800/50 border-b border-zinc-700 overflow-x-auto"
-        >
-          <div 
-            className="whitespace-nowrap text-sm"
-            style={{
-              fontFamily: getFontFamily(),
-              fontSize: `${editorFontSize}px`,
-              lineHeight: 1.6,
-              direction: 'ltr',
-              unicodeBidi: 'plaintext',
-            }}
-          >
-            {(() => {
-              const normalizedCurrent = currentCode.replace(/\s+/g, ' ').trim();
-              const normalizedExpected = expectedCode.replace(/\s+/g, ' ').trim();
-              
-              const typed = normalizedExpected.slice(0, normalizedCurrent.length);
-              const remaining = normalizedExpected.slice(normalizedCurrent.length);
-              
-              return (
-                <>
-                  <span className="text-transparent">{typed}</span>
-                  <span className="text-zinc-500 opacity-60">{remaining}</span>
-                </>
-              );
-            })()}
-          </div>
+      {/* Editor with reference always on the right */}
+      <div className="flex flex-1 min-h-0 overflow-hidden">
+        <div className={mode === 'write' && showGhostText ? 'flex-[1_1_60%] min-w-0' : 'w-full'}>
+          <Editor
+          height="100%"
+          language={getMonacoLanguage()}
+          value={currentCode}
+          onMount={handleEditorMount}
+          theme={theme === 'dark' ? 'codereflex-dark' : 'codereflex-light'}
+          options={{
+            readOnly: mode === 'read',
+            fontFamily: getFontFamily(),
+            fontSize: editorFontSize,
+            lineHeight: 1.6,
+            lineNumbers: showLineNumbers ? 'on' : 'off',
+            wordWrap: wordWrap ? 'on' : 'off',
+            minimap: { enabled: false },
+            scrollBeyondLastLine: false,
+            automaticLayout: true,
+            tabSize: 2,
+            insertSpaces: true,
+            renderLineHighlight: highlightActiveLine ? 'line' : 'none',
+            cursorBlinking: 'smooth',
+            cursorSmoothCaretAnimation: 'on',
+            smoothScrolling: true,
+            overviewRulerLanes: 0,
+            hideCursorInOverviewRuler: true,
+            overviewRulerBorder: false,
+            padding: { top: 16, bottom: 16 },
+            folding: false,
+            lineDecorationsWidth: 8,
+            lineNumbersMinChars: 3,
+            scrollbar: {
+              vertical: 'auto',
+              horizontal: 'auto',
+              verticalScrollbarSize: 8,
+              horizontalScrollbarSize: 8,
+            },
+            quickSuggestions: false,
+            suggestOnTriggerCharacters: false,
+            acceptSuggestionOnEnter: 'off',
+            tabCompletion: 'off',
+            wordBasedSuggestions: 'off',
+            parameterHints: { enabled: false },
+            suggest: { showWords: false },
+            autoClosingBrackets: 'never',
+            autoClosingQuotes: 'never',
+            autoSurround: 'never',
+            formatOnPaste: false,
+            formatOnType: false,
+            autoIndent: 'none',
+            bracketPairColorization: { enabled: false },
+            guides: { bracketPairs: false },
+          }}
+        />
         </div>
-      )}
-      <div className="flex-1 min-h-0 relative">
-        <Editor
-        height="100%"
-        language={getMonacoLanguage()}
-        value={currentCode}
-        onMount={handleEditorMount}
-        theme={theme === 'dark' ? 'codereflex-dark' : 'codereflex-light'}
-        options={{
-          readOnly: mode === 'read',
-          fontFamily: getFontFamily(),
-          fontSize: editorFontSize,
-          lineHeight: 1.6,
-          lineNumbers: showLineNumbers ? 'on' : 'off',
-          wordWrap: wordWrap ? 'on' : 'off',
-          minimap: { enabled: false },
-          scrollBeyondLastLine: false,
-          automaticLayout: true,
-          tabSize: 2,
-          insertSpaces: true,
-          renderLineHighlight: highlightActiveLine ? 'line' : 'none',
-          cursorBlinking: 'smooth',
-          cursorSmoothCaretAnimation: 'on',
-          smoothScrolling: true,
-          overviewRulerLanes: 0,
-          hideCursorInOverviewRuler: true,
-          overviewRulerBorder: false,
-          padding: { top: 16, bottom: 16 },
-          folding: false,
-          lineDecorationsWidth: 8,
-          lineNumbersMinChars: 3,
-          scrollbar: {
-            vertical: 'auto',
-            horizontal: 'auto',
-            verticalScrollbarSize: 8,
-            horizontalScrollbarSize: 8,
-          },
-          quickSuggestions: false,
-          suggestOnTriggerCharacters: false,
-          acceptSuggestionOnEnter: 'off',
-          tabCompletion: 'off',
-          wordBasedSuggestions: 'off',
-          parameterHints: { enabled: false },
-          suggest: { showWords: false },
-          autoClosingBrackets: 'never',
-          autoClosingQuotes: 'never',
-          autoSurround: 'never',
-          formatOnPaste: false,
-          formatOnType: false,
-          autoIndent: 'none',
-          bracketPairColorization: { enabled: false },
-          guides: { bracketPairs: false },
-        }}
-      />
+        {mode === 'write' && showGhostText && (
+          <div className="flex-[0_0_40%] border-l border-zinc-700 bg-zinc-900/80 flex flex-col">
+            <div className="text-xs text-zinc-500 px-3 py-2 border-b border-zinc-700">Reference</div>
+            <div className="flex-1 overflow-auto p-3">
+              <pre 
+                className="text-xs font-mono whitespace-pre"
+                style={{ fontFamily: getFontFamily() }}
+              >
+                {expectedCode}
+              </pre>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
