@@ -258,12 +258,13 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
     const { isLoadingReflex, cache } = get();
     if (isLoadingReflex) return;
     
-    const lang = language || undefined;
-    const lvl = level || undefined;
-    const cacheKey = `reflex-${lang || 'all'}-${lvl || 'all'}`;
+    const state = get();
+    const langToLoad = language || state.languageFilter || 'javascript';
+    const lvlToLoad = level || state.levelFilter || 'fundamentals';
+    const cacheKey = `reflex-${langToLoad}-${lvlToLoad}`;
     
-    if (isCacheValid(cache, cacheKey)) {
-      const cached = cache[cacheKey].data;
+    if (isCacheValid(state.cache, cacheKey)) {
+      const cached = state.cache[cacheKey].data;
       set({ reflexSnippets: cached, isLoadingReflex: false });
       return;
     }
@@ -271,7 +272,7 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
     set({ isLoadingReflex: true });
     
     try {
-      const loaded = await fetchFromRepo(language, level);
+      const loaded = await fetchFromRepo(langToLoad, lvlToLoad);
       const reflexSnippets = loaded.filter(e => e.exerciseType === 'reflex-typing');
       
       set({
@@ -291,12 +292,13 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
     const { isLoadingGuided, cache } = get();
     if (isLoadingGuided) return;
     
-    const lang = language || undefined;
-    const lvl = level || undefined;
-    const cacheKey = `guided-${lang || 'all'}-${lvl || 'all'}`;
+    const state = get();
+    const langToLoad = language || state.languageFilter || 'javascript';
+    const lvlToLoad = level || state.levelFilter || 'fundamentals';
+    const cacheKey = `guided-${langToLoad}-${lvlToLoad}`;
     
-    if (isCacheValid(cache, cacheKey)) {
-      const cached = cache[cacheKey].data;
+    if (isCacheValid(state.cache, cacheKey)) {
+      const cached = state.cache[cacheKey].data;
       set({ guidedProblems: cached, isLoadingGuided: false });
       return;
     }
@@ -304,7 +306,7 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
     set({ isLoadingGuided: true });
     
     try {
-      const loaded = await fetchFromRepo(language, level);
+      const loaded = await fetchFromRepo(langToLoad, lvlToLoad);
       const guidedProblems = loaded.filter(e => e.exerciseType === 'guided-problem');
       
       set({
