@@ -52,29 +52,46 @@ const MODES: { value: ExerciseType; label: string; icon: React.ReactNode }[] = [
 ];
 
 const CATEGORIES: { value: ExerciseCategory; label: string }[] = [
+  { value: 'algorithms', label: 'Algorithms' },
+  { value: 'api-design', label: 'API Design' },
+  { value: 'architecture', label: 'Architecture' },
   { value: 'arrays', label: 'Arrays' },
-  { value: 'strings', label: 'Strings' },
-  { value: 'objects', label: 'Objects' },
-  { value: 'functions', label: 'Functions' },
-  { value: 'loops', label: 'Loops' },
   { value: 'async', label: 'Async' },
+  { value: 'authentication', label: 'Authentication' },
+  { value: 'automation', label: 'Automation' },
+  { value: 'backend-architecture', label: 'Backend Arch' },
   { value: 'browser-api', label: 'Browser API' },
   { value: 'classes', label: 'Classes' },
-  { value: 'algorithms', label: 'Algorithms' },
-  { value: 'data-structures', label: 'Data Structures' },
-  { value: 'state-management', label: 'State Mgmt' },
+  { value: 'cloud-architecture', label: 'Cloud Arch' },
+  { value: 'concurrency', label: 'Concurrency' },
+  { value: 'databases', label: 'Databases' },
   { value: 'data-processing', label: 'Data Processing' },
-  { value: 'architecture', label: 'Architecture' },
-  { value: 'performance', label: 'Performance' },
+  { value: 'data-structures', label: 'Data Structures' },
+  { value: 'distributed-systems', label: 'Distributed Sys' },
   { value: 'functional-programming', label: 'FP' },
+  { value: 'functions', label: 'Functions' },
+  { value: 'infrastructure', label: 'Infrastructure' },
+  { value: 'loops', label: 'Loops' },
+  { value: 'microservices', label: 'Microservices' },
+  { value: 'monitoring', label: 'Monitoring' },
+  { value: 'objects', label: 'Objects' },
   { value: 'patterns', label: 'Patterns' },
+  { value: 'performance', label: 'Performance' },
+  { value: 'realtime', label: 'Realtime' },
+  { value: 'resilience', label: 'Resilience' },
+  { value: 'runtime-systems', label: 'Runtime Systems' },
+  { value: 'search', label: 'Search' },
+  { value: 'security', label: 'Security' },
+  { value: 'state-management', label: 'State Mgmt' },
+  { value: 'strings', label: 'Strings' },
   { value: 'system-design', label: 'System Design' },
-  { value: 'api-design', label: 'API Design' },
   { value: 'testing', label: 'Testing' },
+  { value: 'validation', label: 'Validation' },
 ];
 
 export function Sidebar({ className, onSelectExercise }: SidebarProps) {
   const {
+    allExercises,
     filteredExercises,
     currentExercise,
     currentIndex,
@@ -301,10 +318,18 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
 
                 <div className="space-y-1.5">
                   <div className="text-xs text-zinc-600">Category</div>
-                  <div className="flex flex-wrap gap-1 max-h-20 overflow-y-auto">
+                  <div className="flex flex-wrap gap-1 max-h-32 overflow-y-auto">
                     {(() => {
-                      const availableCategories = [...new Set(filteredExercises.map(e => e.category).filter(Boolean))] as string[];
+                      // Obtenemos todas las categorías disponibles para el nivel actual (ignorando el filtro de categoría)
+                      const availableCategories = [...new Set(
+                        allExercises
+                          .filter(e => e.language === languageFilter && e.level === levelFilter)
+                          .map(e => e.category)
+                          .filter(Boolean)
+                      )] as string[];
+
                       const visibleCategories = CATEGORIES.filter(cat => availableCategories.includes(cat.value));
+                      
                       return visibleCategories.map(cat => (
                         <button
                           key={cat.value}
@@ -452,18 +477,25 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
 
             {expandedSections.has('list') && (
               <div className="space-y-1 max-h-64 overflow-y-auto">
-                {filteredExercises.map((exercise, index) => (
-                  <ExerciseItem
-                    key={exercise.id}
-                    exercise={exercise}
-                    index={index + 1}
-                    isActive={currentExercise?.id === exercise.id}
-                    isCompleted={isCompleted(exercise.id)}
-                    stats={getExerciseStats(exercise.id)}
-                    onClick={() => onSelectExercise?.(exercise)}
-                    onToggleFavorite={() => toggleFavorite(exercise.id)}
-                  />
-                ))}
+                {!categoryFilter && languageFilter && levelFilter ? (
+                  <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
+                    <Zap className="w-8 h-8 text-zinc-700 mb-2" />
+                    <p className="text-xs text-zinc-500">Selecciona una categoría para ver los ejercicios</p>
+                  </div>
+                ) : (
+                  filteredExercises.map((exercise, index) => (
+                    <ExerciseItem
+                      key={exercise.id}
+                      exercise={exercise}
+                      index={index + 1}
+                      isActive={currentExercise?.id === exercise.id}
+                      isCompleted={isCompleted(exercise.id)}
+                      stats={getExerciseStats(exercise.id)}
+                      onClick={() => onSelectExercise?.(exercise)}
+                      onToggleFavorite={() => toggleFavorite(exercise.id)}
+                    />
+                  ))
+                )}
               </div>
             )}
           </div>

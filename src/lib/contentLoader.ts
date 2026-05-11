@@ -94,24 +94,18 @@ export class ContentLoader {
 
       for (const file of fileData) {
         if (file.exercises) {
+          const fileLang = (file.metadata.language as ProgrammingLanguage) || language;
+          const fileLevel = (level as DifficultyLevel); // El nivel viene del argumento ya que el archivo es nivel-específico
+
           for (const exercise of file.exercises) {
-            const snippet: ReflexSnippet = {
-              id: exercise.id,
-              title: exercise.title,
-              description: exercise.description,
-              context: exercise.context,
-              category: exercise.category,
-              codeSnippet: exercise.codeSnippet,
-              typingStyle: exercise.typingStyle || 'full',
-              tags: exercise.tags || [],
-              concepts: exercise.concepts || [],
-              estimatedDuration: exercise.estimatedDuration || 60,
-              difficultyScore: exercise.difficultyScore || 5,
+            const snippet: any = {
+              ...exercise,
+              language: fileLang,
+              level: fileLevel,
+              exerciseType: 'reflex-typing',
+              category: exercise.category || 'general',
             };
-            if (exercise.blanks) {
-              snippet.blanks = exercise.blanks;
-            }
-            snippets.push(snippet);
+            snippets.push(snippet as ReflexSnippet);
           }
         }
       }

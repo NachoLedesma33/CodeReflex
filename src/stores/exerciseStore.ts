@@ -102,12 +102,12 @@ const isCacheValid = (cache: ExerciseCache, key: string): boolean => {
 };
 
 const fetchFromRepo = async (
-  language?: ProgrammingLanguage,
-  level?: DifficultyLevel
+  language: ProgrammingLanguage,
+  level: DifficultyLevel
 ): Promise<Exercise[]> => {
   try {
-    const lang = language || 'javascript';
-    const lvl = level || 'fundamentals';
+    const lang = language;
+    const lvl = level;
     
     const reflexSnippets = await contentLoader.loadReflexSnippets(lang as ProgrammingLanguage, lvl as DifficultyLevel);
     const guidedProblems = await contentLoader.loadGuidedProblems(lang as ProgrammingLanguage, lvl as DifficultyLevel);
@@ -189,24 +189,22 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
   },
 
   loadExercises: async (language?: ProgrammingLanguage, level?: DifficultyLevel) => {
-    const { cache, languageFilter, levelFilter, typeFilter, searchQuery } = get();
-    const lang = language || undefined;
-    const lvl = level || undefined;
-    const cacheKey = `${lang || 'all'}-${lvl || 'all'}`;
+    const state = get();
+    const lang = language || state.languageFilter || 'javascript';
+    const lvl = level || state.levelFilter || 'fundamentals';
+    const cacheKey = `${lang}-${lvl}`;
     
     // Verificar cache primero
-    if (isCacheValid(cache, cacheKey)) {
-      const cached = cache[cacheKey].data;
-      const langFilter = languageFilter || language || null;
-      const lvlFilter = levelFilter || level || null;
-      const filtered = applyFilters(cached, langFilter, lvlFilter, null, typeFilter, searchQuery);
+    if (isCacheValid(state.cache, cacheKey)) {
+      const cached = state.cache[cacheKey].data;
+      const filtered = applyFilters(cached, lang, lvl, null, state.typeFilter, state.searchQuery);
       set({
         allExercises: cached,
         filteredExercises: filtered,
         isLoading: false,
         hasLoadedInitial: true,
-        languageFilter: langFilter,
-        levelFilter: lvlFilter,
+        languageFilter: lang,
+        levelFilter: lvl,
       });
       return;
     }
@@ -214,25 +212,23 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
     set({ isLoading: true, error: null });
     
     try {
-      const loaded = await fetchFromRepo(language, level);
+      const loaded = await fetchFromRepo(lang, lvl);
       
       const reflexSnippets = loaded.filter(e => e.exerciseType === 'reflex-typing');
       const guidedProblems = loaded.filter(e => e.exerciseType === 'guided-problem');
       
       const newCache = {
-        ...cache,
+        ...state.cache,
         [cacheKey]: { data: loaded, timestamp: Date.now() },
       };
       
-      const langF = languageFilter || language || null;
-      const lvlF = levelFilter || level || null;
       const filtered = applyFilters(
         loaded,
-        langF,
-        lvlF,
+        lang,
+        lvl,
         null,
-        typeFilter,
-        searchQuery
+        state.typeFilter,
+        state.searchQuery
       );
 
       const newLoadedCombinations = new Set(get().loadedCombinations);
@@ -246,8 +242,8 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
         cache: newCache,
         isLoading: false,
         hasLoadedInitial: true,
-        languageFilter: langF,
-        levelFilter: lvlF,
+        languageFilter: lang,
+        levelFilter: lvl,
         loadedCombinations: newLoadedCombinations,
       });
     } catch (err) {
@@ -450,7 +446,8 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
     if (loadedCombinations.has(cacheKey)) return;
     
     try {
-      const loaded = await fetchFromRepo(languageFilter || undefined, nextLevel);
+      const lang = languageFilter || 'javascript';
+      const loaded = await fetchFromRepo(lang, nextLevel);
       
       set(state => ({
         cache: {
