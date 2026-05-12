@@ -1,0 +1,10 @@
+{
+  "language": "java",
+  "level": "advanced",
+  "reflexCount": 35,
+  "guidedCount": 0,
+  "totalCount": 35,
+  "tags": ["meta-programming", "concurrency", "jvm", "modern-java", "advanced-functional"],
+  "concepts": ["reflection", "async-programming", "sealed-classes", "records", "custom-collectors"],
+  "lastUpdated": "2026-05-12"
+}

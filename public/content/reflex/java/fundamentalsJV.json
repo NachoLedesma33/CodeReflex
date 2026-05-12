@@ -1,154 +1,450 @@
 [
   {
-    "id": "java-fundamentals-001",
-    "title": "Basic Class Structure",
-    "description": "Define a simple Java class with fields and a method.",
-    "context": "Core concept of object-oriented programming in Java.",
-    "difficultyScore": 12,
-    "typingStyle": "full",
-    "tags": ["java", "oop", "classes"],
-    "concepts": ["classes", "objects"],
-    "technicalNotes": [
-      "Java is strictly object-oriented",
-      "Everything must be inside a class"
-    ],
-    "codeSnippet": "public class User {\n    String name;\n\n    public User(String name) {\n        this.name = name;\n    }\n\n    public void greet() {\n        System.out.println(\"Hello \" + name);\n    }\n\n    public static void main(String[] args) {\n        User u = new User(\"Nacho\");\n        u.greet();\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-002",
-    "title": "Variables and Types",
-    "description": "Understand primitive types and variable declaration.",
-    "context": "Fundamental concept in Java syntax and memory handling.",
-    "difficultyScore": 10,
-    "typingStyle": "full",
-    "tags": ["java", "variables"],
-    "concepts": ["primitives"],
-    "technicalNotes": [
-      "Java is statically typed",
-      "Types must be declared explicitly"
-    ],
-    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        int age = 25;\n        String name = \"Nacho\";\n        boolean isDev = true;\n\n        System.out.println(name);\n        System.out.println(age);\n        System.out.println(isDev);\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-003",
-    "title": "If-Else Control Flow",
-    "description": "Use conditional logic in Java.",
-    "context": "Basic decision-making structure in programming.",
-    "difficultyScore": 14,
-    "typingStyle": "full",
-    "tags": ["java", "conditionals"],
-    "concepts": ["control flow"],
-    "technicalNotes": [
-      "Java uses braces for blocks",
-      "Conditions must evaluate to boolean"
-    ],
-    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        int age = 20;\n\n        if (age >= 18) {\n            System.out.println(\"Adult\");\n        } else {\n            System.out.println(\"Minor\");\n        }\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-004",
-    "title": "Loops (for and while)",
-    "description": "Iterate over data using loops.",
-    "context": "Used in almost every Java application.",
-    "difficultyScore": 15,
-    "typingStyle": "full",
-    "tags": ["java", "loops"],
-    "concepts": ["iteration"],
-    "technicalNotes": [
-      "for loops are common for fixed iterations",
-      "while loops depend on conditions"
-    ],
-    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        for (int i = 0; i < 5; i++) {\n            System.out.println(i);\n        }\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-005",
-    "title": "Arrays Basics",
-    "description": "Work with fixed-size arrays.",
-    "context": "Fundamental data structure in Java.",
-    "difficultyScore": 16,
-    "typingStyle": "full",
-    "tags": ["java", "arrays"],
-    "concepts": ["data structures"],
-    "technicalNotes": [
-      "Arrays have fixed size",
-      "Indexed starting from 0"
-    ],
-    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        int[] numbers = {1, 2, 3, 4};\n\n        for (int n : numbers) {\n            System.out.println(n);\n        }\n    }\n}\n"
+    "metadata": {
+      "language": "java",
+      "mode": "reflex-typing",
+      "version": "1.0.0",
+      "lastUpdated": "2026-05-12",
+      "totalExercises": 35
+    },
+    "exercises": [
+      {
+        "id": "jv-fund-001",
+        "title": "Variables: Primitive Types",
+        "description": "Declare and initialize basic primitive types.",
+        "context": "Java is statically typed, meaning you must declare the type of every variable.",
+        "category": "basics",
+        "difficultyScore": 5,
+        "estimatedDuration": 25,
+        "typingStyle": "full",
+        "tags": ["java", "variables"],
+        "concepts": ["primitives", "declaration"],
+        "technicalNotes": ["int, double, boolean are most common"],
+        "codeSnippet": "int count = 10;\ndouble price = 99.99;\nboolean isReady = true;"
+      },
+      {
+        "id": "jv-fund-002",
+        "title": "Strings: Concatenation",
+        "description": "Combine strings using the + operator.",
+        "context": "Strings in Java are objects, not primitives.",
+        "category": "strings",
+        "difficultyScore": 8,
+        "estimatedDuration": 25,
+        "typingStyle": "full",
+        "tags": ["java", "strings"],
+        "concepts": ["objects", "concatenation"],
+        "technicalNotes": ["Strings are immutable in Java"],
+        "codeSnippet": "String firstName = \"Ignacio\";\nString greeting = \"Hello \" + firstName;"
+      },
+      {
+        "id": "jv-fund-003",
+        "title": "Arrays: Fixed Size",
+        "description": "Create and initialize an array.",
+        "context": "Arrays have a fixed length once created.",
+        "category": "basics",
+        "difficultyScore": 12,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java", "arrays"],
+        "concepts": ["fixed length", "indexing"],
+        "technicalNotes": ["Access elements with [index]"],
+        "codeSnippet": "int[] numbers = new int[3];\nnumbers[0] = 1;\nnumbers[1] = 2;\nnumbers[2] = 3;"
+      },
+      {
+        "id": "jv-fund-004",
+        "title": "Methods: Simple Return",
+        "description": "Define a static method that returns a value.",
+        "category": "methods",
+        "difficultyScore": 15,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java", "methods"],
+        "concepts": ["return types", "parameters"],
+        "technicalNotes": ["Static methods belong to the class"],
+        "codeSnippet": "public static int add(int a, int b) {\n    return a + b;\n}"
+      },
+      {
+        "id": "jv-fund-005",
+        "title": "Conditionals: If-Else",
+        "description": "Basic branching logic.",
+        "category": "logic",
+        "difficultyScore": 10,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["control flow"],
+        "technicalNotes": ["Use curly braces for blocks"],
+        "codeSnippet": "if (age >= 18) {\n    status = \"Adult\";\n} else {\n    status = \"Minor\";\n}"
+      },
+      {
+        "id": "jv-fund-006",
+        "title": "Loops: Standard For",
+        "description": "Iterate with a counter.",
+        "category": "loops",
+        "difficultyScore": 14,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["iteration"],
+        "technicalNotes": ["(init; condition; increment)"],
+        "codeSnippet": "for (int i = 0; i < 5; i++) {\n    System.out.println(\"Index: \" + i);\n}"
+      },
+      {
+        "id": "jv-fund-007",
+        "title": "Loops: Enhanced For",
+        "description": "Iterate over elements (for-each).",
+        "category": "loops",
+        "difficultyScore": 15,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["iteration"],
+        "technicalNotes": ["Readable way to loop through arrays/collections"],
+        "codeSnippet": "String[] tags = {\"java\", \"reflex\"};\nfor (String tag : tags) {\n    System.out.println(tag);\n}"
+      },
+      {
+        "id": "jv-fund-008",
+        "title": "ArrayList: Dynamic List",
+        "description": "Basic usage of ArrayList.",
+        "category": "collections",
+        "difficultyScore": 20,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java", "collections"],
+        "concepts": ["generics", "dynamic sizing"],
+        "technicalNotes": ["Part of java.util package"],
+        "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"Java\");\nString item = list.get(0);"
+      },
+      {
+        "id": "jv-fund-009",
+        "title": "Classes: Constructor",
+        "description": "Define a simple class with fields.",
+        "category": "classes",
+        "difficultyScore": 25,
+        "estimatedDuration": 45,
+        "typingStyle": "full",
+        "tags": ["java", "oop"],
+        "concepts": ["constructors", "instances"],
+        "technicalNotes": ["Constructor has the same name as the class"],
+        "codeSnippet": "public class User {\n    private String name;\n    public User(String name) {\n        this.name = name;\n    }\n}"
+      },
+      {
+        "id": "jv-fund-010",
+        "title": "Scanner: User Input",
+        "description": "Read input from the console.",
+        "category": "basics",
+        "difficultyScore": 22,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java", "io"],
+        "concepts": ["input", "objects"],
+        "technicalNotes": ["Remember to close the scanner"],
+        "codeSnippet": "Scanner sc = new Scanner(System.in);\nString input = sc.nextLine();\nsc.close();"
+      },
+      {
+        "id": "jv-fund-011",
+        "title": "Arithmetic: Modulo",
+        "description": "Get the remainder of a division.",
+        "category": "basics",
+        "difficultyScore": 10,
+        "estimatedDuration": 25,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["operators"],
+        "codeSnippet": "int num = 10;\nboolean isEven = (num % 2 == 0);"
+      },
+      {
+        "id": "jv-fund-012",
+        "title": "Switch: Basic Case",
+        "description": "Multi-way branch.",
+        "category": "logic",
+        "difficultyScore": 18,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["switch"],
+        "technicalNotes": ["Don't forget the break statement"],
+        "codeSnippet": "switch (day) {\n    case 1: name = \"Mon\"; break;\n    case 2: name = \"Tue\"; break;\n    default: name = \"N/A\";\n}"
+      },
+      {
+        "id": "jv-fund-013",
+        "title": "Wrapper Classes: Integer",
+        "description": "Boxing and unboxing.",
+        "category": "basics",
+        "difficultyScore": 15,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["wrappers"],
+        "technicalNotes": ["Converting primitive to object"],
+        "codeSnippet": "Integer val = Integer.valueOf(100);\nint back = val.intValue();"
+      },
+      {
+        "id": "jv-fund-014",
+        "title": "Strings: Length and CharAt",
+        "description": "Inspect string properties.",
+        "category": "strings",
+        "difficultyScore": 12,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["methods"],
+        "codeSnippet": "String msg = \"Reflex\";\nint len = msg.length();\nchar first = msg.charAt(0);"
+      },
+      {
+        "id": "jv-fund-015",
+        "title": "Math: Pow and Sqrt",
+        "description": "Use the Math class.",
+        "category": "basics",
+        "difficultyScore": 12,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["utility classes"],
+        "codeSnippet": "double power = Math.pow(2, 3);\ndouble root = Math.sqrt(16);"
+      },
+      {
+        "id": "jv-fund-016",
+        "title": "Final: Constants",
+        "description": "Declare immutable variables.",
+        "category": "basics",
+        "difficultyScore": 10,
+        "estimatedDuration": 25,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["final"],
+        "technicalNotes": ["Naming convention: UPPER_CASE"],
+        "codeSnippet": "final int MAX_USERS = 50;\nfinal String APP_ID = \"ID001\";"
+      },
+      {
+        "id": "jv-fund-017",
+        "title": "Try-Catch: Basic",
+        "description": "Handle runtime exceptions.",
+        "category": "errors",
+        "difficultyScore": 20,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["exceptions"],
+        "codeSnippet": "try {\n    int res = 10 / 0;\n} catch (ArithmeticException e) {\n    System.out.println(\"Error!\");\n}"
+      },
+      {
+        "id": "jv-fund-018",
+        "title": "HashMap: Basic Pairs",
+        "description": "Store keys and values.",
+        "category": "collections",
+        "difficultyScore": 24,
+        "estimatedDuration": 45,
+        "typingStyle": "full",
+        "tags": ["java", "collections"],
+        "concepts": ["mappings"],
+        "codeSnippet": "HashMap<Integer, String> map = new HashMap<>();\nmap.put(1, \"Active\");\nString val = map.get(1);"
+      },
+      {
+        "id": "jv-fund-019",
+        "title": "Overloading: Methods",
+        "description": "Same name, different params.",
+        "category": "methods",
+        "difficultyScore": 22,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["polymorphism"],
+        "codeSnippet": "public int log(int n) { return n; }\npublic String log(String s) { return s; }"
+      },
+      {
+        "id": "jv-fund-020",
+        "title": "Booleans: Operators",
+        "description": "Logical AND, OR, NOT.",
+        "category": "logic",
+        "difficultyScore": 12,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["logic"],
+        "codeSnippet": "boolean res = (5 > 3) && (2 < 4);\nboolean toggled = !res;"
+      },
+      {
+        "id": "jv-fund-021",
+        "title": "Arrays: Initializer",
+        "description": "Shorthand array creation.",
+        "category": "basics",
+        "difficultyScore": 14,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["arrays"],
+        "codeSnippet": "int[] data = {10, 20, 30};\nint length = data.length;"
+      },
+      {
+        "id": "jv-fund-022",
+        "title": "Methods: Void",
+        "description": "Method with no return value.",
+        "category": "methods",
+        "difficultyScore": 10,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["void"],
+        "codeSnippet": "public void printLog(String msg) {\n    System.out.println(\"LOG: \" + msg);\n}"
+      },
+      {
+        "id": "jv-fund-023",
+        "title": "Strings: Substring",
+        "description": "Extract parts of a string.",
+        "category": "strings",
+        "difficultyScore": 18,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["string slicing"],
+        "codeSnippet": "String full = \"HelloWorld\";\nString sub = full.substring(0, 5);"
+      },
+      {
+        "id": "jv-fund-024",
+        "title": "Enums: Simple",
+        "description": "Constants with names.",
+        "category": "basics",
+        "difficultyScore": 20,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["enums"],
+        "codeSnippet": "enum Level { LOW, MEDIUM, HIGH }\nLevel current = Level.MEDIUM;"
+      },
+      {
+        "id": "jv-fund-025",
+        "title": "Casting: Primitive",
+        "description": "Convert types manually.",
+        "category": "basics",
+        "difficultyScore": 15,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["casting"],
+        "codeSnippet": "double d = 9.99;\nint i = (int) d;"
+      },
+      {
+        "id": "jv-fund-026",
+        "title": "StringBuilder: Basics",
+        "description": "Efficient string building.",
+        "category": "strings",
+        "difficultyScore": 25,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["mutable strings"],
+        "codeSnippet": "StringBuilder sb = new StringBuilder();\nsb.append(\"A\").append(\"B\");\nString res = sb.toString();"
+      },
+      {
+        "id": "jv-fund-027",
+        "title": "Collections: HashSet",
+        "description": "Store unique elements.",
+        "category": "collections",
+        "difficultyScore": 22,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["sets"],
+        "codeSnippet": "HashSet<Integer> set = new HashSet<>();\nset.add(10);\nset.add(10); // Duplicate ignored"
+      },
+      {
+        "id": "jv-fund-028",
+        "title": "Object: Equals",
+        "description": "Compare object values.",
+        "category": "basics",
+        "difficultyScore": 18,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["equality"],
+        "technicalNotes": ["Use .equals() for content comparison"],
+        "codeSnippet": "String s1 = \"test\";\nString s2 = \"test\";\nboolean same = s1.equals(s2);"
+      },
+      {
+        "id": "jv-fund-029",
+        "title": "Static: Shared Var",
+        "description": "Class-level variable.",
+        "category": "classes",
+        "difficultyScore": 15,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["static"],
+        "codeSnippet": "public class Counter {\n    public static int total = 0;\n}"
+      },
+      {
+        "id": "jv-fund-030",
+        "title": "Loops: While",
+        "description": "Loop while condition is true.",
+        "category": "loops",
+        "difficultyScore": 12,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["iteration"],
+        "codeSnippet": "int count = 0;\nwhile (count < 5) {\n    count++;\n}"
+      },
+      {
+        "id": "jv-fund-031",
+        "title": "Package: Import",
+        "description": "Use external classes.",
+        "category": "basics",
+        "difficultyScore": 8,
+        "estimatedDuration": 20,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["imports"],
+        "codeSnippet": "import java.util.Date;\nDate now = new Date();"
+      },
+      {
+        "id": "jv-fund-032",
+        "title": "Methods: Main",
+        "description": "The entry point of a program.",
+        "category": "basics",
+        "difficultyScore": 15,
+        "estimatedDuration": 35,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["main method"],
+        "codeSnippet": "public static void main(String[] args) {\n    System.out.println(\"Hello!\");\n}"
+      },
+      {
+        "id": "jv-fund-033",
+        "title": "Conditionals: Ternary",
+        "description": "Compact if-else.",
+        "category": "logic",
+        "difficultyScore": 14,
+        "estimatedDuration": 30,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["one-liners"],
+        "codeSnippet": "int x = 10;\nString res = (x > 5) ? \"Yes\" : \"No\";"
+      },
+      {
+        "id": "jv-fund-034",
+        "title": "Arrays: Multi-dimensional",
+        "description": "Create a matrix.",
+        "category": "basics",
+        "difficultyScore": 28,
+        "estimatedDuration": 45,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["2D arrays"],
+        "codeSnippet": "int[][] matrix = new int[2][2];\nmatrix[0][0] = 1;"
+      },
+      {
+        "id": "jv-fund-035",
+        "title": "Exceptions: Finally",
+        "description": "Execute code regardless of error.",
+        "category": "errors",
+        "difficultyScore": 22,
+        "estimatedDuration": 40,
+        "typingStyle": "full",
+        "tags": ["java"],
+        "concepts": ["finally"],
+        "codeSnippet": "try {\n    // code\n} finally {\n    System.out.println(\"Clean up\");\n}"
+      }
+    ]
   }
-,
-  {
-    "id": "java-fundamentals-006",
-    "title": "Methods Basics",
-    "description": "Define and use methods in Java.",
-    "context": "Core concept for reusable logic in object-oriented programming.",
-    "difficultyScore": 18,
-    "typingStyle": "full",
-    "tags": ["java", "methods"],
-    "concepts": ["functions", "modularity"],
-    "technicalNotes": [
-      "Methods must belong to a class",
-      "Return types are explicit"
-    ],
-    "codeSnippet": "public class Main {\n\n    public static int sum(int a, int b) {\n        return a + b;\n    }\n\n    public static void main(String[] args) {\n        int result = sum(2, 3);\n        System.out.println(result);\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-007",
-    "title": "String Handling",
-    "description": "Work with strings and basic operations.",
-    "context": "Strings are heavily used in backend and UI systems.",
-    "difficultyScore": 17,
-    "typingStyle": "full",
-    "tags": ["java", "strings"],
-    "concepts": ["string manipulation"],
-    "technicalNotes": [
-      "Strings are immutable",
-      "Use built-in methods for operations"
-    ],
-    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        String name = \"Nacho\";\n\n        System.out.println(name.length());\n        System.out.println(name.toUpperCase());\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-008",
-    "title": "Basic Input (Scanner)",
-    "description": "Read user input from console.",
-    "context": "Used in CLI applications and simple programs.",
-    "difficultyScore": 19,
-    "typingStyle": "full",
-    "tags": ["java", "input"],
-    "concepts": ["console input"],
-    "technicalNotes": [
-      "Scanner reads from System.in",
-      "Must import java.util.Scanner"
-    ],
-    "codeSnippet": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        System.out.println(\"Enter name:\");\n        String name = sc.nextLine();\n\n        System.out.println(\"Hello \" + name);\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-009",
-    "title": "Basic OOP Encapsulation",
-    "description": "Use private fields with getters and setters.",
-    "context": "Core principle of object-oriented programming.",
-    "difficultyScore": 20,
-    "typingStyle": "full",
-    "tags": ["java", "oop"],
-    "concepts": ["encapsulation"],
-    "technicalNotes": [
-      "Fields should be private",
-      "Access via methods"
-    ],
-    "codeSnippet": "public class User {\n    private String name;\n\n    public String getName() {\n        return name;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public static void main(String[] args) {\n        User u = new User();\n        u.setName(\"Nacho\");\n        System.out.println(u.getName());\n    }\n}\n"
-  },
-  {
-    "id": "java-fundamentals-010",
-    "title": "Basic Exception Handling",
-    "description": "Handle runtime errors using try-catch.",
-    "context": "Prevents application crashes in production systems.",
-    "difficultyScore": 22,
-    "typingStyle": "full",
-    "tags": ["java", "exceptions"],
-    "concepts": ["error handling"],
-    "technicalNotes": [
-      "Try block contains risky code",
-      "Catch handles exceptions"
-    ],
-    "codeSnippet": "public class Main {\n    public static void main(String[] args) {\n        try {\n            int result = 10 / 0;\n        } catch (ArithmeticException e) {\n            System.out.println(\"Error: division by zero\");\n        }\n    }\n}\n"
-  }
-
 ]
