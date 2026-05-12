@@ -1,0 +1,10 @@
+{
+  "language": "python",
+  "level": "interview",
+  "reflexCount": 35,
+  "guidedCount": 0,
+  "totalCount": 35,
+  "tags": ["algorithms", "data-structures", "big-o", "searching", "sorting"],
+  "concepts": ["sliding-window", "two-pointers", "binary-search", "recursion", "concurrency"],
+  "lastUpdated": "2026-05-12"
+}

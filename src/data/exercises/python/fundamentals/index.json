@@ -1,0 +1,10 @@
+{
+  "language": "python",
+  "level": "fundamentals",
+  "reflexCount": 35,
+  "guidedCount": 0,
+  "totalCount": 35,
+  "tags": ["basics", "syntax", "data-types", "functions", "logic"],
+  "concepts": ["variables", "lists", "strings", "dicts", "loops", "conditionals"],
+  "lastUpdated": "2026-05-12"
+}

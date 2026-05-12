@@ -6,11 +6,17 @@
   "types": ["reflex-snippets", "guided-problems"],
   "totalFiles": 0,
   "exercises": {
-    "javascript-fundamentals-reflex": 0,
-    "javascript-fundamentals-guided": 0,
-    "typescript-fundamentals-reflex": 0,
-    "typescript-fundamentals-guided": 0,
-    "python-fundamentals-reflex": 0,
-    "python-fundamentals-guided": 0
+    "javascript-fundamentals-reflex": 15,
+    "javascript-intermediate-reflex": 15,
+    "javascript-interview-reflex": 15,
+    "javascript-advanced-reflex": 15,
+    "typescript-fundamentals-reflex": 35,
+    "typescript-intermediate-reflex": 35,
+    "typescript-interview-reflex": 35,
+    "typescript-advanced-reflex": 35,
+    "python-fundamentals-reflex": 35,
+    "python-intermediate-reflex": 35,
+    "python-interview-reflex": 35,
+    "python-advanced-reflex": 35
   }
 }

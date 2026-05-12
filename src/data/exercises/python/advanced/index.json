@@ -1,0 +1,10 @@
+{
+  "language": "python",
+  "level": "advanced",
+  "reflexCount": 35,
+  "guidedCount": 0,
+  "totalCount": 35,
+  "tags": ["meta-programming", "concurrency", "advanced-oop", "testing", "performance"],
+  "concepts": ["metaclasses", "asyncio", "descriptors", "abc", "introspection"],
+  "lastUpdated": "2026-05-12"
+}

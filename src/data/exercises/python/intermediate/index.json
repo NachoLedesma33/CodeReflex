@@ -1,0 +1,10 @@
+{
+  "language": "python",
+  "level": "intermediate",
+  "reflexCount": 35,
+  "guidedCount": 0,
+  "totalCount": 35,
+  "tags": ["advanced-syntax", "oop", "collections", "itertools", "decorators"],
+  "concepts": ["generators", "context-managers", "properties", "dunder-methods", "closures"],
+  "lastUpdated": "2026-05-12"
+}
