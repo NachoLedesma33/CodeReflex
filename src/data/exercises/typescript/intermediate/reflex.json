@@ -1,0 +1,681 @@
+{
+  "language": "typescript",
+  "level": "intermediate",
+  "type": "reflex-snippets",
+  "snippets": [
+    {
+      "id": "ts-inter-001",
+      "title": "Algoritmos: Búsqueda Binaria",
+      "description": "Tipado de una implementación de búsqueda binaria.",
+      "category": "algorithms",
+      "difficultyScore": 50,
+      "estimatedDuration": 60,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "algoritmos"
+      ],
+      "concepts": [
+        "búsqueda"
+      ],
+      "technicalNotes": [
+        "Arreglo genérico T"
+      ],
+      "codeSnippet": "function binarySearch<T>(arr: T[], target: T): number { return 0; }"
+    },
+    {
+      "id": "ts-inter-002",
+      "title": "Arquitectura: Inyección de Dependencias",
+      "description": "Tipado de un contenedor de DI (Inyección de Dependencias) simple.",
+      "category": "algorithms",
+      "difficultyScore": 60,
+      "estimatedDuration": 70,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "arquitectura"
+      ],
+      "concepts": [
+        "DI"
+      ],
+      "technicalNotes": [
+        "Registro/obtención genérica"
+      ],
+      "codeSnippet": "interface Container { register<T>(id: string, instance: T): void; get<T>(id: string): T; }"
+    },
+    {
+      "id": "ts-inter-003",
+      "title": "Asíncrono: Peticiones en Paralelo",
+      "description": "Tipado de operaciones con Promise.all.",
+      "category": "algorithms",
+      "difficultyScore": 45,
+      "estimatedDuration": 50,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "asíncrono"
+      ],
+      "concepts": [
+        "concurrencia"
+      ],
+      "technicalNotes": [
+        "Tipo de retorno de tupla"
+      ],
+      "codeSnippet": "const results = await Promise.all([fetch('/a'), fetch('/b')]) as [Response, Response];"
+    },
+    {
+      "id": "ts-inter-004",
+      "title": "Clases: Mixins",
+      "description": "Tipado de mixins de clase.",
+      "category": "classes",
+      "difficultyScore": 65,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "clases"
+      ],
+      "concepts": [
+        "mixins"
+      ],
+      "technicalNotes": [
+        "Tipo Constructor"
+      ],
+      "codeSnippet": "type Constructor = new (...args: any[]) => {};"
+    },
+    {
+      "id": "ts-inter-005",
+      "title": "Procesamiento de Datos: Mapped Types",
+      "description": "Transforma la forma de los datos.",
+      "category": "algorithms",
+      "difficultyScore": 55,
+      "estimatedDuration": 60,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "mapeo"
+      ],
+      "concepts": [
+        "mapped types"
+      ],
+      "technicalNotes": [
+        "Remapeo con 'as'"
+      ],
+      "codeSnippet": "type Prefixed<T> = { [K in keyof T as `data_${string & K}`]: T[K] };"
+    },
+    {
+      "id": "ts-inter-006",
+      "title": "Estructuras de Datos: Lista Enlazada",
+      "description": "Tipado de un nodo genérico.",
+      "category": "arrays",
+      "difficultyScore": 48,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "estructuras-de-datos"
+      ],
+      "concepts": [
+        "lista-enlazada"
+      ],
+      "technicalNotes": [
+        "Interfaz autorreferenciada"
+      ],
+      "codeSnippet": "interface Node<T> { value: T; next?: Node<T>; }"
+    },
+    {
+      "id": "ts-inter-007",
+      "title": "FP: Función Curry",
+      "description": "Tipado de funciones currificadas (curried).",
+      "category": "functions",
+      "difficultyScore": 70,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "fp"
+      ],
+      "concepts": [
+        "currying"
+      ],
+      "technicalNotes": [
+        "Retornos genéricos anidados"
+      ],
+      "codeSnippet": "const curry = <A, B, C>(f: (a: A, b: B) => C) => (a: A) => (b: B) => f(a, b);"
+    },
+    {
+      "id": "ts-inter-008",
+      "title": "Rendimiento: Memoize",
+      "description": "Tipado de un envoltorio (wrapper) de memoización.",
+      "category": "algorithms",
+      "difficultyScore": 58,
+      "estimatedDuration": 65,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "rendimiento"
+      ],
+      "concepts": [
+        "memoización"
+      ],
+      "technicalNotes": [
+        "Firma de función genérica"
+      ],
+      "codeSnippet": "function memo<T extends (...args: any[]) => any>(fn: T): T { return fn; }"
+    },
+    {
+      "id": "ts-inter-009",
+      "title": "Gestión de Estado: Reducer",
+      "description": "Tipado de un reducer de estado.",
+      "category": "algorithms",
+      "difficultyScore": 52,
+      "estimatedDuration": 60,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "estado"
+      ],
+      "concepts": [
+        "reducers"
+      ],
+      "technicalNotes": [
+        "Unión de acciones discriminadas"
+      ],
+      "codeSnippet": "type Action = { type: 'inc' } | { type: 'dec', amount: number };"
+    },
+    {
+      "id": "ts-inter-010",
+      "title": "Algoritmos: Quick Sort",
+      "description": "Tipado de ordenamiento recursivo.",
+      "category": "algorithms",
+      "difficultyScore": 62,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "ordenamiento"
+      ],
+      "technicalNotes": [
+        "Restricción T extends number | string"
+      ],
+      "codeSnippet": "function sort<T>(arr: T[]): T[] { return arr; }"
+    },
+    {
+      "id": "ts-inter-011",
+      "title": "Arquitectura: Patrón Repository",
+      "description": "Acceso a datos genérico.",
+      "category": "patterns",
+      "difficultyScore": 55,
+      "estimatedDuration": 65,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "patrones"
+      ],
+      "technicalNotes": [
+        "Interfaz genérica"
+      ],
+      "codeSnippet": "interface Repo<T> { find(id: string): Promise<T>; }"
+    },
+    {
+      "id": "ts-inter-012",
+      "title": "Asíncrono: Condición de Carrera",
+      "description": "Tipado de Promise.race.",
+      "category": "algorithms",
+      "difficultyScore": 40,
+      "estimatedDuration": 45,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "carrera"
+      ],
+      "technicalNotes": [
+        "Tipo de retorno de unión"
+      ],
+      "codeSnippet": "const result = await Promise.race([fetch('/a'), timeout(500)]);"
+    },
+    {
+      "id": "ts-inter-013",
+      "title": "Clases: Decoradores",
+      "description": "Tipado de decoradores de clase.",
+      "category": "patterns",
+      "difficultyScore": 72,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "decoradores"
+      ],
+      "technicalNotes": [
+        "Funcionalidad experimental"
+      ],
+      "codeSnippet": "function Log(target: Function) {}"
+    },
+    {
+      "id": "ts-inter-014",
+      "title": "Procesamiento de Datos: Deep Pick",
+      "description": "Selecciona propiedades anidadas.",
+      "category": "algorithms",
+      "difficultyScore": 78,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "recursividad"
+      ],
+      "technicalNotes": [
+        "Rutas de template literals"
+      ],
+      "codeSnippet": "type Path<T> = T extends object ? keyof T : never;"
+    },
+    {
+      "id": "ts-inter-015",
+      "title": "Estructuras de Datos: Árbol",
+      "description": "Nodo de árbol genérico.",
+      "category": "algorithms",
+      "difficultyScore": 50,
+      "estimatedDuration": 60,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "árboles"
+      ],
+      "technicalNotes": [
+        "Hijos recursivos"
+      ],
+      "codeSnippet": "interface TreeNode<T> { val: T; children: TreeNode<T>[]; }"
+    },
+    {
+      "id": "ts-inter-016",
+      "title": "FP: Composición",
+      "description": "Tubería (pipe) de funciones segura por tipos.",
+      "category": "algorithms",
+      "difficultyScore": 82,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "pipe"
+      ],
+      "technicalNotes": [
+        "Tuplas variádicas"
+      ],
+      "codeSnippet": "function pipe<T>(...fns: ((a: T) => T)[]): (a: T) => T { return a => a; }"
+    },
+    {
+      "id": "ts-inter-017",
+      "title": "Rendimiento: Throttling",
+      "description": "Tipado de un envoltorio de estrangulamiento (throttle).",
+      "category": "algorithms",
+      "difficultyScore": 55,
+      "estimatedDuration": 60,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "throttling"
+      ],
+      "technicalNotes": [
+        "Utilidad Parameters"
+      ],
+      "codeSnippet": "function throttle<T extends (...args: any[]) => void>(fn: T, ms: number): T { return fn; }"
+    },
+    {
+      "id": "ts-inter-018",
+      "title": "Gestión de Estado: Observable",
+      "description": "Tipado de un flujo básico.",
+      "category": "algorithms",
+      "difficultyScore": 65,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "observadores"
+      ],
+      "technicalNotes": [
+        "Tipo Subscription"
+      ],
+      "codeSnippet": "interface Observable<T> { subscribe(cb: (v: T) => void): void; }"
+    },
+    {
+      "id": "ts-inter-019",
+      "title": "Algoritmos: Grafo DFS",
+      "description": "Tipado de recorrido de lista de adyacencia.",
+      "category": "algorithms",
+      "difficultyScore": 68,
+      "estimatedDuration": 85,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "grafos"
+      ],
+      "technicalNotes": [
+        "Map con valores de tipo Set"
+      ],
+      "codeSnippet": "type Graph = Map<number, Set<number>>;"
+    },
+    {
+      "id": "ts-inter-020",
+      "title": "Arquitectura: Sistema de Plugins",
+      "description": "Tipado de ganchos (hooks) de plugins dinámicos.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 85,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "plugins"
+      ],
+      "technicalNotes": [
+        "Mapeo de interfaz"
+      ],
+      "codeSnippet": "interface Plugin { name: string; init(ctx: object): void; }"
+    },
+    {
+      "id": "ts-inter-021",
+      "title": "Asíncrono: Lógica de Reintento",
+      "description": "Tipado de reintentos asíncronos.",
+      "category": "algorithms",
+      "difficultyScore": 48,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "reintentos"
+      ],
+      "technicalNotes": [
+        "Retorno genérico Promise"
+      ],
+      "codeSnippet": "async function retry<T>(fn: () => Promise<T>, attempts: number): Promise<T> { return fn(); }"
+    },
+    {
+      "id": "ts-inter-022",
+      "title": "Clases: Abstract Factory",
+      "description": "Tipado de fábrica de clases.",
+      "category": "classes",
+      "difficultyScore": 65,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "fábricas"
+      ],
+      "technicalNotes": [
+        "Firma new()"
+      ],
+      "codeSnippet": "function create<T>(ctor: { new(): T }): T { return new ctor(); }"
+    },
+    {
+      "id": "ts-inter-023",
+      "title": "Procesamiento de Datos: Analizador CSV",
+      "description": "Tipado de conversor de cadena a objeto.",
+      "category": "algorithms",
+      "difficultyScore": 58,
+      "estimatedDuration": 65,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "parseo"
+      ],
+      "technicalNotes": [
+        "Tipo Record"
+      ],
+      "codeSnippet": "function parse(csv: string): Record<string, string>[] { return []; }"
+    },
+    {
+      "id": "ts-inter-024",
+      "title": "Estructuras de Datos: Pila/Cola",
+      "description": "Tipado de colecciones básicas.",
+      "category": "algorithms",
+      "difficultyScore": 35,
+      "estimatedDuration": 45,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "pila"
+      ],
+      "technicalNotes": [
+        "Envoltorio de arreglo genérico"
+      ],
+      "codeSnippet": "class Stack<T> { private data: T[] = []; push(item: T) { this.data.push(item); } }"
+    },
+    {
+      "id": "ts-inter-025",
+      "title": "FP: Aplicación Parcial",
+      "description": "Tipado de operaciones bind.",
+      "category": "algorithms",
+      "difficultyScore": 60,
+      "estimatedDuration": 70,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "vinculación (binding)"
+      ],
+      "technicalNotes": [
+        "Omitir tipo del primer parámetro"
+      ],
+      "codeSnippet": "const bind = <A, B, R>(f: (a: A, b: B) => R, a: A) => (b: B) => f(a, b);"
+    },
+    {
+      "id": "ts-inter-026",
+      "title": "Rendimiento: Web Worker",
+      "description": "Tipado de comunicación con el trabajador.",
+      "category": "algorithms",
+      "difficultyScore": 62,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "workers"
+      ],
+      "technicalNotes": [
+        "Tipado de PostMessage"
+      ],
+      "codeSnippet": "interface WorkerData { type: string; payload: any; }"
+    },
+    {
+      "id": "ts-inter-027",
+      "title": "Gestión de Estado: Immer Proxy",
+      "description": "Tipado de estados de borrador (draft).",
+      "category": "algorithms",
+      "difficultyScore": 85,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "proxies"
+      ],
+      "technicalNotes": [
+        "Tipo mapeado de escritura profunda"
+      ],
+      "codeSnippet": "type Draft<T> = { -readonly [K in keyof T]: Draft<T[K]> };"
+    },
+    {
+      "id": "ts-inter-028",
+      "title": "Algoritmos: Caché LRU",
+      "description": "Tipado de expulsión de caché.",
+      "category": "algorithms",
+      "difficultyScore": 80,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "almacenamiento en caché"
+      ],
+      "technicalNotes": [
+        "Lógica de Map + Lista"
+      ],
+      "codeSnippet": "class LRU<K, V> { get(key: K): V | null { return null; } }"
+    },
+    {
+      "id": "ts-inter-029",
+      "title": "Arquitectura: Middleware",
+      "description": "Tipado de manejadores de peticiones.",
+      "category": "algorithms",
+      "difficultyScore": 68,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "middleware"
+      ],
+      "technicalNotes": [
+        "Tipo de función Next()"
+      ],
+      "codeSnippet": "type Middleware = (req: Request, res: Response, next: () => void) => void;"
+    },
+    {
+      "id": "ts-inter-030",
+      "title": "Asíncrono: Data Loader",
+      "description": "Tipado de cargadores por lotes (batching).",
+      "category": "algorithms",
+      "difficultyScore": 72,
+      "estimatedDuration": 85,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "loteo (batching)"
+      ],
+      "technicalNotes": [
+        "Mapeo Clave -> Promesa"
+      ],
+      "codeSnippet": "class Loader<K, V> { load(key: K): Promise<V> { return Promise.resolve({} as V); } }"
+    },
+    {
+      "id": "ts-inter-031",
+      "title": "Clases: Singletons",
+      "description": "Tipado de constructores privados.",
+      "category": "classes",
+      "difficultyScore": 45,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "singletons"
+      ],
+      "technicalNotes": [
+        "Instancia estática"
+      ],
+      "codeSnippet": "class App { private static instance: App; private constructor() {} }"
+    },
+    {
+      "id": "ts-inter-032",
+      "title": "Procesamiento de Datos: Validador",
+      "description": "Tipado de validadores de esquemas.",
+      "category": "algorithms",
+      "difficultyScore": 65,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "validación"
+      ],
+      "technicalNotes": [
+        "Salida genérica T"
+      ],
+      "codeSnippet": "interface Schema<T> { validate(data: any): data is T; }"
+    },
+    {
+      "id": "ts-inter-033",
+      "title": "Estructuras de Datos: Set/Map",
+      "description": "Tipado de colecciones únicas.",
+      "category": "data-structures",
+      "difficultyScore": 30,
+      "estimatedDuration": 40,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "sets"
+      ],
+      "technicalNotes": [
+        "Set<T> genérico"
+      ],
+      "codeSnippet": "const uniqueIds: Set<string> = new Set(['id1']);"
+    },
+    {
+      "id": "ts-inter-034",
+      "title": "FP: Conceptos Básicos de Mónadas",
+      "description": "Tipado de mónadas Maybe/Option.",
+      "category": "algorithms",
+      "difficultyScore": 88,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "mónadas"
+      ],
+      "technicalNotes": [
+        "Métodos genéricos Chain/Map"
+      ],
+      "codeSnippet": "interface Maybe<T> { map<U>(f: (t: T) => U): Maybe<U>; }"
+    },
+    {
+      "id": "ts-inter-035",
+      "title": "Rendimiento: Virtual DOM",
+      "description": "Tipado de VNodes.",
+      "category": "algorithms",
+      "difficultyScore": 82,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "vdom"
+      ],
+      "technicalNotes": [
+        "Unión de etiquetas + Objeto de propiedades"
+      ],
+      "codeSnippet": "interface VNode { tag: string; props: object; children: VNode[]; }"
+    }
+  ]
+}

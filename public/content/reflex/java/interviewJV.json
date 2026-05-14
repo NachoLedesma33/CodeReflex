@@ -4,437 +4,621 @@
       "language": "java",
       "mode": "reflex-typing",
       "version": "1.0.0",
-      "lastUpdated": "2026-05-12",
+      "lastUpdated": "2026-05-14",
       "totalExercises": 35
     },
     "exercises": [
       {
-        "id": "jv-intv-001",
-        "title": "Sliding Window: Max Sum",
-        "description": "Find maximum sum of a subarray of size k.",
-        "context": "Standard technique to reduce complexity from O(n*k) to O(n).",
-        "category": "algorithms",
-        "difficultyScore": 55,
+        "id": "jv-intv-rt-001",
+        "title": "Ventana Deslizable: Suma Máxima",
+        "description": "Encuentra la suma máxima de un subarreglo de tamaño k.",
+        "context": "La técnica de Sliding Window reduce la complejidad de O(n*k) a O(n).",
+        "codeSnippet": "public int maxSum(int[] arr, int k) {\n    int windowSum = 0, maxS = 0;\n    for(int i=0; i<k; i++) windowSum += arr[i];\n    maxS = windowSum;\n    for(int i=k; i<arr.length; i++) {\n        windowSum += arr[i] - arr[i-k];\n        maxS = Math.max(maxS, windowSum);\n    }\n    return maxS;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "sliding-window"
+        ],
+        "concepts": [
+          "optimización",
+          "subarreglos"
+        ],
         "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java", "sliding-window"],
-        "concepts": ["optimization", "subarrays"],
-        "technicalNotes": ["Update sum by adding next and removing first"],
-        "codeSnippet": "public int maxSum(int[] arr, int k) {\n    int windowSum = 0, maxS = 0;\n    for(int i=0; i<k; i++) windowSum += arr[i];\n    maxS = windowSum;\n    for(int i=k; i<arr.length; i++) {\n        windowSum += arr[i] - arr[i-k];\n        maxS = Math.max(maxS, windowSum);\n    }\n    return maxS;\n}"
+        "difficultyScore": 55,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-002",
-        "title": "Two Pointers: Two Sum",
-        "description": "Find if target sum exists in sorted array.",
-        "context": "Optimal for sorted data with O(1) space.",
-        "category": "algorithms",
+        "id": "jv-intv-rt-002",
+        "title": "Dos Punteros: Two Sum",
+        "description": "Comprueba si existe una suma objetivo en un arreglo ordenado.",
+        "context": "Usar dos punteros desde los extremos es ideal para arreglos previamente ordenados.",
+        "codeSnippet": "public boolean twoSum(int[] nums, int target) {\n    int l = 0, r = nums.length - 1;\n    while(l < r) {\n        int sum = nums[l] + nums[r];\n        if(sum == target) return true;\n        if(sum < target) l++; else r--;\n    }\n    return false;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "two-pointers"
+        ],
+        "concepts": [
+          "optimización",
+          "búsqueda ordenada"
+        ],
+        "estimatedDuration": 70,
         "difficultyScore": 52,
-        "estimatedDuration": 70,
-        "typingStyle": "full",
-        "tags": ["java", "two-pointers"],
-        "concepts": ["optimization", "sorted-search"],
-        "technicalNotes": ["Move pointers based on current sum"],
-        "codeSnippet": "public boolean twoSum(int[] nums, int target) {\n    int l = 0, r = nums.length - 1;\n    while(l < r) {\n        int sum = nums[l] + nums[r];\n        if(sum == target) return true;\n        if(sum < target) l++; else r--;\n    }\n    return false;\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-003",
-        "title": "Binary Search: Iterative",
-        "description": "Find target in sorted array O(log n).",
-        "category": "algorithms",
+        "id": "jv-intv-rt-003",
+        "title": "Búsqueda Binaria: Iterativa",
+        "description": "Busca un objetivo en un arreglo ordenado en O(log n).",
+        "context": "Algoritmo fundamental de búsqueda que divide el espacio de búsqueda a la mitad en cada paso.",
+        "codeSnippet": "public int binarySearch(int[] nums, int target) {\n    int l = 0, r = nums.length - 1;\n    while(l <= r) {\n        int mid = l + (r - l) / 2;\n        if(nums[mid] == target) return mid;\n        if(nums[mid] < target) l = mid + 1; else r = mid - 1;\n    }\n    return -1;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "búsqueda"
+        ],
+        "concepts": [
+          "tiempo logarítmico"
+        ],
+        "estimatedDuration": 70,
         "difficultyScore": 50,
-        "estimatedDuration": 70,
-        "typingStyle": "full",
-        "tags": ["java", "searching"],
-        "concepts": ["logarithmic time"],
-        "technicalNotes": ["Watch out for integer overflow in mid calc"],
-        "codeSnippet": "public int binarySearch(int[] nums, int target) {\n    int l = 0, r = nums.length - 1;\n    while(l <= r) {\n        int mid = l + (r - l) / 2;\n        if(nums[mid] == target) return mid;\n        if(nums[mid] < target) l = mid + 1; else r = mid - 1;\n    }\n    return -1;\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-004",
-        "title": "Interview: Singleton",
-        "description": "Thread-safe Singleton implementation.",
-        "category": "patterns",
-        "difficultyScore": 60,
+        "id": "jv-intv-rt-004",
+        "title": "Entrevista: Singleton",
+        "description": "Implementación de Singleton segura para hilos.",
+        "context": "Usa 'double-checked locking' y 'volatile' para garantizar una única instancia en entornos multihilo.",
+        "codeSnippet": "public class Singleton {\n    private static volatile Singleton instance;\n    private Singleton() {}\n    public static Singleton getInstance() {\n        if(instance == null) {\n            synchronized(Singleton.class) {\n                if(instance == null) instance = new Singleton();\n            }\n        }\n        return instance;\n    }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "patrones de diseño"
+        ],
         "estimatedDuration": 80,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["design patterns"],
-        "technicalNotes": ["Uses double-checked locking"],
-        "codeSnippet": "public class Singleton {\n    private static volatile Singleton instance;\n    private Singleton() {}\n    public static Singleton getInstance() {\n        if(instance == null) {\n            synchronized(Singleton.class) {\n                if(instance == null) instance = new Singleton();\n            }\n        }\n        return instance;\n    }\n}"
+        "difficultyScore": 60,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-005",
-        "title": "Data Structures: Stack",
-        "description": "Implement stack using array.",
-        "category": "data-structures",
-        "difficultyScore": 45,
+        "id": "jv-intv-rt-005",
+        "title": "Estructuras de Datos: Pila (Stack)",
+        "description": "Implementa una pila usando un arreglo.",
+        "context": "Las pilas siguen el principio LIFO (Last-In, First-Out).",
+        "codeSnippet": "class Stack {\n    int[] arr = new int[100];\n    int top = -1;\n    void push(int x) { arr[++top] = x; }\n    int pop() { return arr[top--]; }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "stack"
+        ],
+        "concepts": [
+          "LIFO"
+        ],
         "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java", "stack"],
-        "concepts": ["LIFO"],
-        "codeSnippet": "class Stack {\n    int[] arr = new int[100];\n    int top = -1;\n    void push(int x) { arr[++top] = x; }\n    int pop() { return arr[top--]; }\n}"
+        "difficultyScore": 45,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-006",
-        "title": "Data Structures: Node",
-        "description": "Basic building block of linked list.",
-        "category": "data-structures",
+        "id": "jv-intv-rt-006",
+        "title": "Estructuras de Datos: Nodo",
+        "description": "Bloque básico de una lista enlazada.",
+        "context": "Cada nodo contiene un valor y una referencia al siguiente elemento de la lista.",
+        "codeSnippet": "class Node {\n    int val; Node next;\n    Node(int v) { this.val = v; }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "listas enlazadas"
+        ],
+        "concepts": [
+          "nodos"
+        ],
+        "estimatedDuration": 50,
         "difficultyScore": 38,
-        "estimatedDuration": 50,
-        "typingStyle": "full",
-        "tags": ["java", "linked-list"],
-        "concepts": ["nodes"],
-        "codeSnippet": "class Node {\n    int val; Node next;\n    Node(int v) { this.val = v; }\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-007",
-        "title": "Algorithms: BFS",
-        "description": "Breadth-First Search template.",
-        "category": "algorithms",
-        "difficultyScore": 68,
+        "id": "jv-intv-rt-007",
+        "title": "Algoritmos: BFS",
+        "description": "Plantilla de Búsqueda en Anchura (Breadth-First Search).",
+        "context": "BFS recorre el grafo por niveles, usualmente utilizando una cola (Queue).",
+        "codeSnippet": "public void bfs(Node root) {\n    Queue<Node> q = new LinkedList<>();\n    q.add(root);\n    while(!q.isEmpty()) {\n        Node curr = q.poll();\n        for(Node n : curr.neighbors) q.add(n);\n    }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "grafos"
+        ],
+        "concepts": [
+          "colas",
+          "recorrido"
+        ],
         "estimatedDuration": 95,
-        "typingStyle": "full",
-        "tags": ["java", "graphs"],
-        "concepts": ["queues", "traversal"],
-        "codeSnippet": "public void bfs(Node root) {\n    Queue<Node> q = new LinkedList<>();\n    q.add(root);\n    while(!q.isEmpty()) {\n        Node curr = q.poll();\n        for(Node n : curr.neighbors) q.add(n);\n    }\n}"
-      },
-      {
-        "id": "jv-intv-008",
-        "title": "Algorithms: DFS",
-        "description": "Depth-First Search (Recursive).",
-        "category": "algorithms",
         "difficultyScore": 68,
-        "estimatedDuration": 95,
-        "typingStyle": "full",
-        "tags": ["java", "graphs"],
-        "concepts": ["stacks", "recursion"],
-        "codeSnippet": "public void dfs(Node node, Set<Node> visited) {\n    if(visited.contains(node)) return;\n    visited.add(node);\n    for(Node n : node.neighbors) dfs(n, visited);\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-009",
-        "title": "Interview: hashCode/equals",
-        "description": "The contract between both methods.",
-        "category": "advanced",
-        "difficultyScore": 55,
+        "id": "jv-intv-rt-008",
+        "title": "Algoritmos: DFS",
+        "description": "Búsqueda en Profundidad (Recursiva).",
+        "context": "DFS explora cada rama lo más lejos posible antes de retroceder (backtracking).",
+        "codeSnippet": "public void dfs(Node node, Set<Node> visited) {\n    if(visited.contains(node)) return;\n    visited.add(node);\n    for(Node n : node.neighbors) dfs(n, visited);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "grafos"
+        ],
+        "concepts": [
+          "pilas",
+          "recursión"
+        ],
+        "estimatedDuration": 95,
+        "difficultyScore": 68,
+        "category": "algorithms"
+      },
+      {
+        "id": "jv-intv-rt-009",
+        "title": "Entrevista: hashCode/equals",
+        "description": "El contrato fundamental entre ambos métodos.",
+        "context": "Si dos objetos son iguales por equals(), deben retornar el mismo hashCode().",
+        "codeSnippet": "@Override\npublic boolean equals(Object o) { return true; }\n@Override\npublic int hashCode() { return Objects.hash(id); }",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "hashing"
+        ],
         "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["hashing"],
-        "technicalNotes": ["If equals is true, hashCode must be the same"],
-        "codeSnippet": "@Override\npublic boolean equals(Object o) { return true; }\n@Override\npublic int hashCode() { return Objects.hash(id); }"
+        "difficultyScore": 55,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-010",
-        "title": "Big O: Constant O(1)",
-        "description": "Direct access by key or index.",
-        "category": "algorithms",
-        "difficultyScore": 10,
+        "id": "jv-intv-rt-010",
+        "title": "Big O: Constante O(1)",
+        "description": "Acceso directo por clave o índice.",
+        "context": "El tiempo de ejecución no depende del tamaño de la entrada.",
+        "codeSnippet": "public int get(int[] arr, int i) { return arr[i]; }",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "big-o"
+        ],
+        "concepts": [
+          "complejidad"
+        ],
         "estimatedDuration": 20,
-        "typingStyle": "full",
-        "tags": ["java", "big-o"],
-        "concepts": ["complexity"],
-        "codeSnippet": "public int get(int[] arr, int i) { return arr[i]; }"
+        "difficultyScore": 10,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-011",
-        "title": "Big O: Linear O(n)",
-        "description": "Single pass over input.",
-        "category": "algorithms",
-        "difficultyScore": 15,
+        "id": "jv-intv-rt-011",
+        "title": "Big O: Lineal O(n)",
+        "description": "Una sola pasada sobre la entrada.",
+        "context": "El tiempo de ejecución crece proporcionalmente al tamaño de los datos.",
+        "codeSnippet": "for(int x : nums) sum += x;",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "big-o"
+        ],
+        "concepts": [
+          "complejidad"
+        ],
         "estimatedDuration": 30,
-        "typingStyle": "full",
-        "tags": ["java", "big-o"],
-        "concepts": ["complexity"],
-        "codeSnippet": "for(int x : nums) sum += x;"
+        "difficultyScore": 15,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-012",
-        "title": "Memory: Stack vs Heap",
-        "description": "Where data lives.",
-        "category": "advanced",
-        "difficultyScore": 45,
+        "id": "jv-intv-rt-012",
+        "title": "Memoria: Stack vs Heap",
+        "description": "Dónde residen los datos.",
+        "context": "Las variables locales van al Stack; los objetos y sus campos van al Heap.",
+        "codeSnippet": "User u = new User(); // u está en el stack, new User() está en el heap",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "memoria"
+        ],
         "estimatedDuration": 60,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["memory"],
-        "technicalNotes": ["Local vars on stack, objects on heap"],
-        "codeSnippet": "User u = new User(); // u is on stack, new User() is on heap"
+        "difficultyScore": 45,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-013",
-        "title": "Interview: Strings Pool",
-        "description": "How Java saves string memory.",
-        "category": "advanced",
-        "difficultyScore": 50,
+        "id": "jv-intv-rt-013",
+        "title": "Entrevista: String Pool",
+        "description": "Cómo Java ahorra memoria con strings.",
+        "context": "Java almacena literales de texto en una zona especial del Heap para reutilizarlos.",
+        "codeSnippet": "String s1 = \"a\";\nString s2 = \"a\";\nboolean pooled = (s1 == s2); // true",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "memoria"
+        ],
         "estimatedDuration": 70,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["memory"],
-        "codeSnippet": "String s1 = \"a\";\nString s2 = \"a\";\nboolean pooled = (s1 == s2); // true"
+        "difficultyScore": 50,
+        "category": "strings"
       },
       {
-        "id": "jv-intv-014",
-        "title": "Interview: FizzBuzz",
-        "description": "Basic algorithm check.",
-        "category": "logic",
-        "difficultyScore": 15,
+        "id": "jv-intv-rt-014",
+        "title": "Entrevista: FizzBuzz",
+        "description": "Prueba clásica de lógica algorítmica.",
+        "context": "Evalúa el uso del operador módulo y condicionales encadenados.",
+        "codeSnippet": "if(i % 15 == 0) System.out.println(\"FizzBuzz\");\nelse if(i % 3 == 0) System.out.println(\"Fizz\");",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "módulo"
+        ],
         "estimatedDuration": 30,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["modulus"],
-        "codeSnippet": "if(i % 15 == 0) System.out.println(\"FizzBuzz\");\nelse if(i % 3 == 0) System.out.println(\"Fizz\");"
+        "difficultyScore": 15,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-015",
-        "title": "Sorting: Bubble Sort",
-        "description": "Simple sorting O(n^2).",
-        "category": "algorithms",
+        "id": "jv-intv-rt-015",
+        "title": "Ordenación: Bubble Sort",
+        "description": "Ordenamiento simple O(n^2).",
+        "context": "Algoritmo ineficiente para grandes conjuntos, pero educativo para entender comparaciones e intercambios.",
+        "codeSnippet": "for(int i=0; i<n-1; i++) {\n    for(int j=0; j<n-i-1; j++) {\n        if(arr[j] > arr[j+1]) swap(j, j+1);\n    }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "ordenamiento"
+        ],
+        "estimatedDuration": 60,
         "difficultyScore": 40,
-        "estimatedDuration": 60,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sorting"],
-        "codeSnippet": "for(int i=0; i<n-1; i++) {\n    for(int j=0; j<n-i-1; j++) {\n        if(arr[j] > arr[j+1]) swap(j, j+1);\n    }\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-016",
-        "title": "Data Structures: Min Heap",
-        "description": "Priority queue usage.",
-        "category": "data-structures",
+        "id": "jv-intv-rt-016",
+        "title": "Estructuras de Datos: Min Heap",
+        "description": "Uso de colas de prioridad.",
+        "context": "Estructura eficiente para obtener siempre el elemento mínimo de un conjunto.",
+        "codeSnippet": "PriorityQueue<Integer> heap = new PriorityQueue<>();\nheap.add(10); int min = heap.peek();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "montículos",
+          "heaps"
+        ],
+        "estimatedDuration": 75,
         "difficultyScore": 58,
-        "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["heaps"],
-        "codeSnippet": "PriorityQueue<Integer> heap = new PriorityQueue<>();\nheap.add(10); int min = heap.peek();"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-017",
-        "title": "Recursion: Factorial",
-        "description": "Classic recursive example.",
-        "category": "algorithms",
+        "id": "jv-intv-rt-017",
+        "title": "Recursión: Factorial",
+        "description": "Ejemplo clásico de recursividad.",
+        "context": "Todo problema recursivo debe tener un caso base para evitar el StackOverflowError.",
+        "codeSnippet": "public int fact(int n) {\n    return (n <= 1) ? 1 : n * fact(n-1);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "recursión"
+        ],
+        "estimatedDuration": 40,
         "difficultyScore": 30,
-        "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["recursion"],
-        "codeSnippet": "public int fact(int n) {\n    return (n <= 1) ? 1 : n * fact(n-1);\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-018",
-        "title": "Interview: Reverse String",
-        "description": "O(n) string manipulation.",
-        "category": "strings",
+        "id": "jv-intv-rt-018",
+        "title": "Entrevista: Invertir String",
+        "description": "Manipulación de texto en O(n).",
+        "context": "Usa StringBuilder para evitar crear múltiples objetos String inmutables.",
+        "codeSnippet": "StringBuilder sb = new StringBuilder(s);\nreturn sb.reverse().toString();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "algoritmos"
+        ],
+        "estimatedDuration": 40,
         "difficultyScore": 25,
-        "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["algorithms"],
-        "codeSnippet": "StringBuilder sb = new StringBuilder(s);\nreturn sb.reverse().toString();"
+        "category": "strings"
       },
       {
-        "id": "jv-intv-019",
-        "title": "Two Pointers: Valid Palindrome",
-        "description": "Check with pointers from ends.",
-        "category": "algorithms",
+        "id": "jv-intv-rt-019",
+        "title": "Dos Punteros: Palíndromo Válido",
+        "description": "Comprueba con punteros desde ambos extremos.",
+        "context": "Evita crear una copia invertida del string, ahorrando espacio O(1).",
+        "codeSnippet": "while(l < r) {\n    if(s.charAt(l++) != s.charAt(r--)) return false;\n}\nreturn true;",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "two-pointers"
+        ],
+        "concepts": [
+          "optimización"
+        ],
+        "estimatedDuration": 65,
         "difficultyScore": 48,
-        "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java", "two-pointers"],
-        "concepts": ["optimization"],
-        "codeSnippet": "while(l < r) {\n    if(s.charAt(l++) != s.charAt(r--)) return false;\n}\nreturn true;"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-020",
-        "title": "Data Structures: Binary Tree",
-        "description": "Calculate height of tree.",
-        "category": "algorithms",
-        "difficultyScore": 62,
+        "id": "jv-intv-rt-020",
+        "title": "Estructuras de Datos: Árbol Binario",
+        "description": "Calcula la altura de un árbol.",
+        "context": "La altura es la longitud del camino más largo desde la raíz hasta una hoja.",
+        "codeSnippet": "public int height(Node root) {\n    if(root == null) return 0;\n    return 1 + Math.max(height(root.left), height(root.right));\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "árboles"
+        ],
+        "concepts": [
+          "recursión"
+        ],
         "estimatedDuration": 85,
-        "typingStyle": "full",
-        "tags": ["java", "trees"],
-        "concepts": ["recursion"],
-        "codeSnippet": "public int height(Node root) {\n    if(root == null) return 0;\n    return 1 + Math.max(height(root.left), height(root.right));\n}"
+        "difficultyScore": 62,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-021",
-        "title": "Interview: Builder Pattern",
-        "description": "Construct complex objects.",
-        "category": "patterns",
-        "difficultyScore": 65,
+        "id": "jv-intv-rt-021",
+        "title": "Entrevista: Patrón Builder",
+        "description": "Construye objetos complejos paso a paso.",
+        "context": "Mejora la legibilidad y evita constructores con demasiados parámetros.",
+        "codeSnippet": "User u = new UserBuilder().setName(\"Nacho\").setAge(25).build();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "patrones de diseño"
+        ],
         "estimatedDuration": 90,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["design patterns"],
-        "codeSnippet": "User u = new UserBuilder().setName(\"Nacho\").setAge(25).build();"
+        "difficultyScore": 65,
+        "category": "patterns"
       },
       {
-        "id": "jv-intv-022",
-        "title": "Big O: Quadratic O(n^2)",
-        "description": "Nested loops example.",
-        "category": "algorithms",
-        "difficultyScore": 20,
+        "id": "jv-intv-rt-022",
+        "title": "Big O: Cuadrática O(n^2)",
+        "description": "Ejemplo de bucles anidados.",
+        "context": "Típico en comparaciones de 'todos contra todos' dentro de una colección.",
+        "codeSnippet": "for(int i : nums) for(int j : nums) System.out.println(i+j);",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "complejidad"
+        ],
         "estimatedDuration": 35,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["complexity"],
-        "codeSnippet": "for(int i : nums) for(int j : nums) System.out.println(i+j);"
+        "difficultyScore": 20,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-023",
-        "title": "Algorithms: Merge Sort",
-        "description": "Divide and conquer O(n log n).",
-        "category": "algorithms",
-        "difficultyScore": 70,
+        "id": "jv-intv-rt-023",
+        "title": "Algoritmos: Merge Sort",
+        "description": "Divide y vencerás en O(n log n).",
+        "context": "Algoritmo de ordenación estable que requiere espacio extra O(n).",
+        "codeSnippet": "public void sort(int[] arr, int l, int r) {\n    if(l < r) {\n        int m = l + (r-l)/2;\n        sort(arr, l, m); sort(arr, m+1, r);\n        merge(arr, l, m, r);\n    }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "ordenamiento"
+        ],
         "estimatedDuration": 100,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sorting"],
-        "codeSnippet": "public void sort(int[] arr, int l, int r) {\n    if(l < r) {\n        int m = l + (r-l)/2;\n        sort(arr, l, m); sort(arr, m+1, r);\n        merge(arr, l, m, r);\n    }\n}"
+        "difficultyScore": 70,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-024",
-        "title": "Interview: Anagram",
-        "description": "Frequency map approach.",
-        "category": "algorithms",
-        "difficultyScore": 55,
+        "id": "jv-intv-rt-024",
+        "title": "Entrevista: Anagrama",
+        "description": "Enfoque usando tabla de frecuencias.",
+        "context": "Dos palabras son anagramas si tienen exactamente los mismos caracteres con la misma frecuencia.",
+        "codeSnippet": "int[] counts = new int[26];\nfor(char c : s.toCharArray()) counts[c-'a']++;",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "hashing"
+        ],
         "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["hashing"],
-        "codeSnippet": "int[] counts = new int[26];\nfor(char c : s.toCharArray()) counts[c-'a']++;"
+        "difficultyScore": 55,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-025",
-        "title": "Data Structures: Set",
-        "description": "Remove duplicates O(n).",
-        "category": "collections",
+        "id": "jv-intv-rt-025",
+        "title": "Estructuras de Datos: Set",
+        "description": "Elimina duplicados en O(n).",
+        "context": "Los conjuntos (Set) no permiten elementos repetidos por definición.",
+        "codeSnippet": "Set<Integer> set = new HashSet<>(list);\nreturn new ArrayList<>(set);",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "conjuntos (sets)"
+        ],
+        "estimatedDuration": 40,
         "difficultyScore": 28,
-        "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sets"],
-        "codeSnippet": "Set<Integer> set = new HashSet<>(list);\nreturn new ArrayList<>(set);"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-026",
-        "title": "Interview: Fibonacci",
-        "description": "Iterative approach O(n).",
-        "category": "algorithms",
-        "difficultyScore": 35,
+        "id": "jv-intv-rt-026",
+        "title": "Entrevista: Fibonacci",
+        "description": "Enfoque iterativo O(n).",
+        "context": "Evita el crecimiento exponencial de la recursión simple usando programación dinámica o iteración.",
+        "codeSnippet": "int a=0, b=1;\nfor(int i=2; i<=n; i++) {\n    int next = a + b; a = b; b = next;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "programación dinámica"
+        ],
         "estimatedDuration": 50,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["dynamic programming"],
-        "codeSnippet": "int a=0, b=1;\nfor(int i=2; i<=n; i++) {\n    int next = a + b; a = b; b = next;\n}"
+        "difficultyScore": 35,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-027",
-        "title": "Big O: Logarithmic O(log n)",
-        "description": "Divide search space by half.",
-        "category": "algorithms",
-        "difficultyScore": 25,
+        "id": "jv-intv-rt-027",
+        "title": "Big O: Logarítmica O(log n)",
+        "description": "Divide el espacio de búsqueda por la mitad.",
+        "context": "Crecimiento extremadamente lento; ideal para sistemas que manejan millones de datos.",
+        "codeSnippet": "while(n > 0) n /= 2;",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "complejidad"
+        ],
         "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["complexity"],
-        "codeSnippet": "while(n > 0) n /= 2;"
+        "difficultyScore": 25,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-028",
-        "title": "Interview: Reverse List",
-        "description": "In-place reversal O(n).",
-        "category": "algorithms",
-        "difficultyScore": 65,
+        "id": "jv-intv-rt-028",
+        "title": "Entrevista: Invertir Lista",
+        "description": "Inversión in-place (en el sitio) en O(n).",
+        "context": "Manipulación directa de punteros para cambiar la dirección de los enlaces.",
+        "codeSnippet": "Node prev=null, curr=head;\nwhile(curr != null) {\n    Node next = curr.next; curr.next = prev;\n    prev = curr; curr = next;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "listas enlazadas"
+        ],
+        "concepts": [
+          "punteros"
+        ],
         "estimatedDuration": 90,
-        "typingStyle": "full",
-        "tags": ["java", "linked-list"],
-        "concepts": ["pointers"],
-        "codeSnippet": "Node prev=null, curr=head;\nwhile(curr != null) {\n    Node next = curr.next; curr.next = prev;\n    prev = curr; curr = next;\n}"
+        "difficultyScore": 65,
+        "category": "arrays"
       },
       {
-        "id": "jv-intv-029",
-        "title": "Algorithms: Kadane's",
-        "description": "Max subarray sum O(n).",
-        "category": "algorithms",
-        "difficultyScore": 62,
+        "id": "jv-intv-rt-029",
+        "title": "Algoritmos: Kadane",
+        "description": "Suma máxima de subarreglo en O(n).",
+        "context": "Algoritmo de programación dinámica para encontrar la sección contigua de mayor suma.",
+        "codeSnippet": "int curr=0, max=nums[0];\nfor(int n : nums) {\n    curr = Math.max(n, curr + n);\n    max = Math.max(max, curr);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "programación dinámica"
+        ],
         "estimatedDuration": 85,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["dynamic programming"],
-        "codeSnippet": "int curr=0, max=nums[0];\nfor(int n : nums) {\n    curr = Math.max(n, curr + n);\n    max = Math.max(max, curr);\n}"
+        "difficultyScore": 62,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-030",
-        "title": "Interview: Intersection",
-        "description": "Find shared elements.",
-        "category": "algorithms",
+        "id": "jv-intv-rt-030",
+        "title": "Entrevista: Intersección",
+        "description": "Encuentra elementos compartidos.",
+        "context": "Usa un conjunto (HashSet) para realizar búsquedas en tiempo constante O(1).",
+        "codeSnippet": "Set<Integer> set = new HashSet<>();\nfor(int n : nums1) set.add(n);\nfor(int n : nums2) if(set.contains(n)) res.add(n);",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "hashing"
+        ],
+        "estimatedDuration": 70,
         "difficultyScore": 52,
-        "estimatedDuration": 70,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["hashing"],
-        "codeSnippet": "Set<Integer> set = new HashSet<>();\nfor(int n : nums1) set.add(n);\nfor(int n : nums2) if(set.contains(n)) res.add(n);"
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-031",
-        "title": "Data Structures: Matrix",
-        "description": "Transpose a matrix.",
-        "category": "basics",
-        "difficultyScore": 45,
+        "id": "jv-intv-rt-031",
+        "title": "Estructuras de Datos: Matriz",
+        "description": "Transponer una matriz.",
+        "context": "Intercambia filas por columnas manteniendo la diagonal principal.",
+        "codeSnippet": "for(int i=0; i<n; i++) {\n    for(int j=i; j<n; j++) {\n        int temp = m[i][j]; m[i][j] = m[j][i]; m[j][i] = temp;\n    }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "arreglos 2D"
+        ],
         "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["2D arrays"],
-        "codeSnippet": "for(int i=0; i<n; i++) {\n    for(int j=i; j<n; j++) {\n        int temp = m[i][j]; m[i][j] = m[j][i]; m[j][i] = temp;\n    }\n}"
+        "difficultyScore": 45,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-032",
-        "title": "Interview: First Unique",
-        "description": "Find first non-repeating char.",
-        "category": "algorithms",
-        "difficultyScore": 55,
+        "id": "jv-intv-rt-032",
+        "title": "Entrevista: Primer Único",
+        "description": "Encuentra el primer carácter no repetido.",
+        "context": "Requiere dos pasadas: una para contar frecuencias y otra para encontrar el primer carácter con frecuencia 1.",
+        "codeSnippet": "Map<Character, Integer> count = new HashMap<>();\nfor(char c : s.toCharArray()) count.put(c, count.getOrDefault(c, 0) + 1);",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "hashing"
+        ],
         "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["hashing"],
-        "codeSnippet": "Map<Character, Integer> count = new HashMap<>();\nfor(char c : s.toCharArray()) count.put(c, count.getOrDefault(c, 0) + 1);"
+        "difficultyScore": 55,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-033",
-        "title": "Algorithms: Quick Sort",
-        "description": "Partition and sort.",
-        "category": "algorithms",
-        "difficultyScore": 75,
+        "id": "jv-intv-rt-033",
+        "title": "Algoritmos: Quick Sort",
+        "description": "Partición y ordenación.",
+        "context": "Algoritmo de ordenación eficiente basado en la elección de un pivote.",
+        "codeSnippet": "int pivot = arr[high], i = low-1;\nfor(int j=low; j<high; j++) {\n    if(arr[j] < pivot) swap(++i, j);\n}\nswap(++i, high);",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "ordenamiento"
+        ],
         "estimatedDuration": 105,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sorting"],
-        "codeSnippet": "int pivot = arr[high], i = low-1;\nfor(int j=low; j<high; j++) {\n    if(arr[j] < pivot) swap(++i, j);\n}\nswap(++i, high);"
+        "difficultyScore": 75,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-034",
-        "title": "Interview: Binary Search Tree",
-        "description": "Validate BST property.",
-        "category": "algorithms",
-        "difficultyScore": 68,
+        "id": "jv-intv-rt-034",
+        "title": "Entrevista: Árbol de Búsqueda Binaria",
+        "description": "Valida la propiedad de un BST.",
+        "context": "En un BST, cada nodo debe ser mayor que todos los de su izquierda y menor que todos los de su derecha.",
+        "codeSnippet": "public boolean valid(Node n, long min, long max) {\n    if(n == null) return true;\n    if(n.val <= min || n.val >= max) return false;\n    return valid(n.left, min, n.val) && valid(n.right, n.val, max);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "árboles"
+        ],
         "estimatedDuration": 95,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["trees"],
-        "codeSnippet": "public boolean valid(Node n, long min, long max) {\n    if(n == null) return true;\n    if(n.val <= min || n.val >= max) return false;\n    return valid(n.left, min, n.val) && valid(n.right, n.val, max);\n}"
+        "difficultyScore": 68,
+        "category": "algorithms"
       },
       {
-        "id": "jv-intv-035",
-        "title": "Memory: GC Basics",
-        "description": "How Java frees space.",
-        "category": "advanced",
-        "difficultyScore": 50,
-        "estimatedDuration": 70,
+        "id": "jv-intv-rt-035",
+        "title": "Memoria: Básicos de GC",
+        "description": "Cómo libera espacio Java automáticamente.",
+        "context": "El Garbage Collector rastrea objetos inalcanzables para liberar memoria periódicamente.",
+        "codeSnippet": "System.gc(); // Sugiere a la JVM ejecutar el GC, no está garantizado",
         "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["garbage collection"],
-        "codeSnippet": "System.gc(); // Suggests JVM to run GC, not guaranteed"
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "recolección de basura"
+        ],
+        "estimatedDuration": 70,
+        "difficultyScore": 50,
+        "category": "algorithms"
       }
     ]
   }

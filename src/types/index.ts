@@ -11,6 +11,9 @@ export type ExerciseType = 'reflex-typing' | 'guided-problem';
 export type TypingStyle = 'full' | 'fill-blanks' | 'complete-function';
 
 export type ExerciseCategory = 
+  | 'variables'
+  | 'operators'
+  | 'control-flow'
   | 'arrays'
   | 'strings'
   | 'objects'

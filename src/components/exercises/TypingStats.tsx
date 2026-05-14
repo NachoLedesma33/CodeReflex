@@ -77,7 +77,7 @@ export function TypingStats({
   return (
     <Card variant="bordered" className={cn('', className)}>
       <CardHeader className="pb-2">
-        <h3 className="text-sm font-medium text-zinc-400">Live Statistics</h3>
+        <h3 className="text-sm font-medium text-zinc-400">Estadísticas en Vivo</h3>
       </CardHeader>
       
       <CardContent className="space-y-4">
@@ -86,40 +86,40 @@ export function TypingStats({
             icon={<Zap className="w-4 h-4 text-yellow-500" />}
             label="WPM"
             value={metrics.wpm}
-            subValue={averageWpm > 0 ? `Avg: ${averageWpm}` : undefined}
+            subValue={averageWpm > 0 ? `Prom: ${averageWpm}` : undefined}
             highlight={metrics.wpm > 40}
           />
           
           <StatCard
             icon={<Target className="w-4 h-4 text-green-500" />}
-            label="Accuracy"
+            label="Precisión"
             value={`${metrics.accuracy}%`}
             highlight={metrics.accuracy >= 95}
           />
           
           <StatCard
             icon={<AlertCircle className="w-4 h-4 text-red-500" />}
-            label="Errors"
+            label="Errores"
             value={metrics.errors}
-            subValue={errorPositions.length > 0 ? `at positions: ${errorPositions.slice(0, 3).join(', ')}${errorPositions.length > 3 ? '...' : ''}` : undefined}
+            subValue={errorPositions.length > 0 ? `en pos: ${errorPositions.slice(0, 3).join(', ')}${errorPositions.length > 3 ? '...' : ''}` : undefined}
             highlight={metrics.errors > 5}
           />
           
           <StatCard
             icon={<RotateCcw className="w-4 h-4 text-orange-500" />}
-            label="Corrections"
+            label="Correcciones"
             value={metrics.corrections}
           />
           
           <StatCard
             icon={<Clock className="w-4 h-4 text-blue-500" />}
-            label="Time"
+            label="Tiempo"
             value={formatTime(metrics.elapsedTime)}
           />
           
           <StatCard
             icon={<Flame className="w-4 h-4 text-purple-500" />}
-            label="Streak"
+            label="Racha"
             value={characterStreak}
             highlight={characterStreak > 20}
           />
@@ -129,7 +129,7 @@ export function TypingStats({
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-xs text-zinc-500">
               <TrendingUp className="w-3 h-3" />
-              <span>WPM Evolution</span>
+              <span>Evolución de WPM</span>
             </div>
             <div className="h-16 flex items-end gap-0.5">
               {formatWpmHistory.map((point, i) => (
@@ -148,16 +148,16 @@ export function TypingStats({
               ))}
             </div>
             <div className="flex justify-between text-xs text-zinc-600">
-              <span>Start</span>
-              <span>Current: {metrics.wpm} WPM</span>
-              <span>Peak: {maxWpm} WPM</span>
+              <span>Inicio</span>
+              <span>Actual: {metrics.wpm} WPM</span>
+              <span>Pico: {maxWpm} WPM</span>
             </div>
           </div>
         )}
 
         {errorPositions.length > 0 && (
           <div className="space-y-2">
-            <div className="text-xs text-zinc-500">Error Heatmap</div>
+            <div className="text-xs text-zinc-500">Mapa de Errores</div>
             <div 
               className="grid gap-0.5"
               style={{ 
@@ -185,7 +185,7 @@ export function TypingStats({
               </span>
               <span className="flex items-center gap-1">
                 <div className="w-3 h-3 rounded bg-zinc-800" />
-                Correct
+                Correcto
               </span>
             </div>
           </div>
@@ -193,8 +193,8 @@ export function TypingStats({
 
         <div className="pt-2 border-t border-zinc-700 text-xs text-zinc-500">
           <div className="flex justify-between">
-            <span>Characters: {metrics.charactersTyped} / {metrics.charactersTyped + metrics.charactersRemaining}</span>
-            <span>Keystrokes: {metrics.totalKeystrokes}</span>
+            <span>Caracteres: {metrics.charactersTyped} / {metrics.charactersTyped + metrics.charactersRemaining}</span>
+            <span>Pulsaciones: {metrics.totalKeystrokes}</span>
           </div>
         </div>
       </CardContent>

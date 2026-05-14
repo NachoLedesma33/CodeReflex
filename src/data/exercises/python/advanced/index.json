@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["meta-programming", "concurrency", "advanced-oop", "testing", "performance"],
-  "concepts": ["metaclasses", "asyncio", "descriptors", "abc", "introspection"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["meta-programación", "concurrencia", "poo-avanzada", "testing", "rendimiento"],
+  "concepts": ["metaclases", "asyncio", "descriptores", "abc", "introspección"],
+  "lastUpdated": "2026-05-14"
 }

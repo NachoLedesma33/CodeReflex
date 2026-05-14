@@ -27,7 +27,7 @@ interface HeaderProps {
 
 const MODES: { value: ExerciseType; label: string; icon: React.ReactNode }[] = [
   { value: 'reflex-typing', label: 'Reflex', icon: <Keyboard className="w-4 h-4" /> },
-  { value: 'guided-problem', label: 'Guided', icon: <BookOpen className="w-4 h-4" /> },
+  { value: 'guided-problem', label: 'Guiado', icon: <BookOpen className="w-4 h-4" /> },
 ];
 
 export function Header({ className }: HeaderProps) {
@@ -106,7 +106,7 @@ export function Header({ className }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-1.5 px-2 py-1 bg-zinc-800 rounded-lg">
-            <span className="text-xs text-zinc-500">Lvl</span>
+            <span className="text-xs text-zinc-500">Nvl</span>
             <span className="text-sm font-medium text-zinc-300">{level}</span>
           </div>
         </div>
@@ -119,7 +119,7 @@ export function Header({ className }: HeaderProps) {
             size="sm"
             onClick={toggleTheme}
             className="p-2"
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           >
             {theme === 'dark' ? (
               <Sun className="w-5 h-5 text-zinc-400" />
@@ -134,7 +134,7 @@ export function Header({ className }: HeaderProps) {
               size="sm"
               onClick={() => setShowSettingsMenu(!showSettingsMenu)}
               className="p-2"
-              title="Settings"
+              title="Ajustes"
             >
               <Settings className="w-5 h-5 text-zinc-400" />
             </Button>
@@ -143,7 +143,7 @@ export function Header({ className }: HeaderProps) {
               <div className="absolute right-0 top-full mt-2 w-48 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg z-50">
                 <div className="p-2">
                   <div className="text-xs text-zinc-500 px-2 py-1">
-                    {totalExercises} exercises completed
+                    {totalExercises} ejercicios completados
                   </div>
                 </div>
                 <div className="border-t border-zinc-700">
@@ -155,7 +155,7 @@ export function Header({ className }: HeaderProps) {
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-zinc-700/50"
                   >
                     <RotateCcw className="w-4 h-4" />
-                    Reset Progress
+                    Reiniciar Progreso
                   </button>
                 </div>
               </div>
@@ -169,10 +169,10 @@ export function Header({ className }: HeaderProps) {
           <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 w-80">
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-medium text-zinc-100">Reset Progress?</span>
+              <span className="text-sm font-medium text-zinc-100">¿Reiniciar Progreso?</span>
             </div>
             <p className="text-xs text-zinc-400 mb-4">
-              This will permanently delete all your progress, XP, streaks, and achievements. This action cannot be undone.
+              Esto eliminará permanentemente todo tu progreso, XP, rachas y logros. Esta acción no se puede deshacer.
             </p>
             <div className="flex gap-2">
               <Button
@@ -182,7 +182,7 @@ export function Header({ className }: HeaderProps) {
                 className="flex-1"
               >
                 <X className="w-4 h-4 mr-1" />
-                Cancel
+                Cancelar
               </Button>
               <Button
                 variant="danger"
@@ -191,7 +191,7 @@ export function Header({ className }: HeaderProps) {
                 className="flex-1"
               >
                 <Check className="w-4 h-4 mr-1" />
-                Reset
+                Reiniciar
               </Button>
             </div>
           </div>

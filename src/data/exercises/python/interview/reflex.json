@@ -5,391 +5,622 @@
   "snippets": [
     {
       "id": "py-intv-rt-001",
-      "title": "Sliding Window: Basic",
-      "description": "Calculate max sum of subarray of size k.",
-      "context": "Classic pattern to optimize nested loops from O(n*k) to O(n).",
+      "title": "Sliding Window: Básico",
+      "description": "Calcula la suma máxima de un sub-array de tamaño k.",
+      "context": "Patrón clásico para optimizar bucles anidados de O(n*k) a O(n).",
       "codeSnippet": "def max_sum(arr, k):\n    window_sum = sum(arr[:k])\n    max_s = window_sum\n    for i in range(len(arr) - k):\n        window_sum = window_sum - arr[i] + arr[i+k]\n        max_s = max(max_s, window_sum)\n    return max_s",
       "typingStyle": "full",
-      "tags": ["python", "sliding-window"],
-      "concepts": ["optimization", "subarrays"],
+      "tags": [
+        "python",
+        "ventana-deslizable"
+      ],
+      "concepts": [
+        "optimización",
+        "subarreglos"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-002",
-      "title": "Two Pointers: Reverse",
-      "description": "Reverse a list in-place.",
-      "context": "Efficient way to swap elements without extra space O(1).",
+      "title": "Two Pointers: Inversión",
+      "description": "Invierte una lista in-situ.",
+      "context": "Forma eficiente de intercambiar elementos sin espacio extra O(1).",
       "codeSnippet": "def reverse_arr(arr):\n    l, r = 0, len(arr) - 1\n    while l < r:\n        arr[l], arr[r] = arr[r], arr[l]\n        l += 1; r -= 1",
       "typingStyle": "full",
-      "tags": ["python", "two-pointers"],
-      "concepts": ["in-place", "swapping"],
+      "tags": [
+        "python",
+        "dos-punteros"
+      ],
+      "concepts": [
+        "in-place",
+        "intercambio (swapping)"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-003",
-      "title": "Binary Search: Iterative",
-      "description": "Find index of target in sorted array.",
-      "context": "Fundamental O(log n) search algorithm.",
+      "title": "Búsqueda Binaria: Iterativa",
+      "description": "Encuentra el índice de un objetivo en un array ordenado.",
+      "context": "Algoritmo de búsqueda fundamental con complejidad O(log n).",
       "codeSnippet": "def binary_search(arr, target):\n    l, r = 0, len(arr) - 1\n    while l <= r:\n        mid = (l + r) // 2\n        if arr[mid] == target: return mid\n        if arr[mid] < target: l = mid + 1\n        else: r = mid - 1\n    return -1",
       "typingStyle": "full",
-      "tags": ["python", "searching"],
-      "concepts": ["logarithmic time", "sorted data"],
+      "tags": [
+        "python",
+        "búsqueda"
+      ],
+      "concepts": [
+        "tiempo logarítmico",
+        "datos ordenados"
+      ],
       "estimatedDuration": 70,
-      "difficultyScore": 50
+      "difficultyScore": 50,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-004",
-      "title": "Data Structures: Stack",
-      "description": "Implement a basic stack using a list.",
+      "title": "Estructuras de Datos: Pila",
+      "description": "Implementa una pila básica usando una lista.",
+      "context": "Las pilas siguen el principio LIFO (Last In, First Out).",
       "codeSnippet": "class Stack:\n    def __init__(self): self.items = []\n    def push(self, item): self.items.append(item)\n    def pop(self): return self.items.pop()\n    def is_empty(self): return len(self.items) == 0",
       "typingStyle": "full",
-      "tags": ["python", "stack"],
-      "concepts": ["LIFO"],
+      "tags": [
+        "python",
+        "pilas"
+      ],
+      "concepts": [
+        "LIFO"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-005",
-      "title": "Data Structures: Queue",
-      "description": "Implement a queue using deque.",
+      "title": "Estructuras de Datos: Cola",
+      "description": "Implementa una cola usando deque.",
+      "context": "Las colas siguen el principio FIFO (First In, First Out).",
       "codeSnippet": "from collections import deque\nclass Queue:\n    def __init__(self): self.items = deque()\n    def enqueue(self, item): self.items.append(item)\n    def dequeue(self): return self.items.popleft()",
       "typingStyle": "full",
-      "tags": ["python", "queue"],
-      "concepts": ["FIFO"],
+      "tags": [
+        "python",
+        "colas"
+      ],
+      "concepts": [
+        "FIFO"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 42
+      "difficultyScore": 42,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-006",
-      "title": "Linked List: Node",
-      "description": "Define a simple node class.",
+      "title": "Lista Enlazada: Nodo",
+      "description": "Define una clase de nodo simple.",
+      "context": "Bloque básico para construir listas enlazadas, árboles y grafos.",
       "codeSnippet": "class Node:\n    def __init__(self, data):\n        self.data = data\n        self.next = None",
       "typingStyle": "full",
-      "tags": ["python", "linked-list"],
-      "concepts": ["nodes", "pointers"],
+      "tags": [
+        "python",
+        "listas-enlazadas"
+      ],
+      "concepts": [
+        "nodos",
+        "punteros"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 38
+      "difficultyScore": 38,
+      "category": "arrays"
     },
     {
       "id": "py-intv-rt-007",
-      "title": "Binary Tree: Inorder",
-      "description": "Recursive inorder traversal.",
+      "title": "Árbol Binario: Inorder",
+      "description": "Recorrido inorder recursivo.",
+      "context": "Visita izquierda, nodo actual y luego derecha.",
       "codeSnippet": "def inorder(root):\n    if root:\n        inorder(root.left)\n        print(root.data)\n        inorder(root.right)",
       "typingStyle": "full",
-      "tags": ["python", "trees"],
-      "concepts": ["recursion", "traversal"],
+      "tags": [
+        "python",
+        "árboles"
+      ],
+      "concepts": [
+        "recursión",
+        "recorrido"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-008",
-      "title": "Regex: Email Validation",
-      "description": "Basic pattern matching.",
+      "title": "Regex: Validación de Email",
+      "description": "Coincidencia de patrones básica.",
+      "context": "Usa expresiones regulares para validar formatos de texto.",
       "codeSnippet": "import re\ndef is_valid(email):\n    pattern = r'^\\w+@\\w+\\.\\w+$'\n    return bool(re.match(pattern, email))",
       "typingStyle": "full",
-      "tags": ["python", "regex"],
-      "concepts": ["pattern matching"],
+      "tags": [
+        "python",
+        "regex"
+      ],
+      "concepts": [
+        "coincidencia de patrones"
+      ],
       "estimatedDuration": 70,
-      "difficultyScore": 50
+      "difficultyScore": 50,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-009",
-      "title": "Sorting: QuickSort Partition",
-      "description": "Implement the partition step.",
+      "title": "Ordenación: QuickSort Partition",
+      "description": "Implementa el paso de partición.",
+      "context": "El paso clave del algoritmo QuickSort para dividir el array.",
       "codeSnippet": "def partition(arr, low, high):\n    pivot = arr[high]\n    i = low - 1\n    for j in range(low, high):\n        if arr[j] < pivot:\n            i += 1\n            arr[i], arr[j] = arr[j], arr[i]\n    arr[i+1], arr[high] = arr[high], arr[i+1]\n    return i + 1",
       "typingStyle": "full",
-      "tags": ["python", "sorting"],
-      "concepts": ["divide and conquer"],
+      "tags": [
+        "python",
+        "ordenamiento"
+      ],
+      "concepts": [
+        "divide y vencerás"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-010",
-      "title": "Big O: Constant O(1)",
-      "description": "Access element by index.",
+      "title": "Big O: Constante O(1)",
+      "description": "Acceso a elemento por índice.",
+      "context": "El tiempo de ejecución no depende del tamaño de la entrada.",
       "codeSnippet": "def get_first(arr):\n    return arr[0] if arr else None",
       "typingStyle": "full",
-      "tags": ["python", "big-o"],
-      "concepts": ["complexity"],
+      "tags": [
+        "python",
+        "big-o"
+      ],
+      "concepts": [
+        "complejidad"
+      ],
       "estimatedDuration": 20,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-011",
-      "title": "Big O: Linear O(n)",
-      "description": "Sum elements in an array.",
+      "title": "Big O: Lineal O(n)",
+      "description": "Suma de elementos en un array.",
+      "context": "El tiempo de ejecución crece proporcionalmente al tamaño de la entrada.",
       "codeSnippet": "def get_sum(arr):\n    total = 0\n    for x in arr: total += x\n    return total",
       "typingStyle": "full",
-      "tags": ["python", "big-o"],
-      "concepts": ["complexity"],
+      "tags": [
+        "python",
+        "big-o"
+      ],
+      "concepts": [
+        "complejidad"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-012",
       "title": "Caching: LRU Cache",
-      "description": "Use functools.lru_cache.",
+      "description": "Usa functools.lru_cache.",
+      "context": "Almacena resultados de funciones costosas para acceso rápido.",
       "codeSnippet": "from functools import lru_cache\n@lru_cache(maxsize=128)\ndef get_data(id):\n    # Simulate slow operation\n    return f'Result for {id}'",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["memoization"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "memoización"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-013",
-      "title": "Concurrency: ThreadPool",
-      "description": "Run tasks in parallel threads.",
+      "title": "Concurrencia: ThreadPool",
+      "description": "Ejecuta tareas en hilos paralelos.",
+      "context": "Ideal para tareas bloqueadas por I/O.",
       "codeSnippet": "from concurrent.futures import ThreadPoolExecutor\nwith ThreadPoolExecutor() as executor:\n    results = list(executor.map(func, inputs))",
       "typingStyle": "full",
-      "tags": ["python", "threads"],
-      "concepts": ["parallelism"],
+      "tags": [
+        "python",
+        "hilos"
+      ],
+      "concepts": [
+        "paralelismo"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-014",
-      "title": "Memory: Garbage Collection",
-      "description": "Check reference counts.",
+      "title": "Memoria: Recolección de Basura",
+      "description": "Verifica el conteo de referencias.",
+      "context": "Python gestiona la memoria automáticamente mediante conteo de referencias.",
       "codeSnippet": "import sys\na = [1, 2, 3]\nprint(sys.getrefcount(a))",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["memory management"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "gestión de memoria"
+      ],
       "estimatedDuration": 70,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-015",
-      "title": "Recursion: Base Case",
-      "description": "Recursive Fibonacci.",
+      "title": "Recursión: Caso Base",
+      "description": "Fibonacci recursivo.",
+      "context": "Ejemplo clásico de una función que se llama a sí misma.",
       "codeSnippet": "def fib(n):\n    if n <= 1: return n\n    return fib(n-1) + fib(n-2)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["recursion"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "recursión"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-016",
-      "title": "Strings: Palindrome",
-      "description": "Check if string is palindrome.",
+      "title": "Strings: Palíndromo",
+      "description": "Verifica si un string es palíndromo.",
+      "context": "Usa slicing de Python [::-1] para invertir texto de forma concisa.",
       "codeSnippet": "def is_palindrome(s):\n    s = s.lower().replace(' ', '')\n    return s == s[::-1]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["string manipulation"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "manipulación de cadenas"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 25
+      "difficultyScore": 25,
+      "category": "strings"
     },
     {
       "id": "py-intv-rt-017",
-      "title": "Two Pointers: Target Sum",
-      "description": "Find two indices that sum to target.",
+      "title": "Two Pointers: Suma Objetivo",
+      "description": "Encuentra dos índices que sumen un objetivo.",
+      "context": "Optimiza la búsqueda en arrays ordenados usando dos punteros.",
       "codeSnippet": "def two_sum(nums, target):\n    l, r = 0, len(nums) - 1\n    while l < r:\n        s = nums[l] + nums[r]\n        if s == target: return (l, r)\n        if s < target: l += 1\n        else: r -= 1",
       "typingStyle": "full",
-      "tags": ["python", "two-pointers"],
-      "concepts": ["optimization"],
+      "tags": [
+        "python",
+        "dos-punteros"
+      ],
+      "concepts": [
+        "optimización"
+      ],
       "estimatedDuration": 70,
-      "difficultyScore": 52
+      "difficultyScore": 52,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-018",
-      "title": "Data Structures: Hash Map",
-      "description": "Two sum using hash map.",
+      "title": "Estructuras de Datos: Hash Map",
+      "description": "Suma de dos usando un mapa hash.",
+      "context": "Usa espacio extra O(n) para conseguir tiempo lineal O(n) en arrays no ordenados.",
       "codeSnippet": "def two_sum_hash(nums, target):\n    seen = {}\n    for i, n in enumerate(nums):\n        diff = target - n\n        if diff in seen: return (seen[diff], i)\n        seen[n] = i",
       "typingStyle": "full",
-      "tags": ["python", "hash-map"],
-      "concepts": ["trade-offs"],
+      "tags": [
+        "python",
+        "mapas-hash"
+      ],
+      "concepts": [
+        "compromisos (trade-offs)"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-019",
-      "title": "Algorithms: BFS",
-      "description": "Breadth-first search template.",
+      "title": "Algoritmos: BFS",
+      "description": "Plantilla de búsqueda en anchura.",
+      "context": "Usa una cola para explorar niveles de un grafo o árbol.",
       "codeSnippet": "def bfs(graph, start):\n    q, visited = deque([start]), {start}\n    while q:\n        curr = q.popleft()\n        for nbor in graph[curr]:\n            if nbor not in visited:\n                visited.add(nbor); q.append(nbor)",
       "typingStyle": "full",
-      "tags": ["python", "graphs"],
-      "concepts": ["queues", "traversal"],
+      "tags": [
+        "python",
+        "grafos"
+      ],
+      "concepts": [
+        "colas",
+        "recorrido"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 68
+      "difficultyScore": 68,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-020",
-      "title": "Algorithms: DFS",
-      "description": "Depth-first search template.",
+      "title": "Algoritmos: DFS",
+      "description": "Plantilla de búsqueda en profundidad.",
+      "context": "Usa una pila (o recursión) para explorar ramas hasta el final.",
       "codeSnippet": "def dfs(graph, curr, visited=None):\n    if visited is None: visited = set()\n    visited.add(curr)\n    for nbor in graph[curr]:\n        if nbor not in visited:\n            dfs(graph, nbor, visited)",
       "typingStyle": "full",
-      "tags": ["python", "graphs"],
-      "concepts": ["stacks", "traversal"],
+      "tags": [
+        "python",
+        "grafos"
+      ],
+      "concepts": [
+        "pilas",
+        "recorrido"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 68
+      "difficultyScore": 68,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-021",
-      "title": "Interview: Singleton",
-      "description": "Implement singleton pattern.",
+      "title": "Entrevista: Singleton",
+      "description": "Implementa el patrón Singleton.",
+      "context": "Garantiza que una clase tenga una única instancia en todo el programa.",
       "codeSnippet": "class Singleton:\n    _instance = None\n    def __new__(cls):\n        if not cls._instance:\n            cls._instance = super().__new__(cls)\n        return cls._instance",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["design patterns"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "patrones de diseño"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-022",
-      "title": "File I/O: Chunking",
-      "description": "Read large files in pieces.",
+      "title": "File I/O: Fragmentación",
+      "description": "Lee archivos grandes por trozos.",
+      "context": "Optimiza el uso de memoria al no cargar archivos completos en RAM.",
       "codeSnippet": "def read_chunks(path, size=1024):\n    with open(path, 'rb') as f:\n        while chunk := f.read(size):\n            yield chunk",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["performance"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "rendimiento"
+      ],
       "estimatedDuration": 65,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-023",
-      "title": "Sorting: Merge Sort",
-      "description": "Merge step of merge sort.",
+      "title": "Ordenación: Merge Sort",
+      "description": "Paso de mezcla de Merge Sort.",
+      "context": "Combina dos sub-arrays ordenados en uno solo.",
       "codeSnippet": "def merge(l, r):\n    res, i, j = [], 0, 0\n    while i < len(l) and j < len(r):\n        if l[i] < r[j]: res.append(l[i]); i += 1\n        else: res.append(r[j]); j += 1\n    return res + l[i:] + r[j:]",
       "typingStyle": "full",
-      "tags": ["python", "sorting"],
-      "concepts": ["stable sorting"],
+      "tags": [
+        "python",
+        "ordenamiento"
+      ],
+      "concepts": [
+        "ordenamiento estable"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-024",
-      "title": "Recursion: Factorial",
-      "description": "Standard recursive example.",
+      "title": "Recursión: Factorial",
+      "description": "Ejemplo recursivo estándar.",
+      "context": "Cálculo del producto de todos los enteros hasta n.",
       "codeSnippet": "def factorial(n):\n    return 1 if n <= 1 else n * factorial(n-1)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["recursion"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "recursión"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-025",
-      "title": "Dicts: Frequency Map",
-      "description": "Build char frequency dictionary.",
+      "title": "Dicts: Mapa de Frecuencia",
+      "description": "Construye un diccionario de frecuencia de caracteres.",
+      "context": "Técnica común para problemas de strings y anagramas.",
       "codeSnippet": "def char_freq(s):\n    freq = {}\n    for char in s:\n        freq[char] = freq.get(char, 0) + 1\n    return freq",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["counting"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "conteo"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-026",
-      "title": "Strings: Anagram Check",
-      "description": "Verify if two strings are anagrams.",
+      "title": "Strings: Verificación de Anagrama",
+      "description": "Verifica si dos strings son anagramas.",
+      "context": "Dos strings son anagramas si tienen los mismos caracteres con la misma frecuencia.",
       "codeSnippet": "def is_anagram(s1, s2):\n    return sorted(s1) == sorted(s2)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["comparison"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "comparación"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 35
+      "difficultyScore": 35,
+      "category": "strings"
     },
     {
       "id": "py-intv-rt-027",
-      "title": "Memory: Slot Optimization",
-      "description": "Reduce object memory footprint.",
+      "title": "Memoria: Optimización de Slots",
+      "description": "Reduce la huella de memoria de los objetos.",
+      "context": "__slots__ evita la creación de __dict__ por instancia.",
       "codeSnippet": "class Point:\n    __slots__ = ['x', 'y']\n    def __init__(self, x, y):\n        self.x, self.y = x, y",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["optimization"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "optimización"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-028",
-      "title": "Concurrency: Multiprocessing",
-      "description": "Run CPU bound tasks.",
+      "title": "Concurrencia: Multiprocesamiento",
+      "description": "Ejecuta tareas intensivas de CPU.",
+      "context": "Supera el GIL (Global Interpreter Lock) usando procesos separados.",
       "codeSnippet": "from multiprocessing import Pool\nwith Pool(processes=4) as pool:\n    results = pool.map(compute_heavy, data)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["parallelism"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "paralelismo"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-029",
-      "title": "Interview: FizzBuzz",
-      "description": "The classic interview sanity check.",
+      "title": "Entrevista: FizzBuzz",
+      "description": "El clásico control de cordura en entrevistas.",
+      "context": "Prueba básica de lógica y uso de operadores módulo.",
       "codeSnippet": "for i in range(1, 101):\n    if i % 15 == 0: print('FizzBuzz')\n    elif i % 3 == 0: print('Fizz')\n    elif i % 5 == 0: print('Buzz')\n    else: print(i)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["modulus"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "módulo"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-030",
-      "title": "Data Structures: Min Heap",
-      "description": "Use heapq module.",
+      "title": "Estructuras de Datos: Min Heap",
+      "description": "Usa el módulo heapq.",
+      "context": "Implementación eficiente de colas de prioridad.",
       "codeSnippet": "import heapq\nh = []\nheapq.heappush(h, 5)\nmin_val = heapq.heappop(h)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["priority queues"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "colas de prioridad"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 58
+      "difficultyScore": 58,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-031",
-      "title": "Algorithms: Selection Sort",
-      "description": "Simple O(n^2) sort.",
+      "title": "Algoritmos: Selection Sort",
+      "description": "Ordenación simple O(n^2).",
+      "context": "Algoritmo de ordenación básico por selección de mínimos.",
       "codeSnippet": "def selection_sort(arr):\n    for i in range(len(arr)):\n        min_i = i\n        for j in range(i+1, len(arr)):\n            if arr[j] < arr[min_i]: min_i = j\n        arr[i], arr[min_i] = arr[min_i], arr[i]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["sorting"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "ordenamiento"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-032",
-      "title": "Interview: Reverse Integer",
-      "description": "Handle negative and overflow.",
+      "title": "Entrevista: Invertir Entero",
+      "description": "Maneja negativos y desbordamiento.",
+      "context": "Desafío común que implica manipulación matemática y de strings.",
       "codeSnippet": "def reverse_int(x):\n    s = str(abs(x))\n    res = int(s[::-1])\n    return res if x >= 0 else -res",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["math"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "matemáticas"
+      ],
       "estimatedDuration": 65,
-      "difficultyScore": 48
+      "difficultyScore": 48,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-033",
-      "title": "Linked List: Cycle Detection",
-      "description": "Floyd's Tortoise and Hare.",
+      "title": "Lista Enlazada: Detección de Ciclos",
+      "description": "Algoritmo del conejo y la tortuga de Floyd.",
+      "context": "Usa dos punteros a diferentes velocidades para detectar ciclos en O(n).",
       "codeSnippet": "def has_cycle(head):\n    slow = fast = head\n    while fast and fast.next:\n        slow = slow.next\n        fast = fast.next.next\n        if slow == fast: return True\n    return False",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["two-pointers"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "dos-punteros"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "arrays"
     },
     {
       "id": "py-intv-rt-034",
-      "title": "Big O: Quadratic O(n^2)",
-      "description": "Nested loops example.",
+      "title": "Big O: Cuadrático O(n^2)",
+      "description": "Ejemplo de bucles anidados.",
+      "context": "El tiempo de ejecución crece proporcionalmente al cuadrado del tamaño de la entrada.",
       "codeSnippet": "def print_pairs(arr):\n    for i in arr:\n        for j in arr: print(i, j)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["complexity"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "complejidad"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "algorithms"
     },
     {
       "id": "py-intv-rt-035",
-      "title": "Algorithms: Kadane's",
-      "description": "Max subarray sum.",
+      "title": "Algoritmos: Kadane's",
+      "description": "Suma máxima de un sub-array.",
+      "context": "Algoritmo eficiente para encontrar la suma contigua máxima en O(n).",
       "codeSnippet": "def max_subarray(nums):\n    curr_max = total_max = nums[0]\n    for x in nums[1:]:\n        curr_max = max(x, curr_max + x)\n        total_max = max(total_max, curr_max)\n    return total_max",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["dynamic programming"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "programación dinámica"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 62
+      "difficultyScore": 62,
+      "category": "algorithms"
     }
   ]
 }

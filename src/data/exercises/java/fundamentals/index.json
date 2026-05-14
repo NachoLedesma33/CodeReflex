@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["basics", "syntax", "oop", "collections", "logic"],
-  "concepts": ["variables", "strings", "arrays", "methods", "control-flow"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["básicos", "sintaxis", "poo", "colecciones", "lógica"],
+  "concepts": ["variables", "cadenas", "arreglos", "métodos", "flujo-de-control"],
+  "lastUpdated": "2026-05-14"
 }

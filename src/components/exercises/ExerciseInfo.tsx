@@ -139,7 +139,7 @@ export function ExerciseInfo({
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs text-zinc-500">
               <FileText className="w-3 h-3" />
-              <span>Description</span>
+              <span>Descripción</span>
             </div>
             <div className="text-sm text-zinc-400">
               {renderMarkdown(exercise.description)}
@@ -153,7 +153,7 @@ export function ExerciseInfo({
               onClick={() => toggleSection('context')}
               className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-400 transition-colors w-full"
             >
-              <span>📚 Real-world Context</span>
+              <span>📚 Contexto Real</span>
               {expandedSections.has('context') ? (
                 <ChevronUp className="w-3 h-3" />
               ) : (
@@ -175,7 +175,7 @@ export function ExerciseInfo({
               className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-400 transition-colors w-full"
             >
               <BookOpen className="w-3 h-3" />
-              <span>Concepts</span>
+              <span>Conceptos</span>
               {expandedSections.has('concepts') ? (
                 <ChevronUp className="w-3 h-3" />
               ) : (
@@ -201,7 +201,7 @@ export function ExerciseInfo({
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs text-zinc-500">
               <Tag className="w-3 h-3" />
-              <span>Tags</span>
+              <span>Etiquetas</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {exercise.tags.map((tag, i) => (
@@ -222,7 +222,7 @@ export function ExerciseInfo({
               <div className="bg-zinc-800/50 rounded-lg p-2">
                 <div className="flex items-center gap-1.5 text-xs text-zinc-500 mb-1">
                   <Clock className="w-3 h-3" />
-                  <span>Time</span>
+                  <span>Tiempo</span>
                 </div>
                 <code className="text-sm text-zinc-300 font-mono">{exercise.timeComplexity}</code>
               </div>
@@ -231,7 +231,7 @@ export function ExerciseInfo({
               <div className="bg-zinc-800/50 rounded-lg p-2">
                 <div className="flex items-center gap-1.5 text-xs text-zinc-500 mb-1">
                   <HardDrive className="w-3 h-3" />
-                  <span>Space</span>
+                  <span>Espacio</span>
                 </div>
                 <code className="text-sm text-zinc-300 font-mono">{exercise.spaceComplexity}</code>
               </div>
@@ -243,7 +243,7 @@ export function ExerciseInfo({
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs text-zinc-500">
               <CheckCircle2 className="w-3 h-3" />
-              <span>Prerequisites</span>
+              <span>Prerrequisitos</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
               {exercise.prerequisites.map((prereq, i) => (
@@ -263,11 +263,11 @@ export function ExerciseInfo({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs text-zinc-500">
                 <Lightbulb className="w-3 h-3" />
-                <span>Hints ({revealedHints}/{availableHints.length})</span>
+                <span>Pistas ({revealedHints}/{availableHints.length})</span>
               </div>
               {canShowMoreHints && (
                 <Button variant="ghost" size="sm" onClick={revealNextHint}>
-                  Reveal Hint
+                  Revelar Pista
                 </Button>
               )}
             </div>
@@ -285,7 +285,7 @@ export function ExerciseInfo({
               ))}
               {revealedHints === 0 && (
                 <div className="text-xs text-zinc-600 italic">
-                  Click &quot;Reveal Hint&quot; if you get stuck
+                  Haz clic en &quot;Revelar Pista&quot; si te quedas atascado
                 </div>
               )}
             </div>
@@ -293,9 +293,9 @@ export function ExerciseInfo({
         )}
 
         <div className="pt-2 text-xs text-zinc-600">
-          <span>Est. duration: {Math.floor(exercise.estimatedDuration / 60)}min</span>
+          <span>Duración est.: {Math.floor(exercise.estimatedDuration / 60)}min</span>
           <span className="mx-2">•</span>
-          <span>Difficulty: {exercise.difficultyScore}/10</span>
+          <span>Dificultad: {exercise.difficultyScore}/10</span>
         </div>
       </CardContent>
     </Card>

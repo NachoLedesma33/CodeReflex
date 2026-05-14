@@ -25,7 +25,7 @@ const LoadingFallback = () => (
   <div className="flex items-center justify-center h-full">
     <div className="flex flex-col items-center gap-3">
       <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
-      <span className="text-sm text-zinc-500">Loading exercise...</span>
+      <span className="text-sm text-zinc-500">Cargando ejercicio...</span>
     </div>
   </div>
 );
@@ -96,7 +96,7 @@ export default function Home() {
       <div className="flex-1 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4 p-8 bg-zinc-900 rounded-lg border border-red-500/30 max-w-md">
           <AlertCircle className="w-12 h-12 text-red-500" />
-          <h2 className="text-lg font-semibold text-zinc-100">Failed to load exercises</h2>
+          <h2 className="text-lg font-semibold text-zinc-100">Error al cargar ejercicios</h2>
           <p className="text-sm text-zinc-400 text-center">{error}</p>
         </div>
       </div>
@@ -108,7 +108,7 @@ export default function Home() {
       <div className="flex-1 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-          <span className="text-sm text-zinc-500">Loading CodeReflex...</span>
+          <span className="text-sm text-zinc-500">Cargando CodeReflex...</span>
         </div>
       </div>
     );
@@ -150,9 +150,9 @@ export default function Home() {
                     )}
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-zinc-300">No exercises available</h3>
+                    <h3 className="text-lg font-medium text-zinc-300">No hay ejercicios disponibles</h3>
                     <p className="text-sm text-zinc-500 mt-1">
-                      Select a language and difficulty from the sidebar
+                      Selecciona un lenguaje y dificultad en la barra lateral
                     </p>
                   </div>
                 </div>
@@ -204,14 +204,14 @@ export default function Home() {
         <div className="h-8 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between px-4 text-xs text-zinc-600">
           <div className="flex items-center gap-4">
             <span>
-              {currentExercise?.id || 'No exercise selected'}
+              {currentExercise?.id || 'Ningún ejercicio seleccionado'}
             </span>
             <span>
-              {filteredExercises.length} exercises available
+              {filteredExercises.length} ejercicios disponibles
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-zinc-500">Shortcuts:</span>
+            <span className="text-zinc-500">Atajos:</span>
             <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-500">Ctrl+B</kbd>
             <span className="text-zinc-600">Sidebar</span>
             <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-500">Ctrl+S</kbd>

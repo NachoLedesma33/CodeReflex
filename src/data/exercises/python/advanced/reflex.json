@@ -5,389 +5,616 @@
   "snippets": [
     {
       "id": "py-adv-rt-001",
-      "title": "Metaclasses: Basic",
-      "description": "Create a class that modifies other classes.",
-      "context": "Metaclasses are 'classes of classes'. They allow customizing class creation.",
+      "title": "Metaclases: Básico",
+      "description": "Crea una clase que modifica otras clases.",
+      "context": "Las metaclases son 'clases de clases'. Permiten personalizar la creación de clases.",
       "codeSnippet": "class Meta(type):\n    def __new__(cls, name, bases, attrs):\n        attrs['created_by'] = 'Meta'\n        return super().__new__(cls, name, bases, attrs)\n\nclass MyClass(metaclass=Meta): pass",
       "typingStyle": "full",
-      "tags": ["python", "metaclasses"],
-      "concepts": ["type", "__new__"],
+      "tags": [
+        "python",
+        "metaclases"
+      ],
+      "concepts": [
+        "tipo (type)",
+        "__new__"
+      ],
       "estimatedDuration": 120,
-      "difficultyScore": 85
+      "difficultyScore": 85,
+      "category": "classes"
     },
     {
       "id": "py-adv-rt-002",
       "title": "Asyncio: Event Loop",
-      "description": "Run basic async coroutines.",
+      "description": "Ejecuta corrutinas asíncronas básicas.",
+      "context": "Asyncio permite ejecución concurrente usando un único hilo mediante un bucle de eventos.",
       "codeSnippet": "import asyncio\nasync def main():\n    print('Hello')\n    await asyncio.sleep(1)\n    print('World')\n\nasyncio.run(main())",
       "typingStyle": "full",
-      "tags": ["python", "asyncio"],
-      "concepts": ["event loop", "awaitables"],
+      "tags": [
+        "python",
+        "asyncio"
+      ],
+      "concepts": [
+        "bucle de eventos",
+        "awaitables"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 75
+      "difficultyScore": 75,
+      "category": "loops"
     },
     {
       "id": "py-adv-rt-003",
-      "title": "Descriptors: Protocol",
-      "description": "Implement __get__ and __set__.",
+      "title": "Descriptores: Protocolo",
+      "description": "Implementa __get__ y __set__.",
+      "context": "Los descriptores permiten personalizar el acceso, asignación y eliminación de atributos.",
       "codeSnippet": "class Descriptor:\n    def __get__(self, obj, owner):\n        return 'Value'\n    def __set__(self, obj, val):\n        print(f'Setting {val}')",
       "typingStyle": "full",
-      "tags": ["python", "descriptors"],
-      "concepts": ["attribute access", "protocols"],
+      "tags": [
+        "python",
+        "descriptores"
+      ],
+      "concepts": [
+        "acceso a atributos",
+        "protocolos"
+      ],
       "estimatedDuration": 110,
-      "difficultyScore": 80
+      "difficultyScore": 80,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-004",
       "title": "Contextlib: ExitStack",
-      "description": "Manage dynamic number of context managers.",
+      "description": "Gestiona un número dinámico de gestores de contexto.",
+      "context": "ExitStack facilita el manejo de múltiples recursos que deben cerrarse al finalizar.",
       "codeSnippet": "from contextlib import ExitStack\nwith ExitStack() as stack:\n    files = [stack.enter_context(open(f)) for f in filenames]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["resource management"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "gestión de recursos"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-005",
-      "title": "Abstract Base Classes",
-      "description": "Define interfaces with abc module.",
+      "title": "Clases Base Abstractas",
+      "description": "Define interfaces con el módulo abc.",
+      "context": "Las ABCs aseguran que las clases derivadas implementen métodos específicos.",
       "codeSnippet": "from abc import ABC, abstractmethod\nclass Shape(ABC):\n    @abstractmethod\n    def area(self): pass",
       "typingStyle": "full",
-      "tags": ["python", "abc"],
-      "concepts": ["interfaces", "contracts"],
+      "tags": [
+        "python",
+        "abc"
+      ],
+      "concepts": [
+        "interfaces",
+        "contratos"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "classes"
     },
     {
       "id": "py-adv-rt-006",
       "title": "Asyncio: Gather",
-      "description": "Run multiple coroutines concurrently.",
+      "description": "Ejecuta múltiples corrutinas simultáneamente.",
+      "context": "Gather permite esperar por múltiples tareas asíncronas de forma eficiente.",
       "codeSnippet": "async def fetch_all():\n    tasks = [fetch(url) for url in urls]\n    return await asyncio.gather(*tasks)",
       "typingStyle": "full",
-      "tags": ["python", "asyncio"],
-      "concepts": ["parallelism"],
+      "tags": [
+        "python",
+        "asyncio"
+      ],
+      "concepts": [
+        "paralelismo"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 72
+      "difficultyScore": 72,
+      "category": "async"
     },
     {
       "id": "py-adv-rt-007",
-      "title": "Decorators: Class Based",
-      "description": "Implement decorator as a class.",
+      "title": "Decoradores: Basados en Clases",
+      "description": "Implementa un decorador usando una clase.",
+      "context": "Usa el método __call__ para que la instancia de la clase sea ejecutable como una función.",
       "codeSnippet": "class Trace:\n    def __init__(self, func):\n        self.func = func\n    def __call__(self, *args, **kwargs):\n        print('Tracing...')\n        return self.func(*args, **kwargs)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["__call__"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "__call__"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "classes"
     },
     {
       "id": "py-adv-rt-008",
-      "title": "Testing: Pytest Fixtures",
-      "description": "Setup/teardown with fixtures.",
+      "title": "Testing: Fixtures de Pytest",
+      "description": "Configuración y limpieza con fixtures.",
+      "context": "Las fixtures proveen dependencias reutilizables para tus tests de forma limpia.",
       "codeSnippet": "import pytest\n@pytest.fixture\ndef db():\n    conn = connect()\n    yield conn\n    conn.close()",
       "typingStyle": "full",
-      "tags": ["python", "testing"],
-      "concepts": ["fixtures", "dependency injection"],
+      "tags": [
+        "python",
+        "pruebas"
+      ],
+      "concepts": [
+        "fixtures",
+        "inyección de dependencias"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-009",
       "title": "Type Hinting: Protocol",
-      "description": "Structural subtyping (duck typing).",
+      "description": "Subtipado estructural (duck typing estático).",
+      "context": "Define una interfaz que las clases pueden cumplir sin necesidad de herencia explícita.",
       "codeSnippet": "from typing import Protocol\nclass Drawable(Protocol):\n    def draw(self) -> None: ...",
       "typingStyle": "full",
-      "tags": ["python", "typing"],
-      "concepts": ["protocols", "static duck typing"],
+      "tags": [
+        "python",
+        "tipado"
+      ],
+      "concepts": [
+        "protocolos",
+        "duck typing estático"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 75
+      "difficultyScore": 75,
+      "category": "validation"
     },
     {
       "id": "py-adv-rt-010",
-      "title": "Dataclasses: Advanced",
-      "description": "Custom init and post_init.",
+      "title": "Dataclasses: Avanzado",
+      "description": "Uso de field y post_init.",
+      "context": "Permite personalizar la inicialización y el comportamiento por defecto de las dataclasses.",
       "codeSnippet": "from dataclasses import dataclass, field\n@dataclass\nclass Config:\n    options: list = field(default_factory=list)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["boilerplate reduction"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "reducción de código redundante (boilerplate)"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 62
+      "difficultyScore": 62,
+      "category": "classes"
     },
     {
       "id": "py-adv-rt-011",
-      "title": "Inspection: Dir and Getattr",
-      "description": "Dynamic attribute access.",
+      "title": "Inspección: Dir y Getattr",
+      "description": "Acceso dinámico a atributos.",
+      "context": "Técnicas de introspección para interactuar con objetos basándose en strings.",
       "codeSnippet": "obj = MyClass()\nmethod_name = 'execute'\nif hasattr(obj, method_name):\n    func = getattr(obj, method_name)\n    func()",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["introspection"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "introspección"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 58
+      "difficultyScore": 58,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-012",
-      "title": "Performance: Slots",
-      "description": "Memory optimization for classes.",
+      "title": "Rendimiento: __slots__",
+      "description": "Optimización de memoria para clases.",
+      "context": "Reduce drásticamente el uso de RAM al evitar la creación de diccionarios por instancia.",
       "codeSnippet": "class FastPoint:\n    __slots__ = ('x', 'y')\n    def __init__(self, x, y):\n        self.x, self.y = x, y",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["optimization"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "optimización"
+      ],
       "estimatedDuration": 70,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-013",
-      "title": "Generators: Send",
-      "description": "Bidirectional generator communication.",
+      "title": "Generadores: Send",
+      "description": "Comunicación bidireccional con generadores.",
+      "context": "Permite enviar valores de vuelta al generador, convirtiéndolo en una corrutina simple.",
       "codeSnippet": "def echo():\n    while True:\n        val = yield\n        print(f'Received: {val}')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["coroutines"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "corrutinas"
+      ],
       "estimatedDuration": 105,
-      "difficultyScore": 78
+      "difficultyScore": 78,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-014",
       "title": "Functools: Singledispatch",
-      "description": "Generic functions based on type.",
+      "description": "Funciones genéricas basadas en tipos.",
+      "context": "Implementa sobrecarga de funciones (overloading) en Python de forma elegante.",
       "codeSnippet": "from functools import singledispatch\n@singledispatch\ndef process(data): print('Default')\n@process.register(int)\ndef _(data): print('Integer')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["polymorphism"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "polimorfismo"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 68
+      "difficultyScore": 68,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-015",
       "title": "Dunder: __getitem__",
-      "description": "Implement custom indexing.",
+      "description": "Implementa indexación personalizada.",
+      "context": "Permite que tus objetos se comporten como listas o diccionarios al usar corchetes [].",
       "codeSnippet": "class CustomList:\n    def __init__(self, items):\n        self.items = items\n    def __getitem__(self, idx):\n        return self.items[idx]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["sequence protocol"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "protocolo de secuencia"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-016",
-      "title": "Collections: ChainMap",
-      "description": "Search multiple dictionaries.",
+      "title": "Colecciones: ChainMap",
+      "description": "Busca en múltiples diccionarios a la vez.",
+      "context": "Útil para gestionar jerarquías de configuración (ej: valores de usuario sobre valores por defecto).",
       "codeSnippet": "from collections import ChainMap\ndefaults = {'color': 'red'}\nuser = {'color': 'blue'}\ncfg = ChainMap(user, defaults)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["mappings"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "mapeos"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-017",
-      "title": "Operators: Matrix Multiply",
-      "description": "The @ operator.",
+      "title": "Operadores: Multiplicación de Matrices",
+      "description": "Uso del operador @.",
+      "context": "Operador introducido específicamente para cálculos matemáticos y álgebra lineal.",
       "codeSnippet": "import numpy as np\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\nC = A @ B",
       "typingStyle": "full",
-      "tags": ["python", "math"],
-      "concepts": ["magic methods"],
+      "tags": [
+        "python",
+        "matemáticas"
+      ],
+      "concepts": [
+        "métodos mágicos"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-018",
-      "title": "Meta: Type Creation",
-      "description": "Class creation.",
+      "title": "Meta: Creación Dinámica con Type",
+      "description": "Crea clases en tiempo de ejecución.",
+      "context": "Usa la función type() con tres argumentos para generar nuevas clases dinámicamente.",
       "codeSnippet": "MyDynamicClass = type('MyDynamicClass', (object,), {'attr': 100})",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["type"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "tipo (type)"
+      ],
       "estimatedDuration": 110,
-      "difficultyScore": 82
+      "difficultyScore": 82,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-019",
-      "title": "Asyncio: Semaphore",
-      "description": "Limit concurrency.",
+      "title": "Asyncio: Semáforo",
+      "description": "Limita la concurrencia.",
+      "context": "Controla cuántas corrutinas pueden acceder a un recurso limitado simultáneamente.",
       "codeSnippet": "sem = asyncio.Semaphore(5)\nasync def limited_fetch(url):\n    async with sem:\n        return await fetch(url)",
       "typingStyle": "full",
-      "tags": ["python", "asyncio"],
-      "concepts": ["rate limiting"],
+      "tags": [
+        "python",
+        "asyncio"
+      ],
+      "concepts": [
+        "limitación de tasa (rate limiting)"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 76
+      "difficultyScore": 76,
+      "category": "async"
     },
     {
       "id": "py-adv-rt-020",
       "title": "Itertools: Tee",
-      "description": "Split an iterator into multiple.",
+      "description": "Divide un iterador en múltiples copias.",
+      "context": "Permite recorrer los mismos datos de un iterador de forma independiente.",
       "codeSnippet": "from itertools import tee\nit1, it2 = tee(original_iterator, 2)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["iterators"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "iteradores"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-021",
-      "title": "Decorators: Decorator Class",
-      "description": "Decorate a whole class.",
+      "title": "Decoradores: Decorador de Clase",
+      "description": "Decora una clase completa.",
+      "context": "Permite modificar o registrar clases completas al momento de su definición.",
       "codeSnippet": "def add_id(cls):\n    cls.id = 1\n    return cls\n\n@add_id\nclass User: pass",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["wrappers"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "wrappers"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 72
+      "difficultyScore": 72,
+      "category": "classes"
     },
     {
       "id": "py-adv-rt-022",
-      "title": "Garbage Collection: Manual",
-      "description": "Force cleanup.",
+      "title": "Recolección de Basura: Manual",
+      "description": "Fuerza la limpieza de memoria.",
+      "context": "Permite disparar manualmente el Garbage Collector de Python cuando sea necesario.",
       "codeSnippet": "import gc\ngc.collect() # Manually trigger GC",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["memory"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "memoria"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-023",
       "title": "Dunder: __enter__",
-      "description": "Context manager setup.",
+      "description": "Configuración del gestor de contexto.",
+      "context": "Define qué sucede al iniciar un bloque 'with'.",
       "codeSnippet": "class Resource:\n    def __enter__(self):\n        self.conn = connect()\n        return self.conn",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["with statement"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "sentencia with"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 58
+      "difficultyScore": 58,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-024",
       "title": "Asyncio: Future",
-      "description": "Low-level async primitive.",
+      "description": "Primitiva asíncrona de bajo nivel.",
+      "context": "Objeto que representa un resultado que aún no se ha computado (similar a las Promesas).",
       "codeSnippet": "fut = asyncio.Future()\nfut.set_result('Done!')\nprint(await fut)",
       "typingStyle": "full",
-      "tags": ["python", "asyncio"],
-      "concepts": ["promises"],
+      "tags": [
+        "python",
+        "asyncio"
+      ],
+      "concepts": [
+        "promesas"
+      ],
       "estimatedDuration": 110,
-      "difficultyScore": 85
+      "difficultyScore": 85,
+      "category": "async"
     },
     {
       "id": "py-adv-rt-025",
-      "title": "Type Hinting: Generic",
-      "description": "Custom generic classes.",
+      "title": "Type Hinting: Genérico",
+      "description": "Clases genéricas personalizadas.",
+      "context": "Usa TypeVar y Generic para crear componentes que funcionan con múltiples tipos.",
       "codeSnippet": "from typing import TypeVar, Generic\nT = TypeVar('T')\nclass Box(Generic[T]):\n    def __init__(self, val: T): self.val = val",
       "typingStyle": "full",
-      "tags": ["python", "typing"],
-      "concepts": ["generics"],
+      "tags": [
+        "python",
+        "tipado"
+      ],
+      "concepts": [
+        "genéricos"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 78
+      "difficultyScore": 78,
+      "category": "validation"
     },
     {
       "id": "py-adv-rt-026",
-      "title": "Weakref: Memory Management",
-      "description": "Avoid circular references.",
+      "title": "Weakref: Gestión de Memoria",
+      "description": "Evita referencias circulares.",
+      "context": "Las referencias débiles no impiden que el objeto sea recolectado por el GC.",
       "codeSnippet": "import weakref\nclass HeavyObj: pass\nobj = HeavyObj()\nr = weakref.ref(obj)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["weak references"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "referencias débiles"
+      ],
       "estimatedDuration": 120,
-      "difficultyScore": 88
+      "difficultyScore": 88,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-027",
       "title": "Dunder: __call__",
-      "description": "Make instances callable.",
+      "description": "Hace que las instancias sean ejecutables.",
+      "context": "Permite que un objeto se comporte como una función (funtores).",
       "codeSnippet": "class Adder:\n    def __init__(self, n): self.n = n\n    def __call__(self, x): return self.n + x",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["functors"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "funtores"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-028",
-      "title": "Pathlib: Reading",
-      "description": "Quick file read.",
+      "title": "Pathlib: Lectura Rápida",
+      "description": "Lectura directa de archivos.",
+      "context": "Método conveniente para obtener todo el contenido de un archivo en un string.",
       "codeSnippet": "from pathlib import Path\ntext = Path('README.md').read_text()",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["io"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "entrada/salida (io)"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-029",
       "title": "Itertools: Product",
-      "description": "Cartesian product.",
+      "description": "Producto cartesiano.",
+      "context": "Genera todas las combinaciones posibles entre varios conjuntos de datos.",
       "codeSnippet": "from itertools import product\nfor x in product([1, 2], ['a', 'b']):\n    print(x)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["combinatorics"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "combinatoria"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 62
+      "difficultyScore": 62,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-030",
-      "title": "Dicts: Defaultdict Nested",
-      "description": "Auto-creating nested dicts.",
+      "title": "Dicts: Defaultdict Anidado",
+      "description": "Creación automática de diccionarios anidados.",
+      "context": "Técnica recursiva para generar estructuras de datos profundas sin errores de clave.",
       "codeSnippet": "def tree(): return defaultdict(tree)\ndata = tree()\ndata['a']['b'] = 1",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["recursion"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "recursión"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-031",
-      "title": "Performance: Caching Method",
-      "description": "Cached property.",
+      "title": "Rendimiento: Método Cacheado",
+      "description": "Propiedad con caché.",
+      "context": "Almacena el resultado de una computación pesada tras la primera llamada.",
       "codeSnippet": "from functools import cached_property\nclass Dataset:\n    @cached_property\n    def results(self):\n        return compute_heavy()",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["optimization"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "optimización"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 68
+      "difficultyScore": 68,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-032",
-      "title": "Context: ExitStack Files",
-      "description": "Safe bulk file opening.",
+      "title": "Contexto: ExitStack para Archivos",
+      "description": "Apertura segura de archivos en masa.",
+      "context": "Garantiza que todos los archivos abiertos se cierren correctamente, incluso si ocurre un error.",
       "codeSnippet": "with ExitStack() as stack:\n    fds = [stack.enter_context(open(p)) for p in paths]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["io"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "entrada/salida (io)"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 75
+      "difficultyScore": 75,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-033",
       "title": "Testing: Mock Patch",
-      "description": "Mocking external calls.",
+      "description": "Simulación de llamadas externas.",
+      "context": "Sustituye funciones o clases reales por objetos simulados durante los tests.",
       "codeSnippet": "from unittest.mock import patch\nwith patch('requests.get') as mock_get:\n    mock_get.return_value.status_code = 200",
       "typingStyle": "full",
-      "tags": ["python", "mock"],
-      "concepts": ["unit testing"],
+      "tags": [
+        "python",
+        "simulación (mock)"
+      ],
+      "concepts": [
+        "pruebas unitarias"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 78
+      "difficultyScore": 78,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-034",
-      "title": "Itertools: Izip_longest",
-      "description": "Zip with fillvalue.",
+      "title": "Itertools: Zip Longest",
+      "description": "Zip con valor de relleno.",
+      "context": "Itera sobre varios conjuntos hasta que el más largo termine, rellenando huecos.",
       "codeSnippet": "from itertools import zip_longest\nfor x in zip_longest([1, 2], [1], fillvalue=0):\n    print(x)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["iterators"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "iteradores"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 64
+      "difficultyScore": 64,
+      "category": "algorithms"
     },
     {
       "id": "py-adv-rt-035",
-      "title": "Meta: Inspecting Class",
-      "description": "Find all methods of a class.",
+      "title": "Meta: Inspeccionando Clases",
+      "description": "Encuentra todos los métodos de una clase.",
+      "context": "Usa el módulo inspect para analizar dinámicamente la estructura de una clase.",
       "codeSnippet": "import inspect\nmethods = inspect.getmembers(MyClass, predicate=inspect.isfunction)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["introspection"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "introspección"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "classes"
     }
   ]
 }

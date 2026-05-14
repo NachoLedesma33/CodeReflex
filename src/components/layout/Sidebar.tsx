@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ProgrammingLanguage, DifficultyLevel, ExerciseType, Exercise, ExerciseCategory } from '@/types';
 import { cn } from '@/lib/utils';
+import { LanguageIcon } from '@/components/ui/LanguageIcon';
 import {
   ChevronDown,
   ChevronRight,
@@ -32,61 +33,64 @@ interface SidebarProps {
   onSelectExercise?: (exercise: Exercise) => void;
 }
 
-const LANGUAGES: { value: ProgrammingLanguage; label: string; icon: string }[] = [
-  { value: 'javascript', label: 'JavaScript', icon: '🟨' },
-  { value: 'typescript', label: 'TypeScript', icon: '🔷' },
-  { value: 'python', label: 'Python', icon: '🐍' },
-  { value: 'java', label: 'Java', icon: '☕' },
+const LANGUAGES: { value: ProgrammingLanguage; label: string }[] = [
+  { value: 'javascript', label: 'JavaScript' },
+  { value: 'typescript', label: 'TypeScript' },
+  { value: 'python', label: 'Python' },
+  { value: 'java', label: 'Java' },
 ];
 
 const LEVELS: { value: DifficultyLevel; label: string; color: string }[] = [
-  { value: 'fundamentals', label: 'Fundamentals', color: 'text-green-400 bg-green-500/20' },
-  { value: 'intermediate', label: 'Intermediate', color: 'text-yellow-400 bg-yellow-500/20' },
-  { value: 'interview', label: 'Interview', color: 'text-orange-400 bg-orange-500/20' },
-  { value: 'advanced', label: 'Advanced', color: 'text-red-400 bg-red-500/20' },
+  { value: 'fundamentals', label: 'Fundamentos', color: 'text-green-400 bg-green-500/20' },
+  { value: 'intermediate', label: 'Intermedio', color: 'text-yellow-400 bg-yellow-500/20' },
+  { value: 'interview', label: 'Entrevista', color: 'text-orange-400 bg-orange-500/20' },
+  { value: 'advanced', label: 'Avanzado', color: 'text-red-400 bg-red-500/20' },
 ];
 
 const MODES: { value: ExerciseType; label: string; icon: React.ReactNode }[] = [
-  { value: 'reflex-typing', label: 'Reflex Typing', icon: <Keyboard className="w-4 h-4" /> },
-  { value: 'guided-problem', label: 'Guided Problem', icon: <BookOpen className="w-4 h-4" /> },
+  { value: 'reflex-typing', label: 'Práctica Reflex', icon: <Keyboard className="w-4 h-4" /> },
+  { value: 'guided-problem', label: 'Problema Guiado', icon: <BookOpen className="w-4 h-4" /> },
 ];
 
 const CATEGORIES: { value: ExerciseCategory; label: string }[] = [
-  { value: 'algorithms', label: 'Algorithms' },
-  { value: 'api-design', label: 'API Design' },
-  { value: 'architecture', label: 'Architecture' },
+  { value: 'variables', label: 'Variables' },
+  { value: 'operators', label: 'Operadores' },
+  { value: 'control-flow', label: 'Control de Flujo' },
+  { value: 'algorithms', label: 'Algoritmos' },
+  { value: 'api-design', label: 'Diseño de API' },
+  { value: 'architecture', label: 'Arquitectura' },
   { value: 'arrays', label: 'Arrays' },
   { value: 'async', label: 'Async' },
-  { value: 'authentication', label: 'Authentication' },
-  { value: 'automation', label: 'Automation' },
-  { value: 'backend-architecture', label: 'Backend Arch' },
-  { value: 'browser-api', label: 'Browser API' },
-  { value: 'classes', label: 'Classes' },
-  { value: 'cloud-architecture', label: 'Cloud Arch' },
-  { value: 'concurrency', label: 'Concurrency' },
-  { value: 'databases', label: 'Databases' },
-  { value: 'data-processing', label: 'Data Processing' },
-  { value: 'data-structures', label: 'Data Structures' },
-  { value: 'distributed-systems', label: 'Distributed Sys' },
-  { value: 'functional-programming', label: 'FP' },
-  { value: 'functions', label: 'Functions' },
-  { value: 'infrastructure', label: 'Infrastructure' },
-  { value: 'loops', label: 'Loops' },
-  { value: 'microservices', label: 'Microservices' },
-  { value: 'monitoring', label: 'Monitoring' },
-  { value: 'objects', label: 'Objects' },
-  { value: 'patterns', label: 'Patterns' },
-  { value: 'performance', label: 'Performance' },
-  { value: 'realtime', label: 'Realtime' },
-  { value: 'resilience', label: 'Resilience' },
-  { value: 'runtime-systems', label: 'Runtime Systems' },
-  { value: 'search', label: 'Search' },
-  { value: 'security', label: 'Security' },
-  { value: 'state-management', label: 'State Mgmt' },
+  { value: 'authentication', label: 'Autenticación' },
+  { value: 'automation', label: 'Automatización' },
+  { value: 'backend-architecture', label: 'Arquitectura Backend' },
+  { value: 'browser-api', label: 'API del Navegador' },
+  { value: 'classes', label: 'Clases' },
+  { value: 'cloud-architecture', label: 'Arquitectura Cloud' },
+  { value: 'concurrency', label: 'Concurrencia' },
+  { value: 'databases', label: 'Bases de Datos' },
+  { value: 'data-processing', label: 'Procesamiento de Datos' },
+  { value: 'data-structures', label: 'Estructuras de Datos' },
+  { value: 'distributed-systems', label: 'Sistemas Distribuidos' },
+  { value: 'functional-programming', label: 'Prog. Funcional' },
+  { value: 'functions', label: 'Funciones' },
+  { value: 'infrastructure', label: 'Infraestructura' },
+  { value: 'loops', label: 'Bucles' },
+  { value: 'microservices', label: 'Microservicios' },
+  { value: 'monitoring', label: 'Monitoreo' },
+  { value: 'objects', label: 'Objetos' },
+  { value: 'patterns', label: 'Patrones' },
+  { value: 'performance', label: 'Rendimiento' },
+  { value: 'realtime', label: 'Tiempo Real' },
+  { value: 'resilience', label: 'Resiliencia' },
+  { value: 'runtime-systems', label: 'Sistemas Runtime' },
+  { value: 'search', label: 'Búsqueda' },
+  { value: 'security', label: 'Seguridad' },
+  { value: 'state-management', label: 'Gestión de Estado' },
   { value: 'strings', label: 'Strings' },
-  { value: 'system-design', label: 'System Design' },
+  { value: 'system-design', label: 'Diseño de Sistemas' },
   { value: 'testing', label: 'Testing' },
-  { value: 'validation', label: 'Validation' },
+  { value: 'validation', label: 'Validación' },
 ];
 
 export function Sidebar({ className, onSelectExercise }: SidebarProps) {
@@ -190,14 +194,14 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
   return (
     <div className={cn('w-80 h-full bg-zinc-900 border-r border-zinc-800 flex flex-col', className)}>
       <div className="p-3 border-b border-zinc-800 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-zinc-100">Explorer</h2>
+        <h2 className="text-sm font-semibold text-zinc-100">Explorador</h2>
         <div className="flex items-center gap-1">
           <Button
             variant="ghost"
             size="sm"
             onClick={getRandomExercise}
             className="p-1.5"
-            title="Random Exercise"
+            title="Ejercicio Aleatorio"
           >
             <Shuffle className="w-4 h-4" />
           </Button>
@@ -218,7 +222,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-zinc-500" />
             <input
               type="text"
-              placeholder="Search exercises..."
+              placeholder="Buscar ejercicios..."
               value={searchQueryLocal}
               onChange={(e) => setSearchQueryLocal(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
@@ -244,7 +248,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             >
               <span className="flex items-center gap-1">
                 <Filter className="w-3 h-3" />
-                Filters
+                Filtros
               </span>
               {expandedSections.has('filters') ? (
                 <ChevronDown className="w-3 h-3" />
@@ -256,27 +260,28 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             {expandedSections.has('filters') && (
               <div className="space-y-3 pl-1">
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Language</div>
+                  <div className="text-xs text-zinc-600">Lenguaje</div>
                   <div className="flex flex-wrap gap-1">
                     {LANGUAGES.map(lang => (
                       <button
                         key={lang.value}
                         onClick={() => setLanguageFilter(languageFilter === lang.value ? null : lang.value)}
                         className={cn(
-                          'px-2 py-1 text-xs rounded-md transition-colors',
+                          'px-2 py-1 text-xs rounded-md transition-colors flex items-center gap-1.5',
                           languageFilter === lang.value
-                            ? 'bg-blue-500/20 text-blue-400'
-                            : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
+                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                            : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400 border border-transparent'
                         )}
                       >
-                        {lang.icon} {lang.label}
+                        <LanguageIcon language={lang.value} size={16} />
+                        {lang.label}
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Difficulty</div>
+                  <div className="text-xs text-zinc-600">Dificultad</div>
                   <div className="flex flex-wrap gap-1">
                     {LEVELS.map(level => (
                       <button
@@ -296,7 +301,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 </div>
 
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Mode</div>
+                  <div className="text-xs text-zinc-600">Modo</div>
                   <div className="flex gap-1">
                     {MODES.map(m => (
                       <button
@@ -317,7 +322,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 </div>
 
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Category</div>
+                  <div className="text-xs text-zinc-600">Categoría</div>
                   <div className="flex flex-wrap gap-1 max-h-32 overflow-y-auto">
                     {(() => {
                       // Obtenemos todas las categorías disponibles para el nivel actual (ignorando el filtro de categoría)
@@ -360,7 +365,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                     className="w-full text-xs"
                   >
                     <X className="w-3 h-3 mr-1" />
-                    Clear Filters
+                    Limpiar Filtros
                   </Button>
                 )}
               </div>
@@ -371,7 +376,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             <div className="bg-zinc-800/50 rounded-lg p-3 space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-zinc-500">
-                  {levelFilter || 'All'} Progress
+                  Progreso {levelFilter || 'Total'}
                 </span>
                 <span className="text-zinc-400">
                   {currentLevelInfo.completed}/{currentLevelInfo.total}
@@ -395,7 +400,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             >
               <span className="flex items-center gap-1">
                 <Star className="w-3 h-3" />
-                Favorites ({favoritesList.length})
+                Favoritos ({favoritesList.length})
               </span>
               {expandedSections.has('favorites') ? (
                 <ChevronDown className="w-3 h-3" />
@@ -420,7 +425,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                   ))
                 ) : (
                   <div className="text-xs text-zinc-600 italic p-2">
-                    No favorites yet
+                    Sin favoritos aún
                   </div>
                 )}
               </div>
@@ -434,7 +439,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             >
               <span className="flex items-center gap-1">
                 <TrendingUp className="w-3 h-3" />
-                Recommended
+                Recomendados
               </span>
               {expandedSections.has('recommendations') ? (
                 <ChevronDown className="w-3 h-3" />
@@ -466,7 +471,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             >
               <span className="flex items-center gap-1">
                 <Keyboard className="w-3 h-3" />
-                All Exercises ({filteredExercises.length})
+                Todos los Ejercicios ({filteredExercises.length})
               </span>
               {expandedSections.has('list') ? (
                 <ChevronDown className="w-3 h-3" />
@@ -509,7 +514,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
           onClick={getRandomExercise}
         >
           <Shuffle className="w-4 h-4 mr-2" />
-          Random Exercise
+          Ejercicio Aleatorio
         </Button>
       </div>
     </div>

@@ -1,606 +1,607 @@
-[{
-  "metadata": {
-    "language": "javascript",
-    "mode": "reflex-typing",
-    "version": "1.0.0",
-    "lastUpdated": "2026-05-09",
-    "totalExercises": 22
-  },
-  "exercises": [
-    {
-      "id": "js-interview-system-design-cache-001",
-      "title": "Distributed Cache Simulation",
-      "description": "Simulate a distributed cache layer with node balancing and key distribution.",
-      "context": "Distributed caches are used in scalable backend systems, CDNs, and high-performance APIs.",
-      "category": "system-design",
-      "difficultyScore": 82,
-      "estimatedDuration": 210,
-      "typingStyle": "full",
-      "tags": [
-        "distributed-systems",
-        "cache",
-        "backend",
-        "scalability"
-      ],
-      "concepts": [
-        "consistent-hashing",
-        "distributed-cache",
-        "system-design"
-      ],
-      "technicalNotes": [
-        "Distributed caches reduce database load.",
-        "Keys are distributed across nodes.",
-        "Scalable systems rely on cache balancing."
-      ],
-      "codeSnippet": "class CacheNode {\n  constructor(name) {\n    this.name = name;\n    this.storage = new Map();\n  }\n\n  set(key, value) {\n    this.storage.set(key, value);\n  }\n\n  get(key) {\n    return this.storage.get(key);\n  }\n}\n\nclass DistributedCache {\n  constructor(nodes) {\n    this.nodes = nodes;\n  }\n\n  getNode(key) {\n    const index = key.length % this.nodes.length;\n\n    return this.nodes[index];\n  }\n\n  set(key, value) {\n    const node = this.getNode(key);\n\n    node.set(key, value);\n  }\n\n  get(key) {\n    const node = this.getNode(key);\n\n    return node.get(key);\n  }\n}\n\nconst cache = new DistributedCache([\n  new CacheNode('Node-A'),\n  new CacheNode('Node-B')\n]);\n\ncache.set('user:1', 'Nacho');\n\nconsole.log(cache.get('user:1'));\n"
+[
+  {
+    "metadata": {
+      "language": "javascript",
+      "mode": "reflex-typing",
+      "version": "1.0.0",
+      "lastUpdated": "2026-05-14",
+      "totalExercises": 22
     },
-    {
-      "id": "js-interview-load-balancer-002",
-      "title": "Round Robin Load Balancer",
-      "description": "Implement a simplified round-robin load balancing strategy.",
-      "context": "Load balancers distribute traffic between servers in scalable infrastructures.",
-      "category": "system-design",
-      "difficultyScore": 78,
-      "estimatedDuration": 195,
-      "typingStyle": "full",
-      "tags": [
-        "load-balancer",
-        "backend",
-        "infrastructure",
-        "scalability"
-      ],
-      "concepts": [
-        "round-robin",
-        "request-distribution",
-        "server-balancing"
-      ],
-      "technicalNotes": [
-        "Load balancers distribute traffic evenly.",
-        "Round-robin cycles through servers sequentially.",
-        "Essential in scalable infrastructures."
-      ],
-      "codeSnippet": "class LoadBalancer {\n  constructor(servers) {\n    this.servers = servers;\n    this.current = 0;\n  }\n\n  getServer() {\n    const server = this.servers[this.current];\n\n    this.current = (this.current + 1) % this.servers.length;\n\n    return server;\n  }\n}\n\nconst balancer = new LoadBalancer([\n  'Server-1',\n  'Server-2',\n  'Server-3'\n]);\n\nconsole.log(balancer.getServer());\nconsole.log(balancer.getServer());\nconsole.log(balancer.getServer());\n"
-    },
-    {
-      "id": "js-interview-realtime-chat-003",
-      "title": "Realtime Chat Room Engine",
-      "description": "Build the core logic behind a realtime multi-room chat system.",
-      "context": "Realtime messaging systems power chats, collaboration platforms, and multiplayer systems.",
-      "category": "realtime",
-      "difficultyScore": 84,
-      "estimatedDuration": 220,
-      "typingStyle": "full",
-      "tags": [
-        "chat",
-        "realtime",
-        "websockets",
-        "backend"
-      ],
-      "concepts": [
-        "rooms",
-        "subscriptions",
-        "message-broadcasting"
-      ],
-      "technicalNotes": [
-        "Chat systems organize users into rooms.",
-        "Broadcasting distributes messages to subscribers.",
-        "Realtime systems require efficient event handling."
-      ],
-      "codeSnippet": "class ChatRoom {\n  constructor(name) {\n    this.name = name;\n    this.users = [];\n  }\n\n  join(username) {\n    this.users.push(username);\n\n    console.log(`${username} joined ${this.name}`);\n  }\n\n  sendMessage(username, message) {\n    this.users.forEach((user) => {\n      console.log(`[${this.name}] ${username} -> ${user}: ${message}`);\n    });\n  }\n}\n\nconst room = new ChatRoom('developers');\n\nroom.join('Nacho');\nroom.join('Lucas');\n\nroom.sendMessage('Nacho', 'Deployment completed');\n"
-    },
-    {
-      "id": "js-interview-job-queue-004",
-      "title": "Priority Background Job Queue",
-      "description": "Design a scalable background processing queue with priorities.",
-      "context": "Job queues are critical in scalable backend architectures and distributed systems.",
-      "category": "backend-architecture",
-      "difficultyScore": 86,
-      "estimatedDuration": 225,
-      "typingStyle": "full",
-      "tags": [
-        "queues",
-        "background-jobs",
-        "backend",
-        "scalability"
-      ],
-      "concepts": [
-        "priority-queues",
-        "background-processing",
-        "worker-systems"
-      ],
-      "technicalNotes": [
-        "Background queues process tasks asynchronously.",
-        "Priority systems optimize critical workflows.",
-        "Worker systems improve scalability."
-      ],
-      "codeSnippet": "class JobQueue {\n  constructor() {\n    this.jobs = [];\n  }\n\n  add(job, priority) {\n    this.jobs.push({ job, priority });\n\n    this.jobs.sort((a, b) => {\n      return b.priority - a.priority;\n    });\n  }\n\n  process() {\n    while (this.jobs.length > 0) {\n      const currentJob = this.jobs.shift();\n\n      currentJob.job();\n    }\n  }\n}\n\nconst jobs = new JobQueue();\n\njobs.add(() => {\n  console.log('Send email confirmation');\n}, 1);\n\njobs.add(() => {\n  console.log('Process payment');\n}, 10);\n\njobs.process();\n"
-    },
-    {
-      "id": "js-interview-api-gateway-005",
-      "title": "API Gateway Request Router",
-      "description": "Simulate an API Gateway responsible for routing requests to services.",
-      "context": "API gateways centralize authentication, routing, and monitoring in microservice architectures.",
-      "category": "microservices",
-      "difficultyScore": 88,
-      "estimatedDuration": 230,
-      "typingStyle": "full",
-      "tags": [
-        "api-gateway",
-        "microservices",
-        "routing",
-        "backend"
-      ],
-      "concepts": [
-        "service-routing",
-        "gateway-pattern",
-        "request-forwarding"
-      ],
-      "technicalNotes": [
-        "API gateways centralize traffic management.",
-        "Routing directs requests to services.",
-        "Microservice architectures rely heavily on gateways."
-      ],
-      "codeSnippet": "class APIGateway {\n  constructor() {\n    this.routes = {};\n  }\n\n  register(path, handler) {\n    this.routes[path] = handler;\n  }\n\n  handleRequest(path, payload) {\n    const routeHandler = this.routes[path];\n\n    if (!routeHandler) {\n      console.log('Route not found');\n\n      return;\n    }\n\n    return routeHandler(payload);\n  }\n}\n\nconst gateway = new APIGateway();\n\ngateway.register('/users', () => {\n  return 'Users Service';\n});\n\nconsole.log(gateway.handleRequest('/users'));\n"
-    },
-    {
-      "id": "js-interview-event-bus-006",
-      "title": "Microservice Event Bus",
-      "description": "Implement a lightweight event bus for communication between services.",
-      "context": "Event buses are used in microservices, realtime architectures, and scalable distributed systems.",
-      "category": "distributed-systems",
-      "difficultyScore": 89,
-      "estimatedDuration": 235,
-      "typingStyle": "full",
-      "tags": [
-        "event-bus",
-        "microservices",
-        "events",
-        "backend"
-      ],
-      "concepts": [
-        "pub-sub",
-        "event-driven-architecture",
-        "service-communication"
-      ],
-      "technicalNotes": [
-        "Pub/Sub decouples services.",
-        "Event-driven systems improve scalability.",
-        "Event buses centralize communication."
-      ],
-      "codeSnippet": "class EventBus {\n  constructor() {\n    this.listeners = {};\n  }\n\n  subscribe(eventName, listener) {\n    if (!this.listeners[eventName]) {\n      this.listeners[eventName] = [];\n    }\n\n    this.listeners[eventName].push(listener);\n  }\n\n  publish(eventName, payload) {\n    const eventListeners = this.listeners[eventName] || [];\n\n    eventListeners.forEach((listener) => {\n      listener(payload);\n    });\n  }\n}\n\nconst bus = new EventBus();\n\nbus.subscribe('user.created', (user) => {\n  console.log(`Sending welcome email to ${user.username}`);\n});\n\nbus.publish('user.created', {\n  username: 'NachoDev'\n});\n"
-    },
-    {
-      "id": "js-interview-session-store-007",
-      "title": "Distributed Session Store",
-      "description": "Create a scalable session storage layer for authenticated users.",
-      "context": "Session stores are fundamental in authentication systems and scalable web applications.",
-      "category": "authentication",
-      "difficultyScore": 83,
-      "estimatedDuration": 215,
-      "typingStyle": "full",
-      "tags": [
-        "sessions",
-        "authentication",
-        "backend",
-        "security"
-      ],
-      "concepts": [
-        "session-storage",
-        "authentication-state",
-        "token-management"
-      ],
-      "technicalNotes": [
-        "Session stores maintain authenticated state.",
-        "Distributed systems require shared session access.",
-        "Security systems depend on session management."
-      ],
-      "codeSnippet": "class SessionStore {\n  constructor() {\n    this.sessions = new Map();\n  }\n\n  create(sessionId, userData) {\n    this.sessions.set(sessionId, {\n      userData,\n      createdAt: Date.now()\n    });\n  }\n\n  get(sessionId) {\n    return this.sessions.get(sessionId);\n  }\n\n  remove(sessionId) {\n    this.sessions.delete(sessionId);\n  }\n}\n\nconst store = new SessionStore();\n\nstore.create('abc123', {\n  username: 'NachoDev'\n});\n\nconsole.log(store.get('abc123'));\n"
-    },
-    {
-      "id": "js-interview-search-index-008",
-      "title": "Inverted Search Index",
-      "description": "Build a simplified inverted index for fast keyword searching.",
-      "context": "Search engines and document systems use inverted indexes for fast lookups.",
-      "category": "search",
-      "difficultyScore": 91,
-      "estimatedDuration": 245,
-      "typingStyle": "full",
-      "tags": [
-        "search-engine",
-        "indexing",
-        "backend",
-        "algorithms"
-      ],
-      "concepts": [
-        "inverted-index",
-        "text-search",
-        "tokenization"
-      ],
-      "technicalNotes": [
-        "Inverted indexes map words to documents.",
-        "Search engines optimize keyword retrieval.",
-        "Tokenization splits searchable text."
-      ],
-      "codeSnippet": "class SearchIndex {\n  constructor() {\n    this.index = {};\n  }\n\n  add(documentId, content) {\n    const words = content.toLowerCase().split(' ');\n\n    words.forEach((word) => {\n      if (!this.index[word]) {\n        this.index[word] = new Set();\n      }\n\n      this.index[word].add(documentId);\n    });\n  }\n\n  search(word) {\n    return [...(this.index[word.toLowerCase()] || [])];\n  }\n}\n\nconst searchEngine = new SearchIndex();\n\nsearchEngine.add('doc-1', 'javascript backend architecture');\nsearchEngine.add('doc-2', 'typescript frontend patterns');\n\nconsole.log(searchEngine.search('backend'));\n"
-    },
-    {
-      "id": "js-interview-message-broker-009",
-      "title": "Reliable Message Broker",
-      "description": "Implement a basic reliable message broker with acknowledgements.",
-      "context": "Message brokers coordinate communication between distributed services.",
-      "category": "distributed-systems",
-      "difficultyScore": 92,
-      "estimatedDuration": 250,
-      "typingStyle": "full",
-      "tags": [
-        "message-broker",
-        "queues",
-        "distributed-systems",
-        "backend"
-      ],
-      "concepts": [
-        "message-queues",
-        "acknowledgements",
-        "distributed-processing"
-      ],
-      "technicalNotes": [
-        "Message brokers guarantee delivery reliability.",
-        "Acknowledgements confirm successful processing.",
-        "Queues decouple backend services."
-      ],
-      "codeSnippet": "class MessageBroker {\n  constructor() {\n    this.queue = [];\n  }\n\n  publish(message) {\n    this.queue.push({\n      message,\n      acknowledged: false\n    });\n  }\n\n  consume() {\n    const item = this.queue.find((entry) => {\n      return entry.acknowledged === false;\n    });\n\n    if (!item) {\n      return;\n    }\n\n    item.acknowledged = true;\n\n    return item.message;\n  }\n}\n\nconst broker = new MessageBroker();\n\nbroker.publish('Deploy notification');\n\nconsole.log(broker.consume());\n"
-    },
-    {
-      "id": "js-interview-service-discovery-010",
-      "title": "Service Discovery Registry",
-      "description": "Create a registry where services can register and be discovered dynamically.",
-      "context": "Service discovery is a core concept in cloud-native and microservice infrastructures.",
-      "category": "cloud-architecture",
-      "difficultyScore": 90,
-      "estimatedDuration": 240,
-      "typingStyle": "full",
-      "tags": [
-        "service-discovery",
-        "microservices",
-        "cloud",
-        "backend"
-      ],
-      "concepts": [
-        "service-registry",
-        "dynamic-discovery",
-        "cloud-patterns"
-      ],
-      "technicalNotes": [
-        "Service discovery enables dynamic scaling.",
-        "Registries centralize service metadata.",
-        "Cloud infrastructures depend on discovery mechanisms."
-      ],
-      "codeSnippet": "class ServiceRegistry {\n  constructor() {\n    this.services = {};\n  }\n\n  register(serviceName, address) {\n    this.services[serviceName] = address;\n  }\n\n  discover(serviceName) {\n    return this.services[serviceName];\n  }\n}\n\nconst registry = new ServiceRegistry();\n\nregistry.register('auth-service', 'http://localhost:4000');\nregistry.register('payment-service', 'http://localhost:5000');\n\nconsole.log(registry.discover('payment-service'));\n"
-    },
-    {
-      "id": "js-interview-circuit-breaker-011",
-      "title": "Circuit Breaker Pattern",
-      "description": "Protect services from cascading failures using a circuit breaker mechanism.",
-      "context": "Circuit breakers are essential in resilient distributed systems and microservice architectures.",
-      "category": "resilience",
-      "difficultyScore": 93,
-      "estimatedDuration": 255,
-      "typingStyle": "full",
-      "tags": [
-        "circuit-breaker",
-        "microservices",
-        "fault-tolerance",
-        "backend"
-      ],
-      "concepts": [
-        "failure-detection",
-        "service-protection",
-        "resilience-patterns"
-      ],
-      "technicalNotes": [
-        "Circuit breakers prevent repeated failing requests.",
-        "Resilience patterns improve system stability.",
-        "Distributed systems require fault tolerance."
-      ],
-      "codeSnippet": "class CircuitBreaker {\n  constructor(limit) {\n    this.limit = limit;\n    this.failures = 0;\n    this.open = false;\n  }\n\n  async execute(action) {\n    if (this.open) {\n      console.log('Circuit is open');\n\n      return;\n    }\n\n    try {\n      const result = await action();\n\n      this.failures = 0;\n\n      return result;\n    } catch (error) {\n      this.failures++;\n\n      if (this.failures >= this.limit) {\n        this.open = true;\n      }\n\n      console.log('Request failed');\n    }\n  }\n}\n\nconst breaker = new CircuitBreaker(3);\n\nbreaker.execute(async () => {\n  throw new Error('Server unavailable');\n});\n"
-    },
-    {
-      "id": "js-interview-token-bucket-012",
-      "title": "Token Bucket Rate Limiter",
-      "description": "Implement a token bucket algorithm for API request limiting.",
-      "context": "Token bucket algorithms are widely used in APIs, gateways, and cloud infrastructures.",
-      "category": "security",
-      "difficultyScore": 87,
-      "estimatedDuration": 225,
-      "typingStyle": "full",
-      "tags": [
-        "rate-limiting",
-        "token-bucket",
-        "apis",
-        "backend"
-      ],
-      "concepts": [
-        "rate-control",
-        "token-bucket",
-        "request-limiting"
-      ],
-      "technicalNotes": [
-        "Token buckets regulate traffic bursts.",
-        "Rate limiting protects infrastructure.",
-        "APIs use these algorithms for stability."
-      ],
-      "codeSnippet": "class TokenBucket {\n  constructor(capacity, refillRate) {\n    this.capacity = capacity;\n    this.tokens = capacity;\n    this.refillRate = refillRate;\n\n    setInterval(() => {\n      this.tokens = Math.min(\n        this.capacity,\n        this.tokens + this.refillRate\n      );\n    }, 1000);\n  }\n\n  consume() {\n    if (this.tokens <= 0) {\n      console.log('Rate limit exceeded');\n\n      return false;\n    }\n\n    this.tokens--;\n\n    console.log('Request accepted');\n\n    return true;\n  }\n}\n\nconst limiter = new TokenBucket(5, 1);\n\nlimiter.consume();\n"
-    },
-    {
-      "id": "js-interview-distributed-lock-013",
-      "title": "Distributed Lock Manager",
-      "description": "Simulate a distributed locking system for shared resources.",
-      "context": "Distributed locks prevent race conditions in scalable backend systems.",
-      "category": "distributed-systems",
-      "difficultyScore": 94,
-      "estimatedDuration": 260,
-      "typingStyle": "full",
-      "tags": [
-        "distributed-locks",
-        "concurrency",
-        "backend",
-        "synchronization"
-      ],
-      "concepts": [
-        "locking",
-        "race-conditions",
-        "distributed-coordination"
-      ],
-      "technicalNotes": [
-        "Locks coordinate shared resource access.",
-        "Distributed systems require synchronization.",
-        "Race conditions can corrupt shared state."
-      ],
-      "codeSnippet": "class LockManager {\n  constructor() {\n    this.locks = new Set();\n  }\n\n  acquire(resource) {\n    if (this.locks.has(resource)) {\n      console.log('Resource is locked');\n\n      return false;\n    }\n\n    this.locks.add(resource);\n\n    console.log(`Lock acquired for ${resource}`);\n\n    return true;\n  }\n\n  release(resource) {\n    this.locks.delete(resource);\n\n    console.log(`Lock released for ${resource}`);\n  }\n}\n\nconst manager = new LockManager();\n\nmanager.acquire('payment-service');\nmanager.release('payment-service');\n"
-    },
-    {
-      "id": "js-interview-stream-processor-014",
-      "title": "Realtime Stream Processor",
-      "description": "Process realtime event streams with filtering and transformations.",
-      "context": "Stream processors power analytics pipelines, monitoring systems, and realtime platforms.",
-      "category": "realtime",
-      "difficultyScore": 90,
-      "estimatedDuration": 245,
-      "typingStyle": "full",
-      "tags": [
-        "stream-processing",
-        "analytics",
-        "events",
-        "backend"
-      ],
-      "concepts": [
-        "event-streams",
-        "data-pipelines",
-        "realtime-processing"
-      ],
-      "technicalNotes": [
-        "Streams process continuous data flows.",
-        "Realtime analytics depend on stream pipelines.",
-        "Filtering transforms incoming events."
-      ],
-      "codeSnippet": "class StreamProcessor {\n  constructor() {\n    this.handlers = [];\n  }\n\n  use(handler) {\n    this.handlers.push(handler);\n  }\n\n  process(event) {\n    return this.handlers.reduce((current, handler) => {\n      return handler(current);\n    }, event);\n  }\n}\n\nconst processor = new StreamProcessor();\n\nprocessor.use((event) => {\n  return {\n    ...event,\n    processed: true\n  };\n});\n\nconsole.log(processor.process({\n  type: 'USER_LOGIN'\n}));\n"
-    },
-    {
-      "id": "js-interview-auth-provider-015",
-      "title": "Authentication Provider Simulator",
-      "description": "Create a simplified authentication provider with token validation.",
-      "context": "Authentication providers are core components in modern SaaS platforms and APIs.",
-      "category": "authentication",
-      "difficultyScore": 88,
-      "estimatedDuration": 235,
-      "typingStyle": "full",
-      "tags": [
-        "authentication",
-        "tokens",
-        "security",
-        "backend"
-      ],
-      "concepts": [
-        "token-validation",
-        "authentication-flows",
-        "session-security"
-      ],
-      "technicalNotes": [
-        "Auth providers validate user identity.",
-        "Tokens secure authenticated requests.",
-        "Modern APIs rely heavily on token systems."
-      ],
-      "codeSnippet": "class AuthProvider {\n  constructor() {\n    this.tokens = new Map();\n  }\n\n  generateToken(userId) {\n    const token = `${userId}-${Date.now()}`;\n\n    this.tokens.set(token, userId);\n\n    return token;\n  }\n\n  validate(token) {\n    return this.tokens.has(token);\n  }\n}\n\nconst auth = new AuthProvider();\n\nconst token = auth.generateToken('user-1');\n\nconsole.log(auth.validate(token));\n"
-    },
-    {
-      "id": "js-interview-class-factory-016",
-      "title": "Factory Pattern for Object Creation",
-      "description": "Implement Factory pattern for creating different types of objects based on configuration.",
-      "context": "Factory pattern is used in payment processing, document generation, and plugin systems in enterprise applications.",
-      "category": "classes",
-      "difficultyScore": 42,
-      "estimatedDuration": 120,
-      "typingStyle": "full",
-      "tags": [
-        "classes",
-        "factory",
-        "design-patterns",
-        "creational"
-      ],
-      "concepts": [
-        "factory-method",
-        "object-creation",
-        "polymorphism"
-      ],
-      "technicalNotes": [
-        "Decouples object creation from usage.",
-        "Supports different product types.",
-        "Easy to add new product types."
-      ],
-      "codeSnippet": "class User {\n  constructor(data) {\n    Object.assign(this, data);\n  }\n}\n\nclass Admin extends User {\n  constructor(data) {\n    super(data);\n    this.role = 'admin';\n    this.permissions = ['read', 'write', 'delete'];\n  }\n}\n\nclass Guest extends User {\n  constructor(data) {\n    super(data);\n    this.role = 'guest';\n    this.permissions = ['read'];\n  }\n}\n\nclass UserFactory {\n  static create(type, data) {\n    switch (type) {\n      case 'admin':\n        return new Admin(data);\n      case 'guest':\n        return new Guest(data);\n      default:\n        return new User(data);\n    }\n  }\n}\n\nconst admin = UserFactory.create('admin', { name: 'Nacho' });\nconst guest = UserFactory.create('guest', { name: 'Visitor' });\nconst user = UserFactory.create('user', { name: 'Default' });\n\nconsole.log(admin.role, admin.permissions);\nconsole.log(guest.role, guest.permissions);\nconsole.log(user.role);\n"
-    },
-    {
-      "id": "js-interview-algorithms-lru-016",
-      "title": "LRU Cache Implementation",
-      "description": "Implement Least Recently Used cache with O(1) operations for interviews.",
-      "context": "LRU caches are used in database query caching, CDN caching, and memory management in operating systems.",
-      "category": "algorithms",
-      "difficultyScore": 58,
-      "estimatedDuration": 170,
-      "typingStyle": "full",
-      "tags": [
-        "algorithms",
-        "lru-cache",
-        "hashmap",
-        "doubly-linked-list"
-      ],
-      "concepts": [
-        "time-space-tradeoff",
-        "cache-eviction",
-        "o(1)-operations"
-      ],
-      "technicalNotes": [
-        "HashMap for O(1) get/put.",
-        "Doubly linked list maintains order.",
-        "Move to front on access."
-      ],
-      "codeSnippet": "class LRUCache {\n  constructor(capacity) {\n    this.capacity = capacity;\n    this.cache = new Map();\n  }\n\n  get(key) {\n    if (!this.cache.has(key)) return -1;\n    \n    const value = this.cache.get(key);\n    this.cache.delete(key);\n    this.cache.set(key, value);\n    \n    return value;\n  }\n\n  put(key, value) {\n    if (this.cache.has(key)) {\n      this.cache.delete(key);\n    } else if (this.cache.size >= this.capacity) {\n      const firstKey = this.cache.keys().next().value;\n      this.cache.delete(firstKey);\n    }\n    \n    this.cache.set(key, value);\n  }\n\n  getStats() {\n    return {\n      size: this.cache.size,\n      keys: [...this.cache.keys()]\n    };\n  }\n}\n\nconst cache = new LRUCache(3);\ncache.put('a', 1);\ncache.put('b', 2);\ncache.put('c', 3);\nconsole.log(cache.get('a'));\ncache.put('d', 4);\nconsole.log(cache.get('b'));\nconsole.log(cache.getStats());\n"
-    },
-    {
-      "id": "js-interview-data-structures-heap-016",
-      "title": "Min Heap Implementation",
-      "description": "Implement a Min Heap data structure for priority queue operations.",
-      "context": "Heaps are used in Dijkstra's algorithm, heap sort, priority queues, and finding kth largest/smallest elements.",
-      "category": "data-structures",
-      "difficultyScore": 56,
-      "estimatedDuration": 160,
-      "typingStyle": "full",
-      "tags": [
-        "data-structures",
-        "heap",
-        "priority-queue",
-        "binary-tree"
-      ],
-      "concepts": [
-        "heap-property",
-        "heapify",
-        "priority-queue"
-      ],
-      "technicalNotes": [
-        "Parent always smaller than children.",
-        "Array representation: parent at i, children at 2i+1, 2i+2.",
-        "Extract min is O(log n)."
-      ],
-      "codeSnippet": "class MinHeap {\n  constructor() {\n    this.heap = [];\n  }\n\n  parent(i) { return Math.floor((i - 1) / 2); }\n  left(i) { return 2 * i + 1; }\n  right(i) { return 2 * i + 2; }\n\n  insert(val) {\n    this.heap.push(val);\n    this.bubbleUp(this.heap.length - 1);\n  }\n\n  bubbleUp(i) {\n    while (i > 0 && this.heap[this.parent(i)] > this.heap[i]) {\n      [this.heap[i], this.heap[this.parent(i)]] = \n        [this.heap[this.parent(i)], this.heap[i]];\n      i = this.parent(i);\n    }\n  }\n\n  extractMin() {\n    if (this.heap.length === 0) return null;\n    if (this.heap.length === 1) return this.heap.pop();\n\n    const min = this.heap[0];\n    this.heap[0] = this.heap.pop();\n    this.bubbleDown(0);\n    return min;\n  }\n\n  bubbleDown(i) {\n    while (this.left(i) < this.heap.length) {\n      let smallest = this.left(i);\n      if (this.right(i) < this.heap.length && \n          this.heap[this.right(i)] < this.heap[smallest]) {\n        smallest = this.right(i);\n      }\n      if (this.heap[i] <= this.heap[smallest]) break;\n      [this.heap[i], this.heap[smallest]] = \n        [this.heap[smallest], this.heap[i]];\n      i = smallest;\n    }\n  }\n}\n\nconst heap = new MinHeap();\n[5, 3, 8, 1, 2, 7].forEach(v => heap.insert(v));\nconsole.log(heap.extractMin());\nconsole.log(heap.extractMin());\nconsole.log(heap.heap);\n"
-    },
-    {
-      "id": "js-interview-state-management-redux-thunk-016",
-      "title": "Async Actions with Redux Thunk",
-      "description": "Implement async action creators for handling side effects in state management.",
-      "context": "Redux Thunk is used for API calls, async operations, and handling side effects in Redux applications.",
-      "category": "state-management",
-      "difficultyScore": 50,
-      "estimatedDuration": 145,
-      "typingStyle": "full",
-      "tags": [
-        "state-management",
-        "redux",
-        "async",
-        "thunk"
-      ],
-      "concepts": [
-        "async-dispatch",
-        "side-effects",
-        "action-creators"
-      ],
-      "technicalNotes": [
-        "Thunk allows functions in dispatch.",
-        "Handle loading, success, error states.",
-        "Middleware intercepts actions."
-      ],
-      "codeSnippet": "const createAsyncAction = (types) => {\n  return (...args) => {\n    return async (dispatch) => {\n      dispatch({ type: types.pending });\n      try {\n        const result = await args[0]();\n        dispatch({ type: types.success, payload: result });\n        return result;\n      } catch (error) {\n        dispatch({ type: types.failure, payload: error.message });\n        throw error;\n      }\n    };\n  };\n};\n\nconst fetchUserTypes = {\n  pending: 'FETCH_USER_PENDING',\n  success: 'FETCH_USER_SUCCESS',\n  failure: 'FETCH_USER_FAILURE'\n};\n\nconst fetchUser = createAsyncAction(fetchUserTypes)(\n  () => new Promise(resolve => \n    setTimeout(() => resolve({ name: 'Nacho', id: 1 }), 100)\n  )\n);\n\nconst dispatch = action => {\n  console.log('Action:', action.type, action.payload || '');\n};\n\nconsole.log('Dispatching fetchUser...');\ndispatch(fetchUser());\n"
-    },
-    {
-      "id": "js-interview-performance-debounce-016",
-      "title": "Debounce and Throttle Implementation",
-      "description": "Implement debounce and throttle functions for optimizing performance.",
-      "context": "Debounce and throttle are essential for handling scroll events, API calls, and search inputs in modern web apps.",
-      "category": "performance",
-      "difficultyScore": 45,
-      "estimatedDuration": 130,
-      "typingStyle": "full",
-      "tags": [
-        "performance",
-        "debounce",
-        "throttle",
-        "optimization"
-      ],
-      "concepts": [
-        "rate-limiting",
-        "event-handling",
-        "performance-optimization"
-      ],
-      "technicalNotes": [
-        "Debounce: wait until no calls for X ms.",
-        "Throttle: limit calls to once per X ms.",
-        "Crucial for scroll, resize, input events."
-      ],
-      "codeSnippet": "function debounce(fn, delay) {\n  let timeoutId;\n  return (...args) => {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => fn.apply(this, args), delay);\n  };\n}\n\nfunction throttle(fn, limit) {\n  let inThrottle;\n  return (...args) => {\n    if (!inThrottle) {\n      fn.apply(this, args);\n      inThrottle = true;\n      setTimeout(() => inThrottle = false, limit);\n    }\n  };\n}\n\nconst handleSearch = debounce(query => {\n  console.log('Searching:', query);\n}, 300);\n\nconst handleScroll = throttle(() => {\n  console.log('Scroll position:', window.scrollY);\n}, 100);\n\nhandleSearch('h');\nhandleSearch('he');\nhandleSearch('hel');\nhandleSearch('hell');\nhandleSearch('hello');\n"
-    },
-    {
-      "id": "js-interview-architecture-mvc-016",
-      "title": "MVC Architecture Pattern",
-      "description": "Implement Model-View-Controller pattern for structuring applications.",
-      "context": "MVC is the foundation for Rails, Django, Express with EJS, and many other web frameworks.",
-      "category": "architecture",
-      "difficultyScore": 48,
-      "estimatedDuration": 140,
-      "typingStyle": "full",
-      "tags": [
-        "architecture",
-        "mvc",
-        "patterns",
-        "web-frameworks"
-      ],
-      "concepts": [
-        "model-view-controller",
-        "separation-of-concerns",
-        "request-response"
-      ],
-      "technicalNotes": [
-        "Model: data and business logic.",
-        "View: presentation layer.",
-        "Controller: handles user input."
-      ],
-      "codeSnippet": "class Model {\n  constructor() {\n    this.data = {};\n    this.listeners = [];\n  }\n\n  get(key) { return this.data[key]; }\n  set(key, value) {\n    this.data[key] = value;\n    this.notify();\n  }\n\n  subscribe(listener) {\n    this.listeners.push(listener);\n  }\n\n  notify() {\n    this.listeners.forEach(fn => fn(this.data));\n  }\n}\n\nclass View {\n  constructor(model, controller) {\n    this.model = model;\n    this.controller = controller;\n    this.model.subscribe(this.render.bind(this));\n  }\n\n  render(data) {\n    console.log('View updated:', data);\n  }\n\n  handleAction(action) {\n    this.controller.handle(action);\n  }\n}\n\nclass Controller {\n  constructor(model) {\n    this.model = model;\n  }\n\n  handle(action) {\n    if (action.type === 'UPDATE_NAME') {\n      this.model.set('name', action.payload);\n    }\n  }\n}\n\nconst model = new Model();\nconst controller = new Controller(model);\nconst view = new View(model, controller);\n\nview.handleAction({ type: 'UPDATE_NAME', payload: 'Nacho' });\n"
-    },
-    {
-      "id": "js-interview-functional-programming-pipe-016",
-      "title": "Functional Pipe and Compose",
-      "description": "Implement functional programming utilities like pipe and compose for data transformation pipelines.",
-      "context": "Functional composition is used in Redux, Lodash, RxJS, and data processing pipelines.",
-      "category": "functional-programming",
-      "difficultyScore": 44,
-      "estimatedDuration": 125,
-      "typingStyle": "full",
-      "tags": [
-        "functional-programming",
-        "compose",
-        "pipe",
-        "transformation"
-      ],
-      "concepts": [
-        "function-composition",
-        "pure-functions",
-        "data-pipelines"
-      ],
-      "technicalNotes": [
-        "Pipe applies functions left to right.",
-        "Compose applies functions right to left.",
-        "Both enable reusable transformations."
-      ],
-      "codeSnippet": "const pipe = (...fns) => (value) => \n  fns.reduce((acc, fn) => fn(acc), value);\n\nconst compose = (...fns) => (value) => \n  fns.reduceRight((acc, fn) => fn(acc), value);\n\nconst addFive = x => x + 5;\nconst double = x => x * 2;\nconst subtractThree = x => x - 3;\n\nconst piped = pipe(addFive, double, subtractThree);\nconst composed = compose(addFive, double, subtractThree);\n\nconsole.log('Pipe(10):', piped(10));\nconsole.log('Compose(10):', composed(10));\n\nconst processData = pipe(\n  JSON.parse,\n  data => data.filter(item => item.active),\n  items => items.map(item => ({ ...item, score: item.score * 2 })),\n  items => items.sort((a, b) => b.score - a.score)\n);\n\nconst rawData = '[{\"id\":1,\"active\":true,\"score\":10},{\"id\":2,\"active\":false,\"score\":20}]';\nconsole.log(processData(rawData));\n"
-    }
-  ]
-}
+    "exercises": [
+      {
+        "id": "js-interview-system-design-cache-001",
+        "title": "Simulación de Caché Distribuida",
+        "description": "Simula una capa de caché distribuida con balanceo de nodos y distribución de claves.",
+        "context": "Las cachés distribuidas se usan en sistemas backend escalables, CDNs y APIs de alto rendimiento.",
+        "category": "algorithms",
+        "difficultyScore": 82,
+        "estimatedDuration": 210,
+        "typingStyle": "full",
+        "tags": [
+          "sistemas-distribuidos",
+          "caché",
+          "backend",
+          "escalabilidad"
+        ],
+        "concepts": [
+          "hashing-consistente",
+          "caché-distribuida",
+          "diseño-de-sistemas"
+        ],
+        "technicalNotes": [
+          "Las cachés distribuidas reducen la carga de la base de datos.",
+          "Las claves se distribuyen entre los nodos.",
+          "Los sistemas escalables dependen del balanceo de la caché."
+        ],
+        "codeSnippet": "class CacheNode {\n  constructor(name) {\n    this.name = name;\n    this.storage = new Map();\n  }\n\n  set(key, value) {\n    this.storage.set(key, value);\n  }\n\n  get(key) {\n    return this.storage.get(key);\n  }\n}\n\nclass DistributedCache {\n  constructor(nodes) {\n    this.nodes = nodes;\n  }\n\n  getNode(key) {\n    const index = key.length % this.nodes.length;\n\n    return this.nodes[index];\n  }\n\n  set(key, value) {\n    const node = this.getNode(key);\n\n    node.set(key, value);\n  }\n\n  get(key) {\n    const node = this.getNode(key);\n\n    return node.get(key);\n  }\n}\n\nconst cache = new DistributedCache([\n  new CacheNode('Node-A'),\n  new CacheNode('Node-B')\n]);\n\ncache.set('user:1', 'Nacho');\n\nconsole.log(cache.get('user:1'));\n"
+      },
+      {
+        "id": "js-interview-load-balancer-002",
+        "title": "Balanceador de Carga Round Robin",
+        "description": "Implementa una estrategia simplificada de balanceo de carga round-robin.",
+        "context": "Los balanceadores de carga distribuyen el tráfico entre servidores en infraestructuras escalables.",
+        "category": "algorithms",
+        "difficultyScore": 78,
+        "estimatedDuration": 195,
+        "typingStyle": "full",
+        "tags": [
+          "balanceador-de-carga",
+          "backend",
+          "infraestructura",
+          "escalabilidad"
+        ],
+        "concepts": [
+          "round-robin",
+          "distribución-de-peticiones",
+          "balanceo-de-servidores"
+        ],
+        "technicalNotes": [
+          "Los balanceadores de carga distribuyen el tráfico de forma equitativa.",
+          "Round-robin recorre los servidores de forma secuencial.",
+          "Esencial en infraestructuras escalables."
+        ],
+        "codeSnippet": "class LoadBalancer {\n  constructor(servers) {\n    this.servers = servers;\n    this.current = 0;\n  }\n\n  getServer() {\n    const server = this.servers[this.current];\n\n    this.current = (this.current + 1) % this.servers.length;\n\n    return server;\n  }\n}\n\nconst balancer = new LoadBalancer([\n  'Server-1',\n  'Server-2',\n  'Server-3'\n]);\n\nconsole.log(balancer.getServer());\nconsole.log(balancer.getServer());\nconsole.log(balancer.getServer());\n"
+      },
+      {
+        "id": "js-interview-realtime-chat-003",
+        "title": "Motor de Sala de Chat en Tiempo Real",
+        "description": "Construye la lógica central detrás de un sistema de chat multi-sala en tiempo real.",
+        "context": "Los sistemas de mensajería en tiempo real impulsan chats, plataformas de colaboración y sistemas multijugador.",
+        "category": "algorithms",
+        "difficultyScore": 84,
+        "estimatedDuration": 220,
+        "typingStyle": "full",
+        "tags": [
+          "chat",
+          "tiempo-real",
+          "websockets",
+          "backend"
+        ],
+        "concepts": [
+          "salas",
+          "suscripciones",
+          "difusión-de-mensajes"
+        ],
+        "technicalNotes": [
+          "Los sistemas de chat organizan a los usuarios en salas.",
+          "La difusión (broadcasting) distribuye mensajes a los suscriptores.",
+          "Los sistemas en tiempo real requieren un manejo eficiente de eventos."
+        ],
+        "codeSnippet": "class ChatRoom {\n  constructor(name) {\n    this.name = name;\n    this.users = [];\n  }\n\n  join(username) {\n    this.users.push(username);\n\n    console.log(`${username} joined ${this.name}`);\n  }\n\n  sendMessage(username, message) {\n    this.users.forEach((user) => {\n      console.log(`[${this.name}] ${username} -> ${user}: ${message}`);\n    });\n  }\n}\n\nconst room = new ChatRoom('developers');\n\nroom.join('Nacho');\nroom.join('Lucas');\n\nroom.sendMessage('Nacho', 'Deployment completed');\n"
+      },
+      {
+        "id": "js-interview-job-queue-004",
+        "title": "Cola de Trabajos en Segundo Plano con Prioridad",
+        "description": "Diseña una cola de procesamiento en segundo plano escalable con prioridades.",
+        "context": "Las colas de trabajos son críticas en arquitecturas backend escalables y sistemas distribuidos.",
+        "category": "algorithms",
+        "difficultyScore": 86,
+        "estimatedDuration": 225,
+        "typingStyle": "full",
+        "tags": [
+          "colas",
+          "trabajos-en-segundo-plano",
+          "backend",
+          "escalabilidad"
+        ],
+        "concepts": [
+          "colas-de-prioridad",
+          "procesamiento-en-segundo-plano",
+          "sistemas-de-trabajadores"
+        ],
+        "technicalNotes": [
+          "Las colas en segundo plano procesan tareas de forma asíncrona.",
+          "Los sistemas de prioridad optimizan los flujos de trabajo críticos.",
+          "Los sistemas de trabajadores (workers) mejoran la escalabilidad."
+        ],
+        "codeSnippet": "class JobQueue {\n  constructor() {\n    this.jobs = [];\n  }\n\n  add(job, priority) {\n    this.jobs.push({ job, priority });\n\n    this.jobs.sort((a, b) => {\n      return b.priority - a.priority;\n    });\n  }\n\n  process() {\n    while (this.jobs.length > 0) {\n      const currentJob = this.jobs.shift();\n\n      currentJob.job();\n    }\n  }\n}\n\nconst jobs = new JobQueue();\n\njobs.add(() => {\n  console.log('Send email confirmation');\n}, 1);\n\njobs.add(() => {\n  console.log('Process payment');\n}, 10);\n\njobs.process();\n"
+      },
+      {
+        "id": "js-interview-api-gateway-005",
+        "title": "Enrutador de Peticiones de API Gateway",
+        "description": "Simula un API Gateway responsable de enrutar peticiones a los servicios.",
+        "context": "Los API gateways centralizan la autenticación, el enrutamiento y el monitoreo en arquitecturas de microservicios.",
+        "category": "algorithms",
+        "difficultyScore": 88,
+        "estimatedDuration": 230,
+        "typingStyle": "full",
+        "tags": [
+          "api-gateway",
+          "microservicios",
+          "enrutamiento",
+          "backend"
+        ],
+        "concepts": [
+          "enrutamiento-de-servicios",
+          "patrón-gateway",
+          "reenvío-de-peticiones"
+        ],
+        "technicalNotes": [
+          "Los API gateways centralizan la gestión del tráfico.",
+          "El enrutamiento dirige las peticiones a los servicios.",
+          "Las arquitecturas de microservicios dependen en gran medida de los gateways."
+        ],
+        "codeSnippet": "class APIGateway {\n  constructor() {\n    this.routes = {};\n  }\n\n  register(path, handler) {\n    this.routes[path] = handler;\n  }\n\n  handleRequest(path, payload) {\n    const routeHandler = this.routes[path];\n\n    if (!routeHandler) {\n      console.log('Route not found');\n\n      return;\n    }\n\n    return routeHandler(payload);\n  }\n}\n\nconst gateway = new APIGateway();\n\ngateway.register('/users', () => {\n  return 'Users Service';\n});\n\nconsole.log(gateway.handleRequest('/users'));\n"
+      },
+      {
+        "id": "js-interview-event-bus-006",
+        "title": "Bus de Eventos de Microservicios",
+        "description": "Implementa un bus de eventos ligero para la comunicación entre servicios.",
+        "context": "Los buses de eventos se usan en microservicios, arquitecturas en tiempo real y sistemas distribuidos escalables.",
+        "category": "algorithms",
+        "difficultyScore": 89,
+        "estimatedDuration": 235,
+        "typingStyle": "full",
+        "tags": [
+          "bus-de-eventos",
+          "microservicios",
+          "eventos",
+          "backend"
+        ],
+        "concepts": [
+          "pub-sub",
+          "arquitectura-dirigida-por-eventos",
+          "comunicación-entre-servicios"
+        ],
+        "technicalNotes": [
+          "Pub/Sub desacopla los servicios.",
+          "Los sistemas dirigidos por eventos mejoran la escalabilidad.",
+          "Los buses de eventos centralizan la comunicación."
+        ],
+        "codeSnippet": "class EventBus {\n  constructor() {\n    this.listeners = {};\n  }\n\n  subscribe(eventName, listener) {\n    if (!this.listeners[eventName]) {\n      this.listeners[eventName] = [];\n    }\n\n    this.listeners[eventName].push(listener);\n  }\n\n  publish(eventName, payload) {\n    const eventListeners = this.listeners[eventName] || [];\n\n    eventListeners.forEach((listener) => {\n      listener(payload);\n    });\n  }\n}\n\nconst bus = new EventBus();\n\nbus.subscribe('user.created', (user) => {\n  console.log(`Sending welcome email to ${user.username}`);\n});\n\nbus.publish('user.created', {\n  username: 'NachoDev'\n});\n"
+      },
+      {
+        "id": "js-interview-session-store-007",
+        "title": "Almacén de Sesiones Distribuido",
+        "description": "Crea una capa de almacenamiento de sesiones escalable para usuarios autenticados.",
+        "context": "Los almacenes de sesiones son fundamentales en los sistemas de autenticación y aplicaciones web escalables.",
+        "category": "algorithms",
+        "difficultyScore": 83,
+        "estimatedDuration": 215,
+        "typingStyle": "full",
+        "tags": [
+          "sesiones",
+          "autenticación",
+          "backend",
+          "seguridad"
+        ],
+        "concepts": [
+          "almacenamiento-de-sesiones",
+          "estado-de-autenticación",
+          "gestión-de-tokens"
+        ],
+        "technicalNotes": [
+          "Los almacenes de sesiones mantienen el estado autenticado.",
+          "Los sistemas distribuidos requieren acceso compartido a las sesiones.",
+          "Los sistemas de seguridad dependen de la gestión de sesiones."
+        ],
+        "codeSnippet": "class SessionStore {\n  constructor() {\n    this.sessions = new Map();\n  }\n\n  create(sessionId, userData) {\n    this.sessions.set(sessionId, {\n      userData,\n      createdAt: Date.now()\n    });\n  }\n\n  get(sessionId) {\n    return this.sessions.get(sessionId);\n  }\n\n  remove(sessionId) {\n    this.sessions.delete(sessionId);\n  }\n}\n\nconst store = new SessionStore();\n\nstore.create('abc123', {\n  username: 'NachoDev'\n});\n\nconsole.log(store.get('abc123'));\n"
+      },
+      {
+        "id": "js-interview-search-index-008",
+        "title": "Índice de Búsqueda Invertido",
+        "description": "Construye un índice invertido simplificado para búsquedas rápidas por palabras clave.",
+        "context": "Los motores de búsqueda y los sistemas de documentos usan índices invertidos para búsquedas rápidas.",
+        "category": "algorithms",
+        "difficultyScore": 91,
+        "estimatedDuration": 245,
+        "typingStyle": "full",
+        "tags": [
+          "motor-de-búsqueda",
+          "indexación",
+          "backend",
+          "algoritmos"
+        ],
+        "concepts": [
+          "índice-invertido",
+          "búsqueda-de-texto",
+          "tokenización"
+        ],
+        "technicalNotes": [
+          "Los índices invertidos mapean palabras a documentos.",
+          "Los motores de búsqueda optimizan la recuperación de palabras clave.",
+          "La tokenización divide el texto buscable."
+        ],
+        "codeSnippet": "class SearchIndex {\n  constructor() {\n    this.index = {};\n  }\n\n  add(documentId, content) {\n    const words = content.toLowerCase().split(' ');\n\n    words.forEach((word) => {\n      if (!this.index[word]) {\n        this.index[word] = new Set();\n      }\n\n      this.index[word].add(documentId);\n    });\n  }\n\n  search(word) {\n    return [...(this.index[word.toLowerCase()] || [])];\n  }\n}\n\nconst searchEngine = new SearchIndex();\n\nsearchEngine.add('doc-1', 'javascript backend architecture');\nsearchEngine.add('doc-2', 'typescript frontend patterns');\n\nconsole.log(searchEngine.search('backend'));\n"
+      },
+      {
+        "id": "js-interview-message-broker-009",
+        "title": "Broker de Mensajes Confiable",
+        "description": "Implementa un broker de mensajes básico y confiable con confirmaciones (acknowledgements).",
+        "context": "Los brokers de mensajes coordinan la comunicación entre servicios distribuidos.",
+        "category": "algorithms",
+        "difficultyScore": 92,
+        "estimatedDuration": 250,
+        "typingStyle": "full",
+        "tags": [
+          "broker-de-mensajes",
+          "colas",
+          "sistemas-distribuidos",
+          "backend"
+        ],
+        "concepts": [
+          "colas-de-mensajes",
+          "confirmaciones",
+          "procesamiento-distribuido"
+        ],
+        "technicalNotes": [
+          "Los brokers de mensajes garantizan la fiabilidad de la entrega.",
+          "Las confirmaciones (acks) aseguran el procesamiento exitoso.",
+          "Las colas desacoplan los servicios backend."
+        ],
+        "codeSnippet": "class MessageBroker {\n  constructor() {\n    this.queue = [];\n  }\n\n  publish(message) {\n    this.queue.push({\n      message,\n      acknowledged: false\n    });\n  }\n\n  consume() {\n    const item = this.queue.find((entry) => {\n      return entry.acknowledged === false;\n    });\n\n    if (!item) {\n      return;\n    }\n\n    item.acknowledged = true;\n\n    return item.message;\n  }\n}\n\nconst broker = new MessageBroker();\n\nbroker.publish('Deploy notification');\n\nconsole.log(broker.consume());\n"
+      },
+      {
+        "id": "js-interview-service-discovery-010",
+        "title": "Registro de Descubrimiento de Servicios",
+        "description": "Crea un registro donde los servicios puedan registrarse y ser descubiertos dinámicamente.",
+        "context": "El descubrimiento de servicios es un concepto central en las infraestructuras nativas de la nube y de microservicios.",
+        "category": "algorithms",
+        "difficultyScore": 90,
+        "estimatedDuration": 240,
+        "typingStyle": "full",
+        "tags": [
+          "descubrimiento-de-servicios",
+          "microservicios",
+          "cloud",
+          "backend"
+        ],
+        "concepts": [
+          "registro-de-servicios",
+          "descubrimiento-dinámico",
+          "patrones-cloud"
+        ],
+        "technicalNotes": [
+          "El descubrimiento de servicios permite el escalado dinámico.",
+          "Los registros centralizan los metadatos de los servicios.",
+          "Las infraestructuras cloud dependen de los mecanismos de descubrimiento."
+        ],
+        "codeSnippet": "class ServiceRegistry {\n  constructor() {\n    this.services = {};\n  }\n\n  register(serviceName, address) {\n    this.services[serviceName] = address;\n  }\n\n  discover(serviceName) {\n    return this.services[serviceName];\n  }\n}\n\nconst registry = new ServiceRegistry();\n\nregistry.register('auth-service', 'http://localhost:4000');\nregistry.register('payment-service', 'http://localhost:5000');\n\nconsole.log(registry.discover('payment-service'));\n"
+      },
+      {
+        "id": "js-interview-circuit-breaker-011",
+        "title": "Patrón Circuit Breaker",
+        "description": "Protege los servicios de fallos en cascada usando un mecanismo de circuit breaker.",
+        "context": "Los circuit breakers son esenciales en sistemas distribuidos resilientes y arquitecturas de microservicios.",
+        "category": "patterns",
+        "difficultyScore": 93,
+        "estimatedDuration": 255,
+        "typingStyle": "full",
+        "tags": [
+          "circuit-breaker",
+          "microservicios",
+          "tolerancia-a-fallos",
+          "backend"
+        ],
+        "concepts": [
+          "detección-de-fallos",
+          "protección-de-servicios",
+          "patrones-de-resiliencia"
+        ],
+        "technicalNotes": [
+          "Los circuit breakers evitan peticiones repetidas a servicios que fallan.",
+          "Los patrones de resiliencia mejoran la estabilidad del sistema.",
+          "Los sistemas distribuidos requieren tolerancia a fallos."
+        ],
+        "codeSnippet": "class CircuitBreaker {\n  constructor(limit) {\n    this.limit = limit;\n    this.failures = 0;\n    this.open = false;\n  }\n\n  async execute(action) {\n    if (this.open) {\n      console.log('Circuit is open');\n\n      return;\n    }\n\n    try {\n      const result = await action();\n\n      this.failures = 0;\n\n      return result;\n    } catch (error) {\n      this.failures++;\n\n      if (this.failures >= this.limit) {\n        this.open = true;\n      }\n\n      console.log('Request failed');\n    }\n  }\n}\n\nconst breaker = new CircuitBreaker(3);\n\nbreaker.execute(async () => {\n  throw new Error('Server unavailable');\n});\n"
+      },
+      {
+        "id": "js-interview-token-bucket-012",
+        "title": "Limitador de Tasa Token Bucket",
+        "description": "Implementa un algoritmo de token bucket para la limitación de peticiones de API.",
+        "context": "Los algoritmos de token bucket se usan ampliamente en APIs, gateways e infraestructuras cloud.",
+        "category": "algorithms",
+        "difficultyScore": 87,
+        "estimatedDuration": 225,
+        "typingStyle": "full",
+        "tags": [
+          "limitación-de-tasa",
+          "token-bucket",
+          "apis",
+          "backend"
+        ],
+        "concepts": [
+          "control-de-tasa",
+          "token-bucket",
+          "limitación-de-peticiones"
+        ],
+        "technicalNotes": [
+          "Los token buckets regulan ráfagas de tráfico.",
+          "La limitación de tasa protege la infraestructura.",
+          "Las APIs usan estos algoritmos para la estabilidad."
+        ],
+        "codeSnippet": "class TokenBucket {\n  constructor(capacity, refillRate) {\n    this.capacity = capacity;\n    this.tokens = capacity;\n    this.refillRate = refillRate;\n\n    setInterval(() => {\n      this.tokens = Math.min(\n        this.capacity,\n        this.tokens + this.refillRate\n      );\n    }, 1000);\n  }\n\n  consume() {\n    if (this.tokens <= 0) {\n      console.log('Rate limit exceeded');\n\n      return false;\n    }\n\n    this.tokens--;\n\n    console.log('Request accepted');\n\n    return true;\n  }\n}\n\nconst limiter = new TokenBucket(5, 1);\n\nlimiter.consume();\n"
+      },
+      {
+        "id": "js-interview-distributed-lock-013",
+        "title": "Gestor de Bloqueo Distribuido",
+        "description": "Simula un sistema de bloqueo distribuido para recursos compartidos.",
+        "context": "Los bloqueos distribuidos evitan condiciones de carrera en sistemas backend escalables.",
+        "category": "algorithms",
+        "difficultyScore": 94,
+        "estimatedDuration": 260,
+        "typingStyle": "full",
+        "tags": [
+          "bloqueos-distribuidos",
+          "concurrencia",
+          "backend",
+          "sincronización"
+        ],
+        "concepts": [
+          "bloqueo",
+          "condiciones-de-carrera",
+          "coordinación-distribuida"
+        ],
+        "technicalNotes": [
+          "Los bloqueos coordinan el acceso a recursos compartidos.",
+          "Los sistemas distribuidos requieren sincronización.",
+          "Las condiciones de carrera pueden corromper el estado compartido."
+        ],
+        "codeSnippet": "class LockManager {\n  constructor() {\n    this.locks = new Set();\n  }\n\n  acquire(resource) {\n    if (this.locks.has(resource)) {\n      console.log('Resource is locked');\n\n      return false;\n    }\n\n    this.locks.add(resource);\n\n    console.log(`Lock acquired for ${resource}`);\n\n    return true;\n  }\n\n  release(resource) {\n    this.locks.delete(resource);\n\n    console.log(`Lock released for ${resource}`);\n  }\n}\n\nconst manager = new LockManager();\n\nmanager.acquire('payment-service');\nmanager.release('payment-service');\n"
+      },
+      {
+        "id": "js-interview-stream-processor-014",
+        "title": "Procesador de Flujos en Tiempo Real",
+        "description": "Procesa flujos de eventos en tiempo real con filtrado y transformaciones.",
+        "context": "Los procesadores de flujos impulsan tuberías analíticas, sistemas de monitoreo y plataformas en tiempo real.",
+        "category": "algorithms",
+        "difficultyScore": 90,
+        "estimatedDuration": 245,
+        "typingStyle": "full",
+        "tags": [
+          "procesamiento-de-flujos",
+          "analítica",
+          "eventos",
+          "backend"
+        ],
+        "concepts": [
+          "flujos-de-eventos",
+          "tuberías-de-datos",
+          "procesamiento-en-tiempo-real"
+        ],
+        "technicalNotes": [
+          "Los flujos (streams) procesan flujos continuos de datos.",
+          "La analítica en tiempo real depende de las tuberías de flujos.",
+          "El filtrado transforma los eventos entrantes."
+        ],
+        "codeSnippet": "class StreamProcessor {\n  constructor() {\n    this.handlers = [];\n  }\n\n  use(handler) {\n    this.handlers.push(handler);\n  }\n\n  process(event) {\n    return this.handlers.reduce((current, handler) => {\n      return handler(current);\n    }, event);\n  }\n}\n\nconst processor = new StreamProcessor();\n\nprocessor.use((event) => {\n  return {\n    ...event,\n    processed: true\n  };\n});\n\nconsole.log(processor.process({\n  type: 'USER_LOGIN'\n}));\n"
+      },
+      {
+        "id": "js-interview-auth-provider-015",
+        "title": "Simulador de Proveedor de Autenticación",
+        "description": "Crea un proveedor de autenticación simplificado con validación de tokens.",
+        "context": "Los proveedores de autenticación son componentes centrales en las plataformas SaaS modernas y APIs.",
+        "category": "algorithms",
+        "difficultyScore": 88,
+        "estimatedDuration": 235,
+        "typingStyle": "full",
+        "tags": [
+          "autenticación",
+          "tokens",
+          "seguridad",
+          "backend"
+        ],
+        "concepts": [
+          "validación-de-tokens",
+          "flujos-de-autenticación",
+          "seguridad-de-sesión"
+        ],
+        "technicalNotes": [
+          "Los proveedores de autenticación validan la identidad del usuario.",
+          "Los tokens aseguran las peticiones autenticadas.",
+          "Las APIs modernas dependen en gran medida de los sistemas de tokens."
+        ],
+        "codeSnippet": "class AuthProvider {\n  constructor() {\n    this.tokens = new Map();\n  }\n\n  generateToken(userId) {\n    const token = `${userId}-${Date.now()}`;\n\n    this.tokens.set(token, userId);\n\n    return token;\n  }\n\n  validate(token) {\n    return this.tokens.has(token);\n  }\n}\n\nconst auth = new AuthProvider();\n\nconst token = auth.generateToken('user-1');\n\nconsole.log(auth.validate(token));\n"
+      },
+      {
+        "id": "js-interview-class-factory-016",
+        "title": "Patrón Factory para Creación de Objetos",
+        "description": "Implementa el patrón Factory para crear diferentes tipos de objetos basados en la configuración.",
+        "context": "El patrón Factory se usa en el procesamiento de pagos, generación de documentos y sistemas de plugins en aplicaciones empresariales.",
+        "category": "classes",
+        "difficultyScore": 42,
+        "estimatedDuration": 120,
+        "typingStyle": "full",
+        "tags": [
+          "clases",
+          "factory",
+          "patrones-de-diseño",
+          "creacional"
+        ],
+        "concepts": [
+          "método-factory",
+          "creación-de-objetos",
+          "polimorfismo"
+        ],
+        "technicalNotes": [
+          "Desacopla la creación de objetos de su uso.",
+          "Soporta diferentes tipos de productos.",
+          "Fácil de añadir nuevos tipos de productos."
+        ],
+        "codeSnippet": "class User {\n  constructor(data) {\n    Object.assign(this, data);\n  }\n}\n\nclass Admin extends User {\n  constructor(data) {\n    super(data);\n    this.role = 'admin';\n    this.permissions = ['read', 'write', 'delete'];\n  }\n}\n\nclass Guest extends User {\n  constructor(data) {\n    super(data);\n    this.role = 'guest';\n    this.permissions = ['read'];\n  }\n}\n\nclass UserFactory {\n  static create(type, data) {\n    switch (type) {\n      case 'admin':\n        return new Admin(data);\n      case 'guest':\n        return new Guest(data);\n      default:\n        return new User(data);\n    }\n  }\n}\n\nconst admin = UserFactory.create('admin', { name: 'Nacho' });\nconst guest = UserFactory.create('guest', { name: 'Visitor' });\nconst user = UserFactory.create('user', { name: 'Default' });\n\nconsole.log(admin.role, admin.permissions);\nconsole.log(guest.role, guest.permissions);\nconsole.log(user.role);\n"
+      },
+      {
+        "id": "js-interview-algorithms-lru-016",
+        "title": "Implementación de Caché LRU",
+        "description": "Implementa una caché Least Recently Used (Menos Usada Recientemente) con operaciones O(1) para entrevistas.",
+        "context": "Las cachés LRU se usan en el almacenamiento en caché de consultas de bases de datos, caché de CDN y gestión de memoria en sistemas operativos.",
+        "category": "algorithms",
+        "difficultyScore": 58,
+        "estimatedDuration": 170,
+        "typingStyle": "full",
+        "tags": [
+          "algoritmos",
+          "caché-lru",
+          "hashmap",
+          "lista-doblemente-enlazada"
+        ],
+        "concepts": [
+          "equilibrio-espacio-tiempo",
+          "evicción-de-caché",
+          "operaciones-o(1)"
+        ],
+        "technicalNotes": [
+          "HashMap para get/put O(1).",
+          "La lista doblemente enlazada mantiene el orden.",
+          "Se mueve al frente al acceder."
+        ],
+        "codeSnippet": "class LRUCache {\n  constructor(capacity) {\n    this.capacity = capacity;\n    this.cache = new Map();\n  }\n\n  get(key) {\n    if (!this.cache.has(key)) return -1;\n    \n    const value = this.cache.get(key);\n    this.cache.delete(key);\n    this.cache.set(key, value);\n    \n    return value;\n  }\n\n  put(key, value) {\n    if (this.cache.has(key)) {\n      this.cache.delete(key);\n    } else if (this.cache.size >= this.capacity) {\n      const firstKey = this.cache.keys().next().value;\n      this.cache.delete(firstKey);\n    }\n    \n    this.cache.set(key, value);\n  }\n\n  getStats() {\n    return {\n      size: this.cache.size,\n      keys: [...this.cache.keys()]\n    };\n  }\n}\n\nconst cache = new LRUCache(3);\ncache.put('a', 1);\ncache.put('b', 2);\ncache.put('c', 3);\nconsole.log(cache.get('a'));\ncache.put('d', 4);\nconsole.log(cache.get('b'));\nconsole.log(cache.getStats());\n"
+      },
+      {
+        "id": "js-interview-data-structures-heap-016",
+        "title": "Implementación de Min Heap",
+        "description": "Implementa una estructura de datos Min Heap para operaciones de cola de prioridad.",
+        "context": "Los heaps se usan en el algoritmo de Dijkstra, ordenamiento por montículos (heap sort), colas de prioridad y para encontrar el k-ésimo elemento más grande/pequeño.",
+        "category": "algorithms",
+        "difficultyScore": 56,
+        "estimatedDuration": 160,
+        "typingStyle": "full",
+        "tags": [
+          "estructuras-de-datos",
+          "heap",
+          "cola-de-prioridad",
+          "árbol-binario"
+        ],
+        "concepts": [
+          "propiedad-de-montículo",
+          "heapify",
+          "cola-de-prioridad"
+        ],
+        "technicalNotes": [
+          "El padre siempre es más pequeño que los hijos.",
+          "Representación en arreglo: padre en i, hijos en 2i+1, 2i+2.",
+          "La extracción del mínimo es O(log n)."
+        ],
+        "codeSnippet": "class MinHeap {\n  constructor() {\n    this.heap = [];\n  }\n\n  parent(i) { return Math.floor((i - 1) / 2); }\n  left(i) { return 2 * i + 1; }\n  right(i) { return 2 * i + 2; }\n\n  insert(val) {\n    this.heap.push(val);\n    this.bubbleUp(this.heap.length - 1);\n  }\n\n  bubbleUp(i) {\n    while (i > 0 && this.heap[this.parent(i)] > this.heap[i]) {\n      [this.heap[i], this.heap[this.parent(i)]] = \n        [this.heap[this.parent(i)], this.heap[i]];\n      i = this.parent(i);\n    }\n  }\n\n  extractMin() {\n    if (this.heap.length === 0) return null;\n    if (this.heap.length === 1) return this.heap.pop();\n\n    const min = this.heap[0];\n    this.heap[0] = this.heap.pop();\n    this.bubbleDown(0);\n    return min;\n  }\n\n  bubbleDown(i) {\n    while (this.left(i) < this.heap.length) {\n      let smallest = this.left(i);\n      if (this.right(i) < this.heap.length && \n          this.heap[this.right(i)] < this.heap[smallest]) {\n        smallest = this.right(i);\n      }\n      if (this.heap[i] <= this.heap[smallest]) break;\n      [this.heap[i], this.heap[smallest]] = \n        [this.heap[smallest], this.heap[i]];\n      i = smallest;\n    }\n  }\n}\n\nconst heap = new MinHeap();\n[5, 3, 8, 1, 2, 7].forEach(v => heap.insert(v));\nconsole.log(heap.extractMin());\nconsole.log(heap.extractMin());\nconsole.log(heap.heap);\n"
+      },
+      {
+        "id": "js-interview-state-management-redux-thunk-016",
+        "title": "Acciones Asíncronas con Redux Thunk",
+        "description": "Implementa creadores de acciones asíncronas para el manejo de efectos secundarios en la gestión de estado.",
+        "context": "Redux Thunk se usa para llamadas a APIs, operaciones asíncronas y el manejo de efectos secundarios en aplicaciones Redux.",
+        "category": "algorithms",
+        "difficultyScore": 50,
+        "estimatedDuration": 145,
+        "typingStyle": "full",
+        "tags": [
+          "gestión-de-estado",
+          "redux",
+          "asíncrono",
+          "thunk"
+        ],
+        "concepts": [
+          "dispatch-asíncrono",
+          "efectos-secundarios",
+          "creadores-de-acciones"
+        ],
+        "technicalNotes": [
+          "Thunk permite funciones en el dispatch.",
+          "Maneja estados de carga, éxito y error.",
+          "El middleware intercepta las acciones."
+        ],
+        "codeSnippet": "const createAsyncAction = (types) => {\n  return (...args) => {\n    return async (dispatch) => {\n      dispatch({ type: types.pending });\n      try {\n        const result = await args[0]();\n        dispatch({ type: types.success, payload: result });\n        return result;\n      } catch (error) {\n        dispatch({ type: types.failure, payload: error.message });\n        throw error;\n      }\n    };\n  };\n};\n\nconst fetchUserTypes = {\n  pending: 'FETCH_USER_PENDING',\n  success: 'FETCH_USER_SUCCESS',\n  failure: 'FETCH_USER_FAILURE'\n};\n\nconst fetchUser = createAsyncAction(fetchUserTypes)(\n  () => new Promise(resolve => \n    setTimeout(() => resolve({ name: 'Nacho', id: 1 }), 100)\n  )\n);\n\nconst dispatch = action => {\n  console.log('Action:', action.type, action.payload || '');\n};\n\nconsole.log('Dispatching fetchUser...');\ndispatch(fetchUser());\n"
+      },
+      {
+        "id": "js-interview-performance-debounce-016",
+        "title": "Implementación de Debounce y Throttle",
+        "description": "Implementa funciones de debounce y throttle para optimizar el rendimiento.",
+        "context": "Debounce y throttle son esenciales para manejar eventos de scroll, llamadas a APIs y entradas de búsqueda en aplicaciones web modernas.",
+        "category": "algorithms",
+        "difficultyScore": 45,
+        "estimatedDuration": 130,
+        "typingStyle": "full",
+        "tags": [
+          "rendimiento",
+          "debounce",
+          "throttle",
+          "optimización"
+        ],
+        "concepts": [
+          "limitación-de-tasa",
+          "manejo-de-eventos",
+          "optimización-del-rendimiento"
+        ],
+        "technicalNotes": [
+          "Debounce: espera hasta que no haya llamadas durante X ms.",
+          "Throttle: limita las llamadas a una vez cada X ms.",
+          "Crucial para eventos de scroll, redimensionamiento y entrada."
+        ],
+        "codeSnippet": "function debounce(fn, delay) {\n  let timeoutId;\n  return (...args) => {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => fn.apply(this, args), delay);\n  };\n}\n\nfunction throttle(fn, limit) {\n  let inThrottle;\n  return (...args) => {\n    if (!inThrottle) {\n      fn.apply(this, args);\n      inThrottle = true;\n      setTimeout(() => inThrottle = false, limit);\n    }\n  };\n}\n\nconst handleSearch = debounce(query => {\n  console.log('Searching:', query);\n}, 300);\n\nconst handleScroll = throttle(() => {\n  console.log('Scroll position:', window.scrollY);\n}, 100);\n\nhandleSearch('h');\nhandleSearch('he');\nhandleSearch('hel');\nhandleSearch('hell');\nhandleSearch('hello');\n"
+      },
+      {
+        "id": "js-interview-architecture-mvc-016",
+        "title": "Patrón de Arquitectura MVC",
+        "description": "Implementa el patrón Modelo-Vista-Controlador para estructurar aplicaciones.",
+        "context": "MVC es la base de Rails, Django, Express con EJS y muchos otros frameworks web.",
+        "category": "patterns",
+        "difficultyScore": 48,
+        "estimatedDuration": 140,
+        "typingStyle": "full",
+        "tags": [
+          "arquitectura",
+          "mvc",
+          "patrones",
+          "frameworks-web"
+        ],
+        "concepts": [
+          "modelo-vista-controlador",
+          "separación-de-conceptos",
+          "petición-respuesta"
+        ],
+        "technicalNotes": [
+          "Modelo: datos y lógica de negocio.",
+          "Vista: capa de presentación.",
+          "Controlador: maneja la entrada del usuario."
+        ],
+        "codeSnippet": "class Model {\n  constructor() {\n    this.data = {};\n    this.listeners = [];\n  }\n\n  get(key) { return this.data[key]; }\n  set(key, value) {\n    this.data[key] = value;\n    this.notify();\n  }\n\n  subscribe(listener) {\n    this.listeners.push(listener);\n  }\n\n  notify() {\n    this.listeners.forEach(fn => fn(this.data));\n  }\n}\n\nclass View {\n  constructor(model, controller) {\n    this.model = model;\n    this.controller = controller;\n    this.model.subscribe(this.render.bind(this));\n  }\n\n  render(data) {\n    console.log('View updated:', data);\n  }\n\n  handleAction(action) {\n    this.controller.handle(action);\n  }\n}\n\nclass Controller {\n  constructor(model) {\n    this.model = model;\n  }\n\n  handle(action) {\n    if (action.type === 'UPDATE_NAME') {\n      this.model.set('name', action.payload);\n    }\n  }\n}\n\nconst model = new Model();\nconst controller = new Controller(model);\nconst view = new View(model, controller);\n\nview.handleAction({ type: 'UPDATE_NAME', payload: 'Nacho' });\n"
+      },
+      {
+        "id": "js-interview-functional-programming-pipe-016",
+        "title": "Pipe y Compose Funcionales",
+        "description": "Implementa utilidades de programación funcional como pipe y compose para tuberías de transformación de datos.",
+        "context": "La composición funcional se usa en Redux, Lodash, RxJS y tuberías de procesamiento de datos.",
+        "category": "functions",
+        "difficultyScore": 44,
+        "estimatedDuration": 125,
+        "typingStyle": "full",
+        "tags": [
+          "programación-funcional",
+          "compose",
+          "pipe",
+          "transformación"
+        ],
+        "concepts": [
+          "composición-de-funciones",
+          "funciones-puras",
+          "tuberías-de-datos"
+        ],
+        "technicalNotes": [
+          "Pipe aplica funciones de izquierda a derecha.",
+          "Compose aplica funciones de derecha a izquierda.",
+          "Ambos permiten transformaciones reutilizables."
+        ],
+        "codeSnippet": "const pipe = (...fns) => (value) => \n  fns.reduce((acc, fn) => fn(acc), value);\n\nconst compose = (...fns) => (value) => \n  fns.reduceRight((acc, fn) => fn(acc), value);\n\nconst addFive = x => x + 5;\nconst double = x => x * 2;\nconst subtractThree = x => x - 3;\n\nconst piped = pipe(addFive, double, subtractThree);\nconst composed = compose(addFive, double, subtractThree);\n\nconsole.log('Pipe(10):', piped(10));\nconsole.log('Compose(10):', composed(10));\n\nconst processData = pipe(\n  JSON.parse,\n  data => data.filter(item => item.active),\n  items => items.map(item => ({ ...item, score: item.score * 2 })),\n  items => items.sort((a, b) => b.score - a.score)\n);\n\nconst rawData = '[{\"id\":1,\"active\":true,\"score\":10},{\"id\":2,\"active\":false,\"score\":20}]';\nconsole.log(processData(rawData));\n"
+      }
+    ]
+  }
 ]

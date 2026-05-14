@@ -5,398 +5,629 @@
   "snippets": [
     {
       "id": "py-fund-rt-001",
-      "title": "Variables: Basic Assignment",
-      "description": "Assign values to variables of different types.",
-      "context": "Python uses dynamic typing and no keywords like var or let.",
+      "title": "Variables: Asignación Básica",
+      "description": "Asigna valores a variables de diferentes tipos.",
+      "context": "Python usa tipado dinámico y no requiere palabras clave como var o let.",
       "codeSnippet": "user_id = 101\nuser_name = 'Ignacio'\nis_active = True",
       "typingStyle": "full",
-      "tags": ["python", "variables"],
-      "concepts": ["assignment", "dynamic typing"],
+      "tags": [
+        "python",
+        "variables"
+      ],
+      "concepts": [
+        "asignación",
+        "tipado dinámico"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 5
+      "difficultyScore": 5,
+      "category": "variables"
     },
     {
       "id": "py-fund-rt-002",
-      "title": "Lists: Appending and Access",
-      "description": "Create a list and add an element.",
-      "context": "Lists are the most versatile collection type in Python.",
+      "title": "Listas: Añadir y Acceso",
+      "description": "Crea una lista y añade un elemento.",
+      "context": "Las listas son el tipo de colección más versátil en Python.",
       "codeSnippet": "fruits = ['apple', 'banana']\nfruits.append('orange')\nfirst_fruit = fruits[0]",
       "typingStyle": "full",
-      "tags": ["python", "lists"],
-      "concepts": ["list methods", "indexing"],
+      "tags": [
+        "python",
+        "listas"
+      ],
+      "concepts": [
+        "métodos de lista",
+        "indexación"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "arrays"
     },
     {
       "id": "py-fund-rt-003",
       "title": "Strings: F-Strings",
-      "description": "Format strings using f-strings.",
-      "context": "Modern and readable way to include variables in strings.",
+      "description": "Formatea strings usando f-strings.",
+      "context": "Forma moderna y legible de incluir variables en strings.",
       "codeSnippet": "name = 'Nacho'\nage = 25\nmsg = f'Hello, {name}. You are {age} years old.'",
       "typingStyle": "full",
-      "tags": ["python", "strings"],
-      "concepts": ["string formatting", "interpolation"],
+      "tags": [
+        "python",
+        "cadenas"
+      ],
+      "concepts": [
+        "formateo de cadenas",
+        "interpolación"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "strings"
     },
     {
       "id": "py-fund-rt-004",
-      "title": "Functions: Basic Definition",
-      "description": "Define a simple function with parameters.",
-      "context": "Functions are defined with the def keyword and indentation.",
+      "title": "Funciones: Definición Básica",
+      "description": "Define una función simple con parámetros.",
+      "context": "Las funciones se definen con la palabra clave def e indentación.",
       "codeSnippet": "def greet(name, greeting='Hello'):\n    return f'{greeting}, {name}!'",
       "typingStyle": "full",
-      "tags": ["python", "functions"],
-      "concepts": ["def", "parameters", "return"],
+      "tags": [
+        "python",
+        "funciones"
+      ],
+      "concepts": [
+        "def",
+        "parámetros",
+        "retorno"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "functions"
     },
     {
       "id": "py-fund-rt-005",
-      "title": "Conditionals: If-Elif-Else",
-      "description": "Standard control flow with multiple conditions.",
-      "context": "Python uses elif instead of else if.",
+      "title": "Condicionales: If-Elif-Else",
+      "description": "Flujo de control estándar con múltiples condiciones.",
+      "context": "Python usa elif en lugar de else if.",
       "codeSnippet": "if score >= 90:\n    grade = 'A'\nelif score >= 80:\n    grade = 'B'\nelse:\n    grade = 'C'",
       "typingStyle": "full",
-      "tags": ["python", "logic"],
-      "concepts": ["control flow", "boolean logic"],
+      "tags": [
+        "python",
+        "lógica"
+      ],
+      "concepts": [
+        "flujo de control",
+        "lógica booleana"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 14
+      "difficultyScore": 14,
+      "category": "control-flow"
     },
     {
       "id": "py-fund-rt-006",
-      "title": "Loops: For Over List",
-      "description": "Iterate over elements in a list.",
-      "context": "Python's for loop is an 'iterator' loop.",
+      "title": "Bucles: For sobre Lista",
+      "description": "Itera sobre elementos en una lista.",
+      "context": "El bucle for de Python es un bucle de 'iterador'.",
       "codeSnippet": "colors = ['red', 'green', 'blue']\nfor color in colors:\n    print(f'Color: {color}')",
       "typingStyle": "full",
-      "tags": ["python", "loops"],
-      "concepts": ["iteration"],
+      "tags": [
+        "python",
+        "bucles"
+      ],
+      "concepts": [
+        "iteración"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "loops"
     },
     {
       "id": "py-fund-rt-007",
-      "title": "Dictionaries: Basic Usage",
-      "description": "Create a dictionary and access a value.",
-      "context": "Dictionaries store key-value pairs.",
+      "title": "Diccionarios: Uso Básico",
+      "description": "Crea un diccionario y accede a un valor.",
+      "context": "Los diccionarios almacenan pares clave-valor.",
       "codeSnippet": "user = {'id': 1, 'name': 'Nacho'}\nuser_name = user['name']\nuser['active'] = True",
       "typingStyle": "full",
-      "tags": ["python", "dicts"],
-      "concepts": ["keys", "values", "mappings"],
+      "tags": [
+        "python",
+        "diccionarios"
+      ],
+      "concepts": [
+        "claves",
+        "valores",
+        "mapeos"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "objects"
     },
     {
       "id": "py-fund-rt-008",
-      "title": "List Comprehensions: Basic",
-      "description": "Generate a list using compact syntax.",
-      "context": "Pythonic way to transform or filter data.",
+      "title": "List Comprehensions: Básicas",
+      "description": "Genera una lista usando sintaxis compacta.",
+      "context": "Forma pitónica de transformar o filtrar datos.",
       "codeSnippet": "numbers = [1, 2, 3, 4, 5]\nsquares = [n**2 for n in numbers]",
       "typingStyle": "full",
-      "tags": ["python", "comprehensions"],
-      "concepts": ["functional style"],
+      "tags": [
+        "python",
+        "comprensiones"
+      ],
+      "concepts": [
+        "estilo funcional"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "functional-programming"
     },
     {
       "id": "py-fund-rt-009",
-      "title": "Error Handling: Try-Except",
-      "description": "Handle specific exceptions safely.",
-      "context": "Prevents crashes from unexpected input.",
+      "title": "Manejo de Errores: Try-Except",
+      "description": "Maneja excepciones específicas de forma segura.",
+      "context": "Previene cierres inesperados por entradas no válidas.",
       "codeSnippet": "try:\n    value = 10 / 0\nexcept ZeroDivisionError:\n    value = 0\nfinally:\n    print('Cleanup')",
       "typingStyle": "full",
-      "tags": ["python", "exceptions"],
-      "concepts": ["try", "except", "finally"],
+      "tags": [
+        "python",
+        "excepciones"
+      ],
+      "concepts": [
+        "try",
+        "except",
+        "finally"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "validation"
     },
     {
       "id": "py-fund-rt-010",
-      "title": "Classes: Simple Definition",
-      "description": "Create a basic class with an __init__ method.",
-      "context": "Foundation of Object Oriented Programming in Python.",
+      "title": "Clases: Definición Simple",
+      "description": "Crea una clase básica con un método __init__.",
+      "context": "Fundamento de la Programación Orientada a Objetos en Python.",
       "codeSnippet": "class Dog:\n    def __init__(self, name):\n        self.name = name\n    def bark(self):\n        return 'Woof!'",
       "typingStyle": "full",
-      "tags": ["python", "oop"],
-      "concepts": ["init", "self", "instances"],
+      "tags": [
+        "python",
+        "oop"
+      ],
+      "concepts": [
+        "init",
+        "self",
+        "instancias"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 25
+      "difficultyScore": 25,
+      "category": "classes"
     },
     {
       "id": "py-fund-rt-011",
-      "title": "Loops: While Loop",
-      "description": "Basic while loop with a counter.",
+      "title": "Bucles: Bucle While",
+      "description": "Bucle while básico con un contador.",
+      "context": "Ideal cuando no sabemos el número exacto de iteraciones.",
       "codeSnippet": "count = 0\nwhile count < 5:\n    print(count)\n    count += 1",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["iteration"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "iteración"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "loops"
     },
     {
       "id": "py-fund-rt-012",
-      "title": "Tuples: Unpacking",
-      "description": "Assign tuple elements to variables.",
+      "title": "Tuplas: Desempaquetado",
+      "description": "Asigna elementos de una tupla a variables.",
+      "context": "Las tuplas son inmutables y permiten retornar múltiples valores.",
       "codeSnippet": "point = (10, 20)\nx, y = point\nprint(f'X: {x}, Y: {y}')",
       "typingStyle": "full",
-      "tags": ["python", "tuples"],
-      "concepts": ["unpacking"],
+      "tags": [
+        "python",
+        "tuplas"
+      ],
+      "concepts": [
+        "desempaquetado"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "arrays"
     },
     {
       "id": "py-fund-rt-013",
-      "title": "Sets: Uniqueness",
-      "description": "Create a set to remove duplicates.",
+      "title": "Sets: Unicidad",
+      "description": "Crea un set para eliminar duplicados.",
+      "context": "Los sets solo almacenan valores únicos.",
       "codeSnippet": "nums = [1, 2, 2, 3, 3]\nunique_nums = set(nums)\nunique_nums.add(4)",
       "typingStyle": "full",
-      "tags": ["python", "sets"],
-      "concepts": ["uniqueness"],
+      "tags": [
+        "python",
+        "conjuntos"
+      ],
+      "concepts": [
+        "unicidad"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "data-structures"
     },
     {
       "id": "py-fund-rt-014",
-      "title": "Strings: Joining Lists",
-      "description": "Combine a list of strings into one string.",
+      "title": "Strings: Unir Listas",
+      "description": "Combina una lista de strings en uno solo.",
+      "context": "El método join es eficiente para concatenar strings.",
       "codeSnippet": "words = ['Python', 'is', 'great']\nsentence = ' '.join(words)",
       "typingStyle": "full",
-      "tags": ["python", "strings"],
-      "concepts": ["join"],
+      "tags": [
+        "python",
+        "cadenas"
+      ],
+      "concepts": [
+        "join"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 14
+      "difficultyScore": 14,
+      "category": "strings"
     },
     {
       "id": "py-fund-rt-015",
-      "title": "Functions: Multiple Returns",
-      "description": "Return more than one value from a function.",
+      "title": "Funciones: Múltiples Retornos",
+      "description": "Retorna más de un valor desde una función.",
+      "context": "Python permite retornar múltiples valores separados por comas.",
       "codeSnippet": "def get_stats(nums):\n    return min(nums), max(nums)\n\nlow, high = get_stats([1, 5, 2])",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["return", "tuples"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "retorno",
+        "tuplas"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "arrays"
     },
     {
       "id": "py-fund-rt-016",
-      "title": "Lambdas: Anonymous Functions",
-      "description": "Short, one-line functions.",
+      "title": "Lambdas: Funciones Anónimas",
+      "description": "Funciones cortas de una sola línea.",
+      "context": "Útiles para operaciones simples pasadas como argumentos.",
       "codeSnippet": "double = lambda x: x * 2\nresult = double(10)",
       "typingStyle": "full",
-      "tags": ["python", "lambda"],
-      "concepts": ["lambdas"],
+      "tags": [
+        "python",
+        "lambda"
+      ],
+      "concepts": [
+        "lambdas"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "functional-programming"
     },
     {
       "id": "py-fund-rt-017",
       "title": "Itertools: Enumerate",
-      "description": "Loop with both index and value.",
+      "description": "Bucle con índice y valor simultáneamente.",
+      "context": "Evita tener que manejar un contador manual.",
       "codeSnippet": "names = ['Ana', 'Leo']\nfor i, name in enumerate(names):\n    print(f'{i}: {name}')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["enumerate"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "enumerate"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-018",
-      "title": "Dicts: Get Method",
-      "description": "Safely access keys with defaults.",
+      "title": "Dicts: Método Get",
+      "description": "Acceso seguro a claves con valores por defecto.",
+      "context": "Previene errores si la clave no existe en el diccionario.",
       "codeSnippet": "config = {'port': 8080}\nport = config.get('port', 3000)\nhost = config.get('host', 'localhost')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["defaults"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "valores por defecto"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 16
+      "difficultyScore": 16,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-019",
-      "title": "Slicing: List Parts",
-      "description": "Extract subsets of a list.",
+      "title": "Slicing: Partes de Lista",
+      "description": "Extrae subconjuntos de una lista.",
+      "context": "La sintaxis de slicing [start:stop:step] es muy potente.",
       "codeSnippet": "nums = [0, 1, 2, 3, 4, 5]\nfirst_three = nums[:3]\nlast_two = nums[-2:]",
       "typingStyle": "full",
-      "tags": ["python", "slicing"],
-      "concepts": ["slicing"],
+      "tags": [
+        "python",
+        "slicing"
+      ],
+      "concepts": [
+        "slicing"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "arrays"
     },
     {
       "id": "py-fund-rt-020",
-      "title": "Type Hinting: Basics",
-      "description": "Add type annotations to code.",
+      "title": "Type Hinting: Básicos",
+      "description": "Añade anotaciones de tipo al código.",
+      "context": "Mejora la legibilidad y ayuda a las herramientas de análisis estático.",
       "codeSnippet": "def calc_total(price: float, qty: int) -> float:\n    return price * qty",
       "typingStyle": "full",
-      "tags": ["python", "typing"],
-      "concepts": ["type hints"],
+      "tags": [
+        "python",
+        "tipado"
+      ],
+      "concepts": [
+        "anotaciones de tipo"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 24
+      "difficultyScore": 24,
+      "category": "validation"
     },
     {
       "id": "py-fund-rt-021",
-      "title": "Walrus Operator",
-      "description": "Assignment within an expression.",
+      "title": "Operador Walrus",
+      "description": "Asignación dentro de una expresión.",
+      "context": "Introducido en Python 3.8 para mayor concisión.",
       "codeSnippet": "if (n := len(items)) > 10:\n    print(f'Too many items: {n}')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["assignment expressions"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "expresiones de asignación"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-022",
-      "title": "Lists: Sorting",
-      "description": "Sort lists in-place or return new.",
+      "title": "Listas: Ordenación",
+      "description": "Ordena listas in-situ o retorna una nueva.",
+      "context": "sort() modifica la lista, sorted() crea una copia ordenada.",
       "codeSnippet": "data = [3, 1, 4]\ndata.sort()\nnew_data = sorted(data, reverse=True)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["sorting"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "ordenamiento"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "arrays"
     },
     {
       "id": "py-fund-rt-023",
-      "title": "Strings: Multi-line",
-      "description": "Create strings that span lines.",
+      "title": "Strings: Multilínea",
+      "description": "Crea strings que ocupan varias líneas.",
+      "context": "Las comillas triples permiten mantener el formato del texto.",
       "codeSnippet": "query = '''\nSELECT * FROM users\nWHERE id = 1\n'''",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["triple quotes"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "comillas triples"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "strings"
     },
     {
       "id": "py-fund-rt-024",
-      "title": "Conditionals: Ternary",
-      "description": "One-line if statement.",
+      "title": "Condicionales: Ternario",
+      "description": "Sentencia if en una sola línea.",
+      "context": "Sintaxis compacta para asignaciones condicionales simples.",
       "codeSnippet": "status = 'Adult' if age >= 18 else 'Minor'",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["one-liners"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "one-liners"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "control-flow"
     },
     {
       "id": "py-fund-rt-025",
-      "title": "Functions: *args",
-      "description": "Handle variable number of arguments.",
+      "title": "Funciones: *args",
+      "description": "Maneja un número variable de argumentos posicionales.",
+      "context": "Permite pasar cualquier cantidad de argumentos a una función.",
       "codeSnippet": "def sum_all(*args):\n    return sum(args)\n\ntotal = sum_all(1, 2, 3, 4)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["args"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "args"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 26
+      "difficultyScore": 26,
+      "category": "functions"
     },
     {
       "id": "py-fund-rt-026",
-      "title": "Functions: **kwargs",
-      "description": "Handle variable keyword arguments.",
+      "title": "Funciones: **kwargs",
+      "description": "Maneja argumentos de palabra clave variables.",
+      "context": "Ideal para configuraciones o diccionarios de argumentos.",
       "codeSnippet": "def log_data(**kwargs):\n    for key, value in kwargs.items():\n        print(f'{key}: {value}')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["kwargs"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "kwargs"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "functions"
     },
     {
       "id": "py-fund-rt-027",
       "title": "Itertools: Zip",
-      "description": "Combine multiple iterables.",
+      "description": "Combina múltiples iterables elemento a elemento.",
+      "context": "Muy útil para emparejar datos de diferentes fuentes.",
       "codeSnippet": "keys = ['a', 'b']\nvals = [1, 2]\ncombined = dict(zip(keys, vals))",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["zip"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "zip"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-028",
-      "title": "Classes: Method Types",
-      "description": "Static and class methods.",
+      "title": "Clases: Tipos de Método",
+      "description": "Métodos estáticos y de clase.",
+      "context": "Decoradores para definir comportamientos a nivel de clase o utilidad.",
       "codeSnippet": "class Tool:\n    @staticmethod\n    def info():\n        return 'General Tool'",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["decorators"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "decoradores"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "patterns"
     },
     {
       "id": "py-fund-rt-029",
-      "title": "Math: Constants",
-      "description": "Use the math module.",
+      "title": "Math: Constantes",
+      "description": "Usa el módulo math para cálculos matemáticos.",
+      "context": "Provee acceso a funciones matemáticas del estándar C.",
       "codeSnippet": "import math\nradius = 5\narea = math.pi * radius**2",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["imports"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "importaciones"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 8
+      "difficultyScore": 8,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-030",
-      "title": "JSON: Parsing",
-      "description": "Convert JSON to Python dict.",
+      "title": "JSON: Parseo",
+      "description": "Convierte JSON string a diccionario de Python.",
+      "context": "Esencial para trabajar con APIs y datos estructurados.",
       "codeSnippet": "import json\ndata_str = '{\"id\": 1}'\ndata = json.loads(data_str)",
       "typingStyle": "full",
-      "tags": ["python", "json"],
-      "concepts": ["serialization"],
+      "tags": [
+        "python",
+        "json"
+      ],
+      "concepts": [
+        "serialización"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "data-processing"
     },
     {
       "id": "py-fund-rt-031",
       "title": "Time: Sleep",
-      "description": "Pause execution.",
+      "description": "Pausa la ejecución del programa.",
+      "context": "Útil para rate-limiting o simular procesos largos.",
       "codeSnippet": "import time\nprint('Starting...')\ntime.sleep(2)\nprint('Done!')",
       "typingStyle": "full",
-      "tags": ["python", "time"],
-      "concepts": ["delays"],
+      "tags": [
+        "python",
+        "tiempo"
+      ],
+      "concepts": [
+        "retrasos"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "automation"
     },
     {
       "id": "py-fund-rt-032",
-      "title": "Any/All: Logic",
-      "description": "Check list conditions.",
+      "title": "Any/All: Lógica",
+      "description": "Verifica condiciones en una lista completa.",
+      "context": "Forma rápida de comprobar si algún o todos los elementos cumplen una condición.",
       "codeSnippet": "tasks = [True, False, True]\nany_done = any(tasks)\nall_done = all(tasks)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["truthiness"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "truthiness"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 24
+      "difficultyScore": 24,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-033",
-      "title": "Range: Iterators",
-      "description": "Generate sequences.",
+      "title": "Range: Iteradores",
+      "description": "Genera secuencias numéricas.",
+      "context": "Eficiente en memoria para bucles numéricos.",
       "codeSnippet": "for i in range(1, 10, 2):\n    print(i) # 1, 3, 5, 7, 9",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["range"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "range"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-034",
-      "title": "Unpacking: Iterables",
-      "description": "Advanced unpacking with *.",
+      "title": "Desempaquetado: Iterables",
+      "description": "Desempaquetado avanzado con el operador *.",
+      "context": "Permite capturar múltiples elementos en una sola variable.",
       "codeSnippet": "first, *middle, last = [1, 2, 3, 4, 5]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["rest"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "resto"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "algorithms"
     },
     {
       "id": "py-fund-rt-035",
-      "title": "Context Managers: Basics",
-      "description": "Using with statement.",
+      "title": "Context Managers: Básicos",
+      "description": "Uso de la sentencia with.",
+      "context": "Asegura la liberación correcta de recursos (como archivos).",
       "codeSnippet": "with open('test.txt', 'w') as f:\n    f.write('Hello World')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["resource management"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "gestión de recursos"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "algorithms"
     }
   ]
 }

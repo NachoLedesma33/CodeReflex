@@ -1,417 +1,700 @@
-[{
-  "metadata": {
-    "language": "javascript",
-    "mode": "reflex-typing",
-    "version": "1.0.0",
-    "lastUpdated": "2026-05-09",
-    "totalExercises": 15
-  },
-  "exercises": [
-    {
-      "id": "js-fundamentals-array-map-001",
-      "title": "Array Mapping Basics",
-      "description": "Practice transforming arrays using the map method.",
-      "context": "Array mapping is extremely common in frontend development when rendering lists, transforming API responses, or formatting data before displaying it in the UI.",
-      "category": "arrays",
-      "difficultyScore": 12,
-      "estimatedDuration": 45,
-      "typingStyle": "full",
-      "tags": [
-        "arrays",
-        "map",
-        "callbacks",
-        "frontend"
-      ],
-      "concepts": [
-        "array-map",
-        "callback-functions",
-        "immutability"
-      ],
-      "technicalNotes": [
-        "map creates a new array without mutating the original array.",
-        "The callback runs once for every element.",
-        "Arrow functions are commonly used with map."
-      ],
-      "codeSnippet": "const prices = [10, 15, 20, 25];\n\nconst formattedPrices = prices.map((price) => {\n  return `$${price.toFixed(2)}`;\n});\n\nconsole.log(formattedPrices);\n"
+[
+  {
+    "metadata": {
+      "language": "javascript",
+      "mode": "reflex-typing",
+      "version": "1.0.0",
+      "lastUpdated": "2026-05-14",
+      "totalExercises": 35
     },
-    {
-      "id": "js-fundamentals-filter-active-users-002",
-      "title": "Filter Active Users",
-      "description": "Filter objects inside an array based on a condition.",
-      "context": "Filtering collections is used constantly in dashboards, admin panels, search systems, and data processing pipelines.",
-      "category": "arrays",
-      "difficultyScore": 15,
-      "estimatedDuration": 50,
-      "typingStyle": "full",
-      "tags": [
-        "arrays",
-        "filter",
-        "objects",
-        "users"
-      ],
-      "concepts": [
-        "array-filter",
-        "boolean-conditions",
-        "object-access"
-      ],
-      "technicalNotes": [
-        "filter returns a new array containing only matching items.",
-        "The original array remains unchanged.",
-        "Boolean expressions determine whether an item is included."
-      ],
-      "codeSnippet": "const users = [\n  { name: 'Lucas', active: true },\n  { name: 'Mia', active: false },\n  { name: 'Sofia', active: true }\n];\n\nconst activeUsers = users.filter((user) => {\n  return user.active;\n});\n\nconsole.log(activeUsers);\n"
-    },
-    {
-      "id": "js-fundamentals-basic-fetch-003",
-      "title": "Basic Fetch Request",
-      "description": "Practice making a simple asynchronous request using fetch.",
-      "context": "Fetching data from APIs is one of the most common tasks in web development.",
-      "category": "async",
-      "difficultyScore": 20,
-      "estimatedDuration": 65,
-      "typingStyle": "full",
-      "tags": [
-        "fetch",
-        "async",
-        "api",
-        "promises"
-      ],
-      "concepts": [
-        "async-await",
-        "fetch-api",
-        "json-parsing"
-      ],
-      "technicalNotes": [
-        "fetch returns a Promise.",
-        "await pauses execution until the Promise resolves.",
-        "response.json converts the response body into JavaScript data."
-      ],
-      "codeSnippet": "async function loadPosts() {\n  try {\n    const response = await fetch('https://jsonplaceholder.typicode.com/posts');\n\n    const posts = await response.json();\n\n    console.log(posts.slice(0, 3));\n  } catch (error) {\n    console.error('Failed to load posts:', error);\n  }\n}\n\nloadPosts();\n"
-    },
-    {
-      "id": "js-fundamentals-object-destructuring-004",
-      "title": "Object Destructuring Practice",
-      "description": "Extract values from objects using destructuring syntax.",
-      "context": "Destructuring is heavily used in React props, API responses, and configuration objects.",
-      "category": "objects",
-      "difficultyScore": 10,
-      "estimatedDuration": 35,
-      "typingStyle": "full",
-      "tags": [
-        "objects",
-        "destructuring",
-        "syntax"
-      ],
-      "concepts": [
-        "object-destructuring",
-        "template-literals",
-        "const"
-      ],
-      "technicalNotes": [
-        "Destructuring simplifies object property access.",
-        "Template literals improve string readability.",
-        "Destructuring is very common in modern JavaScript frameworks."
-      ],
-      "codeSnippet": "const developer = {\n  name: 'Ignacio',\n  role: 'Full Stack Developer',\n  experience: 3\n};\n\nconst { name, role, experience } = developer;\n\nconsole.log(`${name} works as a ${role}.`);\nconsole.log(`Experience: ${experience} years`);\n"
-    },
-    {
-      "id": "js-fundamentals-basic-debounce-005",
-      "title": "Basic Debounce Function",
-      "description": "Create a debounce utility to delay function execution.",
-      "context": "Debounce is commonly used in search bars, resize listeners, and auto-save systems to improve performance.",
-      "category": "functions",
-      "difficultyScore": 28,
-      "estimatedDuration": 90,
-      "typingStyle": "full",
-      "tags": [
-        "debounce",
-        "timers",
-        "performance",
-        "functions"
-      ],
-      "concepts": [
-        "closures",
-        "setTimeout",
-        "clearTimeout"
-      ],
-      "technicalNotes": [
-        "Closures allow access to variables outside the returned function.",
-        "clearTimeout prevents multiple executions.",
-        "Debouncing improves performance by reducing repeated calls."
-      ],
-      "codeSnippet": "function debounce(callback, delay) {\n  let timeoutId;\n\n  return (...args) => {\n    clearTimeout(timeoutId);\n\n    timeoutId = setTimeout(() => {\n      callback(...args);\n    }, delay);\n  };\n}\n\nconst handleSearch = debounce((value) => {\n  console.log('Searching:', value);\n}, 500);\n\nhandleSearch('react');\n"
-    },
-    {
-      "id": "js-fundamentals-array-reduce-total-006",
-      "title": "Calculate Cart Total",
-      "description": "Use reduce to calculate the total price of items in a shopping cart.",
-      "context": "reduce is commonly used in ecommerce applications, analytics dashboards, and financial summaries where values need to be accumulated.",
-      "category": "arrays",
-      "difficultyScore": 18,
-      "estimatedDuration": 55,
-      "typingStyle": "full",
-      "tags": [
-        "arrays",
-        "reduce",
-        "ecommerce",
-        "totals"
-      ],
-      "concepts": [
-        "array-reduce",
-        "accumulators",
-        "arrow-functions"
-      ],
-      "technicalNotes": [
-        "reduce accumulates values into a single result.",
-        "The accumulator stores the current total.",
-        "Initial values prevent unexpected behavior."
-      ],
-      "codeSnippet": "const cartItems = [\n  { name: 'Keyboard', price: 120 },\n  { name: 'Mouse', price: 80 },\n  { name: 'Monitor', price: 300 }\n];\n\nconst total = cartItems.reduce((sum, item) => {\n  return sum + item.price;\n}, 0);\n\nconsole.log(`Total: $${total}`);\n"
-    },
-    {
-      "id": "js-fundamentals-basic-loop-007",
-      "title": "Loop Through Notifications",
-      "description": "Practice iterating through arrays using a for...of loop.",
-      "context": "Loops are used everywhere in programming to process collections, notifications, messages, and API data.",
-      "category": "loops",
-      "difficultyScore": 8,
-      "estimatedDuration": 35,
-      "typingStyle": "full",
-      "tags": [
-        "loops",
-        "arrays",
-        "for-of",
-        "notifications"
-      ],
-      "concepts": [
-        "for-of-loop",
-        "iteration",
-        "console-output"
-      ],
-      "technicalNotes": [
-        "for...of simplifies array iteration.",
-        "It is cleaner than traditional index-based loops for simple traversal.",
-        "Each iteration exposes the current item directly."
-      ],
-      "codeSnippet": "const notifications = [\n  'New message received',\n  'User logged in',\n  'Backup completed'\n];\n\nfor (const notification of notifications) {\n  console.log(notification);\n}\n"
-    },
-    {
-      "id": "js-fundamentals-string-slugify-008",
-      "title": "Generate URL Slug",
-      "description": "Convert a title into a URL-friendly slug.",
-      "context": "Slug generation is heavily used in blogs, CMS systems, ecommerce platforms, and SEO-friendly URLs.",
-      "category": "strings",
-      "difficultyScore": 22,
-      "estimatedDuration": 60,
-      "typingStyle": "full",
-      "tags": [
-        "strings",
-        "slugify",
-        "seo",
-        "urls"
-      ],
-      "concepts": [
-        "string-methods",
-        "replace",
-        "toLowerCase",
-        "trim"
-      ],
-      "technicalNotes": [
-        "trim removes extra spaces.",
-        "replace with regex helps normalize strings.",
-        "Lowercase URLs improve consistency."
-      ],
-      "codeSnippet": "function slugify(title) {\n  return title\n    .trim()\n    .toLowerCase()\n    .replace(/\\s+/g, '-')\n    .replace(/[^a-z0-9-]/g, '');\n}\n\nconst slug = slugify('  JavaScript Reflex Trainer App  ');\n\nconsole.log(slug);\n"
-    },
-    {
-      "id": "js-fundamentals-local-storage-009",
-      "title": "Save Theme Preference",
-      "description": "Store and retrieve user preferences using localStorage.",
-      "context": "Persisting user settings like themes and preferences is common in modern frontend applications.",
-      "category": "browser-api",
-      "difficultyScore": 16,
-      "estimatedDuration": 45,
-      "typingStyle": "full",
-      "tags": [
-        "localStorage",
-        "browser-api",
-        "frontend",
-        "preferences"
-      ],
-      "concepts": [
-        "localStorage",
-        "browser-storage",
-        "conditional-logic"
-      ],
-      "technicalNotes": [
-        "localStorage persists data between browser sessions.",
-        "Stored values are always strings.",
-        "Fallback values improve robustness."
-      ],
-      "codeSnippet": "const savedTheme = localStorage.getItem('theme');\n\nif (!savedTheme) {\n  localStorage.setItem('theme', 'dark');\n}\n\nconst currentTheme = localStorage.getItem('theme');\n\nconsole.log(`Current theme: ${currentTheme}`);\n"
-    },
-    {
-      "id": "js-fundamentals-basic-sort-010",
-      "title": "Sort Products by Price",
-      "description": "Sort objects inside an array based on numeric values.",
-      "context": "Sorting collections is fundamental in ecommerce stores, dashboards, ranking systems, and admin panels.",
-      "category": "arrays",
-      "difficultyScore": 24,
-      "estimatedDuration": 70,
-      "typingStyle": "full",
-      "tags": [
-        "arrays",
-        "sorting",
-        "products",
-        "compare-functions"
-      ],
-      "concepts": [
-        "array-sort",
-        "compare-callback",
-        "numeric-sorting"
-      ],
-      "technicalNotes": [
-        "sort mutates the original array.",
-        "Compare callbacks define sorting behavior.",
-        "Numeric sorting requires subtraction logic."
-      ],
-      "codeSnippet": "const products = [\n  { name: 'Laptop', price: 1200 },\n  { name: 'Headphones', price: 150 },\n  { name: 'Monitor', price: 450 }\n];\n\nproducts.sort((a, b) => {\n  return a.price - b.price;\n});\n\nconsole.log(products);\n"
-    },
-    {
-      "id": "js-fundamentals-class-person-011",
-      "title": "Basic Class Definition",
-      "description": "Create a simple class with constructor and methods.",
-      "context": "Classes are fundamental in JavaScript for creating blueprints for objects and organizing code.",
-      "category": "classes",
-      "difficultyScore": 20,
-      "estimatedDuration": 55,
-      "typingStyle": "full",
-      "tags": [
-        "classes",
-        "oop",
-        "constructor",
-        "methods"
-      ],
-      "concepts": [
-        "class-basics",
-        "constructor",
-        "instance"
-      ],
-      "technicalNotes": [
-        "Classes are templates for creating objects.",
-        "The constructor runs when creating a new instance.",
-        "Methods define behavior on instances."
-      ],
-      "codeSnippet": "class Person {\n  constructor(name, age) {\n    this.name = name;\n    this.age = age;\n  }\n\n  greet() {\n    return `Hello, my name is ${this.name}`;\n  }\n\n  celebrateBirthday() {\n    this.age++;\n    return `Happy birthday! Now I am ${this.age}`;\n  }\n}\n\nconst person1 = new Person('Nacho', 25);\nconsole.log(person1.greet());\nconsole.log(person1.celebrateBirthday());\n"
-    },
-    {
-      "id": "js-fundamentals-class-car-012",
-      "title": "Car Class with Properties",
-      "description": "Build a Car class with properties to track its state.",
-      "context": "Classes are used to model real-world objects with properties and behaviors in applications.",
-      "category": "classes",
-      "difficultyScore": 22,
-      "estimatedDuration": 60,
-      "typingStyle": "full",
-      "tags": [
-        "classes",
-        "properties",
-        "oop",
-        "state"
-      ],
-      "concepts": [
-        "this-keyword",
-        "object-properties",
-        "state-management"
-      ],
-      "technicalNotes": [
-        "Properties store object state.",
-        "Use 'this' to reference the instance.",
-        "Methods can modify properties."
-      ],
-      "codeSnippet": "class Car {\n  constructor(brand, model, year) {\n    this.brand = brand;\n    this.model = model;\n    this.year = year;\n    this.mileage = 0;\n    this.isRunning = false;\n  }\n\n  start() {\n    this.isRunning = true;\n    return `${this.brand} ${this.model} is now running`;\n  }\n\n  stop() {\n    this.isRunning = false;\n    return `${this.brand} ${this.model} stopped`;\n  }\n\n  drive(distance) {\n    if (this.isRunning) {\n      this.mileage += distance;\n      return `Drove ${distance}km. Total: ${this.mileage}km`;\n    }\n    return 'Start the car first!';\n  }\n}\n\nconst myCar = new Car('Toyota', 'Corolla', 2023);\nconsole.log(myCar.start());\nconsole.log(myCar.drive(50));\nconsole.log(myCar.drive(30));\n"
-    },
-    {
-      "id": "js-fundamentals-testing-assert-011",
-      "title": "Basic Test Assertions",
-      "description": "Write basic assertions for testing functions.",
-      "context": "Testing is essential for ensuring code works correctly and catching bugs early.",
-      "category": "testing",
-      "difficultyScore": 18,
-      "estimatedDuration": 50,
-      "typingStyle": "full",
-      "tags": [
-        "testing",
-        "assertions",
-        "validation",
-        "quality"
-      ],
-      "concepts": [
-        "assertions",
-        "test-cases",
-        "validation"
-      ],
-      "technicalNotes": [
-        "Assertions check if values are as expected.",
-        "Each test should verify one behavior.",
-        "Good tests are repeatable and independent."
-      ],
-      "codeSnippet": "function assert(condition, message) {\n  if (!condition) {\n    throw new Error(`Assertion failed: ${message}`);\n  }\n  console.log(`✓ ${message}`);\n}\n\nfunction add(a, b) {\n  return a + b;\n}\n\nfunction multiply(a, b) {\n  return a * b;\n}\n\nfunction isEven(num) {\n  return num % 2 === 0;\n}\n\nassert(add(2, 3) === 5, 'add(2, 3) should equal 5');\nassert(add(0, 0) === 0, 'add(0, 0) should equal 0');\nassert(add(-1, 1) === 0, 'add(-1, 1) should equal 0');\n\nassert(multiply(3, 4) === 12, 'multiply(3, 4) should equal 12');\nassert(multiply(0, 5) === 0, 'multiply(0, 5) should equal 0');\n\nassert(isEven(4) === true, 'isEven(4) should be true');\nassert(isEven(7) === false, 'isEven(7) should be false');\n"
-    },
-    {
-      "id": "js-fundamentals-testing-validate-012",
-      "title": "Form Validation Tests",
-      "description": "Write validation functions with test cases.",
-      "context": "Input validation is critical for security and data integrity in web applications.",
-      "category": "testing",
-      "difficultyScore": 21,
-      "estimatedDuration": 58,
-      "typingStyle": "full",
-      "tags": [
-        "testing",
-        "validation",
-        "forms",
-        "input-checking"
-      ],
-      "concepts": [
-        "validation-logic",
-        "regex",
-        "error-handling"
-      ],
-      "technicalNotes": [
-        "Validate before processing data.",
-        "Check for empty, format, and range.",
-        "Return meaningful error messages."
-      ],
-      "codeSnippet": "function validateEmail(email) {\n  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return regex.test(email);\n}\n\nfunction validatePassword(password) {\n  return password.length >= 8;\n}\n\nfunction validateAge(age) {\n  return age >= 0 && age <= 150;\n}\n\nconst tests = [\n  { fn: validateEmail, input: 'nacho@example.com', expected: true },\n  { fn: validateEmail, input: 'invalid', expected: false },\n  { fn: validateEmail, input: 'test@test', expected: false },\n  { fn: validatePassword, input: 'password123', expected: true },\n  { fn: validatePassword, input: 'short', expected: false },\n  { fn: validateAge, input: 25, expected: true },\n  { fn: validateAge, input: -5, expected: false },\n  { fn: validateAge, input: 200, expected: false },\n];\n\ntests.forEach(({ fn, input, expected }) => {\n  const result = fn(input);\n  console.log(result === expected ? '✓ PASS' : '✗ FAIL', fn.name, input);\n});\n"
-    },
-    {
-      "id": "js-fundamentals-patterns-module-011",
-      "title": "Module Pattern",
-      "description": "Use JavaScript modules to encapsulate code.",
-      "context": "Modules keep code organized, prevent global pollution, and enable code reuse.",
-      "category": "patterns",
-      "difficultyScore": 19,
-      "estimatedDuration": 52,
-      "typingStyle": "full",
-      "tags": [
-        "patterns",
-        "modules",
-        "encapsulation",
-        "namespaces"
-      ],
-      "concepts": [
-        "iife",
-        "namespace",
-        "private-variables"
-      ],
-      "technicalNotes": [
-        "IIFE creates private scope.",
-        "Revealing module shows only public API.",
-        "Keeps global namespace clean."
-      ],
-      "codeSnippet": "const Calculator = (function() {\n  let result = 0;\n\n  function add(num) {\n    result += num;\n    return this;\n  }\n\n  function subtract(num) {\n    result -= num;\n    return this;\n  }\n\n  function multiply(num) {\n    result *= num;\n    return this;\n  }\n\n  function getResult() {\n    return result;\n  }\n\n  function reset() {\n    result = 0;\n    return this;\n  }\n\n  return { add, subtract, multiply, getResult, reset };\n})();\n\nCalculator.add(10).multiply(2).subtract(5);\nconsole.log(Calculator.getResult());\n\nCalculator.reset().add(100).subtract(50);\nconsole.log(Calculator.getResult());\n"
-    }
-  ]
-}
+    "exercises": [
+      {
+        "id": "js-fund-rt-001",
+        "title": "Arrow Function - Suma",
+        "description": "Practica tipear funciones flecha básicas con return implícito",
+        "context": "Las funciones flecha son la forma moderna de definir funciones en ES6. Se usan extensivamente en React, arrays methods, y callbacks.",
+        "codeSnippet": "const add = (a, b) => a + b;\nconst multiply = (x, y) => x * y;\nconst greet = name => `Hello, ${name}!`;",
+        "typingStyle": "full",
+        "tags": [
+          "funciones",
+          "es6",
+          "sintaxis"
+        ],
+        "concepts": [
+          "funciones-flecha",
+          "retorno-implícito",
+          "sintaxis-concisa"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 1,
+        "category": "functions"
+      },
+      {
+        "id": "js-fund-rt-002",
+        "title": "Arrow Function - Bloque",
+        "description": "Funciones flecha con cuerpo de bloque y return explícito",
+        "context": "Cuando la función tiene múltiples líneas, necesitas usar llaves y return explícito.",
+        "codeSnippet": "const calculate = (a, b) => {\n  const sum = a + b;\n  return sum * 2;\n};",
+        "typingStyle": "full",
+        "tags": [
+          "funciones",
+          "es6"
+        ],
+        "concepts": [
+          "funciones-flecha",
+          "cuerpo-de-bloque",
+          "retorno-explícito"
+        ],
+        "estimatedDuration": 45,
+        "difficultyScore": 2,
+        "category": "functions"
+      },
+      {
+        "id": "js-fund-rt-003",
+        "title": "Array Destructuring",
+        "description": "Practica destructuring de arrays",
+        "context": "Destructuring te permite extraer valores de arrays de forma elegante. Es esencial para React hooks como useState.",
+        "codeSnippet": "const [first, second, ...rest] = [1, 2, 3, 4, 5];\nconst [head, ...tail] = array;\nconst [a, , c] = [10, 20, 30];",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "desestructuración",
+          "es6"
+        ],
+        "concepts": [
+          "desestructuración",
+          "operador-rest",
+          "operador-spread"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-004",
+        "title": "Object Destructuring",
+        "description": "Destructuring de objetos con alias",
+        "context": "Muy usado en React para extraer props y en APIs para parsear respuestas.",
+        "codeSnippet": "const { name, age } = user;\nconst { name: userName, id: userId } = data;",
+        "typingStyle": "full",
+        "tags": [
+          "objetos",
+          "desestructuración"
+        ],
+        "concepts": [
+          "desestructuración-de-objetos",
+          "alias",
+          "valores-por-defecto"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "objects"
+      },
+      {
+        "id": "js-fund-rt-005",
+        "title": "Template Literals",
+        "description": "Practica template literals con expresiones",
+        "context": "Los template literals facilitan la creación de strings con variables y expresiones.",
+        "codeSnippet": "const message = `Hello, ${name}! You have ${items.length} items.`;\nconst html = `<div class=\"${className}\">${content}</div>`;",
+        "typingStyle": "full",
+        "tags": [
+          "cadenas",
+          "es6"
+        ],
+        "concepts": [
+          "plantillas-de-cadena",
+          "interpolación",
+          "expresiones"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 1,
+        "category": "strings"
+      },
+      {
+        "id": "js-fund-rt-006",
+        "title": "Spread Operator - Arrays",
+        "description": "Spread operator para copiar y combinar arrays",
+        "context": "El spread operator (...) es esencial para inmutabilidad y propagación de datos.",
+        "codeSnippet": "const copy = [...original];\nconst merged = [...arr1, ...arr2];\nconst withNew = [...arr, newItem];",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "es6"
+        ],
+        "concepts": [
+          "operador-spread",
+          "copia-de-arreglo",
+          "inmutabilidad"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-007",
+        "title": "Spread Operator - Objects",
+        "description": "Spread operator para objetos",
+        "context": "Usado para actualizar objetos de forma inmutable, muy común en Redux y state management.",
+        "codeSnippet": "const updated = { ...original, name: 'new' };\nconst merged = { ...defaults, ...user };",
+        "typingStyle": "full",
+        "tags": [
+          "objetos",
+          "es6"
+        ],
+        "concepts": [
+          "operador-spread",
+          "fusión-de-objetos",
+          "inmutabilidad"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "objects"
+      },
+      {
+        "id": "js-fund-rt-008",
+        "title": "Map - Transformación",
+        "description": "Método map para transformar arrays",
+        "context": "Map es fundamental para transformar datos. Devuelve un nuevo array.",
+        "codeSnippet": "const doubled = nums.map(n => n * 2);\nconst names = users.map(u => u.name);\nconst html = items.map(i => `<li>${i}</li>`).join('');",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "funcional"
+        ],
+        "concepts": [
+          "map",
+          "transformación",
+          "callbacks"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-009",
+        "title": "Filter - Selección",
+        "description": "Método filter para seleccionar elementos",
+        "context": "Filter devuelve un nuevo array con los elementos que cumplen la condición.",
+        "codeSnippet": "const even = nums.filter(n => n % 2 === 0);\nconst adults = users.filter(u => u.age >= 18);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "funcional"
+        ],
+        "concepts": [
+          "filter",
+          "predicados",
+          "condicionales"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-010",
+        "title": "Reduce - Acumulación",
+        "description": "Método reduce para acumular valores",
+        "context": "Reduce es el método más poderoso. Puede implementar map, filter, y más.",
+        "codeSnippet": "const sum = nums.reduce((acc, n) => acc + n, 0);\nconst max = nums.reduce((a, b) => a > b ? a : b, 0);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "funcional"
+        ],
+        "concepts": [
+          "reduce",
+          "acumulador",
+          "valor-inicial"
+        ],
+        "estimatedDuration": 50,
+        "difficultyScore": 3,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-011",
+        "title": "Find - Búsqueda",
+        "description": "Método find para buscar el primer elemento",
+        "context": "Find devuelve el primer elemento que cumple la condición, o undefined.",
+        "codeSnippet": "const user = users.find(u => u.id === id);\nconst firstEven = nums.find(n => n % 2 === 0);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "funcional"
+        ],
+        "concepts": [
+          "find",
+          "búsqueda",
+          "callbacks"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-012",
+        "title": "Some y Every",
+        "description": "Métodos some y every para verificación",
+        "context": "Some retorna true si algún elemento cumple. Every si todos cumplen.",
+        "codeSnippet": "const hasAdult = users.some(u => u.age >= 18);\nconst allValid = inputs.every(i => i.length > 0);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "funcional"
+        ],
+        "concepts": [
+          "some",
+          "every",
+          "lógica-booleana"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-013",
+        "title": " Ternary Operator",
+        "description": "Operador ternario básico",
+        "context": "El ternario es esencial para condicionales inline en JSX y expresiones cortas.",
+        "codeSnippet": "const status = age >= 18 ? 'adult' : 'minor';\nconst icon = isActive ? '✓' : '✗';",
+        "typingStyle": "full",
+        "tags": [
+          "operadores",
+          "condicionales"
+        ],
+        "concepts": [
+          "ternario",
+          "expresión-condicional"
+        ],
+        "estimatedDuration": 25,
+        "difficultyScore": 1,
+        "category": "control-flow"
+      },
+      {
+        "id": "js-fund-rt-014",
+        "title": "Logical Operators",
+        "description": "Operadores && y || para flujo condicional",
+        "context": "Short-circuit evaluation es común para renderizado condicional y valores por defecto.",
+        "codeSnippet": "const display = isVisible && <Component />;\nconst value = data || 'default';\nconst safe = user && user.profile && user.profile.name;",
+        "typingStyle": "full",
+        "tags": [
+          "operadores",
+          "condicionales"
+        ],
+        "concepts": [
+          "and-lógico",
+          "or-lógico",
+          "cortocircuito"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 1,
+        "category": "control-flow"
+      },
+      {
+        "id": "js-fund-rt-015",
+        "title": "Optional Chaining",
+        "description": "Optional chaining para acceso seguro",
+        "context": "ES2020 feature. Previene errores al acceder a propiedades anidadas que pueden ser undefined.",
+        "codeSnippet": "const name = user?.profile?.name;\nconst method = obj?.method?.();\nconst value = arr?.[0];",
+        "typingStyle": "full",
+        "tags": [
+          "objetos",
+          "es2020"
+        ],
+        "concepts": [
+          "encadenamiento-opcional",
+          "seguridad-nula"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "objects"
+      },
+      {
+        "id": "js-fund-rt-016",
+        "title": "Nullish Coalescing",
+        "description": "Nullish coalescing para valores por defecto",
+        "context": "A diferencia de ||, solo usa el fallback para null/undefined, no para falsy values.",
+        "codeSnippet": "const count = input ?? 0;\nconst name = user.name ?? 'Anonymous';",
+        "typingStyle": "full",
+        "tags": [
+          "operadores",
+          "es2020"
+        ],
+        "concepts": [
+          "fusión-nula",
+          "valores-por-defecto"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 2,
+        "category": "algorithms"
+      },
+      {
+        "id": "js-fund-rt-017",
+        "title": "Array Include",
+        "description": "Método includes para verificación",
+        "context": "Includes es más legible que indexOf para verificar existencia.",
+        "codeSnippet": "const hasItem = array.includes(value);\nconst isValid = ['a', 'b', 'c'].includes(input);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "es2016"
+        ],
+        "concepts": [
+          "includes",
+          "verificación-de-pertenencia"
+        ],
+        "estimatedDuration": 25,
+        "difficultyScore": 1,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-018",
+        "title": "String Methods",
+        "description": "Métodos comunes de string",
+        "context": "Upper, lower, trim, split, join son operaciones frecuentes.",
+        "codeSnippet": "const upper = text.toUpperCase();\nconst trimmed = text.trim();\nconst parts = text.split(',');",
+        "typingStyle": "full",
+        "tags": [
+          "cadenas"
+        ],
+        "concepts": [
+          "métodos-de-cadena",
+          "transformación"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 1,
+        "category": "strings"
+      },
+      {
+        "id": "js-fund-rt-019",
+        "title": "Object Keys/Values/Entries",
+        "description": "Métodos para iterar objetos",
+        "context": "Esencial para transformar y manipular objetos.",
+        "codeSnippet": "const keys = Object.keys(obj);\nconst values = Object.values(data);\nconst entries = Object.entries(item);",
+        "typingStyle": "full",
+        "tags": [
+          "objetos"
+        ],
+        "concepts": [
+          "object-keys",
+          "object-values",
+          "object-entries"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "objects"
+      },
+      {
+        "id": "js-fund-rt-020",
+        "title": "Async Function Basic",
+        "description": "Funciones asíncronas básicas",
+        "context": "Async/await es la forma moderna de manejar operaciones asíncronas.",
+        "codeSnippet": "async function fetchData() {\n  const response = await fetch(url);\n  return response.json();\n}",
+        "typingStyle": "full",
+        "tags": [
+          "asíncrono",
+          "es2017"
+        ],
+        "concepts": [
+          "async-await",
+          "promesas",
+          "await"
+        ],
+        "estimatedDuration": 45,
+        "difficultyScore": 3,
+        "category": "async"
+      },
+      {
+        "id": "js-fund-rt-021",
+        "title": "IIFE - Immediately Invoked",
+        "description": "IIFE para crear scope privado",
+        "context": "Patrón clásico para crear closures y evitar contaminación del scope global.",
+        "codeSnippet": "(function() {\n  const privateVar = 'secret';\n  console.log('IIFE executed');\n})();",
+        "typingStyle": "full",
+        "tags": [
+          "funciones",
+          "patrones"
+        ],
+        "concepts": [
+          "iife",
+          "clausura",
+          "ámbito (scope)"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 2,
+        "category": "functions"
+      },
+      {
+        "id": "js-fund-rt-022",
+        "title": "Class Declaration",
+        "description": "Declaración básica de clase",
+        "context": "Las clases son la forma orientada a objetos de JavaScript.",
+        "codeSnippet": "class User {\n  constructor(name, email) {\n    this.name = name;\n    this.email = email;\n  }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "clases",
+          "poo"
+        ],
+        "concepts": [
+          "clase",
+          "constructor",
+          "this"
+        ],
+        "estimatedDuration": 45,
+        "difficultyScore": 2,
+        "category": "classes"
+      },
+      {
+        "id": "js-fund-rt-023",
+        "title": "Class Methods",
+        "description": "Métodos de clase",
+        "context": "Métodos públicos en clases.",
+        "codeSnippet": "class Calculator {\n  add(a, b) {\n    return a + b;\n  }\n  \n  subtract(a, b) {\n    return a - b;\n  }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "clases",
+          "poo"
+        ],
+        "concepts": [
+          "métodos-de-clase",
+          "this-binding"
+        ],
+        "estimatedDuration": 45,
+        "difficultyScore": 2,
+        "category": "classes"
+      },
+      {
+        "id": "js-fund-rt-024",
+        "title": "Array from",
+        "description": "Array.from para creación",
+        "context": "Crea arrays desde iterables o con longitud específica.",
+        "codeSnippet": "const arr = Array.from('hello');\nconst zeros = Array.from({ length: 5 }, (_, i) => i);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "es6"
+        ],
+        "concepts": [
+          "array-from",
+          "creación-de-arreglos"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 3,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-025",
+        "title": "Object.freeze",
+        "description": "Inmutabilidad con freeze",
+        "context": "Para crear objetos inmutables (const pero no freeze).",
+        "codeSnippet": "const frozen = Object.freeze({ a: 1, b: 2 });\nfrozen.a = 3; // Error en strict mode",
+        "typingStyle": "full",
+        "tags": [
+          "objetos",
+          "inmutabilidad"
+        ],
+        "concepts": [
+          "object-freeze",
+          "corrección-de-const"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "objects"
+      },
+      {
+        "id": "js-fund-rt-026",
+        "title": "Array Fill",
+        "description": "Array.fill para inicialización",
+        "context": "Rellena arrays con un valor específico.",
+        "codeSnippet": "const arr = new Array(5).fill(0);\nconst matrix = Array.from({ length: 3 }, () => Array(3).fill(null));",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "es6"
+        ],
+        "concepts": [
+          "array-fill",
+          "inicialización"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-027",
+        "title": "for...of Loop",
+        "description": "Loop for...of para iterables",
+        "context": "Más limpio que for tradicional para iterar arrays.",
+        "codeSnippet": "for (const item of items) {\n  console.log(item);\n}\n\nfor (const [i, v] of arr.entries()) {\n  console.log(i, v);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "bucles",
+          "es6"
+        ],
+        "concepts": [
+          "for-of",
+          "iterables",
+          "desestructuración"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 2,
+        "category": "loops"
+      },
+      {
+        "id": "js-fund-rt-028",
+        "title": "for...in Loop",
+        "description": "for...in para objetos",
+        "context": "Itera sobre las claves de un objeto.",
+        "codeSnippet": "for (const key in obj) {\n  console.log(key, obj[key]);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "bucles",
+          "objetos"
+        ],
+        "concepts": [
+          "for-in",
+          "claves-de-objeto"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 2,
+        "category": "loops"
+      },
+      {
+        "id": "js-fund-rt-029",
+        "title": "Math Operations",
+        "description": "Operaciones Math comunes",
+        "context": "Math es usado para cálculos numéricos.",
+        "codeSnippet": "const rounded = Math.round(4.5);\nconst floor = Math.floor(4.9);\nconst random = Math.floor(Math.random() * 10);\nconst max = Math.max(...numbers);",
+        "typingStyle": "full",
+        "tags": [
+          "matemáticas",
+          "números"
+        ],
+        "concepts": [
+          "objeto-math",
+          "aleatorio",
+          "redondeo"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "algorithms"
+      },
+      {
+        "id": "js-fund-rt-030",
+        "title": "JSON Parse/Stringify",
+        "description": "Serialización JSON",
+        "context": "Esencial para API calls y storage.",
+        "codeSnippet": "const json = JSON.stringify(data);\nconst parsed = JSON.parse(json);\nconst pretty = JSON.stringify(data, null, 2);",
+        "typingStyle": "full",
+        "tags": [
+          "json",
+          "serialización"
+        ],
+        "concepts": [
+          "json-parse",
+          "json-stringify",
+          "serialización"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "data-processing"
+      },
+      {
+        "id": "js-fund-rt-031",
+        "title": "Default Parameters",
+        "description": "Parámetros con valores por defecto",
+        "context": "ES6 feature para manejar parámetros opcionales.",
+        "codeSnippet": "function greet(name = 'World', greeting = 'Hello') {\n  return `${greeting}, ${name}!`;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "funciones",
+          "es6"
+        ],
+        "concepts": [
+          "parámetros-por-defecto",
+          "parámetros-opcionales"
+        ],
+        "estimatedDuration": 30,
+        "difficultyScore": 1,
+        "category": "functions"
+      },
+      {
+        "id": "js-fund-rt-032",
+        "title": "Rest Parameters",
+        "description": "Parámetros rest",
+        "context": "Recolecta argumentos restantes en un array.",
+        "codeSnippet": "function sum(...numbers) {\n  return numbers.reduce((a, b) => a + b, 0);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "funciones",
+          "es6"
+        ],
+        "concepts": [
+          "parámetros-rest",
+          "funciones-variádicas"
+        ],
+        "estimatedDuration": 35,
+        "difficultyScore": 2,
+        "category": "functions"
+      },
+      {
+        "id": "js-fund-rt-033",
+        "title": "Array Flat",
+        "description": "Array.flat para aplanar",
+        "context": "Aplana arrays anidados hasta cierta profundidad.",
+        "codeSnippet": "const flat = arr.flat();\nconst deepFlat = arr.flat(Infinity);\nconst twoLevels = nested.flat(2);",
+        "typingStyle": "full",
+        "tags": [
+          "arreglos",
+          "es2019"
+        ],
+        "concepts": [
+          "array-flat",
+          "aplanamiento"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 3,
+        "category": "arrays"
+      },
+      {
+        "id": "js-fund-rt-034",
+        "title": "try...catch...finally",
+        "description": "Manejo de errores",
+        "context": "Try-catch es esencial para manejar errores gracefully.",
+        "codeSnippet": "try {\n  const result = JSON.parse(input);\n} catch (e) {\n  console.error('Invalid JSON:', e);\n} finally {\n  console.log('Done');\n}",
+        "typingStyle": "full",
+        "tags": [
+          "gestión-de-errores",
+          "excepciones"
+        ],
+        "concepts": [
+          "try-catch",
+          "gestión-de-errores",
+          "finally"
+        ],
+        "estimatedDuration": 45,
+        "difficultyScore": 2,
+        "category": "validation"
+      },
+      {
+        "id": "js-fund-rt-035",
+        "title": "Set Data Structure",
+        "description": "Set para colecciones únicas",
+        "context": "Set almacena valores únicos, elimina duplicados automáticamente.",
+        "codeSnippet": "const unique = new Set([1, 2, 2, 3]);\nunique.add(4);\nunique.has(3);\nconst array = [...unique];",
+        "typingStyle": "full",
+        "tags": [
+          "estructuras-de-datos",
+          "es6"
+        ],
+        "concepts": [
+          "set",
+          "valores-únicos",
+          "pertenencia"
+        ],
+        "estimatedDuration": 40,
+        "difficultyScore": 3,
+        "category": "algorithms"
+      }
+    ]
+  }
 ]

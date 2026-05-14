@@ -4,473 +4,693 @@
       "language": "typescript",
       "mode": "reflex-typing",
       "version": "1.0.0",
-      "lastUpdated": "2026-05-11",
+      "lastUpdated": "2026-05-14",
       "totalExercises": 35
     },
     "exercises": [
       {
         "id": "ts-fund-001",
-        "title": "Arrays: Basic Typing",
-        "description": "Define an array of strings.",
-        "context": "Essential for handling lists of data.",
+        "title": "Arreglos: Tipado Básico",
+        "description": "Define un arreglo de cadenas (strings).",
+        "context": "Esencial para manejar listas de datos.",
         "category": "arrays",
         "difficultyScore": 10,
         "estimatedDuration": 30,
         "typingStyle": "full",
-        "tags": ["typescript", "arrays"],
-        "concepts": ["array typing"],
-        "technicalNotes": ["Use string[] syntax"],
+        "tags": [
+          "typescript",
+          "arreglos"
+        ],
+        "concepts": [
+          "tipado de arreglos"
+        ],
+        "technicalNotes": [
+          "Usa la sintaxis string[]"
+        ],
         "codeSnippet": "const names: string[] = ['Alice', 'Bob'];"
       },
       {
         "id": "ts-fund-002",
-        "title": "Async: Promise Typing",
-        "description": "Type a simple promise.",
-        "context": "Core for async operations.",
+        "title": "Asíncrono: Tipado de Promesas",
+        "description": "Tipa una promesa simple.",
+        "context": "Núcleo para operaciones asíncronas.",
         "category": "async",
         "difficultyScore": 25,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript", "async"],
-        "concepts": ["promises"],
-        "technicalNotes": ["Promise<T> syntax"],
+        "tags": [
+          "typescript",
+          "asíncrono"
+        ],
+        "concepts": [
+          "promesas"
+        ],
+        "technicalNotes": [
+          "Sintaxis Promise<T>"
+        ],
         "codeSnippet": "const delay = (ms: number): Promise<void> => new Promise(res => setTimeout(res, ms));"
       },
       {
         "id": "ts-fund-003",
-        "title": "Browser API: Element Typing",
-        "description": "Type a DOM element.",
-        "context": "Crucial for web development.",
-        "category": "browser-api",
+        "title": "API Browser: Tipado de Elementos",
+        "description": "Tipa un elemento del DOM.",
+        "context": "Crucial para el desarrollo web.",
+        "category": "algorithms",
         "difficultyScore": 22,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript", "dom"],
-        "concepts": ["type assertions"],
-        "technicalNotes": ["HTMLButtonElement type"],
+        "tags": [
+          "typescript",
+          "dom"
+        ],
+        "concepts": [
+          "aserciones de tipo"
+        ],
+        "technicalNotes": [
+          "Tipo HTMLButtonElement"
+        ],
         "codeSnippet": "const btn = document.querySelector('button') as HTMLButtonElement;"
       },
       {
         "id": "ts-fund-004",
-        "title": "Classes: Visibility",
-        "description": "Use private and public modifiers.",
-        "context": "Encapsulation in OOP.",
+        "title": "Clases: Visibilidad",
+        "description": "Usa los modificadores private y public.",
+        "context": "Encapsulamiento en POO.",
         "category": "classes",
         "difficultyScore": 30,
         "estimatedDuration": 45,
         "typingStyle": "full",
-        "tags": ["typescript", "classes"],
-        "concepts": ["access modifiers"],
-        "technicalNotes": ["private keyword"],
+        "tags": [
+          "typescript",
+          "clases"
+        ],
+        "concepts": [
+          "modificadores de acceso"
+        ],
+        "technicalNotes": [
+          "Palabra clave private"
+        ],
         "codeSnippet": "class User {\n  private id: number;\n  public name: string;\n  constructor(id: number, name: string) { this.id = id; this.name = name; }\n}"
       },
       {
         "id": "ts-fund-005",
-        "title": "Functions: Param Typing",
-        "description": "Type function parameters.",
-        "context": "Ensures call-site safety.",
+        "title": "Funciones: Tipado de Parámetros",
+        "description": "Tipa los parámetros de una función.",
+        "context": "Asegura la seguridad en el sitio de llamada.",
         "category": "functions",
         "difficultyScore": 15,
         "estimatedDuration": 30,
         "typingStyle": "full",
-        "tags": ["typescript", "functions"],
-        "concepts": ["function typing"],
-        "technicalNotes": ["Annotate params and return"],
+        "tags": [
+          "typescript",
+          "funciones"
+        ],
+        "concepts": [
+          "tipado de funciones"
+        ],
+        "technicalNotes": [
+          "Anota parámetros y retorno"
+        ],
         "codeSnippet": "function add(a: number, b: number): number { return a + b; }"
       },
       {
         "id": "ts-fund-006",
-        "title": "Loops: Array Iteration",
-        "description": "Iterate over a typed array.",
-        "context": "Standard processing pattern.",
+        "title": "Bucles: Iteración de Arreglos",
+        "description": "Itera sobre un arreglo tipado.",
+        "context": "Patrón de procesamiento estándar.",
         "category": "loops",
         "difficultyScore": 18,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript", "loops"],
-        "concepts": ["for-of"],
-        "technicalNotes": ["Inferred element types"],
+        "tags": [
+          "typescript",
+          "bucles"
+        ],
+        "concepts": [
+          "for-of"
+        ],
+        "technicalNotes": [
+          "Tipos de elementos inferidos"
+        ],
         "codeSnippet": "const items: string[] = ['a', 'b'];\nfor (const item of items) { console.log(item.toUpperCase()); }"
       },
       {
         "id": "ts-fund-007",
-        "title": "Objects: Interface",
-        "description": "Define object shape.",
-        "context": "Core structural typing.",
-        "category": "objects",
+        "title": "Objetos: Interfaces",
+        "description": "Define la forma de un objeto.",
+        "context": "Núcleo del tipado estructural.",
+        "category": "algorithms",
         "difficultyScore": 16,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript", "interfaces"],
-        "concepts": ["interfaces"],
-        "technicalNotes": ["Reusable shapes"],
+        "tags": [
+          "typescript",
+          "interfaces"
+        ],
+        "concepts": [
+          "interfaces"
+        ],
+        "technicalNotes": [
+          "Formas reutilizables"
+        ],
         "codeSnippet": "interface Point { x: number; y: number; }"
       },
       {
         "id": "ts-fund-008",
-        "title": "Patterns: Discriminated Union",
-        "description": "Handle different states.",
-        "context": "Common in state management.",
+        "title": "Patrones: Unión Discriminada",
+        "description": "Maneja diferentes estados.",
+        "context": "Común en la gestión de estado.",
         "category": "patterns",
         "difficultyScore": 35,
         "estimatedDuration": 50,
         "typingStyle": "full",
-        "tags": ["typescript", "patterns"],
-        "concepts": ["unions"],
-        "technicalNotes": ["Common literal property"],
+        "tags": [
+          "typescript",
+          "patrones"
+        ],
+        "concepts": [
+          "uniones"
+        ],
+        "technicalNotes": [
+          "Propiedad literal común"
+        ],
         "codeSnippet": "type Action = { type: 'save' } | { type: 'load' };"
       },
       {
         "id": "ts-fund-009",
-        "title": "Strings: Template Literals",
-        "description": "Type-safe string templates.",
-        "context": "Dynamic message generation.",
+        "title": "Cadenas: Template Literals",
+        "description": "Plantillas de cadena seguras.",
+        "context": "Generación dinámica de mensajes.",
         "category": "strings",
         "difficultyScore": 12,
         "estimatedDuration": 30,
         "typingStyle": "full",
-        "tags": ["typescript", "strings"],
-        "concepts": ["templates"],
-        "technicalNotes": ["Inferred from literals"],
+        "tags": [
+          "typescript",
+          "cadenas"
+        ],
+        "concepts": [
+          "plantillas"
+        ],
+        "technicalNotes": [
+          "Inferido de literales"
+        ],
         "codeSnippet": "const greet = (name: string) => `Hello ${name}`;"
       },
       {
         "id": "ts-fund-010",
-        "title": "Testing: Any Type",
-        "description": "Bypass check for tests.",
-        "context": "Mocking complex objects.",
-        "category": "testing",
+        "title": "Pruebas: Tipo Any",
+        "description": "Evita la verificación para pruebas.",
+        "context": "Simulación (mocking) de objetos complejos.",
+        "category": "algorithms",
         "difficultyScore": 8,
         "estimatedDuration": 20,
         "typingStyle": "full",
-        "tags": ["typescript", "any"],
-        "concepts": ["any"],
-        "technicalNotes": ["Use sparingly"],
+        "tags": [
+          "typescript",
+          "any"
+        ],
+        "concepts": [
+          "any"
+        ],
+        "technicalNotes": [
+          "Usar con moderación"
+        ],
         "codeSnippet": "const mockData: any = { id: 1 };"
       },
       {
         "id": "ts-fund-011",
-        "title": "Arrays: Readonly",
-        "description": "Immutable arrays.",
+        "title": "Arreglos: Readonly",
+        "description": "Arreglos inmutables.",
         "category": "arrays",
         "difficultyScore": 22,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["readonly"],
-        "technicalNotes": ["Prevents mutations"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "readonly"
+        ],
+        "technicalNotes": [
+          "Evita mutaciones"
+        ],
         "codeSnippet": "const nums: readonly number[] = [1, 2];"
       },
       {
         "id": "ts-fund-012",
-        "title": "Async: Await Type",
-        "description": "Type of awaited value.",
+        "title": "Asíncrono: Tipo Await",
+        "description": "Tipo del valor esperado (awaited).",
         "category": "async",
         "difficultyScore": 32,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["awaited"],
-        "technicalNotes": ["Unwraps promises"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "awaited"
+        ],
+        "technicalNotes": [
+          "Desenvuelve promesas"
+        ],
         "codeSnippet": "type Data = Awaited<Promise<string>>;"
       },
       {
         "id": "ts-fund-013",
-        "title": "Browser API: Events",
-        "description": "Type event handlers.",
-        "category": "browser-api",
+        "title": "API Browser: Eventos",
+        "description": "Tipado de manejadores de eventos.",
+        "category": "algorithms",
         "difficultyScore": 28,
         "estimatedDuration": 45,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["events"],
-        "technicalNotes": ["MouseEvent type"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "eventos"
+        ],
+        "technicalNotes": [
+          "Tipo MouseEvent"
+        ],
         "codeSnippet": "const handleClick = (e: MouseEvent) => console.log(e.clientX);"
       },
       {
         "id": "ts-fund-014",
-        "title": "Classes: Extension",
-        "description": "Inherit from base class.",
+        "title": "Clases: Extensión",
+        "description": "Heredar de una clase base.",
         "category": "classes",
         "difficultyScore": 34,
         "estimatedDuration": 50,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["inheritance"],
-        "technicalNotes": ["super() call"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "herencia"
+        ],
+        "technicalNotes": [
+          "Llamada a super()"
+        ],
         "codeSnippet": "class Admin extends User { role = 'admin'; }"
       },
       {
         "id": "ts-fund-015",
-        "title": "Functions: Optional Params",
-        "description": "Type optional arguments.",
+        "title": "Funciones: Parámetros Opcionales",
+        "description": "Tipado de argumentos opcionales.",
         "category": "functions",
         "difficultyScore": 18,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["optional"],
-        "technicalNotes": ["Use ? suffix"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "opcional"
+        ],
+        "technicalNotes": [
+          "Usa el sufijo ?"
+        ],
         "codeSnippet": "function log(msg: string, level?: string) {}"
       },
       {
         "id": "ts-fund-016",
-        "title": "Loops: Key Iteration",
-        "description": "Iterate object keys.",
+        "title": "Bucles: Iteración de Claves",
+        "description": "Itera sobre las claves de un objeto.",
         "category": "loops",
         "difficultyScore": 26,
         "estimatedDuration": 45,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["keyof"],
-        "technicalNotes": ["Constraint K extends keyof T"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "keyof"
+        ],
+        "technicalNotes": [
+          "Restricción K extends keyof T"
+        ],
         "codeSnippet": "for (const key in obj) { console.log(key); }"
       },
       {
         "id": "ts-fund-017",
-        "title": "Objects: Optional Props",
-        "description": "Optional object fields.",
-        "category": "objects",
+        "title": "Objetos: Propiedades Opcionales",
+        "description": "Campos de objeto opcionales.",
+        "category": "algorithms",
         "difficultyScore": 19,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["optional"],
-        "technicalNotes": ["Interface props with ?"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "opcional"
+        ],
+        "technicalNotes": [
+          "Propiedades de interfaz con ?"
+        ],
         "codeSnippet": "interface User { id: number; bio?: string; }"
       },
       {
         "id": "ts-fund-018",
-        "title": "Patterns: Enums",
-        "description": "Define numeric enums.",
+        "title": "Patrones: Enums",
+        "description": "Define enums numéricos.",
         "category": "patterns",
         "difficultyScore": 20,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["enums"],
-        "technicalNotes": ["Auto-incrementing values"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "enums"
+        ],
+        "technicalNotes": [
+          "Valores con incremento automático"
+        ],
         "codeSnippet": "enum Status { Active, Inactive }"
       },
       {
         "id": "ts-fund-019",
-        "title": "Strings: Literal Types",
-        "description": "Constrain string values.",
+        "title": "Cadenas: Tipos Literales",
+        "description": "Restringe los valores de cadena.",
         "category": "strings",
         "difficultyScore": 24,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["literals"],
-        "technicalNotes": ["Exact string matches"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "literales"
+        ],
+        "technicalNotes": [
+          "Coincidencias exactas de cadena"
+        ],
         "codeSnippet": "type Color = 'red' | 'blue';"
       },
       {
         "id": "ts-fund-020",
-        "title": "Testing: Unknown Type",
-        "description": "Safe alternative to any.",
-        "category": "testing",
+        "title": "Pruebas: Tipo Unknown",
+        "description": "Alternativa segura a any.",
+        "category": "algorithms",
         "difficultyScore": 28,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["unknown"],
-        "technicalNotes": ["Requires narrowing"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "unknown"
+        ],
+        "technicalNotes": [
+          "Requiere estrechamiento (narrowing)"
+        ],
         "codeSnippet": "let input: unknown; if (typeof input === 'string') input.length;"
       },
       {
         "id": "ts-fund-021",
-        "title": "Arrays: Tuples",
-        "description": "Fixed length arrays.",
+        "title": "Arreglos: Tuplas",
+        "description": "Arreglos de longitud fija.",
         "category": "arrays",
         "difficultyScore": 26,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["tuples"],
-        "technicalNotes": ["Fixed types per position"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "tuplas"
+        ],
+        "technicalNotes": [
+          "Tipos fijos por posición"
+        ],
         "codeSnippet": "const point: [number, number] = [0, 0];"
       },
       {
         "id": "ts-fund-022",
-        "title": "Async: Void Function",
-        "description": "Type function returning nothing.",
-        "category": "async",
+        "title": "Asíncrono: Función Void",
+        "description": "Tipado de función que no devuelve nada.",
+        "category": "functions",
         "difficultyScore": 14,
         "estimatedDuration": 30,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["void"],
-        "technicalNotes": ["Standard return type"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "void"
+        ],
+        "technicalNotes": [
+          "Tipo de retorno estándar"
+        ],
         "codeSnippet": "async function save(): Promise<void> {}"
       },
       {
         "id": "ts-fund-023",
-        "title": "Browser API: Selectors",
-        "description": "Type multiple elements.",
-        "category": "browser-api",
+        "title": "API Browser: Selectores",
+        "description": "Tipado de múltiples elementos.",
+        "category": "algorithms",
         "difficultyScore": 30,
         "estimatedDuration": 45,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["NodeList"],
-        "technicalNotes": ["NodeListOf<T>"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "NodeList"
+        ],
+        "technicalNotes": [
+          "Tipo NodeListOf<T>"
+        ],
         "codeSnippet": "const items = document.querySelectorAll('.item') as NodeListOf<HTMLElement>;"
       },
       {
         "id": "ts-fund-024",
-        "title": "Classes: Abstract",
-        "description": "Define base shapes.",
+        "title": "Clases: Abstractas",
+        "description": "Define formas base.",
         "category": "classes",
         "difficultyScore": 40,
         "estimatedDuration": 50,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["abstract"],
-        "technicalNotes": ["Cannot be instantiated"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "abstract"
+        ],
+        "technicalNotes": [
+          "No se puede instanciar"
+        ],
         "codeSnippet": "abstract class Shape { abstract area(): number; }"
       },
       {
         "id": "ts-fund-025",
-        "title": "Functions: Rest Params",
-        "description": "Type variadic functions.",
+        "title": "Funciones: Parámetros Rest",
+        "description": "Tipado de funciones variádicas.",
         "category": "functions",
         "difficultyScore": 25,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["rest"],
-        "technicalNotes": ["Array type for rest"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "rest"
+        ],
+        "technicalNotes": [
+          "Tipo de arreglo para rest"
+        ],
         "codeSnippet": "function sum(...ns: number[]): number { return ns.length; }"
       },
       {
         "id": "ts-fund-026",
-        "title": "Loops: Index Typing",
-        "description": "Standard for loop.",
+        "title": "Bucles: Tipado de Índice",
+        "description": "Bucle for estándar.",
         "category": "loops",
         "difficultyScore": 12,
         "estimatedDuration": 30,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["loops"],
-        "technicalNotes": ["Inferred iterator type"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "bucles"
+        ],
+        "technicalNotes": [
+          "Tipo de iterador inferido"
+        ],
         "codeSnippet": "for (let i: number = 0; i < 10; i++) {}"
       },
       {
         "id": "ts-fund-027",
-        "title": "Objects: Readonly Props",
-        "description": "Immutable object fields.",
-        "category": "objects",
+        "title": "Objetos: Propiedades Readonly",
+        "description": "Campos de objeto inmutables.",
+        "category": "algorithms",
         "difficultyScore": 24,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["readonly"],
-        "technicalNotes": ["Prevents assignment"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "readonly"
+        ],
+        "technicalNotes": [
+          "Evita la asignación"
+        ],
         "codeSnippet": "interface Point { readonly x: number; }"
       },
       {
         "id": "ts-fund-028",
-        "title": "Patterns: String Enums",
-        "description": "Enums with string values.",
-        "category": "patterns",
+        "title": "Patrones: Enums de Cadena",
+        "description": "Enums con valores de cadena.",
+        "category": "strings",
         "difficultyScore": 25,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["enums"],
-        "technicalNotes": ["Explicit values"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "enums"
+        ],
+        "technicalNotes": [
+          "Valores explícitos"
+        ],
         "codeSnippet": "enum Color { Red = 'RED', Blue = 'BLUE' }"
       },
       {
         "id": "ts-fund-029",
-        "title": "Strings: Union Types",
-        "description": "Unions of string literals.",
+        "title": "Cadenas: Tipos de Unión",
+        "description": "Uniones de literales de cadena.",
         "category": "strings",
         "difficultyScore": 20,
         "estimatedDuration": 35,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["unions"],
-        "technicalNotes": ["Constraint options"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "uniones"
+        ],
+        "technicalNotes": [
+          "Opciones de restricción"
+        ],
         "codeSnippet": "let size: 'S' | 'M' | 'L' = 'M';"
       },
       {
         "id": "ts-fund-030",
-        "title": "Testing: Never Type",
-        "description": "Unreachable code.",
-        "category": "testing",
+        "title": "Pruebas: Tipo Never",
+        "description": "Código inalcanzable.",
+        "category": "algorithms",
         "difficultyScore": 35,
         "estimatedDuration": 45,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["never"],
-        "technicalNotes": ["Exhaustive checks"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "never"
+        ],
+        "technicalNotes": [
+          "Comprobaciones exhaustivas"
+        ],
         "codeSnippet": "function error(): never { throw new Error(); }"
       },
       {
         "id": "ts-fund-031",
-        "title": "Arrays: Filter Typing",
-        "description": "Type-safe filtering.",
+        "title": "Arreglos: Tipado de Filtro",
+        "description": "Filtrado seguro por tipos.",
         "category": "arrays",
         "difficultyScore": 28,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["filter"],
-        "technicalNotes": ["Type predicates"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "filtro"
+        ],
+        "technicalNotes": [
+          "Predicados de tipo"
+        ],
         "codeSnippet": "const strs = items.filter((i): i is string => typeof i === 'string');"
       },
       {
         "id": "ts-fund-032",
-        "title": "Async: Try/Catch",
-        "description": "Handle async errors.",
-        "category": "async",
+        "title": "Asíncrono: Try/Catch",
+        "description": "Maneja errores asíncronos.",
+        "category": "algorithms",
         "difficultyScore": 30,
         "estimatedDuration": 45,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["error handling"],
-        "technicalNotes": ["e is unknown"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "manejo de errores"
+        ],
+        "technicalNotes": [
+          "e es unknown"
+        ],
         "codeSnippet": "try { await fetch(); } catch (e) { if (e instanceof Error) {} }"
       },
       {
         "id": "ts-fund-033",
-        "title": "Browser API: Window",
-        "description": "Type global window objects.",
-        "category": "browser-api",
+        "title": "API Browser: Window",
+        "description": "Tipado de objetos window globales.",
+        "category": "algorithms",
         "difficultyScore": 35,
         "estimatedDuration": 50,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["global"],
-        "technicalNotes": ["Declaration merging"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "global"
+        ],
+        "technicalNotes": [
+          "Fusión de declaraciones (merging)"
+        ],
         "codeSnippet": "interface Window { __APP_DATA__: any; }"
       },
       {
         "id": "ts-fund-034",
-        "title": "Classes: Static",
-        "description": "Static class members.",
+        "title": "Clases: Miembros Estáticos",
+        "description": "Miembros de clase estáticos.",
         "category": "classes",
         "difficultyScore": 32,
         "estimatedDuration": 40,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["static"],
-        "technicalNotes": ["Member of class itself"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "estático"
+        ],
+        "technicalNotes": [
+          "Miembro de la clase misma"
+        ],
         "codeSnippet": "class MathUtil { static PI = 3.14; }"
       },
       {
         "id": "ts-fund-035",
-        "title": "Functions: Default Params",
-        "description": "Type default values.",
+        "title": "Funciones: Parámetros por Defecto",
+        "description": "Tipado de valores por defecto.",
         "category": "functions",
         "difficultyScore": 15,
         "estimatedDuration": 30,
         "typingStyle": "full",
-        "tags": ["typescript"],
-        "concepts": ["defaults"],
-        "technicalNotes": ["Inferred from value"],
+        "tags": [
+          "typescript"
+        ],
+        "concepts": [
+          "por defecto"
+        ],
+        "technicalNotes": [
+          "Inferido del valor"
+        ],
         "codeSnippet": "function greet(name: string = 'Guest') {}"
       }
     ]

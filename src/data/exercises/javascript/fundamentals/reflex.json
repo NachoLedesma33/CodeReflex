@@ -10,10 +10,19 @@
       "context": "Las funciones flecha son la forma moderna de definir funciones en ES6. Se usan extensivamente en React, arrays methods, y callbacks.",
       "codeSnippet": "const add = (a, b) => a + b;\nconst multiply = (x, y) => x * y;\nconst greet = name => `Hello, ${name}!`;",
       "typingStyle": "full",
-      "tags": ["functions", "es6", "syntax"],
-      "concepts": ["arrow-functions", "implicit-return", "concise-syntax"],
+      "tags": [
+        "funciones",
+        "es6",
+        "sintaxis"
+      ],
+      "concepts": [
+        "funciones-flecha",
+        "retorno-implícito",
+        "sintaxis-concisa"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "functions"
     },
     {
       "id": "js-fund-rt-002",
@@ -22,10 +31,18 @@
       "context": "Cuando la función tiene múltiples líneas, necesitas usar llaves y return explícito.",
       "codeSnippet": "const calculate = (a, b) => {\n  const sum = a + b;\n  return sum * 2;\n};",
       "typingStyle": "full",
-      "tags": ["functions", "es6"],
-      "concepts": ["arrow-functions", "block-body", "explicit-return"],
+      "tags": [
+        "funciones",
+        "es6"
+      ],
+      "concepts": [
+        "funciones-flecha",
+        "cuerpo-de-bloque",
+        "retorno-explícito"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "functions"
     },
     {
       "id": "js-fund-rt-003",
@@ -34,10 +51,19 @@
       "context": "Destructuring te permite extraer valores de arrays de forma elegante. Es esencial para React hooks como useState.",
       "codeSnippet": "const [first, second, ...rest] = [1, 2, 3, 4, 5];\nconst [head, ...tail] = array;\nconst [a, , c] = [10, 20, 30];",
       "typingStyle": "full",
-      "tags": ["arrays", "destructuring", "es6"],
-      "concepts": ["destructuring", "rest-operator", "spread-operator"],
+      "tags": [
+        "arreglos",
+        "desestructuración",
+        "es6"
+      ],
+      "concepts": [
+        "desestructuración",
+        "operador-rest",
+        "operador-spread"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-004",
@@ -46,10 +72,18 @@
       "context": "Muy usado en React para extraer props y en APIs para parsear respuestas.",
       "codeSnippet": "const { name, age } = user;\nconst { name: userName, id: userId } = data;",
       "typingStyle": "full",
-      "tags": ["objects", "destructuring"],
-      "concepts": ["object-destructuring", "aliases", "default-values"],
+      "tags": [
+        "objetos",
+        "desestructuración"
+      ],
+      "concepts": [
+        "desestructuración-de-objetos",
+        "alias",
+        "valores-por-defecto"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "objects"
     },
     {
       "id": "js-fund-rt-005",
@@ -58,10 +92,18 @@
       "context": "Los template literals facilitan la creación de strings con variables y expresiones.",
       "codeSnippet": "const message = `Hello, ${name}! You have ${items.length} items.`;\nconst html = `<div class=\"${className}\">${content}</div>`;",
       "typingStyle": "full",
-      "tags": ["strings", "es6"],
-      "concepts": ["template-literals", "interpolation", "expressions"],
+      "tags": [
+        "cadenas",
+        "es6"
+      ],
+      "concepts": [
+        "plantillas-de-cadena",
+        "interpolación",
+        "expresiones"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "strings"
     },
     {
       "id": "js-fund-rt-006",
@@ -70,10 +112,18 @@
       "context": "El spread operator (...) es esencial para inmutabilidad y propagación de datos.",
       "codeSnippet": "const copy = [...original];\nconst merged = [...arr1, ...arr2];\nconst withNew = [...arr, newItem];",
       "typingStyle": "full",
-      "tags": ["arrays", "es6"],
-      "concepts": ["spread-operator", "array-copy", "immutability"],
+      "tags": [
+        "arreglos",
+        "es6"
+      ],
+      "concepts": [
+        "operador-spread",
+        "copia-de-arreglo",
+        "inmutabilidad"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-007",
@@ -82,10 +132,18 @@
       "context": "Usado para actualizar objetos de forma inmutable, muy común en Redux y state management.",
       "codeSnippet": "const updated = { ...original, name: 'new' };\nconst merged = { ...defaults, ...user };",
       "typingStyle": "full",
-      "tags": ["objects", "es6"],
-      "concepts": ["spread-operator", "object-merge", "immutability"],
+      "tags": [
+        "objetos",
+        "es6"
+      ],
+      "concepts": [
+        "operador-spread",
+        "fusión-de-objetos",
+        "inmutabilidad"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "objects"
     },
     {
       "id": "js-fund-rt-008",
@@ -94,10 +152,18 @@
       "context": "Map es fundamental para transformar datos. Devuelve un nuevo array.",
       "codeSnippet": "const doubled = nums.map(n => n * 2);\nconst names = users.map(u => u.name);\nconst html = items.map(i => `<li>${i}</li>`).join('');",
       "typingStyle": "full",
-      "tags": ["arrays", "functional"],
-      "concepts": ["map", "transformation", "callbacks"],
+      "tags": [
+        "arreglos",
+        "funcional"
+      ],
+      "concepts": [
+        "map",
+        "transformación",
+        "callbacks"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-009",
@@ -106,10 +172,18 @@
       "context": "Filter devuelve un nuevo array con los elementos que cumplen la condición.",
       "codeSnippet": "const even = nums.filter(n => n % 2 === 0);\nconst adults = users.filter(u => u.age >= 18);",
       "typingStyle": "full",
-      "tags": ["arrays", "functional"],
-      "concepts": ["filter", "predicates", "conditionals"],
+      "tags": [
+        "arreglos",
+        "funcional"
+      ],
+      "concepts": [
+        "filter",
+        "predicados",
+        "condicionales"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-010",
@@ -118,10 +192,18 @@
       "context": "Reduce es el método más poderoso. Puede implementar map, filter, y más.",
       "codeSnippet": "const sum = nums.reduce((acc, n) => acc + n, 0);\nconst max = nums.reduce((a, b) => a > b ? a : b, 0);",
       "typingStyle": "full",
-      "tags": ["arrays", "functional"],
-      "concepts": ["reduce", "accumulator", "initial-value"],
+      "tags": [
+        "arreglos",
+        "funcional"
+      ],
+      "concepts": [
+        "reduce",
+        "acumulador",
+        "valor-inicial"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 3
+      "difficultyScore": 3,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-011",
@@ -130,10 +212,18 @@
       "context": "Find devuelve el primer elemento que cumple la condición, o undefined.",
       "codeSnippet": "const user = users.find(u => u.id === id);\nconst firstEven = nums.find(n => n % 2 === 0);",
       "typingStyle": "full",
-      "tags": ["arrays", "functional"],
-      "concepts": ["find", "search", "callbacks"],
+      "tags": [
+        "arreglos",
+        "funcional"
+      ],
+      "concepts": [
+        "find",
+        "búsqueda",
+        "callbacks"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-012",
@@ -142,10 +232,18 @@
       "context": "Some retorna true si algún elemento cumple. Every si todos cumplen.",
       "codeSnippet": "const hasAdult = users.some(u => u.age >= 18);\nconst allValid = inputs.every(i => i.length > 0);",
       "typingStyle": "full",
-      "tags": ["arrays", "functional"],
-      "concepts": ["some", "every", "boolean-logic"],
+      "tags": [
+        "arreglos",
+        "funcional"
+      ],
+      "concepts": [
+        "some",
+        "every",
+        "lógica-booleana"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-013",
@@ -154,10 +252,17 @@
       "context": "El ternario es esencial para condicionales inline en JSX y expresiones cortas.",
       "codeSnippet": "const status = age >= 18 ? 'adult' : 'minor';\nconst icon = isActive ? '✓' : '✗';",
       "typingStyle": "full",
-      "tags": ["operators", "conditionals"],
-      "concepts": ["ternary", "conditional-expression"],
+      "tags": [
+        "operadores",
+        "condicionales"
+      ],
+      "concepts": [
+        "ternario",
+        "expresión-condicional"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "control-flow"
     },
     {
       "id": "js-fund-rt-014",
@@ -166,10 +271,18 @@
       "context": "Short-circuit evaluation es común para renderizado condicional y valores por defecto.",
       "codeSnippet": "const display = isVisible && <Component />;\nconst value = data || 'default';\nconst safe = user && user.profile && user.profile.name;",
       "typingStyle": "full",
-      "tags": ["operators", "conditionals"],
-      "concepts": ["logical-and", "logical-or", "short-circuit"],
+      "tags": [
+        "operadores",
+        "condicionales"
+      ],
+      "concepts": [
+        "and-lógico",
+        "or-lógico",
+        "cortocircuito"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "control-flow"
     },
     {
       "id": "js-fund-rt-015",
@@ -178,10 +291,17 @@
       "context": "ES2020 feature. Previene errores al acceder a propiedades anidadas que pueden ser undefined.",
       "codeSnippet": "const name = user?.profile?.name;\nconst method = obj?.method?.();\nconst value = arr?.[0];",
       "typingStyle": "full",
-      "tags": ["objects", "es2020"],
-      "concepts": ["optional-chaining", "null-safety"],
+      "tags": [
+        "objetos",
+        "es2020"
+      ],
+      "concepts": [
+        "encadenamiento-opcional",
+        "seguridad-nula"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "objects"
     },
     {
       "id": "js-fund-rt-016",
@@ -190,10 +310,17 @@
       "context": "A diferencia de ||, solo usa el fallback para null/undefined, no para falsy values.",
       "codeSnippet": "const count = input ?? 0;\nconst name = user.name ?? 'Anonymous';",
       "typingStyle": "full",
-      "tags": ["operators", "es2020"],
-      "concepts": ["nullish-coalescing", "default-values"],
+      "tags": [
+        "operadores",
+        "es2020"
+      ],
+      "concepts": [
+        "fusión-nula",
+        "valores-por-defecto"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "algorithms"
     },
     {
       "id": "js-fund-rt-017",
@@ -202,10 +329,17 @@
       "context": "Includes es más legible que indexOf para verificar existencia.",
       "codeSnippet": "const hasItem = array.includes(value);\nconst isValid = ['a', 'b', 'c'].includes(input);",
       "typingStyle": "full",
-      "tags": ["arrays", "es2016"],
-      "concepts": ["includes", "membership-check"],
+      "tags": [
+        "arreglos",
+        "es2016"
+      ],
+      "concepts": [
+        "includes",
+        "verificación-de-pertenencia"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-018",
@@ -214,10 +348,16 @@
       "context": "Upper, lower, trim, split, join son operaciones frecuentes.",
       "codeSnippet": "const upper = text.toUpperCase();\nconst trimmed = text.trim();\nconst parts = text.split(',');",
       "typingStyle": "full",
-      "tags": ["strings"],
-      "concepts": ["string-methods", "transformation"],
+      "tags": [
+        "cadenas"
+      ],
+      "concepts": [
+        "métodos-de-cadena",
+        "transformación"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "strings"
     },
     {
       "id": "js-fund-rt-019",
@@ -226,10 +366,17 @@
       "context": "Esencial para transformar y manipular objetos.",
       "codeSnippet": "const keys = Object.keys(obj);\nconst values = Object.values(data);\nconst entries = Object.entries(item);",
       "typingStyle": "full",
-      "tags": ["objects"],
-      "concepts": ["object-keys", "object-values", "object-entries"],
+      "tags": [
+        "objetos"
+      ],
+      "concepts": [
+        "object-keys",
+        "object-values",
+        "object-entries"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "objects"
     },
     {
       "id": "js-fund-rt-020",
@@ -238,10 +385,18 @@
       "context": "Async/await es la forma moderna de manejar operaciones asíncronas.",
       "codeSnippet": "async function fetchData() {\n  const response = await fetch(url);\n  return response.json();\n}",
       "typingStyle": "full",
-      "tags": ["async", "es2017"],
-      "concepts": ["async-await", "promises", "await"],
+      "tags": [
+        "asíncrono",
+        "es2017"
+      ],
+      "concepts": [
+        "async-await",
+        "promesas",
+        "await"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 3
+      "difficultyScore": 3,
+      "category": "async"
     },
     {
       "id": "js-fund-rt-021",
@@ -250,10 +405,18 @@
       "context": "Patrón clásico para crear closures y evitar contaminación del scope global.",
       "codeSnippet": "(function() {\n  const privateVar = 'secret';\n  console.log('IIFE executed');\n})();",
       "typingStyle": "full",
-      "tags": ["functions", "patterns"],
-      "concepts": ["iife", "closure", "scope"],
+      "tags": [
+        "funciones",
+        "patrones"
+      ],
+      "concepts": [
+        "iife",
+        "clausura",
+        "ámbito (scope)"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "functions"
     },
     {
       "id": "js-fund-rt-022",
@@ -262,10 +425,18 @@
       "context": "Las clases son la forma orientada a objetos de JavaScript.",
       "codeSnippet": "class User {\n  constructor(name, email) {\n    this.name = name;\n    this.email = email;\n  }\n}",
       "typingStyle": "full",
-      "tags": ["classes", "oop"],
-      "concepts": ["class", "constructor", "this"],
+      "tags": [
+        "clases",
+        "poo"
+      ],
+      "concepts": [
+        "clase",
+        "constructor",
+        "this"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "classes"
     },
     {
       "id": "js-fund-rt-023",
@@ -274,10 +445,17 @@
       "context": "Métodos públicos en clases.",
       "codeSnippet": "class Calculator {\n  add(a, b) {\n    return a + b;\n  }\n  \n  subtract(a, b) {\n    return a - b;\n  }\n}",
       "typingStyle": "full",
-      "tags": ["classes", "oop"],
-      "concepts": ["class-methods", "this-binding"],
+      "tags": [
+        "clases",
+        "poo"
+      ],
+      "concepts": [
+        "métodos-de-clase",
+        "this-binding"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "classes"
     },
     {
       "id": "js-fund-rt-024",
@@ -286,10 +464,17 @@
       "context": "Crea arrays desde iterables o con longitud específica.",
       "codeSnippet": "const arr = Array.from('hello');\nconst zeros = Array.from({ length: 5 }, (_, i) => i);",
       "typingStyle": "full",
-      "tags": ["arrays", "es6"],
-      "concepts": ["array-from", "array-creation"],
+      "tags": [
+        "arreglos",
+        "es6"
+      ],
+      "concepts": [
+        "array-from",
+        "creación-de-arreglos"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 3
+      "difficultyScore": 3,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-025",
@@ -298,10 +483,17 @@
       "context": "Para crear objetos inmutables (const pero no freeze).",
       "codeSnippet": "const frozen = Object.freeze({ a: 1, b: 2 });\nfrozen.a = 3; // Error en strict mode",
       "typingStyle": "full",
-      "tags": ["objects", "immutability"],
-      "concepts": ["object-freeze", "const-correctness"],
+      "tags": [
+        "objetos",
+        "inmutabilidad"
+      ],
+      "concepts": [
+        "object-freeze",
+        "corrección-de-const"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "objects"
     },
     {
       "id": "js-fund-rt-026",
@@ -310,10 +502,17 @@
       "context": "Rellena arrays con un valor específico.",
       "codeSnippet": "const arr = new Array(5).fill(0);\nconst matrix = Array.from({ length: 3 }, () => Array(3).fill(null));",
       "typingStyle": "full",
-      "tags": ["arrays", "es6"],
-      "concepts": ["array-fill", "initialization"],
+      "tags": [
+        "arreglos",
+        "es6"
+      ],
+      "concepts": [
+        "array-fill",
+        "inicialización"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-027",
@@ -322,10 +521,18 @@
       "context": "Más limpio que for tradicional para iterar arrays.",
       "codeSnippet": "for (const item of items) {\n  console.log(item);\n}\n\nfor (const [i, v] of arr.entries()) {\n  console.log(i, v);\n}",
       "typingStyle": "full",
-      "tags": ["loops", "es6"],
-      "concepts": ["for-of", "iterables", "destructuring"],
+      "tags": [
+        "bucles",
+        "es6"
+      ],
+      "concepts": [
+        "for-of",
+        "iterables",
+        "desestructuración"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "loops"
     },
     {
       "id": "js-fund-rt-028",
@@ -334,10 +541,17 @@
       "context": "Itera sobre las claves de un objeto.",
       "codeSnippet": "for (const key in obj) {\n  console.log(key, obj[key]);\n}",
       "typingStyle": "full",
-      "tags": ["loops", "objects"],
-      "concepts": ["for-in", "object-keys"],
+      "tags": [
+        "bucles",
+        "objetos"
+      ],
+      "concepts": [
+        "for-in",
+        "claves-de-objeto"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "loops"
     },
     {
       "id": "js-fund-rt-029",
@@ -346,10 +560,18 @@
       "context": "Math es usado para cálculos numéricos.",
       "codeSnippet": "const rounded = Math.round(4.5);\nconst floor = Math.floor(4.9);\nconst random = Math.floor(Math.random() * 10);\nconst max = Math.max(...numbers);",
       "typingStyle": "full",
-      "tags": ["math", "numbers"],
-      "concepts": ["math-object", "random", "rounding"],
+      "tags": [
+        "matemáticas",
+        "números"
+      ],
+      "concepts": [
+        "objeto-math",
+        "aleatorio",
+        "redondeo"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "algorithms"
     },
     {
       "id": "js-fund-rt-030",
@@ -358,10 +580,18 @@
       "context": "Esencial para API calls y storage.",
       "codeSnippet": "const json = JSON.stringify(data);\nconst parsed = JSON.parse(json);\nconst pretty = JSON.stringify(data, null, 2);",
       "typingStyle": "full",
-      "tags": ["json", "serialization"],
-      "concepts": ["json-parse", "json-stringify", "serialization"],
+      "tags": [
+        "json",
+        "serialización"
+      ],
+      "concepts": [
+        "json-parse",
+        "json-stringify",
+        "serialización"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "data-processing"
     },
     {
       "id": "js-fund-rt-031",
@@ -370,10 +600,17 @@
       "context": "ES6 feature para manejar parámetros opcionales.",
       "codeSnippet": "function greet(name = 'World', greeting = 'Hello') {\n  return `${greeting}, ${name}!`;\n}",
       "typingStyle": "full",
-      "tags": ["functions", "es6"],
-      "concepts": ["default-parameters", "optional-params"],
+      "tags": [
+        "funciones",
+        "es6"
+      ],
+      "concepts": [
+        "parámetros-por-defecto",
+        "parámetros-opcionales"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 1
+      "difficultyScore": 1,
+      "category": "functions"
     },
     {
       "id": "js-fund-rt-032",
@@ -382,10 +619,17 @@
       "context": "Recolecta argumentos restantes en un array.",
       "codeSnippet": "function sum(...numbers) {\n  return numbers.reduce((a, b) => a + b, 0);\n}",
       "typingStyle": "full",
-      "tags": ["functions", "es6"],
-      "concepts": ["rest-parameters", "variadic-functions"],
+      "tags": [
+        "funciones",
+        "es6"
+      ],
+      "concepts": [
+        "parámetros-rest",
+        "funciones-variádicas"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "functions"
     },
     {
       "id": "js-fund-rt-033",
@@ -394,10 +638,17 @@
       "context": "Aplana arrays anidados hasta cierta profundidad.",
       "codeSnippet": "const flat = arr.flat();\nconst deepFlat = arr.flat(Infinity);\nconst twoLevels = nested.flat(2);",
       "typingStyle": "full",
-      "tags": ["arrays", "es2019"],
-      "concepts": ["array-flat", "flattening"],
+      "tags": [
+        "arreglos",
+        "es2019"
+      ],
+      "concepts": [
+        "array-flat",
+        "aplanamiento"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 3
+      "difficultyScore": 3,
+      "category": "arrays"
     },
     {
       "id": "js-fund-rt-034",
@@ -406,10 +657,18 @@
       "context": "Try-catch es esencial para manejar errores gracefully.",
       "codeSnippet": "try {\n  const result = JSON.parse(input);\n} catch (e) {\n  console.error('Invalid JSON:', e);\n} finally {\n  console.log('Done');\n}",
       "typingStyle": "full",
-      "tags": ["error-handling", "exceptions"],
-      "concepts": ["try-catch", "error-handling", "finally"],
+      "tags": [
+        "gestión-de-errores",
+        "excepciones"
+      ],
+      "concepts": [
+        "try-catch",
+        "gestión-de-errores",
+        "finally"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 2
+      "difficultyScore": 2,
+      "category": "validation"
     },
     {
       "id": "js-fund-rt-035",
@@ -418,10 +677,18 @@
       "context": "Set almacena valores únicos, elimina duplicados automáticamente.",
       "codeSnippet": "const unique = new Set([1, 2, 2, 3]);\nunique.add(4);\nunique.has(3);\nconst array = [...unique];",
       "typingStyle": "full",
-      "tags": ["data-structures", "es6"],
-      "concepts": ["set", "unique-values", "membership"],
+      "tags": [
+        "estructuras-de-datos",
+        "es6"
+      ],
+      "concepts": [
+        "set",
+        "valores-únicos",
+        "pertenencia"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 3
+      "difficultyScore": 3,
+      "category": "algorithms"
     }
   ]
 }

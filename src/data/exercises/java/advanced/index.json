@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["meta-programming", "concurrency", "jvm", "modern-java", "advanced-functional"],
-  "concepts": ["reflection", "async-programming", "sealed-classes", "records", "custom-collectors"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["meta-programación", "concurrencia", "jvm", "java-moderno", "funcional-avanzado"],
+  "concepts": ["reflection", "programación-asíncrona", "clases-selladas", "records", "collectors-personalizados"],
+  "lastUpdated": "2026-05-14"
 }

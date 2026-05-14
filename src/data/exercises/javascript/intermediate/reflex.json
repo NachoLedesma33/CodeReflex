@@ -1,0 +1,439 @@
+{
+  "language": "javascript",
+  "level": "intermediate",
+  "type": "reflex-snippets",
+  "snippets": [
+    {
+      "id": "js-intermediate-custom-hook-simulation-001",
+      "title": "Oyente de Estado Personalizado",
+      "description": "Simula un sistema ligero de oyente de estado personalizado similar al comportamiento reactivo del frontend.",
+      "context": "Los patrones reactivos se usan mucho en frameworks como React, Vue y librerías de gestión de estado.",
+      "category": "algorithms",
+      "difficultyScore": 34,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "gestión-de-estado",
+        "oyentes",
+        "reactividad",
+        "frontend"
+      ],
+      "concepts": [
+        "clausuras",
+        "callbacks",
+        "patrón-observador"
+      ],
+      "technicalNotes": [
+        "Las clausuras preservan el estado interno.",
+        "Los callbacks permiten actualizaciones reactivas.",
+        "Los patrones de observador son comunes en las arquitecturas frontend."
+      ],
+      "codeSnippet": "function createStore(initialValue) {\n  let state = initialValue;\n  const listeners = [];\n\n  function subscribe(listener) {\n    listeners.push(listener);\n  }\n\n  function setState(newValue) {\n    state = newValue;\n\n    listeners.forEach((listener) => {\n      listener(state);\n    });\n  }\n\n  function getState() {\n    return state;\n  }\n\n  return {\n    subscribe,\n    setState,\n    getState\n  };\n}\n\nconst counterStore = createStore(0);\n\ncounterStore.subscribe((value) => {\n  console.log('Updated value:', value);\n});\n\ncounterStore.setState(1);\n"
+    },
+    {
+      "id": "js-intermediate-promise-all-002",
+      "title": "Cargar Múltiples APIs",
+      "description": "Usa Promise.all para cargar múltiples recursos asíncronos simultáneamente.",
+      "context": "La carga concurrente de APIs es común en tableros, sistemas analíticos y agregación de datos en el frontend.",
+      "category": "algorithms",
+      "difficultyScore": 38,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "asíncrono",
+        "Promise.all",
+        "apis",
+        "concurrencia"
+      ],
+      "concepts": [
+        "Promise.all",
+        "async-await",
+        "peticiones-paralelas"
+      ],
+      "technicalNotes": [
+        "Promise.all ejecuta promesas de forma concurrente.",
+        "La ejecución falla si una promesa es rechazada.",
+        "Mejora el rendimiento de carga."
+      ],
+      "codeSnippet": "async function loadDashboardData() {\n  try {\n    const [users, posts, comments] = await Promise.all([\n      fetch('https://jsonplaceholder.typicode.com/users').then((response) => response.json()),\n      fetch('https://jsonplaceholder.typicode.com/posts').then((response) => response.json()),\n      fetch('https://jsonplaceholder.typicode.com/comments').then((response) => response.json())\n    ]);\n\n    console.log(users.length);\n    console.log(posts.length);\n    console.log(comments.length);\n  } catch (error) {\n    console.error('Failed to load dashboard data:', error);\n  }\n}\n\nloadDashboardData();\n"
+    },
+    {
+      "id": "js-intermediate-array-grouping-003",
+      "title": "Agrupar Pedidos por Estado",
+      "description": "Agrupa pedidos de comercio electrónico dinámicamente usando reduce.",
+      "context": "Agrupar datos es común en tableros, sistemas de administración, herramientas analíticas y plataformas de informes.",
+      "category": "arrays",
+      "difficultyScore": 36,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "reduce",
+        "agrupamiento",
+        "pedidos",
+        "analítica"
+      ],
+      "concepts": [
+        "array-reduce",
+        "objetos-dinámicos",
+        "agrupamiento-de-datos"
+      ],
+      "technicalNotes": [
+        "reduce puede construir objetos dinámicamente.",
+        "El agrupamiento mejora la organización de los datos.",
+        "Las claves dinámicas son útiles para sistemas analíticos."
+      ],
+      "codeSnippet": "const orders = [\n  { id: 1, status: 'pending' },\n  { id: 2, status: 'completed' },\n  { id: 3, status: 'pending' },\n  { id: 4, status: 'cancelled' }\n];\n\nconst groupedOrders = orders.reduce((groups, order) => {\n  const key = order.status;\n\n  if (!groups[key]) {\n    groups[key] = [];\n  }\n\n  groups[key].push(order);\n\n  return groups;\n}, {});\n\nconsole.log(groupedOrders);\n"
+    },
+    {
+      "id": "js-intermediate-basic-event-bus-004",
+      "title": "Bus de Eventos Simple",
+      "description": "Construye un sistema ligero de eventos de publicación/suscripción.",
+      "context": "Los sistemas dirigidos por eventos se usan en arquitecturas frontend, motores de juegos y sistemas de plugins.",
+      "category": "algorithms",
+      "difficultyScore": 42,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "eventos",
+        "pub-sub",
+        "arquitectura",
+        "frontend"
+      ],
+      "concepts": [
+        "publicación-suscripción",
+        "callbacks",
+        "dirigido-por-eventos"
+      ],
+      "technicalNotes": [
+        "La publicación/suscripción desacopla la lógica de la aplicación.",
+        "Los oyentes responden a los eventos emitidos.",
+        "Útil para sistemas frontend escalables."
+      ],
+      "codeSnippet": "function createEventBus() {\n  const listeners = {};\n\n  function subscribe(eventName, callback) {\n    if (!listeners[eventName]) {\n      listeners[eventName] = [];\n    }\n\n    listeners[eventName].push(callback);\n  }\n\n  function emit(eventName, payload) {\n    const eventListeners = listeners[eventName] || [];\n\n    eventListeners.forEach((listener) => {\n      listener(payload);\n    });\n  }\n\n  return {\n    subscribe,\n    emit\n  };\n}\n\nconst eventBus = createEventBus();\n\neventBus.subscribe('notification', (message) => {\n  console.log(message);\n});\n\neventBus.emit('notification', 'New notification received');\n"
+    },
+    {
+      "id": "js-intermediate-basic-memoization-005",
+      "title": "Cálculo con Memoización",
+      "description": "Almacena en caché los resultados de funciones costosas usando memoización.",
+      "context": "La memoización mejora el rendimiento en el renderizado frontend, cálculos y aplicaciones con gran cantidad de datos.",
+      "category": "algorithms",
+      "difficultyScore": 45,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "memoización",
+        "rendimiento",
+        "caché",
+        "optimización"
+      ],
+      "concepts": [
+        "clausuras",
+        "caché",
+        "memoización"
+      ],
+      "technicalNotes": [
+        "La memoización almacena resultados previos.",
+        "Las clausuras mantienen la persistencia de la caché.",
+        "Útil para la optimización del rendimiento."
+      ],
+      "codeSnippet": "function memoize(callback) {\n  const cache = {};\n\n  return function (...args) {\n    const key = JSON.stringify(args);\n\n    if (cache[key]) {\n      return cache[key];\n    }\n\n    const result = callback(...args);\n\n    cache[key] = result;\n\n    return result;\n  };\n}\n\nconst multiply = memoize((a, b) => {\n  console.log('Calculating result...');\n\n  return a * b;\n});\n\nconsole.log(multiply(5, 10));\nconsole.log(multiply(5, 10));\n"
+    },
+    {
+      "id": "js-intermediate-basic-retry-system-006",
+      "title": "Reintentar Peticiones Fallidas",
+      "description": "Implementa un mecanismo de reintento para peticiones asíncronas inestables.",
+      "context": "Los sistemas de reintento son comunes en APIs de producción, sistemas de pago y servicios en la nube donde pueden ocurrir fallos temporales.",
+      "category": "algorithms",
+      "difficultyScore": 48,
+      "estimatedDuration": 125,
+      "typingStyle": "full",
+      "tags": [
+        "asíncrono",
+        "reintento",
+        "apis",
+        "manejo-de-errores"
+      ],
+      "concepts": [
+        "async-await",
+        "patrón-reintento",
+        "recuperación-de-errores"
+      ],
+      "technicalNotes": [
+        "Los reintentos mejoran la fiabilidad en entornos inestables.",
+        "Los bucles pueden controlar los intentos de reintento.",
+        "El manejo de errores es esencial en sistemas asíncronos."
+      ],
+      "codeSnippet": "async function fetchWithRetry(request, retries = 3) {\n  for (let attempt = 1; attempt <= retries; attempt++) {\n    try {\n      const response = await request();\n\n      return response;\n    } catch (error) {\n      console.log(`Attempt ${attempt} failed`);\n\n      if (attempt === retries) {\n        throw error;\n      }\n    }\n  }\n}\n\nfetchWithRetry(() => {\n  return fetch('https://jsonplaceholder.typicode.com/users');\n})\n  .then((response) => response.json())\n  .then((data) => console.log(data.length))\n  .catch((error) => console.error(error));\n"
+    },
+    {
+      "id": "js-intermediate-basic-throttle-007",
+      "title": "Limitar Eventos de Scroll (Throttle)",
+      "description": "Limita la frecuencia con la que se ejecuta una función usando lógica de throttle.",
+      "context": "El throttling se usa ampliamente en el seguimiento de scroll, oyentes de cambio de tamaño y eventos de navegador de alta frecuencia.",
+      "category": "algorithms",
+      "difficultyScore": 44,
+      "estimatedDuration": 115,
+      "typingStyle": "full",
+      "tags": [
+        "rendimiento",
+        "throttle",
+        "eventos",
+        "optimización"
+      ],
+      "concepts": [
+        "throttle",
+        "temporizadores",
+        "optimización-de-eventos"
+      ],
+      "technicalNotes": [
+        "El throttle limita las ejecuciones repetidas.",
+        "Útil para eventos de navegador de alta frecuencia.",
+        "Mejora el rendimiento del frontend."
+      ],
+      "codeSnippet": "function throttle(callback, delay) {\n  let waiting = false;\n\n  return (...args) => {\n    if (waiting) {\n      return;\n    }\n\n    callback(...args);\n\n    waiting = true;\n\n    setTimeout(() => {\n      waiting = false;\n    }, delay);\n  };\n}\n\nconst handleScroll = throttle(() => {\n  console.log('Scrolling detected');\n}, 1000);\n\nwindow.addEventListener('scroll', handleScroll);\n"
+    },
+    {
+      "id": "js-intermediate-basic-queue-system-008",
+      "title": "Cola de Tareas Simple",
+      "description": "Construye un sistema de cola ligero para el procesamiento secuencial de tareas.",
+      "context": "Las colas se usan en sistemas de trabajos, cargas, notificaciones y flujos de trabajo asíncronos.",
+      "category": "algorithms",
+      "difficultyScore": 46,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "cola",
+        "arquitectura",
+        "tareas",
+        "asíncrono"
+      ],
+      "concepts": [
+        "colas",
+        "procesamiento-de-tareas",
+        "gestión-de-arreglos"
+      ],
+      "technicalNotes": [
+        "Las colas procesan las tareas en orden.",
+        "El comportamiento FIFO es común en los sistemas backend.",
+        "La ejecución secuencial mejora la previsibilidad."
+      ],
+      "codeSnippet": "class TaskQueue {\n  constructor() {\n    this.queue = [];\n  }\n\n  add(task) {\n    this.queue.push(task);\n  }\n\n  process() {\n    while (this.queue.length > 0) {\n      const currentTask = this.queue.shift();\n\n      currentTask();\n    }\n  }\n}\n\nconst queue = new TaskQueue();\n\nqueue.add(() => {\n  console.log('Processing image upload');\n});\n\nqueue.add(() => {\n  console.log('Sending notification');\n});\n\nqueue.process();\n"
+    },
+    {
+      "id": "js-intermediate-basic-pagination-009",
+      "title": "Paginación de Productos",
+      "description": "Crea una utilidad de paginación reutilizable para grandes conjuntos de datos.",
+      "context": "La paginación es fundamental en sitios de comercio electrónico, tableros, APIs y sistemas de búsqueda.",
+      "category": "arrays",
+      "difficultyScore": 39,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "paginación",
+        "arreglos",
+        "dashboard",
+        "frontend"
+      ],
+      "concepts": [
+        "slice",
+        "paginación",
+        "procesamiento-de-arreglos"
+      ],
+      "technicalNotes": [
+        "La paginación mejora el rendimiento y la usabilidad.",
+        "slice ayuda a aislar fragmentos de datos.",
+        "Útil para colecciones grandes."
+      ],
+      "codeSnippet": "function paginate(items, currentPage, itemsPerPage) {\n  const startIndex = (currentPage - 1) * itemsPerPage;\n  const endIndex = startIndex + itemsPerPage;\n\n  return items.slice(startIndex, endIndex);\n}\n\nconst products = [\n  'Laptop',\n  'Keyboard',\n  'Monitor',\n  'Headphones',\n  'Mouse',\n  'Webcam'\n];\n\nconst visibleProducts = paginate(products, 1, 3);\n\nconsole.log(visibleProducts);\n"
+    },
+    {
+      "id": "js-intermediate-basic-function-composition-010",
+      "title": "Componer Funciones de Utilidad",
+      "description": "Combina múltiples funciones en una tubería de procesamiento reutilizable.",
+      "context": "La composición de funciones se usa ampliamente en la programación funcional, sistemas de middleware y librerías de utilidad.",
+      "category": "arrays",
+      "difficultyScore": 50,
+      "estimatedDuration": 130,
+      "typingStyle": "full",
+      "tags": [
+        "programación-funcional",
+        "composición",
+        "utilidades",
+        "tuberías"
+      ],
+      "concepts": [
+        "composición-de-funciones",
+        "reduce",
+        "patrones-funcionales"
+      ],
+      "technicalNotes": [
+        "La composición combina múltiples funciones juntas.",
+        "Las funciones se convierten en bloques de procesamiento reutilizables.",
+        "La programación funcional mejora la modularidad."
+      ],
+      "codeSnippet": "function compose(...functions) {\n  return (value) => {\n    return functions.reduceRight((currentValue, currentFunction) => {\n      return currentFunction(currentValue);\n    }, value);\n  };\n}\n\nconst trim = (text) => text.trim();\nconst lowercase = (text) => text.toLowerCase();\nconst addPrefix = (text) => `user:${text}`;\n\nconst formatUsername = compose(addPrefix, lowercase, trim);\n\nconsole.log(formatUsername('   NachoDev   '));\n"
+    },
+    {
+      "id": "js-intermediate-class-user-011",
+      "title": "Clase User con Métodos",
+      "description": "Crea una clase User con propiedades y métodos para una aplicación típica.",
+      "context": "Las clases son fundamentales en la programación orientada a objetos para crear componentes reutilizables y modelos de datos en las aplicaciones.",
+      "category": "classes",
+      "difficultyScore": 32,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "clases",
+        "oop",
+        "métodos",
+        "constructor"
+      ],
+      "concepts": [
+        "definición-de-clase",
+        "constructor",
+        "métodos-de-instancia"
+      ],
+      "technicalNotes": [
+        "Las clases proporcionan una plantilla para crear objetos.",
+        "El constructor inicializa las propiedades del objeto.",
+        "Los métodos definen el comportamiento en las instancias de clase."
+      ],
+      "codeSnippet": "class User {\n  constructor(name, email) {\n    this.name = name;\n    this.email = email;\n    this.isActive = true;\n    this.createdAt = new Date();\n  }\n\n  activate() {\n    this.isActive = true;\n    return `${this.name} is now active`;\n  }\n\n  deactivate() {\n    this.isActive = false;\n    return `${this.name} is now inactive`;\n  }\n\n  getInfo() {\n    return `User: ${this.name}, Email: ${this.email}, Active: ${this.isActive}`;\n  }\n}\n\nconst user = new User('Nacho', 'nacho@example.com');\nconsole.log(user.getInfo());\nconsole.log(user.activate());\n"
+    },
+    {
+      "id": "js-intermediate-class-product-012",
+      "title": "Clase Product con Método Estático",
+      "description": "Construye una clase Product con métodos estáticos para la gestión de inventario.",
+      "context": "Los métodos estáticos se usan para funciones de utilidad y métodos de fábrica en arquitecturas basadas en clases.",
+      "category": "classes",
+      "difficultyScore": 35,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "clases",
+        "estático",
+        "fábrica",
+        "inventario"
+      ],
+      "concepts": [
+        "métodos-estáticos",
+        "propiedades-de-clase",
+        "patrón-fábrica"
+      ],
+      "technicalNotes": [
+        "Los métodos estáticos pertenecen a la clase, no a las instancias.",
+        "Los métodos de fábrica crean instancias con configuraciones específicas.",
+        "Las propiedades estáticas se comparten entre todas las instancias."
+      ],
+      "codeSnippet": "class Product {\n  static count = 0;\n  static inventory = [];\n\n  constructor(name, price, stock) {\n    this.id = ++Product.count;\n    this.name = name;\n    this.price = price;\n    this.stock = stock;\n  }\n\n  static addProduct(product) {\n    Product.inventory.push(product);\n    return `Added ${product.name} to inventory`;\n  }\n\n  static getTotalValue() {\n    return Product.inventory.reduce((total, p) => total + (p.price * p.stock), 0);\n  }\n\n  updateStock(quantity) {\n    this.stock += quantity;\n    return `Stock updated: ${this.stock} units`;\n  }\n}\n\nconst laptop = new Product('Laptop', 999, 10);\nconst phone = new Product('Phone', 499, 25);\n\nconsole.log(Product.addProduct(laptop));\nconsole.log(Product.addProduct(phone));\nconsole.log(`Total inventory value: $${Product.getTotalValue()}`);\n"
+    },
+    {
+      "id": "js-intermediate-algorithms-binary-011",
+      "title": "Implementación de Búsqueda Binaria",
+      "description": "Implementa el algoritmo de búsqueda binaria para encontrar elementos en arreglos ordenados.",
+      "context": "La búsqueda binaria es esencial para búsquedas eficientes en datos ordenados, utilizada en bases de datos, motores de búsqueda y depuración.",
+      "category": "algorithms",
+      "difficultyScore": 38,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "algoritmos",
+        "búsqueda-binaria",
+        "búsqueda",
+        "optimización"
+      ],
+      "concepts": [
+        "divide-y-vencerás",
+        "complejidad-temporal",
+        "recursividad"
+      ],
+      "technicalNotes": [
+        "La búsqueda binaria requiere arreglos ordenados.",
+        "La complejidad temporal es O(log n) frente a O(n) para lineal.",
+        "La complejidad espacial es O(1) para el enfoque iterativo."
+      ],
+      "codeSnippet": "function binarySearch(arr, target) {\n  let left = 0;\n  let right = arr.length - 1;\n\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n\n    if (arr[mid] === target) {\n      return mid;\n    } else if (arr[mid] < target) {\n      left = mid + 1;\n    } else {\n      right = mid - 1;\n    }\n  }\n\n  return -1;\n}\n\nconst sortedNumbers = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];\n\nconsole.log(binarySearch(sortedNumbers, 9));\nconsole.log(binarySearch(sortedNumbers, 6));\nconsole.log(binarySearch(sortedNumbers, 19));\n"
+    },
+    {
+      "id": "js-intermediate-algorithms-fibonacci-012",
+      "title": "Fibonacci con Memoización",
+      "description": "Fibonacci optimizado usando memoización para evitar recalcular valores.",
+      "context": "La memoización es crítica para problemas de programación dinámica, utilizada en IA de juegos, búsqueda de caminos y optimización.",
+      "category": "algorithms",
+      "difficultyScore": 36,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "algoritmos",
+        "memoización",
+        "programación-dinámica",
+        "optimización"
+      ],
+      "concepts": [
+        "memoización",
+        "complejidad-temporal",
+        "optimización"
+      ],
+      "technicalNotes": [
+        "Fibonacci ingenuo es O(2^n), memoizado es O(n).",
+        "La caché almacena resultados calculados para su reutilización.",
+        "El equilibrio entre espacio y tiempo mejora el rendimiento."
+      ],
+      "codeSnippet": "function fibonacciMemo(n, memo = {}) {\n  if (n in memo) return memo[n];\n  if (n <= 1) return n;\n\n  memo[n] = fibonacciMemo(n - 1, memo) + fibonacciMemo(n - 2, memo);\n  return memo[n];\n}\n\nfunction fibonacciTable(n) {\n  const table = new Array(n + 1).fill(0);\n  table[1] = 1;\n\n  for (let i = 2; i <= n; i++) {\n    table[i] = table[i - 1] + table[i - 2];\n  }\n\n  return table[n];\n}\n\nconsole.log(fibonacciMemo(10));\nconsole.log(fibonacciMemo(30));\nconsole.log(fibonacciTable(10));\n"
+    },
+    {
+      "id": "js-intermediate-data-structures-queue-011",
+      "title": "Implementación de Cola",
+      "description": "Implementa una estructura de datos de cola usando arreglos de JavaScript con operaciones de enqueue y dequeue.",
+      "context": "Las colas son fundamentales para la programación de tareas, algoritmos BFS, procesamiento de mensajes y manejo de operaciones asíncronas.",
+      "category": "algorithms",
+      "difficultyScore": 33,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "estructuras-de-datos",
+        "cola",
+        "fifo",
+        "colecciones"
+      ],
+      "concepts": [
+        "principio-fifo",
+        "enqueue-dequeue",
+        "estructura-de-datos-lineal"
+      ],
+      "technicalNotes": [
+        "La cola sigue el principio First-In-First-Out (Primero en entrar, primero en salir).",
+        "Array push() es O(1), shift() es O(n) - usa un puntero de índice para mayor eficiencia.",
+        "Se usa en la búsqueda en anchura y colas de tareas."
+      ],
+      "codeSnippet": "class Queue {\n  constructor() {\n    this.items = [];\n    this.front = 0;\n    this.rear = 0;\n  }\n\n  enqueue(element) {\n    this.items.push(element);\n    this.rear++;\n    return `Enqueued: ${element}`;\n  }\n\n  dequeue() {\n    if (this.isEmpty()) return 'Queue is empty';\n    const element = this.items[this.front];\n    this.front++;\n    return `Dequeued: ${element}`;\n  }\n\n  peek() {\n    if (this.isEmpty()) return 'Queue is empty';\n    return this.items[this.front];\n  }\n\n  isEmpty() {\n    return this.rear - this.front === 0;\n  }\n\n  size() {\n    return this.rear - this.front;\n  }\n}\n\nconst queue = new Queue();\nqueue.enqueue('task1');\nqueue.enqueue('task2');\nqueue.enqueue('task3');\nconsole.log(queue.dequeue());\nconsole.log(queue.peek());\nconsole.log(queue.size());\n"
+    },
+    {
+      "id": "js-intermediate-data-structures-hashmap-012",
+      "title": "Implementación de Hash Map",
+      "description": "Construye un hash map con operaciones básicas como put, get y maneja colisiones.",
+      "context": "Los hash maps son la estructura de datos más común para el almacenamiento de clave-valor, utilizada en bases de datos, cachés e implementaciones de lenguajes.",
+      "category": "algorithms",
+      "difficultyScore": 37,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "estructuras-de-datos",
+        "hashmap",
+        "clave-valor",
+        "hashing"
+      ],
+      "concepts": [
+        "función-hash",
+        "manejo-de-colisiones",
+        "almacenamiento-clave-valor"
+      ],
+      "technicalNotes": [
+        "Las funciones hash mapean claves a índices de arreglos.",
+        "El encadenamiento maneja colisiones con listas enlazadas.",
+        "Caso promedio O(1) para insertar, buscar y eliminar."
+      ],
+      "codeSnippet": "class HashMap {\n  constructor(size = 10) {\n    this.size = size;\n    this.buckets = new Array(size).fill(null).map(() => []);\n  }\n\n  hash(key) {\n    let hash = 0;\n    for (let i = 0; i < key.length; i++) {\n      hash = (hash + key.charCodeAt(i) * (i + 1)) % this.size;\n    }\n    return hash;\n  }\n\n  put(key, value) {\n    const index = this.hash(key);\n    const bucket = this.buckets[index];\n    \n    for (let i = 0; i < bucket.length; i++) {\n      if (bucket[i].key === key) {\n        bucket[i].value = value;\n        return;\n      }\n    }\n    \n    bucket.push({ key, value });\n  }\n\n  get(key) {\n    const index = this.hash(key);\n    const bucket = this.buckets[index];\n    \n    for (const pair of bucket) {\n      if (pair.key === key) return pair.value;\n    }\n    \n    return undefined;\n  }\n}\n\nconst map = new HashMap();\nmap.put('name', 'Nacho');\nmap.put('age', '25');\nmap.put('city', 'Buenos Aires');\nconsole.log(map.get('name'));\nconsole.log(map.get('age'));\nconsole.log(map.get('country'));\n"
+    }
+  ]
+}

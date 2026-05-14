@@ -16,8 +16,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CodeReflex - Technical Training Platform",
-  description: "Master coding through reflex typing and guided problem solving. Prepare for technical interviews with real-world exercises.",
+  title: "CodeReflex - Plataforma de Entrenamiento Técnico",
+  description: "Domina la programación a través de la práctica reflex y la resolución de problemas guiados. Prepárate para entrevistas técnicas con ejercicios del mundo real.",
   keywords: ["coding", "programming", "training", "typing", "reflex", "interview", "practice"],
   authors: [{ name: "CodeReflex" }],
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >

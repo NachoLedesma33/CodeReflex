@@ -5,391 +5,618 @@
   "snippets": [
     {
       "id": "py-int-rt-001",
-      "title": "Decorators: Basic",
-      "description": "Create a simple function decorator.",
-      "context": "Decorators allow modifying behavior of functions without changing their source.",
+      "title": "Decoradores: Básico",
+      "description": "Crea un decorador de función simple.",
+      "context": "Los decoradores permiten modificar el comportamiento de las funciones sin cambiar su código fuente.",
       "codeSnippet": "def log_call(func):\n    def wrapper(*args, **kwargs):\n        print(f'Calling {func.__name__}')\n        return func(*args, **kwargs)\n    return wrapper",
       "typingStyle": "full",
-      "tags": ["python", "decorators"],
-      "concepts": ["higher-order functions", "wrappers"],
+      "tags": [
+        "python",
+        "decoradores"
+      ],
+      "concepts": [
+        "funciones de orden superior",
+        "wrappers"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 35
+      "difficultyScore": 35,
+      "category": "patterns"
     },
     {
       "id": "py-int-rt-002",
-      "title": "Generators: Yield",
-      "description": "Define a generator function.",
-      "context": "Generators are memory-efficient way to handle sequences.",
+      "title": "Generadores: Yield",
+      "description": "Define una función generadora.",
+      "context": "Los generadores son una forma eficiente en memoria de manejar secuencias de datos.",
       "codeSnippet": "def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b",
       "typingStyle": "full",
-      "tags": ["python", "generators"],
-      "concepts": ["lazy evaluation", "iterators"],
+      "tags": [
+        "python",
+        "generadores"
+      ],
+      "concepts": [
+        "evaluación perezosa",
+        "iteradores"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-003",
-      "title": "Collections: Counter",
-      "description": "Count occurrences in a list.",
-      "context": "Counter is a specialized dictionary for counting hashable objects.",
+      "title": "Colecciones: Counter",
+      "description": "Cuenta ocurrencias en una lista.",
+      "context": "Counter es un diccionario especializado para contar objetos hashables.",
       "codeSnippet": "from collections import Counter\nwords = ['apple', 'orange', 'apple']\ncounts = Counter(words)\nprint(counts.most_common(1))",
       "typingStyle": "full",
-      "tags": ["python", "collections"],
-      "concepts": ["counting", "dictionaries"],
+      "tags": [
+        "python",
+        "colecciones"
+      ],
+      "concepts": [
+        "conteo",
+        "diccionarios"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "objects"
     },
     {
       "id": "py-int-rt-004",
-      "title": "Context Managers: Custom",
-      "description": "Define a class with __enter__ and __exit__.",
+      "title": "Gestores de Contexto: Personalizados",
+      "description": "Define una clase con __enter__ y __exit__.",
+      "context": "Permite gestionar recursos (como archivos o conexiones) de forma segura.",
       "codeSnippet": "class Timer:\n    def __enter__(self):\n        self.start = time.time()\n        return self\n    def __exit__(self, *args):\n        print(f'Elapsed: {time.time() - self.start}')",
       "typingStyle": "full",
-      "tags": ["python", "context-managers"],
-      "concepts": ["protocol", "resource management"],
+      "tags": [
+        "python",
+        "gestores-contexto"
+      ],
+      "concepts": [
+        "protocolo",
+        "gestión de recursos"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-005",
-      "title": "Properties: Getter/Setter",
-      "description": "Use @property decorator.",
+      "title": "Propiedades: Getter/Setter",
+      "description": "Usa el decorador @property.",
+      "context": "Permite definir métodos que se comportan como atributos, facilitando la encapsulación.",
       "codeSnippet": "class Circle:\n    def __init__(self, radius):\n        self._radius = radius\n    @property\n    def radius(self):\n        return self._radius",
       "typingStyle": "full",
-      "tags": ["python", "oop"],
-      "concepts": ["encapsulation", "validation"],
+      "tags": [
+        "python",
+        "oop"
+      ],
+      "concepts": [
+        "encapsulación",
+        "validación"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 38
+      "difficultyScore": 38,
+      "category": "classes"
     },
     {
       "id": "py-int-rt-006",
-      "title": "Dunder Methods: __str__",
-      "description": "Define string representation.",
+      "title": "Métodos Dunder: __str__",
+      "description": "Define la representación en string de un objeto.",
+      "context": "Personaliza cómo se muestra el objeto cuando se usa print() o str().",
       "codeSnippet": "class User:\n    def __init__(self, name):\n        self.name = name\n    def __str__(self):\n        return f'User({self.name})'",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["magic methods"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "métodos mágicos"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-007",
       "title": "Itertools: Cycle",
-      "description": "Repeat an iterable infinitely.",
+      "description": "Repite un iterable infinitamente.",
+      "context": "Útil para crear bucles infinitos sobre una secuencia de elementos.",
       "codeSnippet": "from itertools import cycle\ncolors = cycle(['red', 'blue'])\nfor _ in range(5):\n    print(next(colors))",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["infinite iterators"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "iteradores infinitos"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 35
+      "difficultyScore": 35,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-008",
-      "title": "Closures: State Tracking",
-      "description": "Function that remembers scope.",
+      "title": "Closures: Seguimiento de Estado",
+      "description": "Función que recuerda su ámbito.",
+      "context": "Permite que una función interna acceda a variables de su función externa incluso tras finalizar esta.",
       "codeSnippet": "def make_counter():\n    count = 0\n    def counter():\n        nonlocal count\n        count += 1\n        return count\n    return counter",
       "typingStyle": "full",
-      "tags": ["python", "closures"],
-      "concepts": ["nested functions", "scope"],
+      "tags": [
+        "python",
+        "closures"
+      ],
+      "concepts": [
+        "funciones anidadas",
+        "ámbito (scope)"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 42
+      "difficultyScore": 42,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-009",
       "title": "Args/Kwargs: Proxying",
-      "description": "Forward arguments to another function.",
+      "description": "Reenvía argumentos a otra función.",
+      "context": "Permite crear funciones flexibles que aceptan cualquier número de argumentos.",
       "codeSnippet": "def proxy(func, *args, **kwargs):\n    print('Logging call')\n    return func(*args, **kwargs)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["unpacking", "proxying"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "desempaquetado",
+        "proxying"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 34
+      "difficultyScore": 34,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-010",
-      "title": "Map/Filter: Functional",
-      "description": "Use map and filter with lambda.",
+      "title": "Map/Filter: Funcional",
+      "description": "Usa map y filter con lambda.",
+      "context": "Alternativa funcional para transformar y filtrar colecciones.",
       "codeSnippet": "nums = [1, 2, 3, 4, 5]\nevens = filter(lambda x: x % 2 == 0, nums)\nsquares = map(lambda x: x * x, nums)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["lambdas", "iterables"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "lambdas",
+        "iterables"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "functions"
     },
     {
       "id": "py-int-rt-011",
-      "title": "List Comp: Nested",
-      "description": "Matrix flattening.",
+      "title": "Comprensión de Listas: Anidada",
+      "description": "Aplanado de matrices.",
+      "context": "Sintaxis compacta para procesar estructuras de datos anidadas.",
       "codeSnippet": "matrix = [[1, 2], [3, 4]]\nflat = [x for row in matrix for x in row]",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["comprehensions"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "comprensiones"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 38
+      "difficultyScore": 38,
+      "category": "functional-programming"
     },
     {
       "id": "py-int-rt-012",
-      "title": "Dict Comp: Transformation",
-      "description": "Generate dict from list.",
+      "title": "Comprensión de Dicts: Transformación",
+      "description": "Genera un diccionario a partir de una lista.",
+      "context": "Forma rápida de crear mapas a partir de secuencias de tuplas.",
       "codeSnippet": "users = [('Nacho', 25), ('Leo', 30)]\nuser_ages = {name: age for name, age in users}",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["mappings"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "mapeos"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-013",
-      "title": "Collections: defaultdict",
-      "description": "Dict with automatic default values.",
+      "title": "Colecciones: defaultdict",
+      "description": "Diccionario con valores por defecto automáticos.",
+      "context": "Evita errores de clave inexistente al inicializar valores automáticamente.",
       "codeSnippet": "from collections import defaultdict\ngroups = defaultdict(list)\ngroups['python'].append('reflex')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["initialization"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "inicialización"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-014",
-      "title": "Enums: Functional",
-      "description": "Define strongly typed constants.",
+      "title": "Enums: Funcional",
+      "description": "Define constantes fuertemente tipadas.",
+      "context": "Mejora la legibilidad y seguridad del código al agrupar constantes relacionadas.",
       "codeSnippet": "from enum import Enum\nclass Status(Enum):\n    PENDING = 1\n    DONE = 2",
       "typingStyle": "full",
-      "tags": ["python", "enums"],
-      "concepts": ["constants"],
+      "tags": [
+        "python",
+        "enums"
+      ],
+      "concepts": [
+        "constantes"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "functions"
     },
     {
       "id": "py-int-rt-015",
-      "title": "Inheritance: Super()",
-      "description": "Call parent class methods.",
+      "title": "Herencia: Super()",
+      "description": "Llama a métodos de la clase padre.",
+      "context": "Esencial para extender el comportamiento de clases base manteniendo su funcionalidad.",
       "codeSnippet": "class Admin(User):\n    def __init__(self, name):\n        super().__init__(name)\n        self.role = 'admin'",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["mro", "inheritance"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "mro",
+        "herencia"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 35
+      "difficultyScore": 35,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-016",
       "title": "Type Hinting: List/Dict",
-      "description": "Annotate complex collections.",
+      "description": "Anotación de colecciones complejas.",
+      "context": "Ayuda a las herramientas de análisis estático a detectar errores de tipo.",
       "codeSnippet": "from typing import List, Dict\ndef process(data: List[int]) -> Dict[str, int]:\n    return {'sum': sum(data)}",
       "typingStyle": "full",
-      "tags": ["python", "typing"],
-      "concepts": ["generics"],
+      "tags": [
+        "python",
+        "tipado"
+      ],
+      "concepts": [
+        "genéricos"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "validation"
     },
     {
       "id": "py-int-rt-017",
-      "title": "Operator Overloading: __add__",
-      "description": "Define behavior for + operator.",
+      "title": "Sobrecarga de Operadores: __add__",
+      "description": "Define el comportamiento para el operador +.",
+      "context": "Permite que los objetos de tus clases soporten operaciones matemáticas estándar.",
       "codeSnippet": "class Point:\n    def __init__(self, x, y): self.x, self.y = x, y\n    def __add__(self, other):\n        return Point(self.x + other.x, self.y + other.y)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["polymorphism"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "polimorfismo"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 42
+      "difficultyScore": 42,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-018",
       "title": "Itertools: Chain",
-      "description": "Combine multiple iterables into one sequence.",
+      "description": "Combina múltiples iterables en una sola secuencia.",
+      "context": "Permite iterar sobre varias listas o sets como si fueran uno solo sin copiarlos.",
       "codeSnippet": "from itertools import chain\nl1, l2 = [1, 2], [3, 4]\nfor x in chain(l1, l2):\n    print(x)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["chained iterators"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "iteradores encadenados"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 34
+      "difficultyScore": 34,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-019",
-      "title": "Slicing: Reverse",
-      "description": "Reverse an iterable with slicing.",
+      "title": "Slicing: Inversión",
+      "description": "Invierte un iterable usando slicing.",
+      "context": "Técnica ultra-rápida y concisa para invertir strings o listas.",
       "codeSnippet": "text = 'hello'\nreversed_text = text[::-1]\nprint(reversed_text)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["slicing"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "slicing"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 25
+      "difficultyScore": 25,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-020",
-      "title": "Exception: Custom Class",
-      "description": "Define your own error type.",
+      "title": "Excepciones: Clase Personalizada",
+      "description": "Define tu propio tipo de error.",
+      "context": "Ayuda a crear una jerarquía de errores específica para tu aplicación.",
       "codeSnippet": "class ValidationError(Exception):\n    pass\n\ndef validate(x):\n    if x < 0: raise ValidationError('Negative!')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["exceptions"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "excepciones"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 36
+      "difficultyScore": 36,
+      "category": "validation"
     },
     {
       "id": "py-int-rt-021",
-      "title": "Decorators: Parametric",
-      "description": "Decorator with arguments.",
+      "title": "Decoradores: Paramétricos",
+      "description": "Decorador con argumentos.",
+      "context": "Permite configurar el comportamiento del decorador al momento de aplicarlo.",
       "codeSnippet": "def repeat(n):\n    def decorator(func):\n        def wrapper(*args): \n            for _ in range(n): func(*args)\n        return wrapper\n    return decorator",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["closures"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "clausuras (closures)"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 48
+      "difficultyScore": 48,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-022",
-      "title": "Static: Class Variable",
-      "description": "Shared state across instances.",
+      "title": "Estático: Variable de Clase",
+      "description": "Estado compartido entre todas las instancias.",
+      "context": "Útil para contadores globales o configuraciones comunes a todos los objetos de la clase.",
       "codeSnippet": "class Database:\n    _instances = 0\n    def __init__(self):\n        Database._instances += 1",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["class vs instance state"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "estado de clase vs instancia"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "variables"
     },
     {
       "id": "py-int-rt-023",
-      "title": "Collections: namedtuple",
-      "description": "Immutable object with field names.",
+      "title": "Colecciones: namedtuple",
+      "description": "Objeto inmutable con nombres de campo.",
+      "context": "Combina la eficiencia de las tuplas con la legibilidad de los objetos.",
       "codeSnippet": "from collections import namedtuple\nPoint = namedtuple('Point', ['x', 'y'])\np = Point(10, 20)\nprint(p.x)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["records"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "registros (records)"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-024",
-      "title": "F-Strings: Debugging",
-      "description": "Use the = specifier.",
+      "title": "F-Strings: Depuración",
+      "description": "Usa el especificador =.",
+      "context": "Forma rápida de imprimir el nombre y el valor de una variable para depurar.",
       "codeSnippet": "x, y = 10, 20\nprint(f'{x=}, {y=}') # x=10, y=20",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["debugging"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "depuración"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "strings"
     },
     {
       "id": "py-int-rt-025",
       "title": "Itertools: Groupby",
-      "description": "Group consecutive elements.",
+      "description": "Agrupa elementos consecutivos.",
+      "context": "Útil para procesar datos agrupados por una clave común (requiere ordenación previa).",
       "codeSnippet": "from itertools import groupby\ndata = [1, 1, 2, 3, 3]\nfor k, g in groupby(data):\n    print(k, list(g))",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["grouping"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "agrupación"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-026",
-      "title": "Set: Set Difference",
-      "description": "Find elements in one set but not another.",
+      "title": "Sets: Diferencia de Conjuntos",
+      "description": "Encuentra elementos en un conjunto pero no en otro.",
+      "context": "Operación fundamental para comparar colecciones de elementos únicos.",
       "codeSnippet": "s1, s2 = {1, 2, 3}, {3, 4}\ndiff = s1 - s2 # {1, 2}",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["set theory"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "teoría de conjuntos"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 24
+      "difficultyScore": 24,
+      "category": "control-flow"
     },
     {
       "id": "py-int-rt-027",
-      "title": "List: Enumerate Start",
-      "description": "Change starting index of enumerate.",
+      "title": "Listas: Inicio de Enumerate",
+      "description": "Cambia el índice de inicio de enumerate.",
+      "context": "Permite empezar a contar desde 1 (o cualquier número) en lugar de 0.",
       "codeSnippet": "names = ['Alice', 'Bob']\nfor i, name in enumerate(names, start=1):\n    print(f'{i}. {name}')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["enumeration"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "enumeración"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "arrays"
     },
     {
       "id": "py-int-rt-028",
-      "title": "Dicts: Merge Operator",
-      "description": "Merge two dictionaries.",
+      "title": "Dicts: Operador de Unión",
+      "description": "Fusiona dos diccionarios.",
+      "context": "Nueva sintaxis (Python 3.9+) para combinar mapas de forma limpia.",
       "codeSnippet": "d1 = {'a': 1}\nd2 = {'b': 2}\nd3 = d1 | d2",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["merging"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "fusión (merging)"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 25
+      "difficultyScore": 25,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-029",
-      "title": "Functions: Recursive",
-      "description": "Function calling itself.",
+      "title": "Funciones: Recursivas",
+      "description": "Función que se llama a sí misma.",
+      "context": "Estrategia para resolver problemas que pueden dividirse en sub-problemas idénticos.",
       "codeSnippet": "def factorial(n):\n    if n <= 1: return 1\n    return n * factorial(n - 1)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["recursion"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "recursión"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "functions"
     },
     {
       "id": "py-int-rt-030",
-      "title": "Pathlib: Modern Filesystem",
-      "description": "Handle paths objectively.",
+      "title": "Pathlib: Sistema de Archivos Moderno",
+      "description": "Maneja rutas como objetos.",
+      "context": "Alternativa moderna y multiplataforma al módulo os.path.",
       "codeSnippet": "from pathlib import Path\np = Path('data') / 'test.txt'\nprint(p.exists())",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["file paths"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "rutas de archivos"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 32
+      "difficultyScore": 32,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-031",
-      "title": "Sorting: Custom Key",
-      "description": "Sort based on object attributes.",
+      "title": "Ordenación: Clave Personalizada",
+      "description": "Ordena basado en atributos de objetos.",
+      "context": "Permite definir criterios de ordenación complejos usando lambdas.",
       "codeSnippet": "users = [{'name': 'Nacho', 'age': 25}]\nusers.sort(key=lambda u: u['age'])",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["sorting", "lambdas"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "ordenamiento",
+        "lambdas"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 35
+      "difficultyScore": 35,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-032",
-      "title": "Collections: deque",
-      "description": "Double-ended queue.",
+      "title": "Colecciones: deque",
+      "description": "Cola de doble extremo.",
+      "context": "Optimizado para añadir y eliminar elementos tanto al principio como al final.",
       "codeSnippet": "from collections import deque\nq = deque([1, 2, 3])\nq.appendleft(0)\nq.pop()",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["queues", "stacks"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "colas",
+        "pilas"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 38
+      "difficultyScore": 38,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-033",
-      "title": "Any/All: List Processing",
-      "description": "Check list conditions with predicates.",
+      "title": "Any/All: Procesamiento de Listas",
+      "description": "Verifica condiciones en listas usando predicados.",
+      "context": "Permite comprobar si alguno o todos los elementos cumplen una condición.",
       "codeSnippet": "scores = [85, 92, 78]\npassed_all = all(s >= 70 for s in scores)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["truthiness"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "truthiness"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "arrays"
     },
     {
       "id": "py-int-rt-034",
-      "title": "Itertools: Combinations",
-      "description": "Generate all possible pairs.",
+      "title": "Itertools: Combinaciones",
+      "description": "Genera todos los pares posibles.",
+      "context": "Provee todas las combinaciones posibles de una longitud dada sin repetición.",
       "codeSnippet": "from itertools import combinations\nitems = [1, 2, 3]\nfor p in combinations(items, 2):\n    print(p) # (1,2), (1,3), (2,3)",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["combinatorics"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "combinatoria"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "py-int-rt-035",
-      "title": "Context Managers: contextlib",
-      "description": "Decorator-based context managers.",
+      "title": "Gestores de Contexto: contextlib",
+      "description": "Gestores de contexto basados en decoradores.",
+      "context": "Forma rápida de crear gestores de contexto usando generadores.",
       "codeSnippet": "from contextlib import contextmanager\n@contextmanager\ndef temp_file():\n    print('Open'); yield; print('Close')",
       "typingStyle": "full",
-      "tags": ["python"],
-      "concepts": ["generators", "wrappers"],
+      "tags": [
+        "python"
+      ],
+      "concepts": [
+        "generadores",
+        "wrappers"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 42
+      "difficultyScore": 42,
+      "category": "algorithms"
     }
   ]
 }

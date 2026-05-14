@@ -1,0 +1,689 @@
+{
+  "language": "typescript",
+  "level": "interview",
+  "type": "reflex-snippets",
+  "snippets": [
+    {
+      "id": "ts-interview-001",
+      "title": "Algoritmos: Big O",
+      "description": "Analiza la complejidad temporal.",
+      "category": "algorithms",
+      "difficultyScore": 45,
+      "estimatedDuration": 50,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "teoría"
+      ],
+      "concepts": [
+        "complejidad"
+      ],
+      "technicalNotes": [
+        "Ejemplo de O(n)"
+      ],
+      "codeSnippet": "function find(arr: number[], n: number) { return arr.includes(n); }"
+    },
+    {
+      "id": "ts-interview-002",
+      "title": "Arquitectura: Modularización",
+      "description": "Estructura una aplicación grande.",
+      "category": "algorithms",
+      "difficultyScore": 55,
+      "estimatedDuration": 65,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "arquitectura"
+      ],
+      "concepts": [
+        "módulos"
+      ],
+      "technicalNotes": [
+        "Namespace vs Módulo"
+      ],
+      "codeSnippet": "export module Auth { export class User {} }"
+    },
+    {
+      "id": "ts-interview-003",
+      "title": "Auth: Tipado de JWT",
+      "description": "Tipado de cargas útiles (payloads) de tokens.",
+      "category": "algorithms",
+      "difficultyScore": 50,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "auth"
+      ],
+      "concepts": [
+        "jwt"
+      ],
+      "technicalNotes": [
+        "Claims estándar"
+      ],
+      "codeSnippet": "interface Payload { sub: string; iat: number; exp: number; }"
+    },
+    {
+      "id": "ts-interview-004",
+      "title": "Backend: Cliente API",
+      "description": "Tipado de un cliente REST.",
+      "category": "algorithms",
+      "difficultyScore": 60,
+      "estimatedDuration": 70,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "backend"
+      ],
+      "concepts": [
+        "api"
+      ],
+      "technicalNotes": [
+        "Métodos genéricos"
+      ],
+      "codeSnippet": "class Api { async get<T>(url: string): Promise<T> { return fetch(url).then(r => r.json()); } }"
+    },
+    {
+      "id": "ts-interview-005",
+      "title": "Clases: Sobrecarga de Métodos",
+      "description": "Tipado de múltiples firmas de métodos.",
+      "category": "classes",
+      "difficultyScore": 48,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "clases"
+      ],
+      "concepts": [
+        "sobrecargas"
+      ],
+      "technicalNotes": [
+        "Una sola implementación"
+      ],
+      "codeSnippet": "class Box { move(x: number): void; move(x: string): void; move(x: any) {} }"
+    },
+    {
+      "id": "ts-interview-006",
+      "title": "Cloud: AWS Lambda",
+      "description": "Tipado de manejadores (handlers) serverless.",
+      "category": "algorithms",
+      "difficultyScore": 62,
+      "estimatedDuration": 70,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "cloud"
+      ],
+      "concepts": [
+        "serverless"
+      ],
+      "technicalNotes": [
+        "APIGatewayProxyHandler"
+      ],
+      "codeSnippet": "const handler = async (event: any, context: any) => ({ statusCode: 200 });"
+    },
+    {
+      "id": "ts-interview-007",
+      "title": "Estructuras de Datos: BST",
+      "description": "Tipado de Árbol de Búsqueda Binaria (BST).",
+      "category": "algorithms",
+      "difficultyScore": 58,
+      "estimatedDuration": 70,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "árboles"
+      ],
+      "concepts": [
+        "bst"
+      ],
+      "technicalNotes": [
+        "Izquierda/Derecha recursiva"
+      ],
+      "codeSnippet": "interface Node<T> { val: T; left?: Node<T>; right?: Node<T>; }"
+    },
+    {
+      "id": "ts-interview-008",
+      "title": "Distribuido: Bus de Eventos",
+      "description": "Tipado de eventos entre servicios.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 85,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "distribuido"
+      ],
+      "concepts": [
+        "eventos"
+      ],
+      "technicalNotes": [
+        "Tipado basado en tópicos"
+      ],
+      "codeSnippet": "interface Bus { publish(topic: string, data: any): void; }"
+    },
+    {
+      "id": "ts-interview-009",
+      "title": "FP: Mónada Either",
+      "description": "Maneja valores de éxito/error.",
+      "category": "algorithms",
+      "difficultyScore": 82,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "fp"
+      ],
+      "concepts": [
+        "mónadas"
+      ],
+      "technicalNotes": [
+        "Unión Left/Right"
+      ],
+      "codeSnippet": "type Either<E, A> = { left: E } | { right: A };"
+    },
+    {
+      "id": "ts-interview-010",
+      "title": "Microservicios: Gateway",
+      "description": "Tipado de un gateway de enrutamiento.",
+      "category": "algorithms",
+      "difficultyScore": 78,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "microservicios"
+      ],
+      "concepts": [
+        "gateway"
+      ],
+      "technicalNotes": [
+        "Tipado de proxy"
+      ],
+      "codeSnippet": "class Gateway { proxy(req: Request): Promise<Response> { return fetch(req.url); } }"
+    },
+    {
+      "id": "ts-interview-011",
+      "title": "Rendimiento: Perfilado (Profiling)",
+      "description": "Tipado de utilidades de tiempo.",
+      "category": "algorithms",
+      "difficultyScore": 40,
+      "estimatedDuration": 45,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "rendimiento"
+      ],
+      "concepts": [
+        "perfilado"
+      ],
+      "technicalNotes": [
+        "API Performance"
+      ],
+      "codeSnippet": "const t0 = performance.now();"
+    },
+    {
+      "id": "ts-interview-012",
+      "title": "Tiempo Real: WebSockets",
+      "description": "Tipado de mensajes de socket.",
+      "category": "algorithms",
+      "difficultyScore": 65,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "tiempo-real"
+      ],
+      "concepts": [
+        "websockets"
+      ],
+      "technicalNotes": [
+        "Tipado de eventos de mensaje"
+      ],
+      "codeSnippet": "const ws = new WebSocket('ws://localhost'); ws.onmessage = (e) => {};"
+    },
+    {
+      "id": "ts-interview-013",
+      "title": "Resiliencia: Circuit Breaker",
+      "description": "Tipado del manejo de fallos.",
+      "category": "algorithms",
+      "difficultyScore": 85,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "resiliencia"
+      ],
+      "concepts": [
+        "tolerancia-a-fallos"
+      ],
+      "technicalNotes": [
+        "Lógica basada en estado"
+      ],
+      "codeSnippet": "enum State { Open, Closed, HalfOpen }"
+    },
+    {
+      "id": "ts-interview-014",
+      "title": "Búsqueda: Búsqueda Difusa (Fuzzy)",
+      "description": "Tipado de algoritmos de búsqueda.",
+      "category": "control-flow",
+      "difficultyScore": 68,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "búsqueda"
+      ],
+      "concepts": [
+        "difusa"
+      ],
+      "technicalNotes": [
+        "Función de búsqueda genérica"
+      ],
+      "codeSnippet": "function search<T>(query: string, items: T[]): T[] { return items; }"
+    },
+    {
+      "id": "ts-interview-015",
+      "title": "Seguridad: Guardia XSS",
+      "description": "Tipado de la salida del saneador (sanitizer).",
+      "category": "algorithms",
+      "difficultyScore": 72,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "seguridad"
+      ],
+      "concepts": [
+        "xss"
+      ],
+      "technicalNotes": [
+        "Tipo TrustedHTML"
+      ],
+      "codeSnippet": "function sanitize(html: string): string { return html; }"
+    },
+    {
+      "id": "ts-interview-016",
+      "title": "Gestión de Estado: Patrón Flux",
+      "description": "Tipado de despachadores (dispatchers).",
+      "category": "patterns",
+      "difficultyScore": 55,
+      "estimatedDuration": 65,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "estado"
+      ],
+      "concepts": [
+        "flux"
+      ],
+      "technicalNotes": [
+        "Creadores de acciones"
+      ],
+      "codeSnippet": "interface Action { type: string; payload?: any; }"
+    },
+    {
+      "id": "ts-interview-017",
+      "title": "Diseño de Sistemas: Escala",
+      "description": "Tipado de balanceadores de carga.",
+      "category": "algorithms",
+      "difficultyScore": 90,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "diseño"
+      ],
+      "concepts": [
+        "escalado"
+      ],
+      "technicalNotes": [
+        "Lógica Round Robin"
+      ],
+      "codeSnippet": "class LoadBalancer { next(): string { return 'node1'; } }"
+    },
+    {
+      "id": "ts-interview-018",
+      "title": "Algoritmos: Grafo BFS",
+      "description": "Tipado de recorrido basado en cola.",
+      "category": "algorithms",
+      "difficultyScore": 65,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "bfs"
+      ],
+      "technicalNotes": [
+        "Cola genérica"
+      ],
+      "codeSnippet": "function bfs<T>(start: T) {}"
+    },
+    {
+      "id": "ts-interview-019",
+      "title": "Arquitectura: Capa Cebolla (Onion)",
+      "description": "Tipado de arquitectura limpia (clean architecture).",
+      "category": "algorithms",
+      "difficultyScore": 88,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "clean arch"
+      ],
+      "technicalNotes": [
+        "Inversión de dependencias"
+      ],
+      "codeSnippet": "interface UseCase { execute(): void; }"
+    },
+    {
+      "id": "ts-interview-020",
+      "title": "Auth: Flujo OAuth",
+      "description": "Tipado de retrollamadas (callbacks) de autenticación.",
+      "category": "algorithms",
+      "difficultyScore": 68,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "oauth"
+      ],
+      "technicalNotes": [
+        "Validación de estado"
+      ],
+      "codeSnippet": "interface TokenResponse { access_token: string; }"
+    },
+    {
+      "id": "ts-interview-021",
+      "title": "Backend: Modelo ORM",
+      "description": "Tipado de entidades de base de datos.",
+      "category": "algorithms",
+      "difficultyScore": 62,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "orm"
+      ],
+      "technicalNotes": [
+        "Decoradores de propiedades"
+      ],
+      "codeSnippet": "class UserEntity { id: number; name: string; }"
+    },
+    {
+      "id": "ts-interview-022",
+      "title": "Clases: Sobrecarga de Constructor",
+      "description": "Tipado de múltiples constructores.",
+      "category": "classes",
+      "difficultyScore": 52,
+      "estimatedDuration": 65,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "constructores"
+      ],
+      "technicalNotes": [
+        "Una sola implementación"
+      ],
+      "codeSnippet": "class Point { constructor(x: number); constructor(x: string); constructor(x: any) {} }"
+    },
+    {
+      "id": "ts-interview-023",
+      "title": "Cloud: Carga S3",
+      "description": "Tipado de parámetros de almacenamiento.",
+      "category": "algorithms",
+      "difficultyScore": 58,
+      "estimatedDuration": 70,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "almacenamiento"
+      ],
+      "technicalNotes": [
+        "PutObjectCommandInput"
+      ],
+      "codeSnippet": "const params = { Bucket: 'my-bucket', Key: 'file.txt' };"
+    },
+    {
+      "id": "ts-interview-024",
+      "title": "Estructuras de Datos: Montículo (Heap)",
+      "description": "Tipado de colas de prioridad.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "heap"
+      ],
+      "technicalNotes": [
+        "Lógica de Min/Max heap"
+      ],
+      "codeSnippet": "class MinHeap<T> { insert(val: T): void {} }"
+    },
+    {
+      "id": "ts-interview-025",
+      "title": "Distribuido: Consenso",
+      "description": "Tipado de roles Raft/Paxos.",
+      "category": "algorithms",
+      "difficultyScore": 100,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "consenso"
+      ],
+      "technicalNotes": [
+        "Estado Líder/Seguidor"
+      ],
+      "codeSnippet": "enum Role { Leader, Follower, Candidate }"
+    },
+    {
+      "id": "ts-interview-026",
+      "title": "FP: Mónada IO",
+      "description": "Maneja efectos secundarios de forma segura.",
+      "category": "algorithms",
+      "difficultyScore": 92,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "io"
+      ],
+      "technicalNotes": [
+        "Envoltorio de ejecución perezosa (lazy)"
+      ],
+      "codeSnippet": "class IO<T> { constructor(private run: () => T) {} }"
+    },
+    {
+      "id": "ts-interview-027",
+      "title": "Microservicios: Health Check",
+      "description": "Tipado de endpoints de estado.",
+      "category": "algorithms",
+      "difficultyScore": 45,
+      "estimatedDuration": 55,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "monitoreo"
+      ],
+      "technicalNotes": [
+        "Tipos literales UP/DOWN"
+      ],
+      "codeSnippet": "interface Health { status: 'UP' | 'DOWN'; }"
+    },
+    {
+      "id": "ts-interview-028",
+      "title": "Rendimiento: Fuga de Memoria",
+      "description": "Tipado de referencias de GC (Garbage Collector).",
+      "category": "algorithms",
+      "difficultyScore": 85,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "recolección-de-basura"
+      ],
+      "technicalNotes": [
+        "Uso de WeakMap"
+      ],
+      "codeSnippet": "const cache = new WeakMap();"
+    },
+    {
+      "id": "ts-interview-029",
+      "title": "Tiempo Real: Polling",
+      "description": "Tipado de obtenedores periódicos.",
+      "category": "algorithms",
+      "difficultyScore": 35,
+      "estimatedDuration": 45,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "polling"
+      ],
+      "technicalNotes": [
+        "Tipado de intervalos"
+      ],
+      "codeSnippet": "const poll = setInterval(() => fetch('/data'), 1000);"
+    },
+    {
+      "id": "ts-interview-030",
+      "title": "Resiliencia: Mamparo (Bulkhead)",
+      "description": "Aísla los fallos.",
+      "category": "algorithms",
+      "difficultyScore": 78,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "aislamiento"
+      ],
+      "technicalNotes": [
+        "Pooling de recursos"
+      ],
+      "codeSnippet": "class Pool { acquire(): Promise<any> { return Promise.resolve(); } }"
+    },
+    {
+      "id": "ts-interview-031",
+      "title": "Búsqueda: ElasticSearch",
+      "description": "Tipado de consultas de búsqueda.",
+      "category": "algorithms",
+      "difficultyScore": 65,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "elasticsearch"
+      ],
+      "technicalNotes": [
+        "Tipado de DSL"
+      ],
+      "codeSnippet": "interface Query { match: { [field: string]: string } }"
+    },
+    {
+      "id": "ts-interview-032",
+      "title": "Seguridad: Limitación de Tasa (Rate Limit)",
+      "description": "Previene la fuerza bruta.",
+      "category": "algorithms",
+      "difficultyScore": 60,
+      "estimatedDuration": 75,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "ratelimiting"
+      ],
+      "technicalNotes": [
+        "Contador basado en ventana"
+      ],
+      "codeSnippet": "class RateLimiter { check(ip: string): boolean { return true; } }"
+    },
+    {
+      "id": "ts-interview-033",
+      "title": "Gestión de Estado: Máquina de Estados",
+      "description": "Tipado de máquinas formales.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "fsm"
+      ],
+      "technicalNotes": [
+        "Mapeo de transiciones"
+      ],
+      "codeSnippet": "interface Machine<S, E> { transition(state: S, event: E): S; }"
+    },
+    {
+      "id": "ts-interview-034",
+      "title": "Diseño de Sistemas: Fragmentación (Shard) de Base de Datos",
+      "description": "Tipado de lógica de partición.",
+      "category": "algorithms",
+      "difficultyScore": 95,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "sharding"
+      ],
+      "technicalNotes": [
+        "Enrutamiento basado en hash"
+      ],
+      "codeSnippet": "function getShard(id: number): string { return `shard_${id % 4}`; }"
+    },
+    {
+      "id": "ts-interview-035",
+      "title": "Algoritmos: Programación Dinámica",
+      "description": "Tipado de recursividad memoizada.",
+      "category": "algorithms",
+      "difficultyScore": 88,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "dp"
+      ],
+      "technicalNotes": [
+        "Enfoque basado en tabla"
+      ],
+      "codeSnippet": "function fib(n: number, memo: number[]): number { return 0; }"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["advanced-syntax", "oop", "collections", "itertools", "decorators"],
-  "concepts": ["generators", "context-managers", "properties", "dunder-methods", "closures"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["sintaxis-avanzada", "poo", "colecciones", "itertools", "decoradores"],
+  "concepts": ["generadores", "gestores-de-contexto", "propiedades", "métodos-dunder", "closures"],
+  "lastUpdated": "2026-05-14"
 }

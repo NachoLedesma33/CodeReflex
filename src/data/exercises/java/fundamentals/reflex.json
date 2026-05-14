@@ -5,391 +5,613 @@
   "snippets": [
     {
       "id": "jv-fund-rt-001",
-      "title": "Variables: Primitive Types",
-      "description": "Declare and initialize basic primitive types.",
-      "context": "Java is statically typed, meaning you must declare the type of every variable.",
+      "title": "Variables: Tipos Primitivos",
+      "description": "Declara e inicializa tipos primitivos básicos.",
+      "context": "Java es un lenguaje de tipado estático, lo que significa que debes declarar el tipo de cada variable.",
       "codeSnippet": "int count = 10;\ndouble price = 99.99;\nboolean isReady = true;",
       "typingStyle": "full",
-      "tags": ["java", "variables"],
-      "concepts": ["primitives", "declaration"],
+      "tags": [
+        "java",
+        "variables"
+      ],
+      "concepts": [
+        "primitivos",
+        "declaración"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 5
+      "difficultyScore": 5,
+      "category": "variables"
     },
     {
       "id": "jv-fund-rt-002",
-      "title": "Strings: Concatenation",
-      "description": "Combine strings using the + operator.",
-      "context": "Strings in Java are objects, not primitives.",
+      "title": "Strings: Concatenación",
+      "description": "Combina strings usando el operador +.",
+      "context": "En Java, los Strings son objetos, no tipos primitivos.",
       "codeSnippet": "String firstName = \"Ignacio\";\nString greeting = \"Hello \" + firstName;",
       "typingStyle": "full",
-      "tags": ["java", "strings"],
-      "concepts": ["objects", "concatenation"],
+      "tags": [
+        "java",
+        "strings"
+      ],
+      "concepts": [
+        "objetos",
+        "concatenación"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 8
+      "difficultyScore": 8,
+      "category": "strings"
     },
     {
       "id": "jv-fund-rt-003",
-      "title": "Arrays: Fixed Size",
-      "description": "Create and initialize an array.",
-      "context": "Arrays have a fixed length once created.",
+      "title": "Arrays: Tamaño Fijo",
+      "description": "Crea e inicializa un array.",
+      "context": "Los arrays tienen una longitud fija una vez creados.",
       "codeSnippet": "int[] numbers = new int[3];\nnumbers[0] = 1;\nnumbers[1] = 2;\nnumbers[2] = 3;",
       "typingStyle": "full",
-      "tags": ["java", "arrays"],
-      "concepts": ["fixed length", "indexing"],
+      "tags": [
+        "java",
+        "arrays"
+      ],
+      "concepts": [
+        "longitud fija",
+        "indexación"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "arrays"
     },
     {
       "id": "jv-fund-rt-004",
-      "title": "Methods: Simple Return",
-      "description": "Define a static method that returns a value.",
+      "title": "Métodos: Retorno Simple",
+      "description": "Define un método estático que retorna un valor.",
+      "context": "Los métodos estáticos pertenecen a la clase y pueden llamarse sin instanciarla.",
       "codeSnippet": "public static int add(int a, int b) {\n    return a + b;\n}",
       "typingStyle": "full",
-      "tags": ["java", "methods"],
-      "concepts": ["return types", "parameters"],
+      "tags": [
+        "java",
+        "métodos"
+      ],
+      "concepts": [
+        "tipos de retorno",
+        "parámetros"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-005",
-      "title": "Conditionals: If-Else",
-      "description": "Basic branching logic.",
+      "title": "Condicionales: If-Else",
+      "description": "Lógica básica de ramificación.",
+      "context": "Estructura fundamental para el control de flujo en Java.",
       "codeSnippet": "if (age >= 18) {\n    status = \"Adult\";\n} else {\n    status = \"Minor\";\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["control flow"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "flujo de control"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "control-flow"
     },
     {
       "id": "jv-fund-rt-006",
-      "title": "Loops: Standard For",
-      "description": "Iterate with a counter.",
+      "title": "Bucles: For Estándar",
+      "description": "Itera usando un contador.",
+      "context": "Ideal cuando conoces el número exacto de iteraciones.",
       "codeSnippet": "for (int i = 0; i < 5; i++) {\n    System.out.println(\"Index: \" + i);\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["iteration"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "iteración"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 14
+      "difficultyScore": 14,
+      "category": "loops"
     },
     {
       "id": "jv-fund-rt-007",
-      "title": "Loops: Enhanced For",
-      "description": "Iterate over elements (for-each).",
+      "title": "Bucles: For Mejorado",
+      "description": "Itera sobre elementos (for-each).",
+      "context": "Forma más legible de iterar sobre arrays o colecciones.",
       "codeSnippet": "String[] tags = {\"java\", \"reflex\"};\nfor (String tag : tags) {\n    System.out.println(tag);\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["iteration"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "iteración"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "loops"
     },
     {
       "id": "jv-fund-rt-008",
-      "title": "ArrayList: Dynamic List",
-      "description": "Basic usage of ArrayList.",
+      "title": "ArrayList: Lista Dinámica",
+      "description": "Uso básico de ArrayList.",
+      "context": "A diferencia de los arrays, ArrayList puede cambiar de tamaño dinámicamente.",
       "codeSnippet": "ArrayList<String> list = new ArrayList<>();\nlist.add(\"Java\");\nString item = list.get(0);",
       "typingStyle": "full",
-      "tags": ["java", "collections"],
-      "concepts": ["generics", "dynamic sizing"],
+      "tags": [
+        "java",
+        "colecciones"
+      ],
+      "concepts": [
+        "genéricos",
+        "tamaño dinámico"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "arrays"
     },
     {
       "id": "jv-fund-rt-009",
-      "title": "Classes: Constructor",
-      "description": "Define a simple class with fields.",
+      "title": "Clases: Constructor",
+      "description": "Define una clase simple con campos.",
+      "context": "Los constructores inicializan el estado de un nuevo objeto.",
       "codeSnippet": "public class User {\n    private String name;\n    public User(String name) {\n        this.name = name;\n    }\n}",
       "typingStyle": "full",
-      "tags": ["java", "oop"],
-      "concepts": ["constructors", "instances"],
+      "tags": [
+        "java",
+        "oop"
+      ],
+      "concepts": [
+        "constructores",
+        "instancias"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 25
+      "difficultyScore": 25,
+      "category": "classes"
     },
     {
       "id": "jv-fund-rt-010",
-      "title": "Scanner: User Input",
-      "description": "Read input from the console.",
+      "title": "Scanner: Entrada de Usuario",
+      "description": "Lee entrada desde la consola.",
+      "context": "La clase Scanner permite capturar datos del usuario de forma sencilla.",
       "codeSnippet": "Scanner sc = new Scanner(System.in);\nString input = sc.nextLine();\nsc.close();",
       "typingStyle": "full",
-      "tags": ["java", "io"],
-      "concepts": ["input", "objects"],
+      "tags": [
+        "java",
+        "io"
+      ],
+      "concepts": [
+        "entrada",
+        "objetos"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "objects"
     },
     {
       "id": "jv-fund-rt-011",
-      "title": "Arithmetic: Modulo",
-      "description": "Get the remainder of a division.",
+      "title": "Aritmética: Módulo",
+      "description": "Obtén el resto de una división.",
+      "context": "El operador % es muy útil para determinar paridad o ciclos.",
       "codeSnippet": "int num = 10;\nboolean isEven = (num % 2 == 0);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["operators"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "operadores"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-012",
-      "title": "Switch: Basic Case",
-      "description": "Multi-way branch.",
+      "title": "Switch: Caso Básico",
+      "description": "Ramificación múltiple.",
+      "context": "Alternativa más limpia a múltiples if-else cuando se compara una sola variable.",
       "codeSnippet": "switch (day) {\n    case 1: name = \"Mon\"; break;\n    case 2: name = \"Tue\"; break;\n    default: name = \"N/A\";\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["switch"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "switch"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-013",
-      "title": "Wrapper Classes: Integer",
-      "description": "Boxing and unboxing.",
+      "title": "Clases Wrapper: Integer",
+      "description": "Boxing y unboxing.",
+      "context": "Permite tratar tipos primitivos como objetos cuando es necesario.",
       "codeSnippet": "Integer val = Integer.valueOf(100);\nint back = val.intValue();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["wrappers"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "wrappers"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "classes"
     },
     {
       "id": "jv-fund-rt-014",
-      "title": "Strings: Length and CharAt",
-      "description": "Inspect string properties.",
+      "title": "Strings: Length y CharAt",
+      "description": "Inspecciona propiedades de un string.",
+      "context": "Métodos básicos para manipular y analizar texto.",
       "codeSnippet": "String msg = \"Reflex\";\nint len = msg.length();\nchar first = msg.charAt(0);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["methods"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "métodos"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "strings"
     },
     {
       "id": "jv-fund-rt-015",
-      "title": "Math: Pow and Sqrt",
-      "description": "Use the Math class.",
+      "title": "Math: Pow y Sqrt",
+      "description": "Uso de la clase Math.",
+      "context": "Provee funciones matemáticas estáticas comunes.",
       "codeSnippet": "double power = Math.pow(2, 3);\ndouble root = Math.sqrt(16);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["utility classes"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "clases de utilidad"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-016",
-      "title": "Final: Constants",
-      "description": "Declare immutable variables.",
+      "title": "Final: Constantes",
+      "description": "Declara variables inmutables.",
+      "context": "La palabra clave final impide que el valor sea modificado tras su asignación.",
       "codeSnippet": "final int MAX_USERS = 50;\nfinal String APP_ID = \"ID001\";",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["final"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "final"
+      ],
       "estimatedDuration": 25,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-017",
-      "title": "Try-Catch: Basic",
-      "description": "Handle runtime exceptions.",
+      "title": "Try-Catch: Básico",
+      "description": "Maneja excepciones en tiempo de ejecución.",
+      "context": "Evita que el programa se detenga abruptamente ante errores esperados.",
       "codeSnippet": "try {\n    int res = 10 / 0;\n} catch (ArithmeticException e) {\n    System.out.println(\"Error!\");\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["exceptions"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "excepciones"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "validation"
     },
     {
       "id": "jv-fund-rt-018",
-      "title": "HashMap: Basic Pairs",
-      "description": "Store keys and values.",
+      "title": "HashMap: Pares Básicos",
+      "description": "Almacena claves y valores.",
+      "context": "Colección fundamental para búsquedas rápidas basadas en una clave.",
       "codeSnippet": "HashMap<Integer, String> map = new HashMap<>();\nmap.put(1, \"Active\");\nString val = map.get(1);",
       "typingStyle": "full",
-      "tags": ["java", "collections"],
-      "concepts": ["mappings"],
+      "tags": [
+        "java",
+        "colecciones"
+      ],
+      "concepts": [
+        "mapeos"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 24
+      "difficultyScore": 24,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-019",
-      "title": "Overloading: Methods",
-      "description": "Same name, different params.",
+      "title": "Sobrecarga: Métodos",
+      "description": "Mismo nombre, diferentes parámetros.",
+      "context": "Permite definir múltiples comportamientos para un mismo nombre de método.",
       "codeSnippet": "public int log(int n) { return n; }\npublic String log(String s) { return s; }",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["polymorphism"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "polimorfismo"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-020",
-      "title": "Booleans: Operators",
-      "description": "Logical AND, OR, NOT.",
+      "title": "Booleanos: Operadores",
+      "description": "Y (AND), O (OR), NO (NOT) lógicos.",
+      "context": "Fundamento para construir expresiones condicionales complejas.",
       "codeSnippet": "boolean res = (5 > 3) && (2 < 4);\nboolean toggled = !res;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["logic"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "lógica"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "control-flow"
     },
     {
       "id": "jv-fund-rt-021",
-      "title": "Arrays: Initializer",
-      "description": "Shorthand array creation.",
+      "title": "Arrays: Inicializador",
+      "description": "Creación rápida de arrays.",
+      "context": "Sintaxis abreviada para cuando ya conoces los elementos del array.",
       "codeSnippet": "int[] data = {10, 20, 30};\nint length = data.length;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["arrays"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "arrays"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 14
+      "difficultyScore": 14,
+      "category": "arrays"
     },
     {
       "id": "jv-fund-rt-022",
-      "title": "Methods: Void",
-      "description": "Method with no return value.",
+      "title": "Métodos: Void",
+      "description": "Método que no retorna ningún valor.",
+      "context": "Se usa para ejecutar acciones o procedimientos sin devolver un resultado.",
       "codeSnippet": "public void printLog(String msg) {\n    System.out.println(\"LOG: \" + msg);\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["void"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "void"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 10
+      "difficultyScore": 10,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-023",
       "title": "Strings: Substring",
-      "description": "Extract parts of a string.",
+      "description": "Extrae partes de un string.",
+      "context": "Permite obtener una porción del texto original especificando índices.",
       "codeSnippet": "String full = \"HelloWorld\";\nString sub = full.substring(0, 5);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["string slicing"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "slicing de cadenas"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "strings"
     },
     {
       "id": "jv-fund-rt-024",
-      "title": "Enums: Simple",
-      "description": "Constants with names.",
+      "title": "Enums: Simples",
+      "description": "Constantes con nombre.",
+      "context": "Define un conjunto fijo de valores posibles para una variable.",
       "codeSnippet": "enum Level { LOW, MEDIUM, HIGH }\nLevel current = Level.MEDIUM;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["enums"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "enums"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 20
+      "difficultyScore": 20,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-025",
-      "title": "Casting: Primitive",
-      "description": "Convert types manually.",
+      "title": "Casting: Primitivo",
+      "description": "Convierte tipos manualmente.",
+      "context": "Necesario cuando conviertes de un tipo de mayor precisión a uno menor (narrowing).",
       "codeSnippet": "double d = 9.99;\nint i = (int) d;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["casting"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "casting"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-026",
-      "title": "StringBuilder: Basics",
-      "description": "Efficient string building.",
+      "title": "StringBuilder: Básicos",
+      "description": "Construcción eficiente de strings.",
+      "context": "Más eficiente que concatenar con + cuando realizas muchas modificaciones.",
       "codeSnippet": "StringBuilder sb = new StringBuilder();\nsb.append(\"A\").append(\"B\");\nString res = sb.toString();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["mutable strings"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "cadenas mutables"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 25
+      "difficultyScore": 25,
+      "category": "strings"
     },
     {
       "id": "jv-fund-rt-027",
       "title": "Collections: HashSet",
-      "description": "Store unique elements.",
-      "codeSnippet": "HashSet<Integer> set = new HashSet<>();\nset.add(10);\nset.add(10); // Duplicate ignored",
+      "description": "Almacena elementos únicos.",
+      "context": "Garantiza que no haya duplicados en la colección de forma eficiente.",
+      "codeSnippet": "HashSet<Integer> set = new HashSet<>();\nset.add(10);\nset.add(10); // Duplicado ignorado",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["sets"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "conjuntos (sets)"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-028",
       "title": "Object: Equals",
-      "description": "Compare object values.",
+      "description": "Compara valores de objetos.",
+      "context": "A diferencia de ==, equals() compara el contenido real del objeto.",
       "codeSnippet": "String s1 = \"test\";\nString s2 = \"test\";\nboolean same = s1.equals(s2);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["equality"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "igualdad"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 18
+      "difficultyScore": 18,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-029",
-      "title": "Static: Shared Var",
-      "description": "Class-level variable.",
+      "title": "Static: Var Compartida",
+      "description": "Variable a nivel de clase.",
+      "context": "El valor es compartido por todas las instancias de la clase.",
       "codeSnippet": "public class Counter {\n    public static int total = 0;\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["static"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "static"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-030",
-      "title": "Loops: While",
-      "description": "Loop while condition is true.",
+      "title": "Bucles: While",
+      "description": "Bucle mientras la condición sea verdadera.",
+      "context": "Ideal cuando no sabes cuántas veces se ejecutará el bucle de antemano.",
       "codeSnippet": "int count = 0;\nwhile (count < 5) {\n    count++;\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["iteration"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "iteración"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 12
+      "difficultyScore": 12,
+      "category": "loops"
     },
     {
       "id": "jv-fund-rt-031",
       "title": "Package: Import",
-      "description": "Use external classes.",
+      "description": "Uso de clases externas.",
+      "context": "Permite utilizar clases que están en otros paquetes de la librería estándar o de terceros.",
       "codeSnippet": "import java.util.Date;\nDate now = new Date();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["imports"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "importaciones"
+      ],
       "estimatedDuration": 20,
-      "difficultyScore": 8
+      "difficultyScore": 8,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-032",
-      "title": "Methods: Main",
-      "description": "The entry point of a program.",
+      "title": "Métodos: Main",
+      "description": "El punto de entrada de un programa.",
+      "context": "Todo programa Java independiente requiere un método main para iniciar su ejecución.",
       "codeSnippet": "public static void main(String[] args) {\n    System.out.println(\"Hello!\");\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["main method"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "método main"
+      ],
       "estimatedDuration": 35,
-      "difficultyScore": 15
+      "difficultyScore": 15,
+      "category": "algorithms"
     },
     {
       "id": "jv-fund-rt-033",
-      "title": "Conditionals: Ternary",
-      "description": "Compact if-else.",
+      "title": "Condicionales: Ternario",
+      "description": "If-else compacto.",
+      "context": "Permite asignar un valor basado en una condición en una sola línea.",
       "codeSnippet": "int x = 10;\nString res = (x > 5) ? \"Yes\" : \"No\";",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["one-liners"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "one-liners"
+      ],
       "estimatedDuration": 30,
-      "difficultyScore": 14
+      "difficultyScore": 14,
+      "category": "control-flow"
     },
     {
       "id": "jv-fund-rt-034",
-      "title": "Arrays: Multi-dimensional",
-      "description": "Create a matrix.",
+      "title": "Arrays: Multidimensionales",
+      "description": "Crea una matriz.",
+      "context": "Permite almacenar datos en estructuras de filas y columnas.",
       "codeSnippet": "int[][] matrix = new int[2][2];\nmatrix[0][0] = 1;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["2D arrays"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "arreglos 2D"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 28
+      "difficultyScore": 28,
+      "category": "arrays"
     },
     {
       "id": "jv-fund-rt-035",
-      "title": "Exceptions: Finally",
-      "description": "Execute code regardless of error.",
+      "title": "Excepciones: Finally",
+      "description": "Ejecuta código sin importar si hubo error.",
+      "context": "Se usa comúnmente para liberar recursos, como cerrar archivos o conexiones.",
       "codeSnippet": "try {\n    // code\n} finally {\n    System.out.println(\"Clean up\");\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["finally"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "finally"
+      ],
       "estimatedDuration": 40,
-      "difficultyScore": 22
+      "difficultyScore": 22,
+      "category": "algorithms"
     }
   ]
 }

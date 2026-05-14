@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useProgressStore } from '@/stores/progressStore';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
+import { LanguageIcon } from '@/components/ui/LanguageIcon';
 import {
   Flame,
   Target,
@@ -24,20 +25,21 @@ interface StatsPanelProps {
 }
 
 const ACHIEVEMENTS = [
-  { id: 'first-exercise', name: 'First Steps', description: 'Complete your first exercise', icon: '🎯', requirement: 1, category: 'volume' },
-  { id: 'ten-exercises', name: 'Getting Started', description: 'Complete 10 exercises', icon: '🚀', requirement: 10, category: 'volume' },
-  { id: 'fifty-exercises', name: 'Dedicated', description: 'Complete 50 exercises', icon: '💪', requirement: 50, category: 'volume' },
-  { id: 'wpm-30', name: 'Speed Demon', description: 'Reach 30 WPM', icon: '⚡', requirement: 30, category: 'speed' },
-  { id: 'wpm-50', name: 'Fast Typer', description: 'Reach 50 WPM', icon: '🔥', requirement: 50, category: 'speed' },
-  { id: 'wpm-80', name: 'Lightning', description: 'Reach 80 WPM', icon: '🌩️', requirement: 80, category: 'speed' },
-  { id: 'accuracy-90', name: 'Precision', description: 'Achieve 90% accuracy', icon: '🎯', requirement: 90, category: 'accuracy' },
-  { id: 'accuracy-99', name: 'Perfection', description: 'Achieve 99% accuracy', icon: '💎', requirement: 99, category: 'accuracy' },
-  { id: 'streak-3', name: 'Consistent', description: '3-day streak', icon: '📅', requirement: 3, category: 'streak' },
-  { id: 'streak-7', name: 'Weekly Warrior', description: '7-day streak', icon: '🗓️', requirement: 7, category: 'streak' },
-  { id: 'streak-30', name: 'Monthly Master', description: '30-day streak', icon: '🏆', requirement: 30, category: 'streak' },
-  { id: 'js-master', name: 'JS Ninja', description: 'Complete all JS exercises', icon: '🟨', requirement: 35, category: 'language' },
-  { id: 'ts-master', name: 'TS Master', description: 'Complete all TS exercises', icon: '🔷', requirement: 35, category: 'language' },
-  { id: 'py-master', name: 'Python Pro', description: 'Complete all Python exercises', icon: '🐍', requirement: 35, category: 'language' },
+  { id: 'first-exercise', name: 'Primeros Pasos', description: 'Completa tu primer ejercicio', icon: '🎯', requirement: 1, category: 'volume' },
+  { id: 'ten-exercises', name: 'Comenzando', description: 'Completa 10 ejercicios', icon: '🚀', requirement: 10, category: 'volume' },
+  { id: 'fifty-exercises', name: 'Dedicado', description: 'Completa 50 ejercicios', icon: '💪', requirement: 50, category: 'volume' },
+  { id: 'wpm-30', name: 'Velocidad Base', description: 'Alcanza 30 WPM', icon: '⚡', requirement: 30, category: 'speed' },
+  { id: 'wpm-50', name: 'Mecanógrafo Rápido', description: 'Alcanza 50 WPM', icon: '🔥', requirement: 50, category: 'speed' },
+  { id: 'wpm-80', name: 'Rayo', description: 'Alcanza 80 WPM', icon: '🌩️', requirement: 80, category: 'speed' },
+  { id: 'accuracy-90', name: 'Precisión', description: 'Logra 90% de precisión', icon: '🎯', requirement: 90, category: 'accuracy' },
+  { id: 'accuracy-99', name: 'Perfección', description: 'Logra 99% de precisión', icon: '💎', requirement: 99, category: 'accuracy' },
+  { id: 'streak-3', name: 'Consistente', description: 'Racha de 3 días', icon: '📅', requirement: 3, category: 'streak' },
+  { id: 'streak-7', name: 'Guerrero Semanal', description: 'Racha de 7 días', icon: '🗓️', requirement: 7, category: 'streak' },
+  { id: 'streak-30', name: 'Maestro Mensual', description: 'Racha de 30 días', icon: '🏆', requirement: 30, category: 'streak' },
+  { id: 'js-master', name: 'Ninja JS', description: 'Completa todos los ejercicios de JS', icon: 'javascript', category: 'language' },
+  { id: 'ts-master', name: 'Maestro TS', description: 'Completa todos los ejercicios de TS', icon: 'typescript', category: 'language' },
+  { id: 'py-master', name: 'Python Pro', description: 'Completa todos los ejercicios de Python', icon: 'python', category: 'language' },
+  { id: 'java-master', name: 'Experto Java', description: 'Completa todos los ejercicios de Java', icon: 'java', category: 'language' },
 ];
 
 export function StatsPanel({ className, compact = false }: StatsPanelProps) {
@@ -79,7 +81,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         return { level: i + 1, title: getLevelTitle(i + 1), progress: ((totalXP - xpThresholds[i]) / (xpThresholds[i + 1] - xpThresholds[i])) * 100 || 100 };
       }
     }
-    return { level: 1, title: 'Novice', progress: (totalXP / 100) * 100 };
+    return { level: 1, title: 'Novato', progress: (totalXP / 100) * 100 };
   }, [totalXP]);
 
   const unlockedAchievements = useMemo(() => {
@@ -138,33 +140,33 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
   return (
     <Card variant="bordered" className={cn('', className)}>
       <CardHeader className="pb-2">
-        <h3 className="text-sm font-medium text-zinc-400">Your Progress</h3>
+        <h3 className="text-sm font-medium text-zinc-400">Tu Progreso</h3>
       </CardHeader>
 
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <StatCard
             icon={<Flame className="w-4 h-4 text-orange-500" />}
-            label="Current Streak"
+            label="Racha Actual"
             value={currentStreak}
-            subValue={`Best: ${longestStreak}`}
+            subValue={`Mejor: ${longestStreak}`}
             highlight={currentStreak > 0}
           />
           <StatCard
             icon={<Target className="w-4 h-4 text-green-500" />}
-            label="Completed"
+            label="Completados"
             value={totalExercises}
-            subValue={`${totalAttempts} attempts`}
+            subValue={`${totalAttempts} intentos`}
           />
           <StatCard
             icon={<Zap className="w-4 h-4 text-yellow-500" />}
-            label="Best WPM"
+            label="Mejor WPM"
             value={bestOverallWpm}
             highlight={bestOverallWpm > 40}
           />
           <StatCard
             icon={<Clock className="w-4 h-4 text-blue-500" />}
-            label="Total Time"
+            label="Tiempo Total"
             value={formatTime(totalTypingTime)}
           />
         </div>
@@ -173,7 +175,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
           <div className="flex items-center justify-between text-xs text-zinc-500">
             <span className="flex items-center gap-1">
               <Star className="w-3 h-3" />
-              Level {level.level} - {level.title}
+              Nivel {level.level} - {level.title}
             </span>
             <span>{totalXP} / {getXPForLevel(level.level + 1)} XP</span>
           </div>
@@ -188,26 +190,28 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         <div className="space-y-2">
           <div className="text-xs text-zinc-500 flex items-center gap-1">
             <BarChart3 className="w-3 h-3" />
-            Performance by Language
+            Rendimiento por Lenguaje
           </div>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             <LanguageStat
               language="JavaScript"
-              color="bg-yellow-500"
               wpm={bestWpmByLanguage.javascript}
               accuracy={bestAccuracyByLanguage.javascript}
             />
             <LanguageStat
               language="TypeScript"
-              color="bg-blue-500"
               wpm={bestWpmByLanguage.typescript}
               accuracy={bestAccuracyByLanguage.typescript}
             />
             <LanguageStat
               language="Python"
-              color="bg-green-500"
               wpm={bestWpmByLanguage.python}
               accuracy={bestAccuracyByLanguage.python}
+            />
+            <LanguageStat
+              language="Java"
+              wpm={bestWpmByLanguage.java || 0}
+              accuracy={bestAccuracyByLanguage.java || 0}
             />
           </div>
         </div>
@@ -215,7 +219,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         <div className="space-y-2">
           <div className="text-xs text-zinc-500 flex items-center gap-1">
             <Calendar className="w-3 h-3" />
-            Activity Heatmap (Last Year)
+            Mapa de Actividad (Último Año)
           </div>
           <div className="overflow-x-auto">
             <div className="flex gap-[2px]">
@@ -235,35 +239,41 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
             </div>
           </div>
           <div className="flex items-center gap-2 text-[10px] text-zinc-600">
-            <span>Less</span>
+            <span>Menos</span>
             <div className="w-2 h-2 bg-zinc-800 rounded-sm" />
             <div className="w-2 h-2 bg-green-900 rounded-sm" />
             <div className="w-2 h-2 bg-green-700 rounded-sm" />
             <div className="w-2 h-2 bg-green-500 rounded-sm" />
-            <span>More</span>
+            <span>Más</span>
           </div>
         </div>
 
         <div className="space-y-2">
           <div className="text-xs text-zinc-500 flex items-center gap-1">
             <Award className="w-3 h-3" />
-            Achievements ({unlockedAchievements.length}/{ACHIEVEMENTS.length})
+            Logros ({unlockedAchievements.length}/{ACHIEVEMENTS.length})
           </div>
           <div className="flex flex-wrap gap-2">
             {unlockedAchievements.length > 0 ? (
               unlockedAchievements.map(achievement => (
-                <div
-                  key={achievement.id}
-                  className="flex items-center gap-1.5 px-2 py-1 bg-yellow-500/20 rounded-lg text-xs"
-                  title={achievement.description}
-                >
-                  <span>{achievement.icon}</span>
-                  <span className="text-yellow-200">{achievement.name}</span>
-                </div>
+                  <div
+                    key={achievement.id}
+                    className="flex items-center gap-1.5 px-2 py-1 bg-yellow-500/20 rounded-lg text-xs"
+                    title={achievement.description}
+                  >
+                    <span>
+                      {achievement.category === 'language' ? (
+                        <LanguageIcon language={achievement.icon} size={16} />
+                      ) : (
+                        achievement.icon
+                      )}
+                    </span>
+                    <span className="text-yellow-200">{achievement.name}</span>
+                  </div>
               ))
             ) : (
               <div className="text-xs text-zinc-600 italic">
-                Complete exercises to unlock achievements!
+                ¡Completa ejercicios para desbloquear logros!
               </div>
             )}
           </div>
@@ -271,21 +281,27 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
 
         {unlockedAchievements.length < ACHIEVEMENTS.length && (
           <div className="pt-2 border-t border-zinc-700">
-            <div className="text-xs text-zinc-500 mb-2">Locked Achievements</div>
+            <div className="text-xs text-zinc-500 mb-2">Logros Bloqueados</div>
             <div className="flex flex-wrap gap-2">
               {ACHIEVEMENTS.filter(a => !unlockedAchievements.find(u => u.id === a.id)).slice(0, 5).map(achievement => (
-                <div
-                  key={achievement.id}
-                  className="flex items-center gap-1.5 px-2 py-1 bg-zinc-800 rounded-lg text-xs opacity-50"
-                  title={achievement.description}
-                >
-                  <span>{achievement.icon}</span>
-                  <span className="text-zinc-500">{achievement.name}</span>
-                </div>
+                  <div
+                    key={achievement.id}
+                    className="flex items-center gap-1.5 px-2 py-1 bg-zinc-800 rounded-lg text-xs opacity-50"
+                    title={achievement.description}
+                  >
+                    <span>
+                      {achievement.category === 'language' ? (
+                        <LanguageIcon language={achievement.icon} size={16} />
+                      ) : (
+                        achievement.icon
+                      )}
+                    </span>
+                    <span className="text-zinc-500">{achievement.name}</span>
+                  </div>
               ))}
               {ACHIEVEMENTS.length - unlockedAchievements.length > 5 && (
                 <div className="text-xs text-zinc-600 px-2 py-1">
-                  +{ACHIEVEMENTS.length - unlockedAchievements.length - 5} more
+                  +{ACHIEVEMENTS.length - unlockedAchievements.length - 5} más
                 </div>
               )}
             </div>
@@ -329,26 +345,25 @@ function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
 
 interface LanguageStatProps {
   language: string;
-  color: string;
   wpm: number;
   accuracy: number;
 }
 
-function LanguageStat({ language, color, wpm, accuracy }: LanguageStatProps) {
+function LanguageStat({ language, wpm, accuracy }: LanguageStatProps) {
   return (
-    <div className="bg-zinc-800/30 rounded-lg p-2 text-center">
-      <div className={cn('w-2 h-2 rounded-full mx-auto mb-1', color)} />
-      <div className="text-xs text-zinc-500 mb-1">{language}</div>
-      <div className="text-sm font-medium text-zinc-300">{wpm || '-'}</div>
-      <div className="text-[10px] text-zinc-600">WPM</div>
+    <div className="bg-zinc-800/30 rounded-lg p-2 text-center border border-zinc-800/50 hover:border-zinc-700/50 transition-colors">
+      <LanguageIcon language={language} size={20} className="mx-auto mb-1.5" />
+      <div className="text-[10px] text-zinc-500 mb-1 uppercase tracking-wider">{language}</div>
+      <div className="text-sm font-semibold text-zinc-200">{wpm || '-'}</div>
+      <div className="text-[10px] text-zinc-600">BEST WPM</div>
     </div>
   );
 }
 
 function getLevelTitle(level: number): string {
   const titles = [
-    'Novice', 'Beginner', 'Intermediate', 'Advanced',
-    'Expert', 'Master', 'Grandmaster', 'Legend', 'Mythic', 'Divine'
+    'Novato', 'Principiante', 'Intermedio', 'Avanzado',
+    'Experto', 'Maestro', 'Gran Maestro', 'Leyenda', 'Mítico', 'Divino'
   ];
   return titles[Math.min(level - 1, titles.length - 1)];
 }

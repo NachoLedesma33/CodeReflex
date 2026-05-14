@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["algorithms", "data-structures", "big-o", "searching", "sorting"],
-  "concepts": ["sliding-window", "two-pointers", "binary-search", "recursion", "concurrency"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["algoritmos", "estructuras-de-datos", "big-o", "búsqueda", "ordenamiento"],
+  "concepts": ["ventana-deslizable", "dos-punteros", "búsqueda-binaria", "recursión", "concurrencia"],
+  "lastUpdated": "2026-05-14"
 }

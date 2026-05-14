@@ -293,10 +293,10 @@ export function GuidedProblem({
                 phase === 'testing' && 'bg-purple-500/20 text-purple-400',
                 phase === 'completed' && 'bg-green-500/20 text-green-400',
               )}>
-                {phase === 'reading' && '📖 Reading'}
-                {phase === 'coding' && '⌨️ Coding'}
-                {phase === 'testing' && '🧪 Testing'}
-                {phase === 'completed' && '✅ Completed'}
+                {phase === 'reading' && '📖 Lectura'}
+                {phase === 'coding' && '⌨️ Código'}
+                {phase === 'testing' && '🧪 Pruebas'}
+                {phase === 'completed' && '✅ Completado'}
               </span>
             </div>
             <div className="flex items-center gap-3 text-zinc-500">
@@ -315,7 +315,7 @@ export function GuidedProblem({
                   className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100 w-full"
                 >
                   <FileText className="w-4 h-4" />
-                  Problem Statement
+                  Descripción del Problema
                   {expandedSections.has('problem') ? (
                     <ChevronUp className="w-4 h-4 ml-auto" />
                   ) : (
@@ -337,7 +337,7 @@ export function GuidedProblem({
                     className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100 w-full"
                   >
                     <BookOpen className="w-4 h-4" />
-                    Theory & Context
+                    Teoría y Contexto
                     {expandedSections.has('theory') ? (
                       <ChevronUp className="w-4 h-4 ml-auto" />
                     ) : (
@@ -360,7 +360,7 @@ export function GuidedProblem({
                     className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100 w-full"
                   >
                     <Code2 className="w-4 h-4" />
-                    Technical Notes ({technicalNotes.length})
+                    Notas Técnicas ({technicalNotes.length})
                     {expandedSections.has('notes') ? (
                       <ChevronUp className="w-4 h-4 ml-auto" />
                     ) : (
@@ -393,11 +393,11 @@ export function GuidedProblem({
                       className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100"
                     >
                       <Lightbulb className="w-4 h-4" />
-                      Hints ({revealedHints}/{hints.length})
+                      Pistas ({revealedHints}/{hints.length})
                     </button>
                     {revealedHints < hints.length && (
                       <Button variant="ghost" size="sm" onClick={revealNextHint}>
-                        Reveal
+                        Revelar
                       </Button>
                     )}
                   </div>
@@ -409,7 +409,7 @@ export function GuidedProblem({
                           className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3"
                         >
                           <div className="flex items-start gap-2">
-                            <span className="text-yellow-500 font-mono text-sm">Hint {i + 1}:</span>
+                            <span className="text-yellow-500 font-mono text-sm">Pista {i + 1}:</span>
                             <span className="text-sm text-yellow-200">{hint.text}</span>
                           </div>
                         </div>
@@ -421,7 +421,7 @@ export function GuidedProblem({
 
               <Button onClick={startCoding} className="w-full" size="lg">
                 <Play className="w-4 h-4 mr-2" />
-                Start Coding
+                Empezar a Programar
               </Button>
             </div>
           )}
@@ -429,7 +429,7 @@ export function GuidedProblem({
           {(phase === 'coding' || phase === 'testing' || phase === 'completed') && (
             <div className="space-y-4">
               <div className="bg-zinc-800/50 rounded-lg p-3 text-sm text-zinc-400 border border-zinc-700/50">
-                <div className="font-medium text-zinc-300 mb-1">Problem:</div>
+                <div className="font-medium text-zinc-300 mb-1">Problema:</div>
                 {exercise.description.split('\n').slice(0, 3).join('\n')}
                 {exercise.description.split('\n').length > 3 && '...'}
               </div>
@@ -451,25 +451,25 @@ export function GuidedProblem({
                 {phase === 'coding' && (
                   <Button onClick={runTests} className="flex-1">
                     <ListChecks className="w-4 h-4 mr-2" />
-                    Run Tests
+                    Ejecutar Pruebas
                   </Button>
                 )}
                 {phase === 'testing' && (
                   <Button variant="secondary" onClick={() => setPhase('coding')} className="flex-1">
-                    Continue Coding
+                    Continuar Programando
                   </Button>
                 )}
                 {phase === 'completed' && (
                   <Button onClick={resetProblem} variant="secondary">
                     <RotateCcw className="w-4 h-4 mr-2" />
-                    Try Again
+                    Intentar de Nuevo
                   </Button>
                 )}
               </div>
 
               {testStates.length > 0 && (
                 <div className="space-y-2">
-                  <div className="text-sm font-medium text-zinc-400">Test Results:</div>
+                  <div className="text-sm font-medium text-zinc-400">Resultados:</div>
                   {testStates.map((test, i) => (
                     <div
                       key={test.id}
@@ -491,13 +491,13 @@ export function GuidedProblem({
                           <XCircle className="w-4 h-4 text-red-500" />
                         )}
                         <span className="text-sm font-medium text-zinc-300">
-                          Test {i + 1}: {test.description}
+                          Prueba {i + 1}: {test.description}
                         </span>
                         {test.isHidden && <EyeOff className="w-3 h-3 text-zinc-600" />}
                       </div>
                       {test.passed !== null && (
                         <div className="text-xs font-mono mt-1">
-                          <span className="text-zinc-500">Expected: </span>
+                          <span className="text-zinc-500">Esperado: </span>
                           <span className="text-zinc-400">{test.expected}</span>
                           {test.passed === false && (
                             <>
@@ -516,14 +516,14 @@ export function GuidedProblem({
               {phase === 'completed' && exercise.explanation && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-zinc-400">Solution Explanation</div>
+                    <div className="text-sm font-medium text-zinc-400">Explicación de la Solución</div>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => setShowSolution(!showSolution)}
                     >
                       {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                      {showSolution ? ' Hide' : ' Show'}
+                      {showSolution ? ' Ocultar' : ' Mostrar'}
                     </Button>
                   </div>
                   {showSolution && (
@@ -552,7 +552,7 @@ export function GuidedProblem({
               disabled={isFirst}
             >
               <ChevronLeft className="w-4 h-4 mr-1" />
-              Previous
+              Anterior
             </Button>
             <span className="text-xs text-zinc-500">
               {currentIndex + 1} / {filteredExercises.length}
@@ -563,7 +563,7 @@ export function GuidedProblem({
               onClick={onNext || (() => getNextExercise())}
               disabled={isLast}
             >
-              Next
+              Siguiente
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </div>

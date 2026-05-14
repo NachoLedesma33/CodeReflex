@@ -5,388 +5,610 @@
   "snippets": [
     {
       "id": "jv-adv-rt-001",
-      "title": "Reflection: Dynamic Call",
-      "description": "Invoke a method by name at runtime.",
+      "title": "Reflection: Llamada Dinámica",
+      "description": "Invoca un método por su nombre en tiempo de ejecución.",
+      "context": "La API de Reflection permite interactuar con métodos y campos privados o desconocidos en tiempo de compilación.",
       "codeSnippet": "Method method = obj.getClass().getMethod(\"execute\", String.class);\nmethod.invoke(obj, \"payload\");",
       "typingStyle": "full",
-      "tags": ["java", "reflection"],
-      "concepts": ["dynamic access"],
+      "tags": [
+        "java",
+        "reflection"
+      ],
+      "concepts": [
+        "acceso dinámico"
+      ],
       "estimatedDuration": 120,
-      "difficultyScore": 85
+      "difficultyScore": 85,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-002",
-      "title": "Concurrency: ReentrantLock",
-      "description": "Manual locking mechanism.",
-      "codeSnippet": "Lock lock = new ReentrantLock();\nlock.lock();\ntry { /* critical section */ } finally { lock.unlock(); }",
+      "title": "Concurrencia: ReentrantLock",
+      "description": "Mecanismo de bloqueo manual.",
+      "context": "Ofrece más flexibilidad que los bloques synchronized, como bloqueos con tiempo de espera o interrumpibles.",
+      "codeSnippet": "Lock lock = new ReentrantLock();\nlock.lock();\ntry { /* sección crítica */ } finally { lock.unlock(); }",
       "typingStyle": "full",
-      "tags": ["java", "locks"],
-      "concepts": ["thread safety"],
+      "tags": [
+        "java",
+        "locks"
+      ],
+      "concepts": [
+        "seguridad de hilos"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 75
+      "difficultyScore": 75,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-003",
-      "title": "Concurrency: CompletableFuture",
-      "description": "Async programming with pipelines.",
+      "title": "Concurrencia: CompletableFuture",
+      "description": "Programación asíncrona mediante pipelines.",
+      "context": "Permite encadenar tareas asíncronas de forma no bloqueante, similar a las Promesas en JavaScript.",
       "codeSnippet": "CompletableFuture.supplyAsync(() -> \"Data\")\n    .thenApply(s -> s + \" Processed\")\n    .thenAccept(System.out::println);",
       "typingStyle": "full",
-      "tags": ["java", "async"],
-      "concepts": ["futures", "promises"],
+      "tags": [
+        "java",
+        "async"
+      ],
+      "concepts": [
+        "futuros",
+        "promesas"
+      ],
       "estimatedDuration": 110,
-      "difficultyScore": 80
+      "difficultyScore": 80,
+      "category": "async"
     },
     {
       "id": "jv-adv-rt-004",
-      "title": "Java 17: Sealed Classes",
-      "description": "Restrict which classes can extend.",
+      "title": "Java 17: Clases Selladas (Sealed)",
+      "description": "Restringe qué clases pueden extender de otra.",
+      "context": "Las clases selladas permiten un control jerárquico estricto sobre la herencia.",
       "codeSnippet": "public sealed class Shape permits Circle, Square {}\npublic final class Circle extends Shape {}",
       "typingStyle": "full",
-      "tags": ["java", "modern"],
-      "concepts": ["encapsulation"],
+      "tags": [
+        "java",
+        "moderno"
+      ],
+      "concepts": [
+        "encapsulación"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "classes"
     },
     {
       "id": "jv-adv-rt-005",
       "title": "Java 14+: Records",
-      "description": "Immutable data carriers.",
+      "description": "Transportadores de datos inmutables.",
+      "context": "Los Records eliminan el boilerplate de los POJOs generando automáticamente constructores, getters, equals y hashCode.",
       "codeSnippet": "public record User(String name, int age) {}",
       "typingStyle": "full",
-      "tags": ["java", "modern"],
-      "concepts": ["data objects"],
+      "tags": [
+        "java",
+        "moderno"
+      ],
+      "concepts": [
+        "objetos de datos"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-006",
-      "title": "Annotations: Custom",
-      "description": "Define metadata for code.",
+      "title": "Anotaciones: Personalizadas",
+      "description": "Define metadatos para el código.",
+      "context": "Las anotaciones pueden ser procesadas en tiempo de ejecución mediante Reflection o en tiempo de compilación.",
       "codeSnippet": "@Retention(RetentionPolicy.RUNTIME)\n@Target(ElementType.METHOD)\npublic @interface LogCall {}",
       "typingStyle": "full",
-      "tags": ["java", "meta"],
-      "concepts": ["metadata"],
+      "tags": [
+        "java",
+        "meta"
+      ],
+      "concepts": [
+        "metadatos"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 75
+      "difficultyScore": 75,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-007",
       "title": "JVM: ClassLoader",
-      "description": "Load classes dynamically.",
+      "description": "Carga clases dinámicamente.",
+      "context": "El ClassLoader es el encargado de buscar y cargar los archivos .class en la memoria de la JVM.",
       "codeSnippet": "ClassLoader loader = MyClass.class.getClassLoader();\nClass<?> cls = loader.loadClass(\"com.pkg.Dynamic\");",
       "typingStyle": "full",
-      "tags": ["java", "jvm"],
-      "concepts": ["loading"],
+      "tags": [
+        "java",
+        "jvm"
+      ],
+      "concepts": [
+        "carga de clases"
+      ],
       "estimatedDuration": 130,
-      "difficultyScore": 90
+      "difficultyScore": 90,
+      "category": "classes"
     },
     {
       "id": "jv-adv-rt-008",
-      "title": "Concurrency: CountDownLatch",
-      "description": "Wait for multiple tasks.",
-      "codeSnippet": "CountDownLatch latch = new CountDownLatch(3);\n// in workers: latch.countDown();\nlatch.await();",
+      "title": "Concurrencia: CountDownLatch",
+      "description": "Espera por múltiples tareas antes de continuar.",
+      "context": "Útil para sincronizar el inicio de una aplicación hasta que todos los servicios necesarios estén listos.",
+      "codeSnippet": "CountDownLatch latch = new CountDownLatch(3);\n// en los hilos: latch.countDown();\nlatch.await();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["synchronization"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "sincronización"
+      ],
       "estimatedDuration": 105,
-      "difficultyScore": 78
+      "difficultyScore": 78,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-009",
-      "title": "Reflection: Private Access",
-      "description": "Break encapsulation for testing/debug.",
+      "title": "Reflection: Acceso Privado",
+      "description": "Rompe la encapsulación para tests o depuración.",
+      "context": "setAccessible(true) permite leer o modificar campos privados, algo útil en frameworks como Hibernate o Jackson.",
       "codeSnippet": "Field field = obj.getClass().getDeclaredField(\"secret\");\nfield.setAccessible(true);\nString val = (String) field.get(obj);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["reflection"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "reflection"
+      ],
       "estimatedDuration": 110,
-      "difficultyScore": 82
+      "difficultyScore": 82,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-010",
-      "title": "Streams: Custom Collector",
-      "description": "Define how to gather results.",
+      "title": "Streams: Collector Personalizado",
+      "description": "Define cómo recolectar los resultados de un stream.",
+      "context": "Permite crear lógicas de acumulación complejas que no están cubiertas por los colectores estándar.",
       "codeSnippet": "Collector<String, ?, Map<Integer, List<String>>> c = \n    Collectors.groupingBy(String::length);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["accumulation"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "acumulación"
+      ],
       "estimatedDuration": 120,
-      "difficultyScore": 88
+      "difficultyScore": 88,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-011",
-      "title": "Volatile: Memory Barrier",
-      "description": "Ensure visibility across threads.",
+      "title": "Volatile: Barrera de Memoria",
+      "description": "Asegura la visibilidad entre hilos.",
+      "context": "Garantiza que el valor de una variable se lea y escriba directamente en la memoria principal, no en la caché del CPU.",
       "codeSnippet": "private volatile boolean active = true;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["memory model"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "modelo de memoria"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 72
+      "difficultyScore": 72,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-012",
-      "title": "Generics: Type Erasure",
-      "description": "Runtime behavior of generics.",
-      "codeSnippet": "List<String> list = new ArrayList<>();\n// At runtime, it's just List<Object>",
+      "title": "Genéricos: Type Erasure",
+      "description": "Comportamiento en runtime de los genéricos.",
+      "context": "En Java, los genéricos se eliminan tras la compilación por compatibilidad hacia atrás.",
+      "codeSnippet": "List<String> list = new ArrayList<>();\n// En runtime, es simplemente una List de Object",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["jvm internals"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "internos de la jvm"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-013",
-      "title": "Concurrency: Semaphore",
-      "description": "Limit concurrent access.",
-      "codeSnippet": "Semaphore sem = new Semaphore(5);\nsem.acquire();\ntry { /* job */ } finally { sem.release(); }",
+      "title": "Concurrencia: Semáforo (Semaphore)",
+      "description": "Limita el acceso concurrente mediante permisos.",
+      "context": "Controla el número de hilos que pueden acceder simultáneamente a un recurso limitado.",
+      "codeSnippet": "Semaphore sem = new Semaphore(5);\nsem.acquire();\ntry { /* tarea */ } finally { sem.release(); }",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["permits"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "permisos"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 74
+      "difficultyScore": 74,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-014",
-      "title": "Lambdas: Method Reference",
-      "description": "Compact lambda syntax.",
+      "title": "Lambdas: Referencia a Método",
+      "description": "Sintaxis compacta para lambdas simples.",
+      "context": "Usa el operador :: para referenciar métodos existentes de forma elegante.",
       "codeSnippet": "list.forEach(System.out::println);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["syntax"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "sintaxis"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-015",
-      "title": "Collections: CopyOnWriteArrayList",
-      "description": "Thread-safe list for iteration.",
+      "title": "Colecciones: CopyOnWriteArrayList",
+      "description": "Lista segura para hilos optimizada para lecturas.",
+      "context": "Crea una copia de la lista en cada modificación, evitando ConcurrentModificationException durante la iteración.",
       "codeSnippet": "List<String> safeList = new CopyOnWriteArrayList<>();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["immutability"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "inmutabilidad"
+      ],
       "estimatedDuration": 90,
-      "difficultyScore": 68
+      "difficultyScore": 68,
+      "category": "arrays"
     },
     {
       "id": "jv-adv-rt-016",
-      "title": "JVM: Thread Dump",
-      "description": "Analyze running threads.",
+      "title": "JVM: Volcado de Hilos (Thread Dump)",
+      "description": "Analiza los hilos en ejecución.",
+      "context": "Permite diagnosticar deadlocks (bloqueos mutuos) o hilos bloqueados en producción.",
       "codeSnippet": "Map<Thread, StackTraceElement[]> all = Thread.getAllStackTraces();",
       "typingStyle": "full",
-      "tags": ["java", "jvm"],
-      "concepts": ["debugging"],
+      "tags": [
+        "java",
+        "jvm"
+      ],
+      "concepts": [
+        "depuración"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-017",
-      "title": "Concurrency: ThreadLocal",
-      "description": "Thread-specific data.",
+      "title": "Concurrencia: ThreadLocal",
+      "description": "Datos específicos por cada hilo.",
+      "context": "Permite almacenar variables que solo son visibles y accesibles por el hilo que las creó.",
       "codeSnippet": "ThreadLocal<User> ctx = new ThreadLocal<>();\nctx.set(user); User u = ctx.get();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["context management"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "gestión de contexto"
+      ],
       "estimatedDuration": 100,
-      "difficultyScore": 76
+      "difficultyScore": 76,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-018",
       "title": "Java 17: Pattern Matching",
-      "description": "Instanceof with extraction.",
+      "description": "Uso de instanceof con extracción automática.",
+      "context": "Simplifica el código eliminando la necesidad de castings manuales tras comprobar el tipo.",
       "codeSnippet": "if (obj instanceof String s) {\n    System.out.println(s.toLowerCase());\n}",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["syntax"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "sintaxis"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "patterns"
     },
     {
       "id": "jv-adv-rt-019",
-      "title": "Serialization: serialVersionUID",
-      "description": "Version control for saved objects.",
+      "title": "Serialización: serialVersionUID",
+      "description": "Control de versiones para objetos guardados.",
+      "context": "Asegura que la clase que carga un objeto sea compatible con la versión que lo guardó.",
       "codeSnippet": "private static final long serialVersionUID = 1L;",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["persistence"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "persistencia"
+      ],
       "estimatedDuration": 70,
-      "difficultyScore": 50
+      "difficultyScore": 50,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-020",
       "title": "Optional: FlatMap",
-      "description": "Handle nested optionals.",
+      "description": "Maneja Optionals anidados.",
+      "context": "Evita tener estructuras del tipo Optional<Optional<T>> al transformar valores.",
       "codeSnippet": "Optional<String> val = opt.flatMap(User::getAddress).map(Address::getCity);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["monads"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "mónadas"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 62
+      "difficultyScore": 62,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-021",
-      "title": "Functional: Predicate",
-      "description": "Condition checker interface.",
+      "title": "Funcional: Predicate",
+      "description": "Interfaz para comprobación de condiciones.",
+      "context": "Interfaz funcional que acepta un objeto y devuelve un booleano.",
       "codeSnippet": "Predicate<String> isEmpty = String::isEmpty;\nboolean res = isEmpty.test(\"\");",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["logic"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "lógica"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "control-flow"
     },
     {
       "id": "jv-adv-rt-022",
-      "title": "Functional: Consumer",
-      "description": "Action taker interface.",
+      "title": "Funcional: Consumer",
+      "description": "Interfaz para ejecutar acciones.",
+      "context": "Interfaz funcional que acepta un argumento pero no devuelve ningún resultado.",
       "codeSnippet": "Consumer<String> logger = System.out::println;\nlogger.accept(\"Hello\");",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["actions"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "acciones"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "functions"
     },
     {
       "id": "jv-adv-rt-023",
-      "title": "Functional: Supplier",
-      "description": "Data provider interface.",
+      "title": "Funcional: Supplier",
+      "description": "Interfaz proveedora de datos.",
+      "context": "Interfaz funcional que no acepta argumentos y devuelve un nuevo objeto o valor.",
       "codeSnippet": "Supplier<Double> random = Math::random;\ndouble val = random.get();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["generation"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "generación"
+      ],
       "estimatedDuration": 45,
-      "difficultyScore": 30
+      "difficultyScore": 30,
+      "category": "functions"
     },
     {
       "id": "jv-adv-rt-024",
-      "title": "Concurrency: CyclicBarrier",
-      "description": "Wait for a common point.",
+      "title": "Concurrencia: CyclicBarrier",
+      "description": "Espera a que todos lleguen a un punto común.",
+      "context": "A diferencia de CountDownLatch, una barrera puede ser reutilizada tras ser liberada.",
       "codeSnippet": "CyclicBarrier barrier = new CyclicBarrier(3);\nbarrier.await();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["synchronization"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "sincronización"
+      ],
       "estimatedDuration": 110,
-      "difficultyScore": 82
+      "difficultyScore": 82,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-025",
-      "title": "Reflect: Constructor",
-      "description": "Create instance dynamically.",
+      "title": "Reflection: Constructor",
+      "description": "Crea instancias de forma dinámica.",
+      "context": "Permite instanciar objetos incluso si no se conoce su tipo exacto hasta el momento de ejecución.",
       "codeSnippet": "Constructor<User> cons = User.class.getConstructor(String.class);\nUser u = cons.newInstance(\"Nacho\");",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["reflection"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "reflection"
+      ],
       "estimatedDuration": 115,
-      "difficultyScore": 84
+      "difficultyScore": 84,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-026",
       "title": "Streams: Collectors.joining",
-      "description": "Build string from stream.",
+      "description": "Construye un string a partir de un stream.",
+      "context": "Forma eficiente de concatenar elementos con delimitadores, prefijos y sufijos.",
       "codeSnippet": "String res = list.stream().collect(Collectors.joining(\", \"));",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["aggregation"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "agregación"
+      ],
       "estimatedDuration": 50,
-      "difficultyScore": 35
+      "difficultyScore": 35,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-027",
       "title": "Optional: Filter",
-      "description": "Condition on optional value.",
+      "description": "Aplica una condición sobre un valor opcional.",
+      "context": "Si el valor existe pero no cumple el filtro, devuelve un Optional vacío.",
       "codeSnippet": "opt.filter(s -> s.startsWith(\"A\")).ifPresent(System.out::println);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["filtering"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "filtrado"
+      ],
       "estimatedDuration": 55,
-      "difficultyScore": 40
+      "difficultyScore": 40,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-028",
       "title": "JVM: Classpath",
-      "description": "System properties for loading.",
+      "description": "Propiedades del sistema para carga de clases.",
+      "context": "Define las rutas donde la JVM buscará los archivos .class y librerías externas.",
       "codeSnippet": "String cp = System.getProperty(\"java.class.path\");",
       "typingStyle": "full",
-      "tags": ["java", "jvm"],
-      "concepts": ["environment"],
+      "tags": [
+        "java",
+        "jvm"
+      ],
+      "concepts": [
+        "entorno"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "classes"
     },
     {
       "id": "jv-adv-rt-029",
-      "title": "Concurrency: Future",
-      "description": "Basic async result.",
+      "title": "Concurrencia: Future",
+      "description": "Resultado básico de una tarea asíncrona.",
+      "context": "Representa el resultado futuro de una operación que puede estar aún en ejecución.",
       "codeSnippet": "Future<Integer> f = executor.submit(() -> 1);\nint res = f.get();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["futures"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "futuros"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-030",
-      "title": "Interfaces: Private Methods",
-      "description": "Helper methods in interfaces.",
+      "title": "Interfaces: Métodos Privados",
+      "description": "Métodos de ayuda dentro de interfaces.",
+      "context": "Permiten encapsular lógica común compartida por varios métodos default o estáticos de la interfaz.",
       "codeSnippet": "public interface I {\n    default void log() { logInternal(); }\n    private void logInternal() {}\n}",
       "typingStyle": "full",
-      "tags": ["java", "modern"],
-      "concepts": ["encapsulation"],
+      "tags": [
+        "java",
+        "moderno"
+      ],
+      "concepts": [
+        "encapsulación"
+      ],
       "estimatedDuration": 60,
-      "difficultyScore": 45
+      "difficultyScore": 45,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-031",
       "title": "Streams: Collectors.partitioningBy",
-      "description": "Split into two groups.",
+      "description": "Divide el stream en dos grupos (booleano).",
+      "context": "Colector especializado que agrupa elementos según si cumplen o no un predicado.",
       "codeSnippet": "Map<Boolean, List<Integer>> parts = list.stream()\n    .collect(Collectors.partitioningBy(n -> n > 10));",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["grouping"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "agrupación"
+      ],
       "estimatedDuration": 80,
-      "difficultyScore": 60
+      "difficultyScore": 60,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-032",
       "title": "Reflection: Proxy",
-      "description": "Create dynamic interface proxies.",
+      "description": "Crea proxys dinámicos para interfaces.",
+      "context": "Permite interceptar llamadas a métodos en tiempo de ejecución, clave para el desarrollo de AOP (Programación Orientada a Aspectos).",
       "codeSnippet": "MyInterface proxy = (MyInterface) Proxy.newProxyInstance(\n    loader, interfaces, handler);",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["meta-programming"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "meta-programación"
+      ],
       "estimatedDuration": 135,
-      "difficultyScore": 92
+      "difficultyScore": 92,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-033",
-      "title": "Concurrency: ConcurrentHashMap",
-      "description": "High performance thread-safe map.",
+      "title": "Concurrencia: ConcurrentHashMap",
+      "description": "Mapa seguro para hilos de alto rendimiento.",
+      "context": "Usa bloqueos segmentados para permitir lecturas y escrituras concurrentes sin bloquear todo el mapa.",
       "codeSnippet": "Map<String, Integer> safeMap = new ConcurrentHashMap<>();",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["collections"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "colecciones"
+      ],
       "estimatedDuration": 95,
-      "difficultyScore": 70
+      "difficultyScore": 70,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-034",
-      "title": "Java 17: Switch Expressions",
-      "description": "Enhanced switch with yield/return.",
+      "title": "Java 17: Expresiones Switch",
+      "description": "Switch mejorado con yield y retorno de valor.",
+      "context": "Permite usar switch como una expresión que devuelve un resultado, evitando errores por falta de 'break'.",
       "codeSnippet": "int len = switch (day) {\n    case \"MON\" -> 3;\n    default -> 0;\n};",
       "typingStyle": "full",
-      "tags": ["java"],
-      "concepts": ["syntax"],
+      "tags": [
+        "java"
+      ],
+      "concepts": [
+        "sintaxis"
+      ],
       "estimatedDuration": 85,
-      "difficultyScore": 65
+      "difficultyScore": 65,
+      "category": "algorithms"
     },
     {
       "id": "jv-adv-rt-035",
-      "title": "JVM: Heap Memory Info",
-      "description": "Monitor memory usage.",
+      "title": "JVM: Info de Memoria Heap",
+      "description": "Monitoriza el uso de memoria.",
+      "context": "Permite consultar programáticamente la cantidad de memoria libre y total disponible para la aplicación.",
       "codeSnippet": "Runtime rt = Runtime.getRuntime();\nlong free = rt.freeMemory();\nlong total = rt.totalMemory();",
       "typingStyle": "full",
-      "tags": ["java", "jvm"],
-      "concepts": ["monitoring"],
+      "tags": [
+        "java",
+        "jvm"
+      ],
+      "concepts": [
+        "monitoreo"
+      ],
       "estimatedDuration": 75,
-      "difficultyScore": 55
+      "difficultyScore": 55,
+      "category": "algorithms"
     }
   ]
 }

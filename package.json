@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "content:generate": "tsx scripts/generate-content.ts",
     "content:validate": "tsx scripts/validate-content.ts",
-    "content:stats": "tsx scripts/content-stats.ts"
+    "content:stats": "tsx scripts/content-stats.ts",
+    "commit": "node scripts/quick-commit.js"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",

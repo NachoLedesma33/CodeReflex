@@ -1,0 +1,689 @@
+{
+  "language": "typescript",
+  "level": "advanced",
+  "type": "reflex-snippets",
+  "snippets": [
+    {
+      "id": "ts-adv-001",
+      "title": "Algoritmos: Recorrido de Grafos",
+      "description": "Tipado de lógica de grafos compleja.",
+      "category": "algorithms",
+      "difficultyScore": 85,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "avanzado"
+      ],
+      "concepts": [
+        "grafos"
+      ],
+      "technicalNotes": [
+        "Nodos y aristas genéricos"
+      ],
+      "codeSnippet": "interface Edge<T> { to: Node<T>; weight: number; }\ninterface Node<T> { val: T; edges: Edge<T>[]; }"
+    },
+    {
+      "id": "ts-adv-002",
+      "title": "Diseño de API: Versionado",
+      "description": "Tipado de respuestas de API versionadas.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "api"
+      ],
+      "concepts": [
+        "versionado"
+      ],
+      "technicalNotes": [
+        "Uniones discriminadas por versión"
+      ],
+      "codeSnippet": "type Response = { v: '1', data: string } | { v: '2', payload: object };"
+    },
+    {
+      "id": "ts-adv-003",
+      "title": "Arquitectura: Arquitectura de Plugins",
+      "description": "Tipado de un sistema de plugins seguro.",
+      "category": "algorithms",
+      "difficultyScore": 90,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "arquitectura"
+      ],
+      "concepts": [
+        "plugins"
+      ],
+      "technicalNotes": [
+        "Aumento de módulo (module augmentation) para plugins"
+      ],
+      "codeSnippet": "interface Plugins {} declare global { interface Plugins { core: any } }"
+    },
+    {
+      "id": "ts-adv-004",
+      "title": "Automatización: Analizador de CLI",
+      "description": "Tipado de argumentos de línea de comandos.",
+      "category": "algorithms",
+      "difficultyScore": 70,
+      "estimatedDuration": 85,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "cli"
+      ],
+      "concepts": [
+        "automatización"
+      ],
+      "technicalNotes": [
+        "Record para el mapeo de flags"
+      ],
+      "codeSnippet": "function parse(args: string[]): Record<string, string | boolean> { return {}; }"
+    },
+    {
+      "id": "ts-adv-005",
+      "title": "Clases: API de Metadatos",
+      "description": "Tipado del uso de Reflect Metadata.",
+      "category": "classes",
+      "difficultyScore": 88,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "reflect"
+      ],
+      "concepts": [
+        "metadatos"
+      ],
+      "technicalNotes": [
+        "Decoradores experimentales"
+      ],
+      "codeSnippet": "Reflect.defineMetadata('role', 'admin', User.prototype, 'save');"
+    },
+    {
+      "id": "ts-adv-006",
+      "title": "Concurrencia: Mutex Lock",
+      "description": "Tipado de bloqueos (locks) asíncronos.",
+      "category": "algorithms",
+      "difficultyScore": 92,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "asíncrono"
+      ],
+      "concepts": [
+        "locks"
+      ],
+      "technicalNotes": [
+        "Bloqueo basado en cola"
+      ],
+      "codeSnippet": "class Mutex { async lock(): Promise<() => void> { return () => {}; } }"
+    },
+    {
+      "id": "ts-adv-007",
+      "title": "Bases de Datos: Constructor de Consultas",
+      "description": "Constructor de SQL seguro por tipos.",
+      "category": "algorithms",
+      "difficultyScore": 95,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "sql"
+      ],
+      "concepts": [
+        "constructor-de-consultas"
+      ],
+      "technicalNotes": [
+        "Tipos de selección recursiva"
+      ],
+      "codeSnippet": "class Query<T> { select<K extends keyof T>(...keys: K[]): Query<Pick<T, K>> { return this as any; } }"
+    },
+    {
+      "id": "ts-adv-008",
+      "title": "Estructuras de Datos: Segment Tree",
+      "description": "Tipado de estructuras de consulta de rango.",
+      "category": "algorithms",
+      "difficultyScore": 98,
+      "estimatedDuration": 130,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "avanzado"
+      ],
+      "concepts": [
+        "segment-tree"
+      ],
+      "technicalNotes": [
+        "Representación basada en arreglos"
+      ],
+      "codeSnippet": "class SegmentTree { constructor(data: number[]) {} }"
+    },
+    {
+      "id": "ts-adv-009",
+      "title": "Distribuido: Relojes de Vector",
+      "description": "Tipado del seguimiento de causalidad.",
+      "category": "algorithms",
+      "difficultyScore": 100,
+      "estimatedDuration": 140,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "distribuido"
+      ],
+      "concepts": [
+        "causalidad"
+      ],
+      "technicalNotes": [
+        "Mapa de IDs de nodo a contadores"
+      ],
+      "codeSnippet": "type VectorClock = Map<string, number>;"
+    },
+    {
+      "id": "ts-adv-010",
+      "title": "Infraestructura: Configuración de IaC",
+      "description": "Tipado de configuraciones de Terraform/Pulumi.",
+      "category": "algorithms",
+      "difficultyScore": 72,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "cloud"
+      ],
+      "concepts": [
+        "iac"
+      ],
+      "technicalNotes": [
+        "Interfaces de configuración anidadas"
+      ],
+      "codeSnippet": "interface Config { region: 'us-east-1'; vpc: { cidr: string } }"
+    },
+    {
+      "id": "ts-adv-011",
+      "title": "Monitoreo: API de Tracing",
+      "description": "Tipado de tramos (spans) de OpenTelemetry.",
+      "category": "algorithms",
+      "difficultyScore": 82,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "monitoreo"
+      ],
+      "concepts": [
+        "trazabilidad"
+      ],
+      "technicalNotes": [
+        "Tipado del contexto del tramo (span)"
+      ],
+      "codeSnippet": "interface Span { traceId: string; spanId: string; }"
+    },
+    {
+      "id": "ts-adv-012",
+      "title": "Rendimiento: WebAssembly",
+      "description": "Tipado de llamadas de puente WASM.",
+      "category": "algorithms",
+      "difficultyScore": 88,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "wasm"
+      ],
+      "concepts": [
+        "wasm"
+      ],
+      "technicalNotes": [
+        "Búferes TypedArray"
+      ],
+      "codeSnippet": "interface WasmExports { add(a: number, b: number): number; }"
+    },
+    {
+      "id": "ts-adv-013",
+      "title": "Tiempo Real: CRDTs",
+      "description": "Tipado de tipos de datos libres de conflictos (conflict-free).",
+      "category": "algorithms",
+      "difficultyScore": 98,
+      "estimatedDuration": 130,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "crdt"
+      ],
+      "concepts": [
+        "tiempo-real"
+      ],
+      "technicalNotes": [
+        "Lógica LWW-Element-Set"
+      ],
+      "codeSnippet": "interface CRDT<T> { merge(other: CRDT<T>): void; }"
+    },
+    {
+      "id": "ts-adv-014",
+      "title": "Runtime: VM de Bytecode",
+      "description": "Tipado de conjuntos de instrucciones.",
+      "category": "algorithms",
+      "difficultyScore": 95,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "compiladores"
+      ],
+      "concepts": [
+        "runtime"
+      ],
+      "technicalNotes": [
+        "Enums numéricos de OpCode"
+      ],
+      "codeSnippet": "enum Op { PUSH, ADD, RET } type Instruction = [Op, ...any[]];"
+    },
+    {
+      "id": "ts-adv-015",
+      "title": "Seguridad: Ganchos (Hooks) Criptográficos",
+      "description": "Tipado de flujos de cifrado.",
+      "category": "algorithms",
+      "difficultyScore": 92,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "crypto"
+      ],
+      "concepts": [
+        "seguridad"
+      ],
+      "technicalNotes": [
+        "API SubtleCrypto"
+      ],
+      "codeSnippet": "async function encrypt(key: CryptoKey, data: ArrayBuffer): Promise<ArrayBuffer> { return data; }"
+    },
+    {
+      "id": "ts-adv-016",
+      "title": "Gestión de Estado: Modelo Actor",
+      "description": "Tipado de actores aislados.",
+      "category": "algorithms",
+      "difficultyScore": 88,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "actores"
+      ],
+      "concepts": [
+        "concurrencia"
+      ],
+      "technicalNotes": [
+        "Tipado de bandeja de entrada (inbox) de mensajes"
+      ],
+      "codeSnippet": "interface Actor<M> { receive(msg: M): void; }"
+    },
+    {
+      "id": "ts-adv-017",
+      "title": "Validación: Type Guards",
+      "description": "Tipado de validadores recursivos.",
+      "category": "algorithms",
+      "difficultyScore": 82,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript",
+        "guards"
+      ],
+      "concepts": [
+        "validación"
+      ],
+      "technicalNotes": [
+        "Tipo recursivo 'is Type'"
+      ],
+      "codeSnippet": "function isDeep<T>(val: any): val is T { return true; }"
+    },
+    {
+      "id": "ts-adv-018",
+      "title": "Algoritmos: Dijkstra",
+      "description": "Tipado de lógica de camino más corto.",
+      "category": "algorithms",
+      "difficultyScore": 92,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "búsqueda-de-caminos"
+      ],
+      "technicalNotes": [
+        "Soporte para cola de prioridad"
+      ],
+      "codeSnippet": "function dijkstra(start: number, end: number) {}"
+    },
+    {
+      "id": "ts-adv-019",
+      "title": "Diseño de API: GraphQL",
+      "description": "Tipado de resolutores y esquemas.",
+      "category": "algorithms",
+      "difficultyScore": 85,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "graphql"
+      ],
+      "technicalNotes": [
+        "Tipado de Context y Args"
+      ],
+      "codeSnippet": "type Resolver<TArgs, TRes> = (parent: any, args: TArgs) => Promise<TRes>;"
+    },
+    {
+      "id": "ts-adv-020",
+      "title": "Arquitectura: Event Sourcing",
+      "description": "Tipado de almacenes de eventos.",
+      "category": "algorithms",
+      "difficultyScore": 95,
+      "estimatedDuration": 115,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "eventos"
+      ],
+      "technicalNotes": [
+        "Lógica de repetición (replay)"
+      ],
+      "codeSnippet": "interface Event { type: string; timestamp: number; payload: any; }"
+    },
+    {
+      "id": "ts-adv-021",
+      "title": "Automatización: Bot de Scraping",
+      "description": "Tipado de flujos de navegador sin cabeza (headless).",
+      "category": "algorithms",
+      "difficultyScore": 78,
+      "estimatedDuration": 95,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "scraping"
+      ],
+      "technicalNotes": [
+        "Tipado de manejadores de elementos"
+      ],
+      "codeSnippet": "async function scrape(page: any) { await page.goto('url'); }"
+    },
+    {
+      "id": "ts-adv-022",
+      "title": "Clases: Patrones Proxy",
+      "description": "Tipado de proxies dinámicos.",
+      "category": "classes",
+      "difficultyScore": 84,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "proxy"
+      ],
+      "technicalNotes": [
+        "ProxyHandler<T>"
+      ],
+      "codeSnippet": "const p = new Proxy(target, { get: (t, k) => t[k as keyof typeof t] });"
+    },
+    {
+      "id": "ts-adv-023",
+      "title": "Concurrencia: Canales",
+      "description": "Tipado de canales estilo CSP.",
+      "category": "algorithms",
+      "difficultyScore": 90,
+      "estimatedDuration": 110,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "canales"
+      ],
+      "technicalNotes": [
+        "Extremos de lectura/escritura"
+      ],
+      "codeSnippet": "interface Channel<T> { put(val: T): void; take(): Promise<T>; }"
+    },
+    {
+      "id": "ts-adv-024",
+      "title": "Bases de Datos: Pool de Conexiones",
+      "description": "Tipado de gestión de pools.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "pooling"
+      ],
+      "technicalNotes": [
+        "Comprobaciones de estado para conexiones"
+      ],
+      "codeSnippet": "class Pool { acquire(): Promise<Client> { return Promise.resolve({} as Client); } }"
+    },
+    {
+      "id": "ts-adv-025",
+      "title": "Distribuido: Protocolo Gossip",
+      "description": "Tipado de difusión epidémica.",
+      "category": "algorithms",
+      "difficultyScore": 98,
+      "estimatedDuration": 125,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "gossip"
+      ],
+      "technicalNotes": [
+        "Lógica de selección de pares (peers)"
+      ],
+      "codeSnippet": "function gossip(nodes: string[], msg: any) {}"
+    },
+    {
+      "id": "ts-adv-026",
+      "title": "Infraestructura: API de Docker",
+      "description": "Tipado de orquestación de contenedores.",
+      "category": "algorithms",
+      "difficultyScore": 82,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "contenedores"
+      ],
+      "technicalNotes": [
+        "Tipado de salida basado en flujos (streams)"
+      ],
+      "codeSnippet": "async function start(containerId: string): Promise<void> {}"
+    },
+    {
+      "id": "ts-adv-027",
+      "title": "Monitoreo: Servidor de Métricas",
+      "description": "Tipado de métricas de Prometheus.",
+      "category": "algorithms",
+      "difficultyScore": 75,
+      "estimatedDuration": 90,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "métricas"
+      ],
+      "technicalNotes": [
+        "Tipado de Counter y Gauge"
+      ],
+      "codeSnippet": "class Counter { inc(labels: object) {} }"
+    },
+    {
+      "id": "ts-adv-028",
+      "title": "Rendimiento: Perfilador de Memoria",
+      "description": "Tipado de instantáneas (snapshots) del montón (heap).",
+      "category": "algorithms",
+      "difficultyScore": 92,
+      "estimatedDuration": 115,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "memoria"
+      ],
+      "technicalNotes": [
+        "Análisis de punteros de objetos"
+      ],
+      "codeSnippet": "function analyzeHeap() { return process.memoryUsage(); }"
+    },
+    {
+      "id": "ts-adv-029",
+      "title": "Validación: Esquema Zod",
+      "description": "Inferencia de tipos a partir de esquemas.",
+      "category": "algorithms",
+      "difficultyScore": 65,
+      "estimatedDuration": 80,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "inferencia"
+      ],
+      "technicalNotes": [
+        "z.infer<typeof schema>"
+      ],
+      "codeSnippet": "type User = z.infer<typeof UserSchema>;"
+    },
+    {
+      "id": "ts-adv-030",
+      "title": "Algoritmos: Búsqueda A*",
+      "description": "Tipado de búsqueda de caminos heurística.",
+      "category": "algorithms",
+      "difficultyScore": 95,
+      "estimatedDuration": 120,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "a-star"
+      ],
+      "technicalNotes": [
+        "Cálculo de H(n) y G(n)"
+      ],
+      "codeSnippet": "function aStar(start: Point, goal: Point) {}"
+    },
+    {
+      "id": "ts-adv-031",
+      "title": "Diseño de API: Límite de Tasa",
+      "description": "Tipado de lógica de ventana deslizante.",
+      "category": "algorithms",
+      "difficultyScore": 72,
+      "estimatedDuration": 85,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "limitación-de-tasa"
+      ],
+      "technicalNotes": [
+        "Contadores basados en Redis"
+      ],
+      "codeSnippet": "async function isAllowed(id: string): Promise<boolean> { return true; }"
+    },
+    {
+      "id": "ts-adv-032",
+      "title": "Arquitectura: Patrón Saga",
+      "description": "Tipado de transacciones distribuidas.",
+      "category": "patterns",
+      "difficultyScore": 98,
+      "estimatedDuration": 125,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "sagas"
+      ],
+      "technicalNotes": [
+        "Acciones de compensación"
+      ],
+      "codeSnippet": "interface Saga { execute(): Promise<void>; compensate(): Promise<void>; }"
+    },
+    {
+      "id": "ts-adv-033",
+      "title": "Concurrencia: Semáforos",
+      "description": "Tipado de conteo de recursos.",
+      "category": "algorithms",
+      "difficultyScore": 85,
+      "estimatedDuration": 100,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "semáforos"
+      ],
+      "technicalNotes": [
+        "Gestión de permisos"
+      ],
+      "codeSnippet": "class Semaphore { constructor(public permits: number) {} }"
+    },
+    {
+      "id": "ts-adv-034",
+      "title": "Bases de Datos: Transaccional",
+      "description": "Tipado de operaciones ACID.",
+      "category": "algorithms",
+      "difficultyScore": 88,
+      "estimatedDuration": 105,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "acid"
+      ],
+      "technicalNotes": [
+        "Tipado de Rollback y Commit"
+      ],
+      "codeSnippet": "async function tx(work: (db: Db) => Promise<void>) {}"
+    },
+    {
+      "id": "ts-adv-035",
+      "title": "Distribuido: Algoritmo Paxos",
+      "description": "Tipado de roles de proponente/aceptador.",
+      "category": "algorithms",
+      "difficultyScore": 100,
+      "estimatedDuration": 150,
+      "typingStyle": "full",
+      "tags": [
+        "typescript"
+      ],
+      "concepts": [
+        "consenso"
+      ],
+      "technicalNotes": [
+        "Mensajes de fase 1 y 2"
+      ],
+      "codeSnippet": "interface Message { phase: 1 | 2; proposalId: number; }"
+    }
+  ]
+}

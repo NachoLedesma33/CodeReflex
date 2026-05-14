@@ -1,770 +1,770 @@
 [
-    {
-  "metadata": {
-    "language": "javascript",
-    "mode": "reflex-typing",
-    "version": "1.0.0",
-    "lastUpdated": "2026-05-09",
-    "totalExercises": 28
-  },
-  "exercises": [
-    {
-      "id": "js-advanced-event-sourcing-016",
-      "title": "Event Sourcing Store",
-      "description": "Implement a simplified event sourcing architecture for state reconstruction.",
-      "context": "Event sourcing is used in financial systems, audit-heavy platforms, and scalable enterprise applications.",
-      "category": "architecture",
-      "difficultyScore": 96,
-      "estimatedDuration": 275,
-      "typingStyle": "full",
-      "tags": [
-        "event-sourcing",
-        "architecture",
-        "backend",
-        "enterprise"
-      ],
-      "concepts": [
-        "event-storage",
-        "state-reconstruction",
-        "append-only-logs"
-      ],
-      "technicalNotes": [
-        "Event sourcing stores state changes as immutable events.",
-        "State can be reconstructed from event history.",
-        "Auditability is a major advantage."
-      ],
-      "codeSnippet": "class EventStore {\n  constructor() {\n    this.events = [];\n  }\n\n  append(event) {\n    this.events.push(event);\n  }\n\n  replay() {\n    return this.events.reduce((state, event) => {\n      switch (event.type) {\n        case 'USER_CREATED':\n          state.users.push(event.payload);\n          break;\n\n        default:\n          break;\n      }\n\n      return state;\n    }, {\n      users: []\n    });\n  }\n}\n\nconst store = new EventStore();\n\nstore.append({\n  type: 'USER_CREATED',\n  payload: {\n    username: 'NachoDev'\n  }\n});\n\nconsole.log(store.replay());\n"
+  {
+    "metadata": {
+      "language": "javascript",
+      "mode": "reflex-typing",
+      "version": "1.0.0",
+      "lastUpdated": "2026-05-14",
+      "totalExercises": 28
     },
-    {
-      "id": "js-advanced-query-optimizer-017",
-      "title": "Query Optimization Engine",
-      "description": "Build a simplified query optimizer for filtering large datasets.",
-      "context": "Query optimizers improve performance in databases, analytics engines, and search platforms.",
-      "category": "performance",
-      "difficultyScore": 91,
-      "estimatedDuration": 250,
-      "typingStyle": "full",
-      "tags": [
-        "query-optimization",
-        "performance",
-        "backend",
-        "databases"
-      ],
-      "concepts": [
-        "query-planning",
-        "filter-optimization",
-        "data-indexing"
-      ],
-      "technicalNotes": [
-        "Query optimizers reduce unnecessary operations.",
-        "Indexes accelerate lookups.",
-        "Filtering order affects performance."
-      ],
-      "codeSnippet": "class QueryEngine {\n  constructor(data) {\n    this.data = data;\n  }\n\n  execute(filters) {\n    return this.data.filter((item) => {\n      return filters.every((filter) => {\n        return filter(item);\n      });\n    });\n  }\n}\n\nconst engine = new QueryEngine([\n  { username: 'Nacho', role: 'admin' },\n  { username: 'Lucas', role: 'user' }\n]);\n\nconst results = engine.execute([\n  (user) => user.role === 'admin'\n]);\n\nconsole.log(results);\n"
-    },
-    {
-      "id": "js-advanced-memory-profiler-018",
-      "title": "Memory Usage Profiler",
-      "description": "Track and analyze memory allocation patterns during execution.",
-      "context": "Profilers are used in performance engineering, debugging tools, and enterprise systems.",
-      "category": "performance",
-      "difficultyScore": 93,
-      "estimatedDuration": 260,
-      "typingStyle": "full",
-      "tags": [
-        "memory",
-        "profiling",
-        "performance",
-        "monitoring"
-      ],
-      "concepts": [
-        "memory-tracking",
-        "profiling-tools",
-        "resource-analysis"
-      ],
-      "technicalNotes": [
-        "Profilers analyze runtime resource usage.",
-        "Memory leaks reduce system stability.",
-        "Monitoring improves optimization workflows."
-      ],
-      "codeSnippet": "class MemoryProfiler {\n  constructor() {\n    this.snapshots = [];\n  }\n\n  capture(label) {\n    this.snapshots.push({\n      label,\n      memory: process.memoryUsage().heapUsed\n    });\n  }\n\n  getSnapshots() {\n    return this.snapshots;\n  }\n}\n\nconst profiler = new MemoryProfiler();\n\nprofiler.capture('before-processing');\n\nconst largeArray = new Array(10000).fill('code-reflex');\n\nprofiler.capture('after-processing');\n\nconsole.log(profiler.getSnapshots());\n"
-    },
-    {
-      "id": "js-advanced-graphql-engine-019",
-      "title": "Mini GraphQL Resolver Engine",
-      "description": "Implement a lightweight GraphQL-style resolver execution system.",
-      "context": "GraphQL engines power APIs, dashboards, and modern frontend-backend integrations.",
-      "category": "api-design",
-      "difficultyScore": 95,
-      "estimatedDuration": 270,
-      "typingStyle": "full",
-      "tags": [
-        "graphql",
-        "apis",
-        "backend",
-        "resolvers"
-      ],
-      "concepts": [
-        "query-resolution",
-        "resolver-patterns",
-        "api-abstractions"
-      ],
-      "technicalNotes": [
-        "Resolvers map queries to data.",
-        "GraphQL enables flexible data fetching.",
-        "Abstraction simplifies frontend communication."
-      ],
-      "codeSnippet": "class GraphQLEngine {\n  constructor(resolvers) {\n    this.resolvers = resolvers;\n  }\n\n  execute(query) {\n    const resolver = this.resolvers[query];\n\n    if (!resolver) {\n      throw new Error('Query not found');\n    }\n\n    return resolver();\n  }\n}\n\nconst engine = new GraphQLEngine({\n  users: () => {\n    return ['Nacho', 'Lucas'];\n  }\n});\n\nconsole.log(engine.execute('users'));\n"
-    },
-    {
-      "id": "js-advanced-concurrency-controller-020",
-      "title": "Dynamic Concurrency Controller",
-      "description": "Control concurrent async operations dynamically under heavy workloads.",
-      "context": "Concurrency controllers are critical in scalable APIs, upload systems, and distributed services.",
-      "category": "concurrency",
-      "difficultyScore": 97,
-      "estimatedDuration": 285,
-      "typingStyle": "full",
-      "tags": [
-        "concurrency",
-        "async",
-        "backend",
-        "performance"
-      ],
-      "concepts": [
-        "concurrency-limits",
-        "async-control",
-        "resource-management"
-      ],
-      "technicalNotes": [
-        "Concurrency control prevents overload.",
-        "Async workflows require resource coordination.",
-        "Performance systems depend on balanced execution."
-      ],
-      "codeSnippet": "class ConcurrencyController {\n  constructor(limit) {\n    this.limit = limit;\n    this.running = 0;\n    this.queue = [];\n  }\n\n  async run(task) {\n    if (this.running >= this.limit) {\n      await new Promise((resolve) => {\n        this.queue.push(resolve);\n      });\n    }\n\n    this.running++;\n\n    try {\n      return await task();\n    } finally {\n      this.running--;\n\n      const next = this.queue.shift();\n\n      if (next) {\n        next();\n      }\n    }\n  }\n}\n\nconst controller = new ConcurrencyController(2);\n\ncontroller.run(async () => {\n  console.log('Processing task A');\n});\n"
-    },
-    {
-      "id": "js-advanced-plugin-runtime-021",
-      "title": "Sandboxed Plugin Runtime",
-      "description": "Execute external plugins safely inside an isolated runtime environment.",
-      "context": "Plugin runtimes are used in IDEs, automation platforms, browser extensions, and enterprise systems.",
-      "category": "security",
-      "difficultyScore": 98,
-      "estimatedDuration": 300,
-      "typingStyle": "full",
-      "tags": [
-        "plugins",
-        "sandbox",
-        "security",
-        "architecture"
-      ],
-      "concepts": [
-        "sandboxing",
-        "runtime-isolation",
-        "plugin-execution"
-      ],
-      "technicalNotes": [
-        "Sandboxing isolates external code execution.",
-        "Plugin runtimes improve extensibility.",
-        "Isolation prevents unsafe operations."
-      ],
-      "codeSnippet": "class PluginRuntime {\n  constructor() {\n    this.plugins = [];\n  }\n\n  register(plugin) {\n    this.plugins.push(plugin);\n  }\n\n  execute(context) {\n    this.plugins.forEach((plugin) => {\n      try {\n        plugin(context);\n      } catch (error) {\n        console.log('Plugin execution failed');\n      }\n    });\n  }\n}\n\nconst runtime = new PluginRuntime();\n\nruntime.register((context) => {\n  context.logs.push('Plugin initialized');\n});\n\nconst context = {\n  logs: []\n};\n\nruntime.execute(context);\n\nconsole.log(context.logs);\n"
-    },
-    {
-      "id": "js-advanced-distributed-scheduler-022",
-      "title": "Distributed Task Scheduler",
-      "description": "Coordinate scheduled tasks across multiple worker instances.",
-      "context": "Distributed schedulers are common in cloud systems, automation platforms, and backend infrastructures.",
-      "category": "distributed-systems",
-      "difficultyScore": 99,
-      "estimatedDuration": 310,
-      "typingStyle": "full",
-      "tags": [
-        "scheduler",
-        "distributed-systems",
-        "workers",
-        "backend"
-      ],
-      "concepts": [
-        "distributed-coordination",
-        "task-scheduling",
-        "worker-management"
-      ],
-      "technicalNotes": [
-        "Distributed schedulers prevent duplicate execution.",
-        "Workers coordinate task ownership.",
-        "Cloud systems rely heavily on scheduling mechanisms."
-      ],
-      "codeSnippet": "class DistributedScheduler {\n  constructor() {\n    this.tasks = [];\n  }\n\n  register(taskName, callback, interval) {\n    this.tasks.push({\n      taskName,\n      callback,\n      interval\n    });\n  }\n\n  start() {\n    this.tasks.forEach((task) => {\n      setInterval(() => {\n        console.log(`Running ${task.taskName}`);\n\n        task.callback();\n      }, task.interval);\n    });\n  }\n}\n\nconst scheduler = new DistributedScheduler();\n\nscheduler.register('sync-metrics', () => {\n  console.log('Metrics synchronized');\n}, 5000);\n\nscheduler.start();\n"
-    },
-    {
-      "id": "js-advanced-search-ranking-023",
-      "title": "Search Ranking Algorithm",
-      "description": "Implement a ranking system for ordering search results by relevance.",
-      "context": "Ranking systems are used in search engines, ecommerce platforms, and recommendation systems.",
-      "category": "algorithms",
-      "difficultyScore": 94,
-      "estimatedDuration": 265,
-      "typingStyle": "full",
-      "tags": [
-        "search",
-        "ranking",
-        "algorithms",
-        "backend"
-      ],
-      "concepts": [
-        "scoring-algorithms",
-        "ranking-systems",
-        "search-relevance"
-      ],
-      "technicalNotes": [
-        "Ranking algorithms score result relevance.",
-        "Search quality depends on ordering accuracy.",
-        "Recommendation systems rely on scoring models."
-      ],
-      "codeSnippet": "function rankResults(results, keyword) {\n  return results\n    .map((result) => {\n      const score = result.content\n        .toLowerCase()\n        .split(keyword.toLowerCase())\n        .length - 1;\n\n      return {\n        ...result,\n        score\n      };\n    })\n    .sort((a, b) => {\n      return b.score - a.score;\n    });\n}\n\nconst ranked = rankResults([\n  {\n    title: 'JavaScript Performance',\n    content: 'javascript optimization performance'\n  },\n  {\n    title: 'TypeScript Basics',\n    content: 'typescript introduction'\n  }\n], 'javascript');\n\nconsole.log(ranked);\n"
-    },
-    {
-      "id": "js-advanced-replication-manager-024",
-      "title": "Database Replication Manager",
-      "description": "Simulate replication between primary and replica database nodes.",
-      "context": "Replication systems improve scalability, redundancy, and reliability in databases.",
-      "category": "databases",
-      "difficultyScore": 96,
-      "estimatedDuration": 290,
-      "typingStyle": "full",
-      "tags": [
-        "replication",
-        "databases",
-        "backend",
-        "distributed-systems"
-      ],
-      "concepts": [
-        "primary-replica",
-        "data-synchronization",
-        "database-architecture"
-      ],
-      "technicalNotes": [
-        "Replication improves availability.",
-        "Replica nodes synchronize data changes.",
-        "Distributed databases rely on replication strategies."
-      ],
-      "codeSnippet": "class DatabaseNode {\n  constructor(name) {\n    this.name = name;\n    this.data = [];\n  }\n\n  insert(record) {\n    this.data.push(record);\n  }\n}\n\nclass ReplicationManager {\n  constructor(primary, replicas) {\n    this.primary = primary;\n    this.replicas = replicas;\n  }\n\n  write(record) {\n    this.primary.insert(record);\n\n    this.replicas.forEach((replica) => {\n      replica.insert(record);\n    });\n  }\n}\n\nconst primary = new DatabaseNode('primary');\nconst replica = new DatabaseNode('replica');\n\nconst replication = new ReplicationManager(primary, [replica]);\n\nreplication.write({\n  username: 'NachoDev'\n});\n\nconsole.log(replica.data);\n"
-    },
-    {
-      "id": "js-advanced-observability-pipeline-025",
-      "title": "Observability Metrics Pipeline",
-      "description": "Aggregate logs, metrics, and traces into a centralized observability pipeline.",
-      "context": "Observability systems are critical in cloud-native platforms and large-scale infrastructures.",
-      "category": "monitoring",
-      "difficultyScore": 97,
-      "estimatedDuration": 295,
-      "typingStyle": "full",
-      "tags": [
-        "observability",
-        "monitoring",
-        "metrics",
-        "backend"
-      ],
-      "concepts": [
-        "metrics-pipelines",
-        "centralized-logging",
-        "distributed-monitoring"
-      ],
-      "technicalNotes": [
-        "Observability combines logs, metrics, and traces.",
-        "Centralized monitoring improves debugging.",
-        "Cloud-native systems depend on observability."
-      ],
-      "codeSnippet": "class ObservabilityPipeline {\n  constructor() {\n    this.metrics = [];\n  }\n\n  collect(metric) {\n    this.metrics.push({\n      ...metric,\n      collectedAt: Date.now()\n    });\n  }\n\n  summarize() {\n    return this.metrics.reduce((summary, metric) => {\n      summary[metric.type] = (summary[metric.type] || 0) + 1;\n\n      return summary;\n    }, {});\n  }\n}\n\nconst pipeline = new ObservabilityPipeline();\n\npipeline.collect({\n  type: 'http_request'\n});\n\npipeline.collect({\n  type: 'http_request'\n});\n\npipeline.collect({\n  type: 'database_query'\n});\n\nconsole.log(pipeline.summarize());\n"
-    },
-    {
-      "id": "js-advanced-state-machine-026",
-      "title": "Finite State Machine Engine",
-      "description": "Create a reusable finite state machine engine for complex workflows.",
-      "context": "State machines are used in authentication flows, game engines, UI workflows, and automation systems.",
-      "category": "architecture",
-      "difficultyScore": 92,
-      "estimatedDuration": 250,
-      "typingStyle": "full",
-      "tags": [
-        "state-machine",
-        "workflow",
-        "architecture",
-        "automation"
-      ],
-      "concepts": [
-        "finite-state-machines",
-        "transitions",
-        "workflow-control"
-      ],
-      "technicalNotes": [
-        "State machines control predictable workflows.",
-        "Transitions define allowed state changes.",
-        "Widely used in scalable UI and backend systems."
-      ],
-      "codeSnippet": "class StateMachine {\n  constructor(initialState, transitions) {\n    this.state = initialState;\n    this.transitions = transitions;\n  }\n\n  transition(action) {\n    const nextState = this.transitions[this.state]?.[action];\n\n    if (!nextState) {\n      console.log('Invalid transition');\n\n      return;\n    }\n\n    this.state = nextState;\n  }\n}\n\nconst authMachine = new StateMachine('logged_out', {\n  logged_out: {\n    login: 'logged_in'\n  },\n  logged_in: {\n    logout: 'logged_out'\n  }\n});\n\nauthMachine.transition('login');\n\nconsole.log(authMachine.state);\n"
-    },
-    {
-      "id": "js-advanced-cdn-simulator-027",
-      "title": "Content Delivery Network Simulator",
-      "description": "Simulate how a CDN caches and serves assets from edge locations.",
-      "context": "CDNs are fundamental in modern web performance and global content delivery.",
-      "category": "infrastructure",
-      "difficultyScore": 98,
-      "estimatedDuration": 300,
-      "typingStyle": "full",
-      "tags": [
-        "cdn",
-        "caching",
-        "infrastructure",
-        "performance"
-      ],
-      "concepts": [
-        "edge-caching",
-        "content-delivery",
-        "global-distribution"
-      ],
-      "technicalNotes": [
-        "CDNs cache assets geographically closer to users.",
-        "Edge servers improve latency.",
-        "Caching reduces origin server load."
-      ],
-      "codeSnippet": "class EdgeServer {\n  constructor(location) {\n    this.location = location;\n    this.cache = new Map();\n  }\n\n  cacheAsset(path, content) {\n    this.cache.set(path, content);\n  }\n\n  serve(path) {\n    return this.cache.get(path);\n  }\n}\n\nclass CDN {\n  constructor(edges) {\n    this.edges = edges;\n  }\n\n  deploy(path, content) {\n    this.edges.forEach((edge) => {\n      edge.cacheAsset(path, content);\n    });\n  }\n}\n\nconst cdn = new CDN([\n  new EdgeServer('Argentina'),\n  new EdgeServer('Germany')\n]);\n\ncdn.deploy('/main.js', 'console.log(\"CodeReflex\")');\n"
-    },
-    {
-      "id": "js-advanced-task-orchestrator-028",
-      "title": "Workflow Task Orchestrator",
-      "description": "Coordinate dependent async tasks with execution ordering.",
-      "context": "Task orchestration is used in CI/CD systems, cloud workflows, and automation platforms.",
-      "category": "automation",
-      "difficultyScore": 95,
-      "estimatedDuration": 285,
-      "typingStyle": "full",
-      "tags": [
-        "orchestration",
-        "workflows",
-        "automation",
-        "backend"
-      ],
-      "concepts": [
-        "dependency-management",
-        "workflow-execution",
-        "task-coordination"
-      ],
-      "technicalNotes": [
-        "Orchestration coordinates dependent operations.",
-        "Execution order matters in workflows.",
-        "CI/CD pipelines rely on orchestration."
-      ],
-      "codeSnippet": "class TaskOrchestrator {\n  constructor() {\n    this.tasks = [];\n  }\n\n  add(name, dependencies, callback) {\n    this.tasks.push({\n      name,\n      dependencies,\n      callback\n    });\n  }\n\n  async run() {\n    for (const task of this.tasks) {\n      await task.callback();\n\n      console.log(`${task.name} completed`);\n    }\n  }\n}\n\nconst orchestrator = new TaskOrchestrator();\n\norchestrator.add('build', [], async () => {\n  console.log('Building application');\n});\n\norchestrator.add('deploy', ['build'], async () => {\n  console.log('Deploying application');\n});\n\norchestrator.run();\n"
-    },
-    {
-      "id": "js-advanced-schema-validator-029",
-      "title": "Dynamic Schema Validator",
-      "description": "Validate complex nested objects using configurable schemas.",
-      "context": "Schema validation is essential in APIs, forms, and enterprise backend systems.",
-      "category": "validation",
-      "difficultyScore": 90,
-      "estimatedDuration": 245,
-      "typingStyle": "full",
-      "tags": [
-        "validation",
-        "schemas",
-        "backend",
-        "forms"
-      ],
-      "concepts": [
-        "schema-validation",
-        "nested-objects",
-        "dynamic-rules"
-      ],
-      "technicalNotes": [
-        "Schema validation enforces data integrity.",
-        "Nested validations improve reliability.",
-        "Enterprise APIs depend heavily on schemas."
-      ],
-      "codeSnippet": "function validateSchema(data, schema) {\n  const errors = [];\n\n  Object.keys(schema).forEach((field) => {\n    const validator = schema[field];\n\n    if (!validator(data[field])) {\n      errors.push(`${field} is invalid`);\n    }\n  });\n\n  return errors;\n}\n\nconst userSchema = {\n  username: (value) => value.length >= 3,\n  email: (value) => value.includes('@')\n};\n\nconsole.log(validateSchema({\n  username: 'Nacho',\n  email: 'nacho@mail.com'\n}, userSchema));\n"
-    },
-    {
-      "id": "js-advanced-cluster-manager-030",
-      "title": "Worker Cluster Manager",
-      "description": "Manage and monitor multiple worker instances in a cluster.",
-      "context": "Cluster managers are used in Node.js servers, cloud systems, and scalable backend infrastructures.",
-      "category": "distributed-systems",
-      "difficultyScore": 99,
-      "estimatedDuration": 315,
-      "typingStyle": "full",
-      "tags": [
-        "clusters",
-        "workers",
-        "backend",
-        "infrastructure"
-      ],
-      "concepts": [
-        "worker-management",
-        "cluster-coordination",
-        "process-monitoring"
-      ],
-      "technicalNotes": [
-        "Clusters improve scalability and fault tolerance.",
-        "Worker managers coordinate multiple processes.",
-        "Monitoring improves system reliability."
-      ],
-      "codeSnippet": "class ClusterManager {\n  constructor() {\n    this.workers = [];\n  }\n\n  addWorker(workerId) {\n    this.workers.push({\n      workerId,\n      status: 'active'\n    });\n  }\n\n  monitor() {\n    this.workers.forEach((worker) => {\n      console.log(`${worker.workerId} -> ${worker.status}`);\n    });\n  }\n}\n\nconst cluster = new ClusterManager();\n\ncluster.addWorker('worker-1');\ncluster.addWorker('worker-2');\n\ncluster.monitor();\n"
-    },
-    {
-      "id": "js-advanced-distributed-transactions-031",
-      "title": "Distributed Transaction Coordinator",
-      "description": "Coordinate transactions between multiple independent services using a two-phase commit strategy.",
-      "context": "Distributed transactions are critical in banking systems, ecommerce platforms, and enterprise architectures.",
-      "category": "distributed-systems",
-      "difficultyScore": 100,
-      "estimatedDuration": 330,
-      "typingStyle": "full",
-      "tags": [
-        "transactions",
-        "distributed-systems",
-        "two-phase-commit",
-        "backend"
-      ],
-      "concepts": [
-        "transaction-coordination",
-        "two-phase-commit",
-        "distributed-consistency"
-      ],
-      "technicalNotes": [
-        "Distributed transactions synchronize operations across services.",
-        "Two-phase commit ensures consistency.",
-        "Enterprise systems rely on transactional integrity."
-      ],
-      "codeSnippet": "class TransactionService {\n  constructor(name) {\n    this.name = name;\n  }\n\n  prepare() {\n    console.log(`${this.name} prepared transaction`);\n\n    return true;\n  }\n\n  commit() {\n    console.log(`${this.name} committed transaction`);\n  }\n}\n\nclass TransactionCoordinator {\n  constructor(services) {\n    this.services = services;\n  }\n\n  execute() {\n    const allPrepared = this.services.every((service) => {\n      return service.prepare();\n    });\n\n    if (!allPrepared) {\n      console.log('Transaction failed');\n\n      return;\n    }\n\n    this.services.forEach((service) => {\n      service.commit();\n    });\n  }\n}\n\nconst coordinator = new TransactionCoordinator([\n  new TransactionService('PaymentService'),\n  new TransactionService('InventoryService')\n]);\n\ncoordinator.execute();\n"
-    },
-    {
-      "id": "js-advanced-runtime-compiler-032",
-      "title": "Runtime Expression Compiler",
-      "description": "Compile and execute dynamic expressions at runtime safely.",
-      "context": "Runtime compilers are used in template engines, automation systems, and low-code platforms.",
-      "category": "runtime-systems",
-      "difficultyScore": 97,
-      "estimatedDuration": 295,
-      "typingStyle": "full",
-      "tags": [
-        "compiler",
-        "runtime",
-        "expressions",
-        "backend"
-      ],
-      "concepts": [
-        "dynamic-execution",
-        "expression-parsing",
-        "runtime-evaluation"
-      ],
-      "technicalNotes": [
-        "Runtime compilers interpret dynamic logic.",
-        "Expression engines power template systems.",
-        "Controlled execution improves flexibility."
-      ],
-      "codeSnippet": "class ExpressionCompiler {\n  compile(expression) {\n    return new Function('context', `return ${expression}`);\n  }\n}\n\nconst compiler = new ExpressionCompiler();\n\nconst evaluate = compiler.compile('context.price * context.quantity');\n\nconsole.log(evaluate({\n  price: 25,\n  quantity: 4\n}));\n"
-    },
-    {
-      "id": "js-advanced-access-control-033",
-      "title": "Role-Based Access Control Engine",
-      "description": "Implement a RBAC system with permissions and role inheritance.",
-      "context": "RBAC systems secure enterprise dashboards, admin panels, and cloud platforms.",
-      "category": "security",
-      "difficultyScore": 94,
-      "estimatedDuration": 275,
-      "typingStyle": "full",
-      "tags": [
-        "rbac",
-        "permissions",
-        "security",
-        "backend"
-      ],
-      "concepts": [
-        "role-based-access-control",
-        "permissions",
-        "authorization"
-      ],
-      "technicalNotes": [
-        "RBAC centralizes permission management.",
-        "Roles simplify authorization logic.",
-        "Enterprise systems depend on secure access control."
-      ],
-      "codeSnippet": "class AccessControl {\n  constructor() {\n    this.roles = {};\n  }\n\n  defineRole(role, permissions) {\n    this.roles[role] = permissions;\n  }\n\n  can(role, permission) {\n    return this.roles[role]?.includes(permission);\n  }\n}\n\nconst rbac = new AccessControl();\n\nrbac.defineRole('admin', [\n  'create-user',\n  'delete-user'\n]);\n\nconsole.log(rbac.can('admin', 'delete-user'));\n"
-    },
-    {
-      "id": "js-advanced-api-versioning-034",
-      "title": "API Versioning Router",
-      "description": "Route incoming requests dynamically based on API version.",
-      "context": "Versioning strategies are fundamental in scalable public APIs and SaaS platforms.",
-      "category": "api-design",
-      "difficultyScore": 92,
-      "estimatedDuration": 255,
-      "typingStyle": "full",
-      "tags": [
-        "api-versioning",
-        "routing",
-        "backend",
-        "architecture"
-      ],
-      "concepts": [
-        "version-management",
-        "request-routing",
-        "api-maintenance"
-      ],
-      "technicalNotes": [
-        "Versioning maintains backward compatibility.",
-        "Routing logic separates API versions.",
-        "Large APIs evolve through controlled versioning."
-      ],
-      "codeSnippet": "class VersionedRouter {\n  constructor() {\n    this.routes = {};\n  }\n\n  register(version, handler) {\n    this.routes[version] = handler;\n  }\n\n  resolve(version) {\n    return this.routes[version];\n  }\n}\n\nconst router = new VersionedRouter();\n\nrouter.register('v1', () => {\n  return 'API Version 1';\n});\n\nrouter.register('v2', () => {\n  return 'API Version 2';\n});\n\nconsole.log(router.resolve('v2')());\n"
-    },
-    {
-      "id": "js-advanced-realtime-collaboration-035",
-      "title": "Collaborative Document Engine",
-      "description": "Build the core synchronization logic behind collaborative editing systems.",
-      "context": "Collaborative editing powers realtime productivity apps like shared code editors and documents.",
-      "category": "realtime",
-      "difficultyScore": 100,
-      "estimatedDuration": 340,
-      "typingStyle": "full",
-      "tags": [
-        "collaboration",
-        "realtime",
-        "synchronization",
-        "backend"
-      ],
-      "concepts": [
-        "document-sync",
-        "operational-transforms",
-        "realtime-collaboration"
-      ],
-      "technicalNotes": [
-        "Realtime collaboration synchronizes concurrent changes.",
-        "Operational transforms resolve conflicts.",
-        "Collaborative editors require efficient syncing."
-      ],
-      "codeSnippet": "class CollaborativeDocument {\n  constructor(content = '') {\n    this.content = content;\n    this.operations = [];\n  }\n\n  applyOperation(user, operation) {\n    this.operations.push({\n      user,\n      operation\n    });\n\n    this.content += operation.text;\n  }\n\n  getContent() {\n    return this.content;\n  }\n}\n\nconst documentEngine = new CollaborativeDocument();\n\ndocumentEngine.applyOperation('Nacho', {\n  text: 'Hello '\n});\n\ndocumentEngine.applyOperation('Lucas', {\n  text: 'World'\n});\n\nconsole.log(documentEngine.getContent());\n"
-    },
-    {
-      "id": "js-advanced-class-singleton-021",
-      "title": "Singleton Pattern Implementation",
-      "description": "Implement the Singleton pattern for creating a single instance across the application.",
-      "context": "Singletons are used for configuration managers, connection pools, and global state management in large applications.",
-      "category": "classes",
-      "difficultyScore": 45,
-      "estimatedDuration": 130,
-      "typingStyle": "full",
-      "tags": [
-        "classes",
-        "singleton",
-        "design-patterns",
-        "oop"
-      ],
-      "concepts": [
-        "single-instance",
-        "private-constructor",
-        "global-access"
-      ],
-      "technicalNotes": [
-        "Ensures only one instance exists.",
-        "Provides global access point.",
-        "Lazy initialization defers creation until needed."
-      ],
-      "codeSnippet": "class DatabaseConnection {\n  constructor() {\n    if (DatabaseConnection.instance) {\n      throw new Error('Use DatabaseConnection.getInstance()');\n    }\n    this.connected = false;\n    this.connectionString = '';\n  }\n\n  static getInstance() {\n    if (!DatabaseConnection.instance) {\n      DatabaseConnection.instance = new DatabaseConnection();\n    }\n    return DatabaseConnection.instance;\n  }\n\n  connect(connectionString) {\n    this.connectionString = connectionString;\n    this.connected = true;\n    return `Connected to ${connectionString}`;\n  }\n\n  disconnect() {\n    this.connected = false;\n    return 'Disconnected';\n  }\n\n  query(sql) {\n    if (!this.connected) return 'Not connected';\n    return `Executing: ${sql}`;\n  }\n}\n\nconst db1 = DatabaseConnection.getInstance();\nconst db2 = DatabaseConnection.getInstance();\n\nconsole.log(db1 === db2);\nconsole.log(db1.connect('postgres://localhost/mydb'));\nconsole.log(db2.query('SELECT * FROM users'));\n"
-    },
-    {
-      "id": "js-advanced-class-decorator-022",
-      "title": "Decorator Pattern",
-      "description": "Implement the Decorator pattern for adding behavior to objects dynamically.",
-      "context": "Decorators are used in React higher-order components, middleware patterns, and feature extensions.",
-      "category": "classes",
-      "difficultyScore": 48,
-      "estimatedDuration": 140,
-      "typingStyle": "full",
-      "tags": [
-        "classes",
-        "decorator",
-        "design-patterns",
-        "composition"
-      ],
-      "concepts": [
-        "dynamic-behavior",
-        "composition",
-        "wrapper-pattern"
-      ],
-      "technicalNotes": [
-        "Adds behavior without modifying original class.",
-        "Follows composition over inheritance.",
-        "Chain multiple decorators together."
-      ],
-      "codeSnippet": "class Coffee {\n  getCost() { return 5; }\n  getDescription() { return 'Coffee'; }\n}\n\nclass CoffeeDecorator {\n  constructor(coffee) {\n    this.coffee = coffee;\n  }\n\n  getCost() { return this.coffee.getCost(); }\n  getDescription() { return this.coffee.getDescription(); }\n}\n\nclass Milk extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 2; }\n  getDescription() { return this.coffee.getDescription() + ', Milk'; }\n}\n\nclass Sugar extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 1; }\n  getDescription() { return this.coffee.getDescription() + ', Sugar'; }\n}\n\nclass WhippedCream extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 3; }\n  getDescription() { return this.coffee.getDescription() + ', Whipped Cream'; }\n}\n\nlet myCoffee = new Coffee();\nmyCoffee = new Milk(myCoffee);\nmyCoffee = new Sugar(myCoffee);\nmyCoffee = new WhippedCream(myCoffee);\n\nconsole.log(`${myCoffee.getDescription()} = $${myCoffee.getCost()}`);\n"
-    },
-    {
-      "id": "js-advanced-data-structures-graph-021",
-      "title": "Graph with Adjacency List",
-      "description": "Implement a graph data structure using adjacency list representation with BFS and DFS.",
-      "context": "Graphs model social networks, road maps, web page links, and dependency relationships in software.",
-      "category": "data-structures",
-      "difficultyScore": 52,
-      "estimatedDuration": 150,
-      "typingStyle": "full",
-      "tags": [
-        "data-structures",
-        "graph",
-        "bfs",
-        "dfs",
-        "adjacency"
-      ],
-      "concepts": [
-        "vertices-edges",
-        "traversal-algorithms",
-        "graph-representation"
-      ],
-      "technicalNotes": [
-        "Adjacency list is memory efficient for sparse graphs.",
-        "BFS uses queue, DFS uses recursion/stack.",
-        "Both O(V + E) time complexity."
-      ],
-      "codeSnippet": "class Graph {\n  constructor() {\n    this.adjacencyList = new Map();\n  }\n\n  addVertex(vertex) {\n    if (!this.adjacencyList.has(vertex)) {\n      this.adjacencyList.set(vertex, []);\n    }\n  }\n\n  addEdge(v1, v2) {\n    this.adjacencyList.get(v1).push(v2);\n    this.adjacencyList.get(v2).push(v1);\n  }\n\n  bfs(start) {\n    const visited = new Set();\n    const queue = [start];\n    const result = [];\n\n    while (queue.length > 0) {\n      const vertex = queue.shift();\n      if (!visited.has(vertex)) {\n        visited.add(vertex);\n        result.push(vertex);\n        \n        for (const neighbor of this.adjacencyList.get(vertex)) {\n          if (!visited.has(neighbor)) {\n            queue.push(neighbor);\n          }\n        }\n      }\n    }\n    return result;\n  }\n\n  dfs(start) {\n    const visited = new Set();\n    const result = [];\n\n    const dfsHelper = (vertex) => {\n      visited.add(vertex);\n      result.push(vertex);\n      \n      for (const neighbor of this.adjacencyList.get(vertex)) {\n        if (!visited.has(neighbor)) {\n          dfsHelper(neighbor);\n        }\n      }\n    };\n\n    dfsHelper(start);\n    return result;\n  }\n}\n\nconst g = new Graph();\n['A', 'B', 'C', 'D', 'E'].forEach(v => g.addVertex(v));\ng.addEdge('A', 'B');\ng.addEdge('A', 'C');\ng.addEdge('B', 'D');\ng.addEdge('C', 'E');\n\nconsole.log('BFS:', g.bfs('A'));\nconsole.log('DFS:', g.dfs('A'));\n"
-    },
-    {
-      "id": "js-advanced-data-structures-trie-022",
-      "title": "Trie Data Structure",
-      "description": "Implement a Trie for efficient prefix-based string operations and autocomplete.",
-      "context": "Tries are used in search engines, autocomplete systems, spell checkers, and IP routing.",
-      "category": "data-structures",
-      "difficultyScore": 50,
-      "estimatedDuration": 145,
-      "typingStyle": "full",
-      "tags": [
-        "data-structures",
-        "trie",
-        "prefix-tree",
-        "autocomplete"
-      ],
-      "concepts": [
-        "prefix-matching",
-        "efficient-search",
-        "tree-structure"
-      ],
-      "technicalNotes": [
-        "Time complexity O(m) where m is word length.",
-        "Space efficient for shared prefixes.",
-        "Supports fast prefix searches."
-      ],
-      "codeSnippet": "class TrieNode {\n  constructor() {\n    this.children = new Map();\n    this.isEndOfWord = false;\n  }\n}\n\nclass Trie {\n  constructor() {\n    this.root = new TrieNode();\n  }\n\n  insert(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children.has(char)) {\n        node.children.set(char, new TrieNode());\n      }\n      node = node.children.get(char);\n    }\n    node.isEndOfWord = true;\n  }\n\n  search(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children.has(char)) {\n        return false;\n      }\n      node = node.children.get(char);\n    }\n    return node.isEndOfWord;\n  }\n\n  startsWith(prefix) {\n    let node = this.root;\n    for (const char of prefix) {\n      if (!node.children.has(char)) {\n        return false;\n      }\n      node = node.children.get(char);\n    }\n    return true;\n  }\n\n  getSuggestions(prefix) {\n    let node = this.root;\n    for (const char of prefix) {\n      if (!node.children.has(char)) {\n        return [];\n      }\n      node = node.children.get(char);\n    }\n    \n    const suggestions = [];\n    const dfs = (n, path) => {\n      if (n.isEndOfWord) suggestions.push(path);\n      for (const [char, child] of n.children) {\n        dfs(child, path + char);\n      }\n    };\n    \n    dfs(node, prefix);\n    return suggestions;\n  }\n}\n\nconst trie = new Trie();\n['hello', 'help', 'her', 'hi', 'world', 'work'].forEach(w => trie.insert(w));\n\nconsole.log(trie.search('hello'));\nconsole.log(trie.startsWith('he'));\nconsole.log(trie.getSuggestions('he'));\n"
-    },
-    {
-      "id": "js-advanced-algorithms-dijkstra-021",
-      "title": "Dijkstra's Shortest Path",
-      "description": "Implement Dijkstra's algorithm for finding shortest paths in weighted graphs.",
-      "context": "Dijkstra is used in GPS navigation, network routing, flight scheduling, and game pathfinding.",
-      "category": "algorithms",
-      "difficultyScore": 55,
-      "estimatedDuration": 160,
-      "typingStyle": "full",
-      "tags": [
-        "algorithms",
-        "dijkstra",
-        "shortest-path",
-        "graph"
-      ],
-      "concepts": [
-        "weighted-graphs",
-        "priority-queue",
-        "greedy-algorithm"
-      ],
-      "technicalNotes": [
-        "Time complexity O((V + E) log V) with priority queue.",
-        "Works only with non-negative weights.",
-        "Can be optimized with Fibonacci heap."
-      ],
-      "codeSnippet": "class PriorityQueue {\n  constructor() {\n    this.values = [];\n  }\n\n  enqueue(val, priority) {\n    this.values.push({ val, priority });\n    this.sort();\n  }\n\n  dequeue() {\n    return this.values.shift();\n  }\n\n  sort() {\n    this.values.sort((a, b) => a.priority - b.priority);\n  }\n\n  isEmpty() {\n    return this.values.length === 0;\n  }\n}\n\nfunction dijkstra(graph, start) {\n  const distances = {};\n  const pq = new PriorityQueue();\n\n  for (const vertex in graph) {\n    distances[vertex] = vertex === start ? 0 : Infinity;\n  }\n\n  pq.enqueue(start, 0);\n\n  while (!pq.isEmpty()) {\n    const { val: current } = pq.dequeue();\n\n    for (const [neighbor, weight] of Object.entries(graph[current] || {})) {\n      const newDist = distances[current] + weight;\n      if (newDist < distances[neighbor]) {\n        distances[neighbor] = newDist;\n        pq.enqueue(neighbor, newDist);\n      }\n    }\n  }\n\n  return distances;\n}\n\nconst graph = {\n  A: { B: 4, C: 2 },\n  B: { A: 4, C: 1, D: 5 },\n  C: { A: 2, B: 1, D: 8 },\n  D: { B: 5, C: 8, E: 3 },\n  E: { D: 3 }\n};\n\nconsole.log(dijkstra(graph, 'A'));\n"
-    },
-    {
-      "id": "js-advanced-algorithms-topological-sort-022",
-      "title": "Topological Sort",
-      "description": "Implement topological sorting for directed acyclic graphs (DAGs).",
-      "context": "Topological sort is used in build systems, task scheduling, dependency resolution, and course planning.",
-      "category": "algorithms",
-      "difficultyScore": 53,
-      "estimatedDuration": 155,
-      "typingStyle": "full",
-      "tags": [
-        "algorithms",
-        "topological-sort",
-        "dag",
-        "dependencies"
-      ],
-      "concepts": [
-        "dependency-ordering",
-        "graph-cycles",
-        " Kahn's-algorithm"
-      ],
-      "technicalNotes": [
-        "Only works on DAGs (no cycles).",
-        "Used for dependency resolution.",
-        "Multiple valid orderings possible."
-      ],
-      "codeSnippet": "function topologicalSort(numCourses, prerequisites) {\n  const graph = {};\n  const inDegree = {};\n\n  for (let i = 0; i < numCourses; i++) {\n    graph[i] = [];\n    inDegree[i] = 0;\n  }\n\n  for (const [course, prereq] of prerequisites) {\n    graph[prereq].push(course);\n    inDegree[course]++;\n  }\n\n  const queue = [];\n  for (let i = 0; i < numCourses; i++) {\n    if (inDegree[i] === 0) queue.push(i);\n  }\n\n  const result = [];\n  while (queue.length > 0) {\n    const course = queue.shift();\n    result.push(course);\n\n    for (const next of graph[course]) {\n      inDegree[next]--;\n      if (inDegree[next] === 0) {\n        queue.push(next);\n      }\n    }\n  }\n\n  return result.length === numCourses ? result : [];\n}\n\nconst numCourses = 4;\nconst prerequisites = [[1, 0], [2, 1], [3, 2], [2, 0]];\n\nconsole.log(topologicalSort(numCourses, prerequisites));\n"
-    },
-    {
-      "id": "js-advanced-state-management-redux-021",
-      "title": "Redux-like State Management",
-      "description": "Implement a Redux-like state management system with actions, reducers, and store.",
-      "context": "Redux pattern is fundamental in React applications, Vuex, NgRx, and centralized state management.",
-      "category": "state-management",
-      "difficultyScore": 54,
-      "estimatedDuration": 155,
-      "typingStyle": "full",
-      "tags": [
-        "state-management",
-        "redux",
-        "store",
-        "actions"
-      ],
-      "concepts": [
-        "unidirectional-data",
-        "immutable-state",
-        "action-reducer"
-      ],
-      "technicalNotes": [
-        "Single source of truth for state.",
-        "State is read-only, changes via actions.",
-        "Reducers must be pure functions."
-      ],
-      "codeSnippet": "function createStore(reducer, initialState) {\n  let state = initialState;\n  const listeners = [];\n\n  const getState = () => state;\n\n  const dispatch = (action) => {\n    state = reducer(state, action);\n    listeners.forEach(listener => listener());\n  };\n\n  const subscribe = (listener) => {\n    listeners.push(listener);\n    return () => {\n      const index = listeners.indexOf(listener);\n      listeners.splice(index, 1);\n    };\n  };\n\n  return { getState, dispatch, subscribe };\n}\n\nconst initialState = { count: 0, user: null };\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case 'INCREMENT':\n      return { ...state, count: state.count + 1 };\n    case 'DECREMENT':\n      return { ...state, count: state.count - 1 };\n    case 'SET_USER':\n      return { ...state, user: action.payload };\n    default:\n      return state;\n  }\n}\n\nconst store = createStore(reducer, initialState);\n\nstore.subscribe(() => console.log('State:', store.getState()));\n\nstore.dispatch({ type: 'INCREMENT' });\nstore.dispatch({ type: 'INCREMENT' });\nstore.dispatch({ type: 'SET_USER', payload: { name: 'Nacho' } });\nstore.dispatch({ type: 'DECREMENT' });\n"
-    },
-    {
-      "id": "js-advanced-state-management-observer-022",
-      "title": "Observer Pattern with Subjects",
-      "description": "Implement the Observer pattern for reactive state changes and event handling.",
-      "context": "Observer pattern is used in event systems, reactive frameworks, and pub/sub messaging architectures.",
-      "category": "state-management",
-      "difficultyScore": 51,
-      "estimatedDuration": 145,
-      "typingStyle": "full",
-      "tags": [
-        "state-management",
-        "observer",
-        "pub-sub",
-        "events"
-      ],
-      "concepts": [
-        "subject-observers",
-        "event-handling",
-        "reactive-pattern"
-      ],
-      "technicalNotes": [
-        "Subjects maintain list of observers.",
-        "Observers are notified of state changes.",
-        "Decouples subject from observers."
-      ],
-      "codeSnippet": "class Subject {\n  constructor() {\n    this.observers = [];\n  }\n\n  subscribe(observer) {\n    this.observers.push(observer);\n  }\n\n  unsubscribe(observer) {\n    const index = this.observers.indexOf(observer);\n    if (index > -1) this.observers.splice(index, 1);\n  }\n\n  notify(data) {\n    this.observers.forEach(observer => observer.update(data));\n  }\n}\n\nclass Observer {\n  constructor(name) {\n    this.name = name;\n  }\n\n  update(data) {\n    console.log(`${this.name} received:`, data);\n  }\n}\n\nclass WeatherStation extends Subject {\n  constructor() {\n    super();\n    this.temperature = 0;\n  }\n\n  setTemperature(temp) {\n    this.temperature = temp;\n    this.notify({ temp, timestamp: Date.now() });\n  }\n}\n\nconst station = new WeatherStation();\nconst display1 = new Observer('Display 1');\nconst display2 = new Observer('Display 2');\n\nstation.subscribe(display1);\nstation.subscribe(display2);\n\nstation.setTemperature(25);\nstation.setTemperature(28);\n"
-    }
-  ]
-}
+    "exercises": [
+      {
+        "id": "js-advanced-event-sourcing-016",
+        "title": "Almacén de Event Sourcing",
+        "description": "Implementa una arquitectura simplificada de event sourcing para la reconstrucción de estado.",
+        "context": "El event sourcing se usa en sistemas financieros, plataformas con gran carga de auditoría y aplicaciones empresariales escalables.",
+        "category": "algorithms",
+        "difficultyScore": 96,
+        "estimatedDuration": 275,
+        "typingStyle": "full",
+        "tags": [
+          "event-sourcing",
+          "arquitectura",
+          "backend",
+          "empresa"
+        ],
+        "concepts": [
+          "almacenamiento-de-eventos",
+          "reconstrucción-de-estado",
+          "logs-de-solo-adición"
+        ],
+        "technicalNotes": [
+          "Event sourcing almacena los cambios de estado como eventos inmutables.",
+          "El estado puede reconstruirse a partir del historial de eventos.",
+          "La auditabilidad es una gran ventaja."
+        ],
+        "codeSnippet": "class EventStore {\n  constructor() {\n    this.events = [];\n  }\n\n  append(event) {\n    this.events.push(event);\n  }\n\n  replay() {\n    return this.events.reduce((state, event) => {\n      switch (event.type) {\n        case 'USER_CREATED':\n          state.users.push(event.payload);\n          break;\n\n        default:\n          break;\n      }\n\n      return state;\n    }, {\n      users: []\n    });\n  }\n}\n\nconst store = new EventStore();\n\nstore.append({\n  type: 'USER_CREATED',\n  payload: {\n    username: 'NachoDev'\n  }\n});\n\nconsole.log(store.replay());\n"
+      },
+      {
+        "id": "js-advanced-query-optimizer-017",
+        "title": "Motor de Optimización de Consultas",
+        "description": "Construye un optimizador de consultas simplificado para filtrar grandes conjuntos de datos.",
+        "context": "Los optimizadores de consultas mejoran el rendimiento en bases de datos, motores analíticos y plataformas de búsqueda.",
+        "category": "algorithms",
+        "difficultyScore": 91,
+        "estimatedDuration": 250,
+        "typingStyle": "full",
+        "tags": [
+          "optimización-de-consultas",
+          "rendimiento",
+          "backend",
+          "bases-de-datos"
+        ],
+        "concepts": [
+          "planificación-de-consultas",
+          "optimización-de-filtros",
+          "indexación-de-datos"
+        ],
+        "technicalNotes": [
+          "Los optimizadores de consultas reducen las operaciones innecesarias.",
+          "Los índices aceleran las búsquedas.",
+          "El orden de filtrado afecta al rendimiento."
+        ],
+        "codeSnippet": "class QueryEngine {\n  constructor(data) {\n    this.data = data;\n  }\n\n  execute(filters) {\n    return this.data.filter((item) => {\n      return filters.every((filter) => {\n        return filter(item);\n      });\n    });\n  }\n}\n\nconst engine = new QueryEngine([\n  { username: 'Nacho', role: 'admin' },\n  { username: 'Lucas', role: 'user' }\n]);\n\nconst results = engine.execute([\n  (user) => user.role === 'admin'\n]);\n\nconsole.log(results);\n"
+      },
+      {
+        "id": "js-advanced-memory-profiler-018",
+        "title": "Perfilador de Uso de Memoria",
+        "description": "Rastrea y analiza los patrones de asignación de memoria durante la ejecución.",
+        "context": "Los perfiladores se usan en ingeniería de rendimiento, herramientas de depuración y sistemas empresariales.",
+        "category": "algorithms",
+        "difficultyScore": 93,
+        "estimatedDuration": 260,
+        "typingStyle": "full",
+        "tags": [
+          "memoria",
+          "perfilado",
+          "rendimiento",
+          "monitoreo"
+        ],
+        "concepts": [
+          "seguimiento-de-memoria",
+          "herramientas-de-perfilado",
+          "análisis-de-recursos"
+        ],
+        "technicalNotes": [
+          "Los perfiladores analizan el uso de recursos en tiempo de ejecución.",
+          "Las fugas de memoria reducen la estabilidad del sistema.",
+          "El monitoreo mejora los flujos de trabajo de optimización."
+        ],
+        "codeSnippet": "class MemoryProfiler {\n  constructor() {\n    this.snapshots = [];\n  }\n\n  capture(label) {\n    this.snapshots.push({\n      label,\n      memory: process.memoryUsage().heapUsed\n    });\n  }\n\n  getSnapshots() {\n    return this.snapshots;\n  }\n}\n\nconst profiler = new MemoryProfiler();\n\nprofiler.capture('before-processing');\n\nconst largeArray = new Array(10000).fill('code-reflex');\n\nprofiler.capture('after-processing');\n\nconsole.log(profiler.getSnapshots());\n"
+      },
+      {
+        "id": "js-advanced-graphql-engine-019",
+        "title": "Mini Motor de Resolutores GraphQL",
+        "description": "Implementa un sistema ligero de ejecución de resolutores estilo GraphQL.",
+        "context": "Los motores GraphQL impulsan APIs, tableros e integraciones modernas frontend-backend.",
+        "category": "algorithms",
+        "difficultyScore": 95,
+        "estimatedDuration": 270,
+        "typingStyle": "full",
+        "tags": [
+          "graphql",
+          "apis",
+          "backend",
+          "resolutores"
+        ],
+        "concepts": [
+          "resolución-de-consultas",
+          "patrones-de-resolución",
+          "abstracciones-de-api"
+        ],
+        "technicalNotes": [
+          "Los resolutores mapean consultas a datos.",
+          "GraphQL permite la obtención flexible de datos.",
+          "La abstracción simplifica la comunicación con el frontend."
+        ],
+        "codeSnippet": "class GraphQLEngine {\n  constructor(resolvers) {\n    this.resolvers = resolvers;\n  }\n\n  execute(query) {\n    const resolver = this.resolvers[query];\n\n    if (!resolver) {\n      throw new Error('Query not found');\n    }\n\n    return resolver();\n  }\n}\n\nconst engine = new GraphQLEngine({\n  users: () => {\n    return ['Nacho', 'Lucas'];\n  }\n});\n\nconsole.log(engine.execute('users'));\n"
+      },
+      {
+        "id": "js-advanced-concurrency-controller-020",
+        "title": "Controlador de Concurrencia Dinámico",
+        "description": "Controla operaciones asíncronas concurrentes dinámicamente bajo cargas de trabajo pesadas.",
+        "context": "Los controladores de concurrencia son críticos en APIs escalables, sistemas de carga y servicios distribuidos.",
+        "category": "algorithms",
+        "difficultyScore": 97,
+        "estimatedDuration": 285,
+        "typingStyle": "full",
+        "tags": [
+          "concurrencia",
+          "asíncrono",
+          "backend",
+          "rendimiento"
+        ],
+        "concepts": [
+          "límites-de-concurrencia",
+          "control-asíncrono",
+          "gestión-de-recursos"
+        ],
+        "technicalNotes": [
+          "El control de concurrencia evita la sobrecarga.",
+          "Los flujos de trabajo asíncronos requieren coordinación de recursos.",
+          "Los sistemas de alto rendimiento dependen de una ejecución equilibrada."
+        ],
+        "codeSnippet": "class ConcurrencyController {\n  constructor(limit) {\n    this.limit = limit;\n    this.running = 0;\n    this.queue = [];\n  }\n\n  async run(task) {\n    if (this.running >= this.limit) {\n      await new Promise((resolve) => {\n        this.queue.push(resolve);\n      });\n    }\n\n    this.running++;\n\n    try {\n      return await task();\n    } finally {\n      this.running--;\n\n      const next = this.queue.shift();\n\n      if (next) {\n        next();\n      }\n    }\n  }\n}\n\nconst controller = new ConcurrencyController(2);\n\ncontroller.run(async () => {\n  console.log('Processing task A');\n});\n"
+      },
+      {
+        "id": "js-advanced-plugin-runtime-021",
+        "title": "Entorno de Ejecución de Plugins en Sandbox",
+        "description": "Ejecuta plugins externos de forma segura dentro de un entorno de ejecución aislado.",
+        "context": "Los entornos de plugins se usan en IDEs, plataformas de automatización, extensiones de navegador y sistemas empresariales.",
+        "category": "algorithms",
+        "difficultyScore": 98,
+        "estimatedDuration": 300,
+        "typingStyle": "full",
+        "tags": [
+          "plugins",
+          "sandbox",
+          "seguridad",
+          "arquitectura"
+        ],
+        "concepts": [
+          "sandboxing",
+          "aislamiento-en-ejecución",
+          "ejecución-de-plugins"
+        ],
+        "technicalNotes": [
+          "El sandboxing aísla la ejecución de código externo.",
+          "Los entornos de plugins mejoran la extensibilidad.",
+          "El aislamiento evita operaciones inseguras."
+        ],
+        "codeSnippet": "class PluginRuntime {\n  constructor() {\n    this.plugins = [];\n  }\n\n  register(plugin) {\n    this.plugins.push(plugin);\n  }\n\n  execute(context) {\n    this.plugins.forEach((plugin) => {\n      try {\n        plugin(context);\n      } catch (error) {\n        console.log('Plugin execution failed');\n      }\n    });\n  }\n}\n\nconst runtime = new PluginRuntime();\n\nruntime.register((context) => {\n  context.logs.push('Plugin initialized');\n});\n\nconst context = {\n  logs: []\n};\n\nruntime.execute(context);\n\nconsole.log(context.logs);\n"
+      },
+      {
+        "id": "js-advanced-distributed-scheduler-022",
+        "title": "Programador de Tareas Distribuido",
+        "description": "Coordina tareas programadas a través de múltiples instancias de trabajadores.",
+        "context": "Los programadores distribuidos son comunes en sistemas cloud, plataformas de automatización e infraestructuras backend.",
+        "category": "algorithms",
+        "difficultyScore": 99,
+        "estimatedDuration": 310,
+        "typingStyle": "full",
+        "tags": [
+          "programador",
+          "sistemas-distribuidos",
+          "trabajadores",
+          "backend"
+        ],
+        "concepts": [
+          "coordinación-distribuida",
+          "programación-de-tareas",
+          "gestión-de-trabajadores"
+        ],
+        "technicalNotes": [
+          "Los programadores distribuidos evitan la ejecución duplicada.",
+          "Los trabajadores coordinan la propiedad de las tareas.",
+          "Los sistemas cloud dependen en gran medida de los mecanismos de programación."
+        ],
+        "codeSnippet": "class DistributedScheduler {\n  constructor() {\n    this.tasks = [];\n  }\n\n  register(taskName, callback, interval) {\n    this.tasks.push({\n      taskName,\n      callback,\n      interval\n    });\n  }\n\n  start() {\n    this.tasks.forEach((task) => {\n      setInterval(() => {\n        console.log(`Running ${task.taskName}`);\n\n        task.callback();\n      }, task.interval);\n    });\n  }\n}\n\nconst scheduler = new DistributedScheduler();\n\nscheduler.register('sync-metrics', () => {\n  console.log('Metrics synchronized');\n}, 5000);\n\nscheduler.start();\n"
+      },
+      {
+        "id": "js-advanced-search-ranking-023",
+        "title": "Algoritmo de Ranking de Búsqueda",
+        "description": "Implementa un sistema de ranking para ordenar los resultados de búsqueda por relevancia.",
+        "context": "Los sistemas de ranking se usan en motores de búsqueda, plataformas de comercio electrónico y sistemas de recomendación.",
+        "category": "algorithms",
+        "difficultyScore": 94,
+        "estimatedDuration": 265,
+        "typingStyle": "full",
+        "tags": [
+          "búsqueda",
+          "ranking",
+          "algoritmos",
+          "backend"
+        ],
+        "concepts": [
+          "algoritmos-de-puntuación",
+          "sistemas-de-ranking",
+          "relevancia-de-búsqueda"
+        ],
+        "technicalNotes": [
+          "Los algoritmos de ranking puntúan la relevancia de los resultados.",
+          "La calidad de la búsqueda depende de la precisión del ordenamiento.",
+          "Los sistemas de recomendación dependen de los modelos de puntuación."
+        ],
+        "codeSnippet": "function rankResults(results, keyword) {\n  return results\n    .map((result) => {\n      const score = result.content\n        .toLowerCase()\n        .split(keyword.toLowerCase())\n        .length - 1;\n\n      return {\n        ...result,\n        score\n      };\n    })\n    .sort((a, b) => {\n      return b.score - a.score;\n    });\n}\n\nconst ranked = rankResults([\n  {\n    title: 'JavaScript Performance',\n    content: 'javascript optimization performance'\n  },\n  {\n    title: 'TypeScript Basics',\n    content: 'typescript introduction'\n  }\n], 'javascript');\n\nconsole.log(ranked);\n"
+      },
+      {
+        "id": "js-advanced-replication-manager-024",
+        "title": "Gestor de Replicación de Base de Datos",
+        "description": "Simula la replicación entre los nodos primario y réplica de una base de datos.",
+        "context": "Los sistemas de replicación mejoran la escalabilidad, redundancia y fiabilidad en las bases de datos.",
+        "category": "algorithms",
+        "difficultyScore": 96,
+        "estimatedDuration": 290,
+        "typingStyle": "full",
+        "tags": [
+          "replicación",
+          "bases-de-datos",
+          "backend",
+          "sistemas-distribuidos"
+        ],
+        "concepts": [
+          "primario-réplica",
+          "sincronización-de-datos",
+          "arquitectura-de-base-de-datos"
+        ],
+        "technicalNotes": [
+          "La replicación mejora la disponibilidad.",
+          "Los nodos réplica sincronizan los cambios de datos.",
+          "Las bases de datos distribuidas dependen de estrategias de replicación."
+        ],
+        "codeSnippet": "class DatabaseNode {\n  constructor(name) {\n    this.name = name;\n    this.data = [];\n  }\n\n  insert(record) {\n    this.data.push(record);\n  }\n}\n\nclass ReplicationManager {\n  constructor(primary, replicas) {\n    this.primary = primary;\n    this.replicas = replicas;\n  }\n\n  write(record) {\n    this.primary.insert(record);\n\n    this.replicas.forEach((replica) => {\n      replica.insert(record);\n    });\n  }\n}\n\nconst primary = new DatabaseNode('primary');\nconst replica = new DatabaseNode('replica');\n\nconst replication = new ReplicationManager(primary, [replica]);\n\nreplication.write({\n  username: 'NachoDev'\n});\n\nconsole.log(replica.data);\n"
+      },
+      {
+        "id": "js-advanced-observability-pipeline-025",
+        "title": "Tubería de Métricas de Observabilidad",
+        "description": "Agrega logs, métricas y trazas en una tubería de observabilidad centralizada.",
+        "context": "Los sistemas de observabilidad son críticos en plataformas nativas de la nube e infraestructuras a gran escala.",
+        "category": "algorithms",
+        "difficultyScore": 97,
+        "estimatedDuration": 295,
+        "typingStyle": "full",
+        "tags": [
+          "observabilidad",
+          "monitoreo",
+          "métricas",
+          "backend"
+        ],
+        "concepts": [
+          "tuberías-de-métricas",
+          "logging-centralizado",
+          "monitoreo-distribuido"
+        ],
+        "technicalNotes": [
+          "La observabilidad combina logs, métricas y trazas.",
+          "El monitoreo centralizado mejora la depuración.",
+          "Los sistemas nativos de la nube dependen de la observabilidad."
+        ],
+        "codeSnippet": "class ObservabilityPipeline {\n  constructor() {\n    this.metrics = [];\n  }\n\n  collect(metric) {\n    this.metrics.push({\n      ...metric,\n      collectedAt: Date.now()\n    });\n  }\n\n  summarize() {\n    return this.metrics.reduce((summary, metric) => {\n      summary[metric.type] = (summary[metric.type] || 0) + 1;\n\n      return summary;\n    }, {});\n  }\n}\n\nconst pipeline = new ObservabilityPipeline();\n\npipeline.collect({\n  type: 'http_request'\n});\n\npipeline.collect({\n  type: 'http_request'\n});\n\npipeline.collect({\n  type: 'database_query'\n});\n\nconsole.log(pipeline.summarize());\n"
+      },
+      {
+        "id": "js-advanced-state-machine-026",
+        "title": "Motor de Máquina de Estados Finitos",
+        "description": "Crea un motor de máquina de estados finitos reutilizable para flujos de trabajo complejos.",
+        "context": "Las máquinas de estados se usan en flujos de autenticación, motores de juegos, flujos de UI y sistemas de automatización.",
+        "category": "algorithms",
+        "difficultyScore": 92,
+        "estimatedDuration": 250,
+        "typingStyle": "full",
+        "tags": [
+          "máquina-de-estados",
+          "flujo-de-trabajo",
+          "arquitectura",
+          "automatización"
+        ],
+        "concepts": [
+          "máquinas-de-estados-finitos",
+          "transiciones",
+          "control-de-flujo"
+        ],
+        "technicalNotes": [
+          "Las máquinas de estados controlan flujos de trabajo predecibles.",
+          "Las transiciones definen los cambios de estado permitidos.",
+          "Muy utilizadas en sistemas escalables de UI y backend."
+        ],
+        "codeSnippet": "class StateMachine {\n  constructor(initialState, transitions) {\n    this.state = initialState;\n    this.transitions = transitions;\n  }\n\n  transition(action) {\n    const nextState = this.transitions[this.state]?.[action];\n\n    if (!nextState) {\n      console.log('Invalid transition');\n\n      return;\n    }\n\n    this.state = nextState;\n  }\n}\n\nconst authMachine = new StateMachine('logged_out', {\n  logged_out: {\n    login: 'logged_in'\n  },\n  logged_in: {\n    logout: 'logged_out'\n  }\n});\n\nauthMachine.transition('login');\n\nconsole.log(authMachine.state);\n"
+      },
+      {
+        "id": "js-advanced-cdn-simulator-027",
+        "title": "Simulador de Red de Entrega de Contenidos (CDN)",
+        "description": "Simula cómo una CDN almacena en caché y sirve activos desde ubicaciones de borde (edge).",
+        "context": "Las CDNs son fundamentales en el rendimiento web moderno y la entrega global de contenidos.",
+        "category": "algorithms",
+        "difficultyScore": 98,
+        "estimatedDuration": 300,
+        "typingStyle": "full",
+        "tags": [
+          "cdn",
+          "caché",
+          "infraestructura",
+          "rendimiento"
+        ],
+        "concepts": [
+          "edge-caching",
+          "entrega-de-contenido",
+          "distribución-global"
+        ],
+        "technicalNotes": [
+          "Las CDNs almacenan activos geográficamente más cerca de los usuarios.",
+          "Los servidores de borde mejoran la latencia.",
+          "El almacenamiento en caché reduce la carga del servidor de origen."
+        ],
+        "codeSnippet": "class EdgeServer {\n  constructor(location) {\n    this.location = location;\n    this.cache = new Map();\n  }\n\n  cacheAsset(path, content) {\n    this.cache.set(path, content);\n  }\n\n  serve(path) {\n    return this.cache.get(path);\n  }\n}\n\nclass CDN {\n  constructor(edges) {\n    this.edges = edges;\n  }\n\n  deploy(path, content) {\n    this.edges.forEach((edge) => {\n      edge.cacheAsset(path, content);\n    });\n  }\n}\n\nconst cdn = new CDN([\n  new EdgeServer('Argentina'),\n  new EdgeServer('Germany')\n]);\n\ncdn.deploy('/main.js', 'console.log(\"CodeReflex\")');\n"
+      },
+      {
+        "id": "js-advanced-task-orchestrator-028",
+        "title": "Orquestador de Tareas de Flujo de Trabajo",
+        "description": "Coordina tareas asíncronas dependientes con ordenamiento de ejecución.",
+        "context": "La orquestación de tareas se usa en sistemas CI/CD, flujos de trabajo cloud y plataformas de automatización.",
+        "category": "algorithms",
+        "difficultyScore": 95,
+        "estimatedDuration": 285,
+        "typingStyle": "full",
+        "tags": [
+          "orquestación",
+          "flujos-de-trabajo",
+          "automatización",
+          "backend"
+        ],
+        "concepts": [
+          "gestión-de-dependencias",
+          "ejecución-de-flujos",
+          "coordinación-de-tareas"
+        ],
+        "technicalNotes": [
+          "La orquestación coordina operaciones dependientes.",
+          "El orden de ejecución importa en los flujos de trabajo.",
+          "Las tuberías CI/CD dependen de la orquestación."
+        ],
+        "codeSnippet": "class TaskOrchestrator {\n  constructor() {\n    this.tasks = [];\n  }\n\n  add(name, dependencies, callback) {\n    this.tasks.push({\n      name,\n      dependencies,\n      callback\n    });\n  }\n\n  async run() {\n    for (const task of this.tasks) {\n      await task.callback();\n\n      console.log(`${task.name} completed`);\n    }\n  }\n}\n\nconst orchestrator = new TaskOrchestrator();\n\norchestrator.add('build', [], async () => {\n  console.log('Building application');\n});\n\norchestrator.add('deploy', ['build'], async () => {\n  console.log('Deploying application');\n});\n\norchestrator.run();\n"
+      },
+      {
+        "id": "js-advanced-schema-validator-029",
+        "title": "Validador de Esquema Dinámico",
+        "description": "Valida objetos anidados complejos usando esquemas configurables.",
+        "context": "La validación de esquemas es esencial en APIs, formularios y sistemas backend empresariales.",
+        "category": "algorithms",
+        "difficultyScore": 90,
+        "estimatedDuration": 245,
+        "typingStyle": "full",
+        "tags": [
+          "validación",
+          "esquemas",
+          "backend",
+          "formularios"
+        ],
+        "concepts": [
+          "validación-de-esquemas",
+          "objetos-anidados",
+          "reglas-dinámicas"
+        ],
+        "technicalNotes": [
+          "La validación de esquemas impone la integridad de los datos.",
+          "Las validaciones anidadas mejoran la fiabilidad.",
+          "Las APIs empresariales dependen en gran medida de los esquemas."
+        ],
+        "codeSnippet": "function validateSchema(data, schema) {\n  const errors = [];\n\n  Object.keys(schema).forEach((field) => {\n    const validator = schema[field];\n\n    if (!validator(data[field])) {\n      errors.push(`${field} is invalid`);\n    }\n  });\n\n  return errors;\n}\n\nconst userSchema = {\n  username: (value) => value.length >= 3,\n  email: (value) => value.includes('@')\n};\n\nconsole.log(validateSchema({\n  username: 'Nacho',\n  email: 'nacho@mail.com'\n}, userSchema));\n"
+      },
+      {
+        "id": "js-advanced-schema-validator-030",
+        "title": "Gestor de Clúster de Trabajadores",
+        "description": "Gestiona y monitorea múltiples instancias de trabajadores en un clúster.",
+        "context": "Los gestores de clúster se usan en servidores Node.js, sistemas cloud e infraestructuras backend escalables.",
+        "category": "algorithms",
+        "difficultyScore": 99,
+        "estimatedDuration": 315,
+        "typingStyle": "full",
+        "tags": [
+          "clústeres",
+          "trabajadores",
+          "backend",
+          "infraestructura"
+        ],
+        "concepts": [
+          "gestión-de-trabajadores",
+          "coordinación-de-clúster",
+          "monitoreo-de-procesos"
+        ],
+        "technicalNotes": [
+          "Los clústeres mejoran la escalabilidad y la tolerancia a fallos.",
+          "Los gestores de trabajadores coordinan múltiples procesos.",
+          "El monitoreo mejora la fiabilidad del sistema."
+        ],
+        "codeSnippet": "class ClusterManager {\n  constructor() {\n    this.workers = [];\n  }\n\n  addWorker(workerId) {\n    this.workers.push({\n      workerId,\n      status: 'active'\n    });\n  }\n\n  monitor() {\n    this.workers.forEach((worker) => {\n      console.log(`${worker.workerId} -> ${worker.status}`);\n    });\n  }\n}\n\nconst cluster = new ClusterManager();\n\ncluster.addWorker('worker-1');\ncluster.addWorker('worker-2');\n\ncluster.monitor();\n"
+      },
+      {
+        "id": "js-advanced-distributed-transactions-031",
+        "title": "Coordinador de Transacciones Distribuidas",
+        "description": "Coordina transacciones entre múltiples servicios independientes usando una estrategia de compromiso de dos fases (two-phase commit).",
+        "context": "Las transacciones distribuidas son críticas en sistemas bancarios, plataformas de comercio electrónico y arquitecturas empresariales.",
+        "category": "algorithms",
+        "difficultyScore": 100,
+        "estimatedDuration": 330,
+        "typingStyle": "full",
+        "tags": [
+          "transacciones",
+          "sistemas-distribuidos",
+          "compromiso-de-dos-fases",
+          "backend"
+        ],
+        "concepts": [
+          "coordinación-de-transacciones",
+          "two-phase-commit",
+          "consistencia-distribuida"
+        ],
+        "technicalNotes": [
+          "Las transacciones distribuidas sincronizan operaciones a través de los servicios.",
+          "El compromiso de dos fases asegura la consistencia.",
+          "Los sistemas empresariales dependen de la integridad transaccional."
+        ],
+        "codeSnippet": "class TransactionService {\n  constructor(name) {\n    this.name = name;\n  }\n\n  prepare() {\n    console.log(`${this.name} prepared transaction`);\n\n    return true;\n  }\n\n  commit() {\n    console.log(`${this.name} committed transaction`);\n  }\n}\n\nclass TransactionCoordinator {\n  constructor(services) {\n    this.services = services;\n  }\n\n  execute() {\n    const allPrepared = this.services.every((service) => {\n      return service.prepare();\n    });\n\n    if (!allPrepared) {\n      console.log('Transaction failed');\n\n      return;\n    }\n\n    this.services.forEach((service) => {\n      service.commit();\n    });\n  }\n}\n\nconst coordinator = new TransactionCoordinator([\n  new TransactionService('PaymentService'),\n  new TransactionService('InventoryService')\n]);\n\ncoordinator.execute();\n"
+      },
+      {
+        "id": "js-advanced-runtime-compiler-032",
+        "title": "Compilador de Expresiones en Tiempo de Ejecución",
+        "description": "Compila y ejecuta expresiones dinámicas en tiempo de ejecución de forma segura.",
+        "context": "Los compiladores en tiempo de ejecución se usan en motores de plantillas, sistemas de automatización y plataformas low-code.",
+        "category": "algorithms",
+        "difficultyScore": 97,
+        "estimatedDuration": 295,
+        "typingStyle": "full",
+        "tags": [
+          "compilador",
+          "runtime",
+          "expresiones",
+          "backend"
+        ],
+        "concepts": [
+          "ejecución-dinámica",
+          "parseo-de-expresiones",
+          "evaluación-en-tiempo-de-ejecución"
+        ],
+        "technicalNotes": [
+          "Los compiladores en tiempo de ejecución interpretan lógica dinámica.",
+          "Los motores de expresiones impulsan los sistemas de plantillas.",
+          "La ejecución controlada mejora la flexibilidad."
+        ],
+        "codeSnippet": "class ExpressionCompiler {\n  compile(expression) {\n    return new Function('context', `return ${expression}`);\n  }\n}\n\nconst compiler = new ExpressionCompiler();\n\nconst evaluate = compiler.compile('context.price * context.quantity');\n\nconsole.log(evaluate({\n  price: 25,\n  quantity: 4\n}));\n"
+      },
+      {
+        "id": "js-advanced-access-control-033",
+        "title": "Motor de Control de Acceso Basado en Roles (RBAC)",
+        "description": "Implementa un sistema RBAC con permisos y herencia de roles.",
+        "context": "Los sistemas RBAC aseguran tableros empresariales, paneles de administración y plataformas cloud.",
+        "category": "algorithms",
+        "difficultyScore": 94,
+        "estimatedDuration": 275,
+        "typingStyle": "full",
+        "tags": [
+          "rbac",
+          "permisos",
+          "seguridad",
+          "backend"
+        ],
+        "concepts": [
+          "control-de-acceso-basado-en-roles",
+          "permisos",
+          "autorización"
+        ],
+        "technicalNotes": [
+          "El RBAC centraliza la gestión de permisos.",
+          "Los roles simplifican la lógica de autorización.",
+          "Los sistemas empresariales dependen de un control de acceso seguro."
+        ],
+        "codeSnippet": "class AccessControl {\n  constructor() {\n    this.roles = {};\n  }\n\n  defineRole(role, permissions) {\n    this.roles[role] = permissions;\n  }\n\n  can(role, permission) {\n    return this.roles[role]?.includes(permission);\n  }\n}\n\nconst rbac = new AccessControl();\n\nrbac.defineRole('admin', [\n  'create-user',\n  'delete-user'\n]);\n\nconsole.log(rbac.can('admin', 'delete-user'));\n"
+      },
+      {
+        "id": "js-advanced-api-versioning-034",
+        "title": "Enrutador de Versiones de API",
+        "description": "Enruta peticiones entrantes dinámicamente según la versión de la API.",
+        "context": "Las estrategias de versionado son fundamentales en APIs públicas escalables y plataformas SaaS.",
+        "category": "algorithms",
+        "difficultyScore": 92,
+        "estimatedDuration": 255,
+        "typingStyle": "full",
+        "tags": [
+          "versionado-de-api",
+          "enrutamiento",
+          "backend",
+          "arquitectura"
+        ],
+        "concepts": [
+          "gestión-de-versiones",
+          "enrutamiento-de-peticiones",
+          "mantenimiento-de-api"
+        ],
+        "technicalNotes": [
+          "El versionado mantiene la compatibilidad hacia atrás.",
+          "La lógica de enrutamiento separa las versiones de la API.",
+          "Las grandes APIs evolucionan mediante un versionado controlado."
+        ],
+        "codeSnippet": "class VersionedRouter {\n  constructor() {\n    this.routes = {};\n  }\n\n  register(version, handler) {\n    this.routes[version] = handler;\n  }\n\n  resolve(version) {\n    return this.routes[version];\n  }\n}\n\nconst router = new VersionedRouter();\n\nrouter.register('v1', () => {\n  return 'API Version 1';\n});\n\nrouter.register('v2', () => {\n  return 'API Version 2';\n});\n\nconsole.log(router.resolve('v2')());\n"
+      },
+      {
+        "id": "js-advanced-realtime-collaboration-035",
+        "title": "Motor de Documentos Colaborativos",
+        "description": "Construye la lógica central de sincronización detrás de los sistemas de edición colaborativa.",
+        "context": "La edición colaborativa impulsa aplicaciones de productividad en tiempo real como editores de código compartido y documentos.",
+        "category": "algorithms",
+        "difficultyScore": 100,
+        "estimatedDuration": 340,
+        "typingStyle": "full",
+        "tags": [
+          "colaboración",
+          "tiempo-real",
+          "sincronización",
+          "backend"
+        ],
+        "concepts": [
+          "sincronización-de-documentos",
+          "transformaciones-operacionales",
+          "colaboración-en-tiempo-real"
+        ],
+        "technicalNotes": [
+          "La colaboración en tiempo real sincroniza cambios concurrentes.",
+          "Las transformaciones operacionales (OT) resuelven conflictos.",
+          "Los editores colaborativos requieren una sincronización eficiente."
+        ],
+        "codeSnippet": "class CollaborativeDocument {\n  constructor(content = '') {\n    this.content = content;\n    this.operations = [];\n  }\n\n  applyOperation(user, operation) {\n    this.operations.push({\n      user,\n      operation\n    });\n\n    this.content += operation.text;\n  }\n\n  getContent() {\n    return this.content;\n  }\n}\n\nconst documentEngine = new CollaborativeDocument();\n\ndocumentEngine.applyOperation('Nacho', {\n  text: 'Hello '\n});\n\ndocumentEngine.applyOperation('Lucas', {\n  text: 'World'\n});\n\nconsole.log(documentEngine.getContent());\n"
+      },
+      {
+        "id": "js-advanced-class-singleton-021",
+        "title": "Implementación del Patrón Singleton",
+        "description": "Implementa el patrón Singleton para crear una única instancia en toda la aplicación.",
+        "context": "Los singletons se usan para gestores de configuración, pools de conexiones y gestión de estado global en grandes aplicaciones.",
+        "category": "classes",
+        "difficultyScore": 45,
+        "estimatedDuration": 130,
+        "typingStyle": "full",
+        "tags": [
+          "clases",
+          "singleton",
+          "patrones-de-diseño",
+          "oop"
+        ],
+        "concepts": [
+          "instancia-única",
+          "constructor-privado",
+          "acceso-global"
+        ],
+        "technicalNotes": [
+          "Asegura que solo exista una instancia.",
+          "Proporciona un punto de acceso global.",
+          "La inicialización perezosa (lazy) pospone la creación hasta que se necesita."
+        ],
+        "codeSnippet": "class DatabaseConnection {\n  constructor() {\n    if (DatabaseConnection.instance) {\n      throw new Error('Use DatabaseConnection.getInstance()');\n    }\n    this.connected = false;\n    this.connectionString = '';\n  }\n\n  static getInstance() {\n    if (!DatabaseConnection.instance) {\n      DatabaseConnection.instance = new DatabaseConnection();\n    }\n    return DatabaseConnection.instance;\n  }\n\n  connect(connectionString) {\n    this.connectionString = connectionString;\n    this.connected = true;\n    return `Connected to ${connectionString}`;\n  }\n\n  disconnect() {\n    this.connected = false;\n    return 'Disconnected';\n  }\n\n  query(sql) {\n    if (!this.connected) return 'Not connected';\n    return `Executing: ${sql}`;\n  }\n}\n\nconst db1 = DatabaseConnection.getInstance();\nconst db2 = DatabaseConnection.getInstance();\n\nconsole.log(db1 === db2);\nconsole.log(db1.connect('postgres://localhost/mydb'));\nconsole.log(db2.query('SELECT * FROM users'));\n"
+      },
+      {
+        "id": "js-advanced-class-decorator-022",
+        "title": "Patrón Decorator",
+        "description": "Implementa el patrón Decorator para añadir comportamiento a los objetos dinámicamente.",
+        "context": "Los decoradores se usan en componentes de orden superior de React, patrones de middleware y extensiones de funcionalidades.",
+        "category": "classes",
+        "difficultyScore": 48,
+        "estimatedDuration": 140,
+        "typingStyle": "full",
+        "tags": [
+          "clases",
+          "decorator",
+          "patrones-de-diseño",
+          "composición"
+        ],
+        "concepts": [
+          "comportamiento-dinámico",
+          "composición",
+          "patrón-envoltorio"
+        ],
+        "technicalNotes": [
+          "Añade comportamiento sin modificar la clase original.",
+          "Sigue la composición sobre la herencia.",
+          "Permite encadenar múltiples decoradores."
+        ],
+        "codeSnippet": "class Coffee {\n  getCost() { return 5; }\n  getDescription() { return 'Coffee'; }\n}\n\nclass CoffeeDecorator {\n  constructor(coffee) {\n    this.coffee = coffee;\n  }\n\n  getCost() { return this.coffee.getCost(); }\n  getDescription() { return this.coffee.getDescription(); }\n}\n\nclass Milk extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 2; }\n  getDescription() { return this.coffee.getDescription() + ', Milk'; }\n}\n\nclass Sugar extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 1; }\n  getDescription() { return this.coffee.getDescription() + ', Sugar'; }\n}\n\nclass WhippedCream extends CoffeeDecorator {\n  getCost() { return this.coffee.getCost() + 3; }\n  getDescription() { return this.coffee.getDescription() + ', Whipped Cream'; }\n}\n\nlet myCoffee = new Coffee();\nmyCoffee = new Milk(myCoffee);\nmyCoffee = new Sugar(myCoffee);\nmyCoffee = new WhippedCream(myCoffee);\n\nconsole.log(`${myCoffee.getDescription()} = $${myCoffee.getCost()}`);\n"
+      },
+      {
+        "id": "js-advanced-data-structures-graph-021",
+        "title": "Grafo con Lista de Adyacencia",
+        "description": "Implementa una estructura de datos de grafo usando una representación de lista de adyacencia con BFS y DFS.",
+        "context": "Los grafos modelan redes sociales, mapas de carreteras, enlaces de páginas web y relaciones de dependencia en software.",
+        "category": "arrays",
+        "difficultyScore": 52,
+        "estimatedDuration": 150,
+        "typingStyle": "full",
+        "tags": [
+          "estructuras-de-datos",
+          "grafo",
+          "bfs",
+          "dfs",
+          "adyacencia"
+        ],
+        "concepts": [
+          "vértices-y-aristas",
+          "algoritmos-de-recorrido",
+          "representación-de-grafos"
+        ],
+        "technicalNotes": [
+          "La lista de adyacencia es eficiente en memoria para grafos dispersos.",
+          "BFS usa una cola, DFS usa recursividad/pila.",
+          "Ambos tienen una complejidad temporal O(V + E)."
+        ],
+        "codeSnippet": "class Graph {\n  constructor() {\n    this.adjacencyList = new Map();\n  }\n\n  addVertex(vertex) {\n    if (!this.adjacencyList.has(vertex)) {\n      this.adjacencyList.set(vertex, []);\n    }\n  }\n\n  addEdge(v1, v2) {\n    this.adjacencyList.get(v1).push(v2);\n    this.adjacencyList.get(v2).push(v1);\n  }\n\n  bfs(start) {\n    const visited = new Set();\n    const queue = [start];\n    const result = [];\n\n    while (queue.length > 0) {\n      const vertex = queue.shift();\n      if (!visited.has(vertex)) {\n        visited.add(vertex);\n        result.push(vertex);\n        \n        for (const neighbor of this.adjacencyList.get(vertex)) {\n          if (!visited.has(neighbor)) {\n            queue.push(neighbor);\n          }\n        }\n      }\n    }\n    return result;\n  }\n\n  dfs(start) {\n    const visited = new Set();\n    const result = [];\n\n    const dfsHelper = (vertex) => {\n      visited.add(vertex);\n      result.push(vertex);\n      \n      for (const neighbor of this.adjacencyList.get(vertex)) {\n        if (!visited.has(neighbor)) {\n          dfsHelper(neighbor);\n        }\n      }\n    };\n\n    dfsHelper(start);\n    return result;\n  }\n}\n\nconst g = new Graph();\n['A', 'B', 'C', 'D', 'E'].forEach(v => g.addVertex(v));\ng.addEdge('A', 'B');\ng.addEdge('A', 'C');\ng.addEdge('B', 'D');\ng.addEdge('C', 'E');\n\nconsole.log('BFS:', g.bfs('A'));\nconsole.log('DFS:', g.dfs('A'));\n"
+      },
+      {
+        "id": "js-advanced-data-structures-trie-022",
+        "title": "Estructura de Datos Trie",
+        "description": "Implementa un Trie para operaciones eficientes de cadenas basadas en prefijos y autocompletado.",
+        "context": "Los Tries se usan en motores de búsqueda, sistemas de autocompletado, correctores ortográficos y enrutamiento IP.",
+        "category": "algorithms",
+        "difficultyScore": 50,
+        "estimatedDuration": 145,
+        "typingStyle": "full",
+        "tags": [
+          "estructuras-de-datos",
+          "trie",
+          "árbol-de-prefijos",
+          "autocompletado"
+        ],
+        "concepts": [
+          "coincidencia-de-prefijos",
+          "búsqueda-eficiente",
+          "estructura-de-árbol"
+        ],
+        "technicalNotes": [
+          "Complejidad temporal O(m) donde m es la longitud de la palabra.",
+          "Eficiente en espacio para prefijos compartidos.",
+          "Soporta búsquedas rápidas por prefijo."
+        ],
+        "codeSnippet": "class TrieNode {\n  constructor() {\n    this.children = new Map();\n    this.isEndOfWord = false;\n  }\n}\n\nclass Trie {\n  constructor() {\n    this.root = new TrieNode();\n  }\n\n  insert(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children.has(char)) {\n        node.children.set(char, new TrieNode());\n      }\n      node = node.children.get(char);\n    }\n    node.isEndOfWord = true;\n  }\n\n  search(word) {\n    let node = this.root;\n    for (const char of word) {\n      if (!node.children.has(char)) {\n        return false;\n      }\n      node = node.children.get(char);\n    }\n    return node.isEndOfWord;\n  }\n\n  startsWith(prefix) {\n    let node = this.root;\n    for (const char of prefix) {\n      if (!node.children.has(char)) {\n        return false;\n      }\n      node = node.children.get(char);\n    }\n    return true;\n  }\n\n  getSuggestions(prefix) {\n    let node = this.root;\n    for (const char of prefix) {\n      if (!node.children.has(char)) {\n        return [];\n      }\n      node = node.children.get(char);\n    }\n    \n    const suggestions = [];\n    const dfs = (n, path) => {\n      if (n.isEndOfWord) suggestions.push(path);\n      for (const [char, child] of n.children) {\n        dfs(child, path + char);\n      }\n    };\n    \n    dfs(node, prefix);\n    return suggestions;\n  }\n}\n\nconst trie = new Trie();\n['hello', 'help', 'her', 'hi', 'world', 'work'].forEach(w => trie.insert(w));\n\nconsole.log(trie.search('hello'));\nconsole.log(trie.startsWith('he'));\nconsole.log(trie.getSuggestions('he'));\n"
+      },
+      {
+        "id": "js-advanced-algorithms-dijkstra-021",
+        "title": "Camino más Corto de Dijkstra",
+        "description": "Implementa el algoritmo de Dijkstra para encontrar los caminos más cortos en grafos ponderados.",
+        "context": "Dijkstra se usa en navegación GPS, enrutamiento de red, programación de vuelos y búsqueda de caminos en juegos.",
+        "category": "algorithms",
+        "difficultyScore": 55,
+        "estimatedDuration": 160,
+        "typingStyle": "full",
+        "tags": [
+          "algoritmos",
+          "dijkstra",
+          "camino-más-corto",
+          "grafo"
+        ],
+        "concepts": [
+          "grafos-ponderados",
+          "cola-de-prioridad",
+          "algoritmo-ávido"
+        ],
+        "technicalNotes": [
+          "Complejidad temporal O((V + E) log V) con cola de prioridad.",
+          "Solo funciona con pesos no negativos.",
+          "Se puede optimizar con un montículo de Fibonacci."
+        ],
+        "codeSnippet": "class PriorityQueue {\n  constructor() {\n    this.values = [];\n  }\n\n  enqueue(val, priority) {\n    this.values.push({ val, priority });\n    this.sort();\n  }\n\n  dequeue() {\n    return this.values.shift();\n  }\n\n  sort() {\n    this.values.sort((a, b) => a.priority - b.priority);\n  }\n\n  isEmpty() {\n    return this.values.length === 0;\n  }\n}\n\nfunction dijkstra(graph, start) {\n  const distances = {};\n  const pq = new PriorityQueue();\n\n  for (const vertex in graph) {\n    distances[vertex] = vertex === start ? 0 : Infinity;\n  }\n\n  pq.enqueue(start, 0);\n\n  while (!pq.isEmpty()) {\n    const { val: current } = pq.dequeue();\n\n    for (const [neighbor, weight] of Object.entries(graph[current] || {})) {\n      const newDist = distances[current] + weight;\n      if (newDist < distances[neighbor]) {\n        distances[neighbor] = newDist;\n        pq.enqueue(neighbor, newDist);\n      }\n    }\n  }\n\n  return distances;\n}\n\nconst graph = {\n  A: { B: 4, C: 2 },\n  B: { A: 4, C: 1, D: 5 },\n  C: { A: 2, B: 1, D: 8 },\n  D: { B: 5, C: 8, E: 3 },\n  E: { D: 3 }\n};\n\nconsole.log(dijkstra(graph, 'A'));\n"
+      },
+      {
+        "id": "js-advanced-algorithms-topological-sort-022",
+        "title": "Ordenamiento Topológico",
+        "description": "Implementa el ordenamiento topológico para grafos acíclicos dirigidos (DAGs).",
+        "context": "El ordenamiento topológico se usa en sistemas de construcción (build systems), programación de tareas, resolución de dependencias y planificación de cursos.",
+        "category": "algorithms",
+        "difficultyScore": 53,
+        "estimatedDuration": 155,
+        "typingStyle": "full",
+        "tags": [
+          "algoritmos",
+          "ordenamiento-topológico",
+          "dag",
+          "dependencias"
+        ],
+        "concepts": [
+          "ordenamiento-de-dependencias",
+          "ciclos-en-grafos",
+          "algoritmo-de-kahn"
+        ],
+        "technicalNotes": [
+          "Solo funciona en DAGs (sin ciclos).",
+          "Se usa para la resolución de dependencias.",
+          "Son posibles múltiples ordenamientos válidos."
+        ],
+        "codeSnippet": "function topologicalSort(numCourses, prerequisites) {\n  const graph = {};\n  const inDegree = {};\n\n  for (let i = 0; i < numCourses; i++) {\n    graph[i] = [];\n    inDegree[i] = 0;\n  }\n\n  for (const [course, prereq] of prerequisites) {\n    graph[prereq].push(course);\n    inDegree[course]++;\n  }\n\n  const queue = [];\n  for (let i = 0; i < numCourses; i++) {\n    if (inDegree[i] === 0) queue.push(i);\n  }\n\n  const result = [];\n  while (queue.length > 0) {\n    const course = queue.shift();\n    result.push(course);\n\n    for (const next of graph[course]) {\n      inDegree[next]--;\n      if (inDegree[next] === 0) {\n        queue.push(next);\n      }\n    }\n  }\n\n  return result.length === numCourses ? result : [];\n}\n\nconst numCourses = 4;\nconst prerequisites = [[1, 0], [2, 1], [3, 2], [2, 0]];\n\nconsole.log(topologicalSort(numCourses, prerequisites));\n"
+      },
+      {
+        "id": "js-advanced-state-management-redux-021",
+        "title": "Gestión de Estado tipo Redux",
+        "description": "Implementa un sistema de gestión de estado tipo Redux con acciones, reducers y store.",
+        "context": "El patrón Redux es fundamental en las aplicaciones React, Vuex, NgRx y en la gestión de estado centralizada.",
+        "category": "algorithms",
+        "difficultyScore": 54,
+        "estimatedDuration": 155,
+        "typingStyle": "full",
+        "tags": [
+          "gestión-de-estado",
+          "redux",
+          "store",
+          "acciones"
+        ],
+        "concepts": [
+          "datos-unidireccionales",
+          "estado-inmutable",
+          "acción-reducer"
+        ],
+        "technicalNotes": [
+          "Fuente única de verdad para el estado.",
+          "El estado es de solo lectura, los cambios se realizan mediante acciones.",
+          "Los reducers deben ser funciones puras."
+        ],
+        "codeSnippet": "function createStore(reducer, initialState) {\n  let state = initialState;\n  const listeners = [];\n\n  const getState = () => state;\n\n  const dispatch = (action) => {\n    state = reducer(state, action);\n    listeners.forEach(listener => listener());\n  };\n\n  const subscribe = (listener) => {\n    listeners.push(listener);\n    return () => {\n      const index = listeners.indexOf(listener);\n      listeners.splice(index, 1);\n    };\n  };\n\n  return { getState, dispatch, subscribe };\n}\n\nconst initialState = { count: 0, user: null };\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case 'INCREMENT':\n      return { ...state, count: state.count + 1 };\n    case 'DECREMENT':\n      return { ...state, count: state.count - 1 };\n    case 'SET_USER':\n      return { ...state, user: action.payload };\n    default:\n      return state;\n  }\n}\n\nconst store = createStore(reducer, initialState);\n\nstore.subscribe(() => console.log('State:', store.getState()));\n\nstore.dispatch({ type: 'INCREMENT' });\nstore.dispatch({ type: 'INCREMENT' });\nstore.dispatch({ type: 'SET_USER', payload: { name: 'Nacho' } });\nstore.dispatch({ type: 'DECREMENT' });\n"
+      },
+      {
+        "id": "js-advanced-state-management-observer-022",
+        "title": "Patrón Observer con Subjects",
+        "description": "Implementa el patrón Observer para cambios de estado reactivos y manejo de eventos.",
+        "context": "El patrón Observer se usa en sistemas de eventos, frameworks reactivos y arquitecturas de mensajería pub/sub.",
+        "category": "patterns",
+        "difficultyScore": 51,
+        "estimatedDuration": 145,
+        "typingStyle": "full",
+        "tags": [
+          "gestión-de-estado",
+          "observer",
+          "pub-sub",
+          "eventos"
+        ],
+        "concepts": [
+          "sujetos-observadores",
+          "manejo-de-eventos",
+          "patrón-reactivo"
+        ],
+        "technicalNotes": [
+          "Los sujetos mantienen una lista de observadores.",
+          "Los observadores son notificados de los cambios de estado.",
+          "Desacopla al sujeto de los observadores."
+        ],
+        "codeSnippet": "class Subject {\n  constructor() {\n    this.observers = [];\n  }\n\n  subscribe(observer) {\n    this.observers.push(observer);\n  }\n\n  unsubscribe(observer) {\n    const index = this.observers.indexOf(observer);\n    if (index > -1) this.observers.splice(index, 1);\n  }\n\n  notify(data) {\n    this.observers.forEach(observer => observer.update(data));\n  }\n}\n\nclass Observer {\n  constructor(name) {\n    this.name = name;\n  }\n\n  update(data) {\n    console.log(`${this.name} received:`, data);\n  }\n}\n\nclass WeatherStation extends Subject {\n  constructor() {\n    super();\n    this.temperature = 0;\n  }\n\n  setTemperature(temp) {\n    this.temperature = temp;\n    this.notify({ temp, timestamp: Date.now() });\n  }\n}\n\nconst station = new WeatherStation();\nconst display1 = new Observer('Display 1');\nconst display2 = new Observer('Display 2');\n\nstation.subscribe(display1);\nstation.subscribe(display2);\n\nstation.setTemperature(25);\nstation.setTemperature(28);\n"
+      }
+    ]
+  }
 ]

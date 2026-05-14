@@ -123,7 +123,7 @@ export function SolutionCheck({
       return {
         type: 'structure',
         passed: true,
-        message: 'Code structure matches perfectly',
+        message: 'La estructura del código coincide perfectamente',
       };
     }
 
@@ -135,7 +135,7 @@ export function SolutionCheck({
       return {
         type: 'structure',
         passed: false,
-        message: `Code is very similar (${Math.round(similarity * 100)}%) but has minor differences`,
+        message: `El código es muy similar (${Math.round(similarity * 100)}%) pero tiene pequeñas diferencias`,
         expected: normalizedExpected.slice(0, 50) + '...',
         actual: normalizedUser.slice(0, 50) + '...',
       };
@@ -145,7 +145,7 @@ export function SolutionCheck({
       return {
         type: 'structure',
         passed: false,
-        message: `Partial match (${Math.round(similarity * 100)}%). Check the differences.`,
+        message: `Coincidencia parcial (${Math.round(similarity * 100)}%). Revisa las diferencias.`,
         expected: normalizedExpected.slice(0, 50) + '...',
         actual: normalizedUser.slice(0, 50) + '...',
       };
@@ -154,7 +154,7 @@ export function SolutionCheck({
     return {
       type: 'structure',
       passed: false,
-      message: 'Code structure differs significantly',
+      message: 'La estructura del código difiere significativamente',
       expected: normalizedExpected.slice(0, 50) + '...',
       actual: normalizedUser.slice(0, 50) + '...',
     };
@@ -167,13 +167,13 @@ export function SolutionCheck({
       return {
         type: 'syntax',
         passed: true,
-        message: 'No syntax errors detected',
+        message: 'No se detectaron errores de sintaxis',
       };
     } catch (e) {
       return {
         type: 'syntax',
         passed: false,
-        message: `Syntax error: ${(e as Error).message}`,
+        message: `Error de sintaxis: ${(e as Error).message}`,
       };
     }
   }, []);
@@ -191,14 +191,14 @@ export function SolutionCheck({
       return {
         type: 'format',
         passed: true,
-        message: `Format matches (${userLines} lines)`,
+        message: `El formato coincide (${userLines} líneas)`,
       };
     }
 
     return {
       type: 'format',
       passed: false,
-      message: `Line count differs: yours (${userLines}) vs expected (${expectedLines})`,
+      message: `El número de líneas difiere: las tuyas (${userLines}) vs esperado (${expectedLines})`,
       expected: `${expectedLines} lines`,
       actual: `${userLines} lines`,
     };
@@ -242,7 +242,7 @@ export function SolutionCheck({
         status: 'pending',
         score: 0,
         details: [],
-        message: 'No code provided',
+        message: 'No se proporcionó código',
       };
     }
 
@@ -254,7 +254,7 @@ export function SolutionCheck({
         status: 'incorrect',
         score: 0,
         details,
-        message: 'Code has syntax errors',
+        message: 'El código tiene errores de sintaxis',
       };
     }
 
@@ -279,10 +279,10 @@ export function SolutionCheck({
     }
 
     const message = status === 'correct' 
-      ? 'Perfect! Your solution is correct.'
+      ? '¡Perfecto! Tu solución es correcta.'
       : status === 'partial'
-      ? `Partially correct (${score}% match). ${structureCheck.message}`
-      : 'Solution does not match expected output';
+      ? `Parcialmente correcto (${score}% de coincidencia). ${structureCheck.message}`
+      : 'La solución no coincide con el resultado esperado';
 
     return { status, score, details, message };
   }, [userCode, expectedCode, validateSyntax, validateFormat, validateStructure]);
@@ -293,7 +293,7 @@ export function SolutionCheck({
     <Card variant="bordered" className={cn('', className)}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium text-zinc-400">Solution Validation</h3>
+          <h3 className="text-sm font-medium text-zinc-400">Validación de Solución</h3>
           <div className={cn(
             'flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium',
             validation.status === 'correct' && 'bg-green-500/20 text-green-400',
@@ -305,7 +305,9 @@ export function SolutionCheck({
             {validation.status === 'partial' && <AlertCircle className="w-3 h-3" />}
             {validation.status === 'incorrect' && <XCircle className="w-3 h-3" />}
             {validation.status === 'pending' && <Code2 className="w-3 h-3" />}
-            {validation.status.charAt(0).toUpperCase() + validation.status.slice(1)}
+            {validation.status === 'correct' ? 'Correcto' : 
+             validation.status === 'partial' ? 'Parcial' : 
+             validation.status === 'incorrect' ? 'Incorrecto' : 'Pendiente'}
           </div>
         </div>
       </CardHeader>
@@ -331,18 +333,20 @@ export function SolutionCheck({
               )}
               <div className="flex-1 min-w-0">
                 <div className={detail.passed ? 'text-green-400' : 'text-red-400'}>
-                  {detail.type.charAt(0).toUpperCase() + detail.type.slice(1)} Check
+                  Control de {detail.type === 'syntax' ? 'Sintaxis' : 
+                            detail.type === 'structure' ? 'Estructura' : 
+                            detail.type === 'format' ? 'Formato' : 'Salida'}
                 </div>
                 <div className="text-xs text-zinc-500 mt-0.5">{detail.message}</div>
                 {!detail.passed && detail.expected && (
                   <div className="text-xs mt-1">
-                    <span className="text-zinc-600">Expected: </span>
+                    <span className="text-zinc-600">Esperado: </span>
                     <code className="text-zinc-400">{detail.expected}</code>
                   </div>
                 )}
                 {!detail.passed && detail.actual && (
                   <div className="text-xs">
-                    <span className="text-zinc-600">Got: </span>
+                    <span className="text-zinc-600">Obtenido: </span>
                     <code className="text-red-400">{detail.actual}</code>
                   </div>
                 )}
@@ -354,7 +358,7 @@ export function SolutionCheck({
         {testCases.length > 0 && onExecute && (
           <div className="pt-2 border-t border-zinc-700">
             <div className="text-xs text-zinc-500 mb-2">
-              Run tests to validate output
+              Ejecuta las pruebas para validar la salida
             </div>
           </div>
         )}

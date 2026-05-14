@@ -4,439 +4,618 @@
       "language": "java",
       "mode": "reflex-typing",
       "version": "1.0.0",
-      "lastUpdated": "2026-05-12",
+      "lastUpdated": "2026-05-14",
       "totalExercises": 35
     },
     "exercises": [
       {
-        "id": "jv-int-001",
-        "title": "Inheritance: Extends",
-        "description": "Create a subclass from a parent class.",
-        "context": "Java uses the 'extends' keyword for single inheritance.",
-        "category": "oop",
-        "difficultyScore": 35,
-        "estimatedDuration": 50,
+        "id": "jv-int-rt-001",
+        "title": "Herencia: Extends",
+        "description": "Crea una subclase a partir de una clase padre.",
+        "context": "Java utiliza la palabra clave 'extends' para la herencia simple.",
+        "codeSnippet": "public class Employee extends Person {\n    private double salary;\n    public Employee(String name, double salary) {\n        super(name);\n        this.salary = salary;\n    }\n}",
         "typingStyle": "full",
-        "tags": ["java", "oop"],
-        "concepts": ["inheritance", "subclassing"],
-        "technicalNotes": ["Subclasses inherit non-private members"],
-        "codeSnippet": "public class Employee extends Person {\n    private double salary;\n    public Employee(String name, double salary) {\n        super(name);\n        this.salary = salary;\n    }\n}"
+        "tags": [
+          "java",
+          "oop"
+        ],
+        "concepts": [
+          "herencia",
+          "subclases"
+        ],
+        "estimatedDuration": 50,
+        "difficultyScore": 35,
+        "category": "classes"
       },
       {
-        "id": "jv-int-002",
+        "id": "jv-int-rt-002",
         "title": "Interfaces: Implements",
-        "description": "Define and implement a contract.",
-        "context": "Interfaces allow multiple inheritance of type in Java.",
-        "category": "oop",
-        "difficultyScore": 38,
+        "description": "Define e implementa un contrato.",
+        "context": "Las interfaces permiten la herencia múltiple de tipos en Java.",
+        "codeSnippet": "public interface Drawable {\n    void draw();\n}\n\npublic class Circle implements Drawable {\n    public void draw() { System.out.println(\"Circle\"); }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "interfaces"
+        ],
+        "concepts": [
+          "abstracción",
+          "contratos"
+        ],
         "estimatedDuration": 55,
-        "typingStyle": "full",
-        "tags": ["java", "interfaces"],
-        "concepts": ["abstraction", "contracts"],
-        "technicalNotes": ["A class can implement many interfaces"],
-        "codeSnippet": "public interface Drawable {\n    void draw();\n}\n\npublic class Circle implements Drawable {\n    public void draw() { System.out.println(\"Circle\"); }\n}"
+        "difficultyScore": 38,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-003",
-        "title": "Polymorphism: Overriding",
-        "description": "Redefine a parent method.",
-        "context": "Use @Override to ensure correct signature matching.",
-        "category": "oop",
-        "difficultyScore": 32,
+        "id": "jv-int-rt-003",
+        "title": "Polimorfismo: Overriding",
+        "description": "Redefine un método del padre.",
+        "context": "La anotación @Override asegura que realmente estés sobrescribiendo un método de la clase base.",
+        "codeSnippet": "@Override\npublic String toString() {\n    return \"User: \" + this.name;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "polimorfismo"
+        ],
         "estimatedDuration": 45,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["polymorphism"],
-        "technicalNotes": ["Dynamic dispatch at runtime"],
-        "codeSnippet": "@Override\npublic String toString() {\n    return \"User: \" + this.name;\n}"
+        "difficultyScore": 32,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-004",
-        "title": "Abstract Classes",
-        "description": "Classes that cannot be instantiated.",
-        "category": "oop",
-        "difficultyScore": 40,
+        "id": "jv-int-rt-004",
+        "title": "Clases Abstractas",
+        "description": "Clases que no pueden ser instanciadas.",
+        "context": "Se usan como plantillas para otras clases, obligando a implementar ciertos métodos.",
+        "codeSnippet": "public abstract class Shape {\n    public abstract double area();\n    public void info() { System.out.println(\"Shape\"); }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "abstracción"
+        ],
         "estimatedDuration": 60,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["abstraction"],
-        "technicalNotes": ["Can contain implemented methods"],
-        "codeSnippet": "public abstract class Shape {\n    public abstract double area();\n    public void info() { System.out.println(\"Shape\"); }\n}"
+        "difficultyScore": 40,
+        "category": "classes"
       },
       {
-        "id": "jv-int-005",
-        "title": "Generics: Class Template",
-        "description": "Create a type-safe container.",
-        "category": "advanced",
-        "difficultyScore": 45,
+        "id": "jv-int-rt-005",
+        "title": "Genéricos: Plantilla de Clase",
+        "description": "Crea un contenedor seguro para tipos.",
+        "context": "Los genéricos permiten parametrizar tipos, evitando castings manuales y errores en runtime.",
+        "codeSnippet": "public class Box<T> {\n    private T content;\n    public void set(T t) { this.content = t; }\n    public T get() { return content; }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "genéricos"
+        ],
+        "concepts": [
+          "seguridad de tipos"
+        ],
         "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java", "generics"],
-        "concepts": ["type safety"],
-        "technicalNotes": ["T is a type parameter"],
-        "codeSnippet": "public class Box<T> {\n    private T content;\n    public void set(T t) { this.content = t; }\n    public T get() { return content; }\n}"
+        "difficultyScore": 45,
+        "category": "classes"
       },
       {
-        "id": "jv-int-006",
+        "id": "jv-int-rt-006",
         "title": "Lambdas: Runnable",
-        "description": "Functional interface implementation.",
-        "category": "functional",
-        "difficultyScore": 30,
+        "description": "Implementación de interfaz funcional.",
+        "context": "Sintaxis compacta para representar una acción que puede ejecutarse.",
+        "codeSnippet": "Runnable task = () -> System.out.println(\"Task running\");\nnew Thread(task).start();",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "lambda"
+        ],
+        "concepts": [
+          "clausuras",
+          "closures"
+        ],
         "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java", "lambda"],
-        "concepts": ["closures"],
-        "technicalNotes": ["Requires exactly one abstract method"],
-        "codeSnippet": "Runnable task = () -> System.out.println(\"Task running\");\nnew Thread(task).start();"
+        "difficultyScore": 30,
+        "category": "functional-programming"
       },
       {
-        "id": "jv-int-007",
-        "title": "Streams: Filter and Collect",
-        "description": "Process a collection functionally.",
-        "category": "functional",
+        "id": "jv-int-rt-007",
+        "title": "Streams: Filter y Collect",
+        "description": "Procesa una colección de forma funcional.",
+        "context": "Los Streams permiten manipular colecciones mediante pipelines de operaciones.",
+        "codeSnippet": "List<String> list = Arrays.asList(\"a\", \"bb\", \"ccc\");\nList<String> res = list.stream()\n    .filter(s -> s.length() > 1)\n    .collect(Collectors.toList());",
+        "typingStyle": "full",
+        "tags": [
+          "java",
+          "streams"
+        ],
+        "concepts": [
+          "tuberías",
+          "pipelines"
+        ],
+        "estimatedDuration": 60,
         "difficultyScore": 42,
-        "estimatedDuration": 60,
-        "typingStyle": "full",
-        "tags": ["java", "streams"],
-        "concepts": ["pipelines"],
-        "technicalNotes": ["Lazy evaluation"],
-        "codeSnippet": "List<String> list = Arrays.asList(\"a\", \"bb\", \"ccc\");\nList<String> res = list.stream()\n    .filter(s -> s.length() > 1)\n    .collect(Collectors.toList());"
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-008",
-        "title": "Optional: Null Safety",
-        "description": "Avoid NullPointerException.",
-        "category": "advanced",
-        "difficultyScore": 35,
+        "id": "jv-int-rt-008",
+        "title": "Optional: Seguridad contra Nulos",
+        "description": "Evita el NullPointerException.",
+        "context": "Provee un contenedor para representar valores que pueden o no estar presentes.",
+        "codeSnippet": "Optional<String> name = Optional.ofNullable(user.getName());\nString finalName = name.orElse(\"Guest\");",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "seguridad nula"
+        ],
         "estimatedDuration": 50,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["null safety"],
-        "codeSnippet": "Optional<String> name = Optional.ofNullable(user.getName());\nString finalName = name.orElse(\"Guest\");"
+        "difficultyScore": 35,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-009",
-        "title": "Exceptions: Custom",
-        "description": "Extend Exception class.",
-        "category": "errors",
-        "difficultyScore": 38,
+        "id": "jv-int-rt-009",
+        "title": "Excepciones: Personalizadas",
+        "description": "Extiende la clase Exception.",
+        "context": "Permite crear tus propios tipos de error específicos para tu lógica de negocio.",
+        "codeSnippet": "public class MyException extends Exception {\n    public MyException(String msg) { super(msg); }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "excepciones"
+        ],
         "estimatedDuration": 55,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["exceptions"],
-        "codeSnippet": "public class MyException extends Exception {\n    public MyException(String msg) { super(msg); }\n}"
+        "difficultyScore": 38,
+        "category": "validation"
       },
       {
-        "id": "jv-int-010",
-        "title": "Enums: with Methods",
-        "description": "Advanced enum features.",
-        "category": "advanced",
-        "difficultyScore": 40,
+        "id": "jv-int-rt-010",
+        "title": "Enums: con Métodos",
+        "description": "Funcionalidades avanzadas de enums.",
+        "context": "En Java, los enums son clases y pueden tener campos, constructores y métodos.",
+        "codeSnippet": "public enum Status {\n    ACTIVE(1), INACTIVE(0);\n    private int val;\n    Status(int v) { this.val = v; }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "enums"
+        ],
         "estimatedDuration": 60,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["enums"],
-        "codeSnippet": "public enum Status {\n    ACTIVE(1), INACTIVE(0);\n    private int val;\n    Status(int v) { this.val = v; }\n}"
+        "difficultyScore": 40,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-011",
+        "id": "jv-int-rt-011",
         "title": "Streams: Mapping",
-        "description": "Transform data in a stream.",
-        "category": "functional",
-        "difficultyScore": 38,
+        "description": "Transforma datos en un stream.",
+        "context": "La operación map permite convertir elementos de un tipo a otro.",
+        "codeSnippet": "List<Integer> counts = words.stream()\n    .map(String::length)\n    .collect(Collectors.toList());",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "mapeo",
+          "map"
+        ],
         "estimatedDuration": 55,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["map"],
-        "codeSnippet": "List<Integer> counts = words.stream()\n    .map(String::length)\n    .collect(Collectors.toList());"
+        "difficultyScore": 38,
+        "category": "arrays"
       },
       {
-        "id": "jv-int-012",
-        "title": "Collections: LinkedList",
-        "description": "Use list with pointers.",
-        "category": "collections",
-        "difficultyScore": 30,
+        "id": "jv-int-rt-012",
+        "title": "Colecciones: LinkedList",
+        "description": "Uso de lista basada en punteros.",
+        "context": "Eficiente para inserciones y eliminaciones frecuentes en ambos extremos.",
+        "codeSnippet": "LinkedList<Integer> queue = new LinkedList<>();\nqueue.addLast(1);\nint first = queue.removeFirst();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "estructuras enlazadas"
+        ],
         "estimatedDuration": 45,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["linked structures"],
-        "codeSnippet": "LinkedList<Integer> queue = new LinkedList<>();\nqueue.addLast(1);\nint first = queue.removeFirst();"
+        "difficultyScore": 30,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-013",
-        "title": "Generics: Wildcards",
-        "description": "Handle unknown types.",
-        "category": "advanced",
-        "difficultyScore": 50,
+        "id": "jv-int-rt-013",
+        "title": "Genéricos: Wildcards",
+        "description": "Maneja tipos desconocidos.",
+        "context": "El comodín (?) permite que un método acepte colecciones de cualquier tipo.",
+        "codeSnippet": "public void printList(List<?> list) {\n    for (Object obj : list) System.out.println(obj);\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "varianza",
+          "wildcards"
+        ],
         "estimatedDuration": 70,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["variance"],
-        "codeSnippet": "public void printList(List<?> list) {\n    for (Object obj : list) System.out.println(obj);\n}"
+        "difficultyScore": 50,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-014",
+        "id": "jv-int-rt-014",
         "title": "Lambdas: Comparator",
-        "description": "Sort with custom logic.",
-        "category": "functional",
-        "difficultyScore": 35,
-        "estimatedDuration": 50,
+        "description": "Ordenación con lógica personalizada.",
+        "context": "Permite definir criterios de ordenación al vuelo sin crear clases pesadas.",
+        "codeSnippet": "users.sort((u1, u2) -> u1.getAge() - u2.getAge());",
         "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sorting"],
-        "codeSnippet": "users.sort((u1, u2) -> u1.getAge() - u2.getAge());"
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "ordenamiento"
+        ],
+        "estimatedDuration": 50,
+        "difficultyScore": 35,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-015",
-        "title": "Inner Classes: Anonymous",
-        "description": "Instantiate interfaces on the fly.",
-        "category": "oop",
-        "difficultyScore": 42,
+        "id": "jv-int-rt-015",
+        "title": "Clases Internas: Anónimas",
+        "description": "Instancia interfaces en el momento.",
+        "context": "Forma tradicional (pre-Java 8) de implementar interfaces sobre la marcha.",
+        "codeSnippet": "new Thread(new Runnable() {\n    public void run() { System.out.println(\"Anon\"); }\n}).start();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "clases internas"
+        ],
         "estimatedDuration": 60,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["inner classes"],
-        "codeSnippet": "new Thread(new Runnable() {\n    public void run() { System.out.println(\"Anon\"); }\n}).start();"
+        "difficultyScore": 42,
+        "category": "classes"
       },
       {
-        "id": "jv-int-016",
-        "title": "Exceptions: Throws",
-        "description": "Propagate errors up the stack.",
-        "category": "errors",
-        "difficultyScore": 28,
+        "id": "jv-int-rt-016",
+        "title": "Excepciones: Throws",
+        "description": "Propaga errores hacia arriba en la pila.",
+        "context": "Declara que un método puede lanzar una excepción que debe ser manejada por quien lo llame.",
+        "codeSnippet": "public void readFile(String p) throws IOException {\n    throw new IOException(\"Missing file\");\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "excepciones comprobadas",
+          "checked exceptions"
+        ],
         "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["checked exceptions"],
-        "codeSnippet": "public void readFile(String p) throws IOException {\n    throw new IOException(\"Missing file\");\n}"
+        "difficultyScore": 28,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-017",
+        "id": "jv-int-rt-017",
         "title": "Streams: AnyMatch",
-        "description": "Check if conditions are met.",
-        "category": "functional",
-        "difficultyScore": 32,
-        "estimatedDuration": 45,
+        "description": "Comprueba si se cumplen condiciones.",
+        "context": "Retorna verdadero si al menos un elemento del stream cumple el predicado.",
+        "codeSnippet": "boolean hasAdmin = users.stream()\n    .anyMatch(u -> u.getRole().equals(\"ADMIN\"));",
         "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["short-circuiting"],
-        "codeSnippet": "boolean hasAdmin = users.stream()\n    .anyMatch(u -> u.getRole().equals(\"ADMIN\"));"
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "cortocircuito",
+          "short-circuiting"
+        ],
+        "estimatedDuration": 45,
+        "difficultyScore": 32,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-018",
-        "title": "Collections: TreeSet",
-        "description": "Store sorted unique elements.",
-        "category": "collections",
+        "id": "jv-int-rt-018",
+        "title": "Colecciones: TreeSet",
+        "description": "Almacena elementos únicos ordenados.",
+        "context": "Mantiene los elementos en su orden natural o según un comparador.",
+        "codeSnippet": "TreeSet<String> sortedSet = new TreeSet<>();\nsortedSet.add(\"Zebra\");\nsortedSet.add(\"Apple\");",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "ordenamiento"
+        ],
+        "estimatedDuration": 50,
         "difficultyScore": 36,
-        "estimatedDuration": 50,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sorting"],
-        "codeSnippet": "TreeSet<String> sortedSet = new TreeSet<>();\nsortedSet.add(\"Zebra\");\nsortedSet.add(\"Apple\");"
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-019",
-        "title": "Interfaces: Default Methods",
-        "description": "Add logic to interfaces safely.",
-        "category": "oop",
-        "difficultyScore": 40,
+        "id": "jv-int-rt-019",
+        "title": "Interfaces: Métodos por Defecto",
+        "description": "Añade lógica a interfaces de forma segura.",
+        "context": "Permite evolucionar interfaces sin romper las clases que ya las implementan.",
+        "codeSnippet": "public interface MyInterface {\n    default void log() { System.out.println(\"Default Log\"); }\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "funcionalidades java 8+"
+        ],
         "estimatedDuration": 55,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["java 8+ features"],
-        "codeSnippet": "public interface MyInterface {\n    default void log() { System.out.println(\"Default Log\"); }\n}"
+        "difficultyScore": 40,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-020",
-        "title": "Generics: Bounded Type",
-        "description": "Limit generic types to subclasses.",
-        "category": "advanced",
-        "difficultyScore": 48,
+        "id": "jv-int-rt-020",
+        "title": "Genéricos: Bounded Type",
+        "description": "Limita tipos genéricos a subclases.",
+        "context": "Restringe los parámetros de tipo para asegurar que tengan ciertas capacidades.",
+        "codeSnippet": "public <T extends Number> void logNum(T n) {\n    System.out.println(n.doubleValue());\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "restricciones",
+          "constraints"
+        ],
         "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["constraints"],
-        "codeSnippet": "public <T extends Number> void logNum(T n) {\n    System.out.println(n.doubleValue());\n}"
+        "difficultyScore": 48,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-021",
+        "id": "jv-int-rt-021",
         "title": "Lambdas: Function",
-        "description": "Standard functional interface.",
-        "category": "functional",
-        "difficultyScore": 35,
+        "description": "Interfaz funcional estándar.",
+        "context": "Representa una función que acepta un argumento y produce un resultado.",
+        "codeSnippet": "Function<String, Integer> parser = Integer::parseInt;\nint n = parser.apply(\"123\");",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "mapeo"
+        ],
         "estimatedDuration": 50,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["mapping"],
-        "codeSnippet": "Function<String, Integer> parser = Integer::parseInt;\nint n = parser.apply(\"123\");"
+        "difficultyScore": 35,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-022",
-        "title": "Collections: PriorityQueue",
-        "description": "Heap-based storage.",
-        "category": "collections",
-        "difficultyScore": 45,
+        "id": "jv-int-rt-022",
+        "title": "Colecciones: PriorityQueue",
+        "description": "Almacenamiento basado en prioridad (Heap).",
+        "context": "Los elementos se procesan según su prioridad natural o un comparador.",
+        "codeSnippet": "PriorityQueue<Integer> pq = new PriorityQueue<>();\npq.offer(10);\nint top = pq.poll();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "prioridad"
+        ],
         "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["priority"],
-        "codeSnippet": "PriorityQueue<Integer> pq = new PriorityQueue<>();\npq.offer(10);\nint top = pq.poll();"
+        "difficultyScore": 45,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-023",
+        "id": "jv-int-rt-023",
         "title": "Streams: Foreach",
-        "description": "Consume stream elements.",
-        "category": "functional",
-        "difficultyScore": 25,
+        "description": "Consume elementos del stream.",
+        "context": "Operación terminal para realizar una acción en cada elemento procesado.",
+        "codeSnippet": "list.stream().forEach(System.out::println);",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "operaciones terminales"
+        ],
         "estimatedDuration": 35,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["terminal operations"],
-        "codeSnippet": "list.stream().forEach(System.out::println);"
+        "difficultyScore": 25,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-024",
-        "title": "Final: Classes and Methods",
-        "description": "Prevent inheritance or overriding.",
-        "category": "oop",
-        "difficultyScore": 30,
+        "id": "jv-int-rt-024",
+        "title": "Final: Clases y Métodos",
+        "description": "Evita la herencia o la sobrescritura.",
+        "context": "Usa 'final' para asegurar la inmutabilidad de la estructura de tus clases.",
+        "codeSnippet": "public final class Secure {\n    public final void lock() {}\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "finalidad"
+        ],
         "estimatedDuration": 45,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["finality"],
-        "codeSnippet": "public final class Secure {\n    public final void lock() {}\n}"
+        "difficultyScore": 30,
+        "category": "classes"
       },
       {
-        "id": "jv-int-025",
-        "title": "Serialization: Transient",
-        "description": "Exclude fields from saving.",
-        "category": "advanced",
+        "id": "jv-int-rt-025",
+        "title": "Serialización: Transient",
+        "description": "Excluye campos del guardado persistente.",
+        "context": "Evita que datos sensibles o temporales sean serializados.",
+        "codeSnippet": "public class Session implements Serializable {\n    private transient String password;\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "serialización"
+        ],
+        "estimatedDuration": 75,
         "difficultyScore": 55,
-        "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["serialization"],
-        "codeSnippet": "public class Session implements Serializable {\n    private transient String password;\n}"
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-026",
-        "title": "Exceptions: Multi-catch",
-        "description": "Handle multiple types in one block.",
-        "category": "errors",
-        "difficultyScore": 32,
+        "id": "jv-int-rt-026",
+        "title": "Excepciones: Multi-catch",
+        "description": "Maneja múltiples tipos en un solo bloque.",
+        "context": "Sintaxis más limpia para cuando varios errores requieren el mismo tratamiento.",
+        "codeSnippet": "try {\n    // code\n} catch (IOException | SQLException e) {\n    e.printStackTrace();\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "excepciones"
+        ],
         "estimatedDuration": 45,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["exceptions"],
-        "codeSnippet": "try {\n    // code\n} catch (IOException | SQLException e) {\n    e.printStackTrace();\n}"
+        "difficultyScore": 32,
+        "category": "validation"
       },
       {
-        "id": "jv-int-027",
+        "id": "jv-int-rt-027",
         "title": "Streams: Reduce",
-        "description": "Combine elements into a single result.",
-        "category": "functional",
-        "difficultyScore": 45,
-        "estimatedDuration": 65,
+        "description": "Combina elementos en un solo resultado.",
+        "context": "Operación terminal para realizar agregaciones personalizadas.",
+        "codeSnippet": "int sum = numbers.stream().reduce(0, (a, b) -> a + b);",
         "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["accumulation"],
-        "codeSnippet": "int sum = numbers.stream().reduce(0, (a, b) -> a + b);"
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "acumulación"
+        ],
+        "estimatedDuration": 65,
+        "difficultyScore": 45,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-028",
-        "title": "Collections: TreeMap",
-        "description": "Store sorted key-value pairs.",
-        "category": "collections",
+        "id": "jv-int-rt-028",
+        "title": "Colecciones: TreeMap",
+        "description": "Almacena pares clave-valor ordenados.",
+        "context": "Mantiene las claves ordenadas alfabética o numéricamente de forma automática.",
+        "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"A\", 1);\nString firstKey = map.firstKey();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "ordenamiento"
+        ],
+        "estimatedDuration": 55,
         "difficultyScore": 40,
-        "estimatedDuration": 55,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["sorting"],
-        "codeSnippet": "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(\"A\", 1);\nString firstKey = map.firstKey();"
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-029",
-        "title": "Inner Classes: Static",
-        "description": "Nested classes that don't need outer instance.",
-        "category": "oop",
+        "id": "jv-int-rt-029",
+        "title": "Clases Internas: Estáticas",
+        "description": "Clases anidadas que no necesitan instancia externa.",
+        "context": "Se comportan como clases normales pero agrupadas lógicamente dentro de otra.",
+        "codeSnippet": "public class Outer {\n    public static class Inner {}\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "anidamiento"
+        ],
+        "estimatedDuration": 55,
         "difficultyScore": 38,
-        "estimatedDuration": 55,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["nesting"],
-        "codeSnippet": "public class Outer {\n    public static class Inner {}\n}"
+        "category": "classes"
       },
       {
-        "id": "jv-int-030",
+        "id": "jv-int-rt-030",
         "title": "Streams: Distinct",
-        "description": "Remove duplicates from a stream.",
-        "category": "functional",
+        "description": "Elimina duplicados de un stream.",
+        "context": "Usa los métodos equals() y hashCode() para identificar elementos únicos.",
+        "codeSnippet": "List<Integer> unique = list.stream()\n    .distinct()\n    .collect(Collectors.toList());",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "filtrado"
+        ],
+        "estimatedDuration": 40,
         "difficultyScore": 30,
-        "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["filtering"],
-        "codeSnippet": "List<Integer> unique = list.stream()\n    .distinct()\n    .collect(Collectors.toList());"
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-031",
-        "title": "Reflection: Basic Info",
-        "description": "Inspect classes at runtime.",
-        "category": "advanced",
-        "difficultyScore": 60,
+        "id": "jv-int-rt-031",
+        "title": "Reflection: Información Básica",
+        "description": "Inspecciona clases en tiempo de ejecución.",
+        "context": "Permite analizar la estructura de los objetos (nombres, métodos, campos) dinámicamente.",
+        "codeSnippet": "Class<?> cls = obj.getClass();\nString name = cls.getName();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "introspección"
+        ],
         "estimatedDuration": 80,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["introspection"],
-        "codeSnippet": "Class<?> cls = obj.getClass();\nString name = cls.getName();"
+        "difficultyScore": 60,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-032",
-        "title": "Collections: Iterator",
-        "description": "Safe collection traversal.",
-        "category": "collections",
-        "difficultyScore": 28,
+        "id": "jv-int-rt-032",
+        "title": "Colecciones: Iterator",
+        "description": "Recorrido seguro de colecciones.",
+        "context": "Forma robusta de iterar y opcionalmente eliminar elementos mientras recorres.",
+        "codeSnippet": "Iterator<String> it = list.iterator();\nwhile(it.hasNext()) {\n    String s = it.next();\n}",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "iteración"
+        ],
         "estimatedDuration": 40,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["iteration"],
-        "codeSnippet": "Iterator<String> it = list.iterator();\nwhile(it.hasNext()) {\n    String s = it.next();\n}"
+        "difficultyScore": 28,
+        "category": "loops"
       },
       {
-        "id": "jv-int-033",
+        "id": "jv-int-rt-033",
         "title": "Streams: FlatMap",
-        "description": "Flatten nested structures.",
-        "category": "functional",
-        "difficultyScore": 52,
+        "description": "Aplanado de estructuras anidadas.",
+        "context": "Convierte un stream de colecciones en un solo stream de elementos.",
+        "codeSnippet": "List<String> flat = nested.stream()\n    .flatMap(Collection::stream)\n    .collect(Collectors.toList());",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "aplanamiento"
+        ],
         "estimatedDuration": 75,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["flattening"],
-        "codeSnippet": "List<String> flat = nested.stream()\n    .flatMap(Collection::stream)\n    .collect(Collectors.toList());"
+        "difficultyScore": 52,
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-034",
-        "title": "Concurrency: AtomicInteger",
-        "description": "Thread-safe counters.",
-        "category": "advanced",
+        "id": "jv-int-rt-034",
+        "title": "Concurrencia: AtomicInteger",
+        "description": "Contadores seguros para hilos.",
+        "context": "Permite realizar operaciones atómicas sin necesidad de bloqueos pesados (synchronized).",
+        "codeSnippet": "AtomicInteger counter = new AtomicInteger(0);\nint next = counter.incrementAndGet();",
+        "typingStyle": "full",
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "atomicidad"
+        ],
+        "estimatedDuration": 65,
         "difficultyScore": 45,
-        "estimatedDuration": 65,
-        "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["atomicity"],
-        "codeSnippet": "AtomicInteger counter = new AtomicInteger(0);\nint next = counter.incrementAndGet();"
+        "category": "algorithms"
       },
       {
-        "id": "jv-int-035",
+        "id": "jv-int-rt-035",
         "title": "Streams: SummaryStatistics",
-        "description": "Get multiple stats at once.",
-        "category": "functional",
-        "difficultyScore": 48,
-        "estimatedDuration": 65,
+        "description": "Obtén múltiples estadísticas a la vez.",
+        "context": "Calcula de un solo paso el conteo, suma, mínimo, máximo y promedio.",
+        "codeSnippet": "IntSummaryStatistics stats = list.stream()\n    .mapToInt(x -> x)\n    .summaryStatistics();",
         "typingStyle": "full",
-        "tags": ["java"],
-        "concepts": ["statistics"],
-        "codeSnippet": "IntSummaryStatistics stats = list.stream()\n    .mapToInt(x -> x)\n    .summaryStatistics();"
+        "tags": [
+          "java"
+        ],
+        "concepts": [
+          "estadísticas"
+        ],
+        "estimatedDuration": 65,
+        "difficultyScore": 48,
+        "category": "algorithms"
       }
     ]
   }

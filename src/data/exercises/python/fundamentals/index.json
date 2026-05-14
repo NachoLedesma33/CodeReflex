@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["basics", "syntax", "data-types", "functions", "logic"],
-  "concepts": ["variables", "lists", "strings", "dicts", "loops", "conditionals"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["básicos", "sintaxis", "tipos-de-datos", "funciones", "lógica"],
+  "concepts": ["variables", "listas", "cadenas", "diccionarios", "bucles", "condicionales"],
+  "lastUpdated": "2026-05-14"
 }

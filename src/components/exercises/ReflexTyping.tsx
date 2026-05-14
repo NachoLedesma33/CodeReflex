@@ -333,7 +333,7 @@ export function ReflexTyping({
                   <div className="flex items-center gap-2">
                     <Target className="w-4 h-4 text-green-500" />
                     <span className="text-sm font-medium">{metrics.accuracy}%</span>
-                    <span className="text-xs text-zinc-500">Accuracy</span>
+                    <span className="text-xs text-zinc-500">Precisión</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4 text-blue-500" />
@@ -352,20 +352,20 @@ export function ReflexTyping({
 
                 {sessionState === 'idle' && (
                   <div className="text-sm text-zinc-400">
-                    Start typing to begin...
+                    Empieza a escribir para comenzar...
                   </div>
                 )}
                 {sessionState === 'running' && (
                   <Button onClick={pauseSession} variant="secondary" size="md">
                     <Pause className="w-4 h-4 mr-2" />
-                    Pause
+                    Pausar
                   </Button>
                 )}
                 {sessionState === 'paused' && (
                   <div className="flex gap-2">
                     <Button onClick={resumeSession} size="md">
                       <Play className="w-4 h-4 mr-2" />
-                      Resume
+                      Continuar
                     </Button>
                     <Button onClick={resetSession} variant="ghost" size="md">
                       <RotateCcw className="w-4 h-4" />
@@ -406,7 +406,7 @@ export function ReflexTyping({
                 disabled={isFirst}
               >
                 <ChevronLeft className="w-4 h-4 mr-1" />
-                Previous
+                Anterior
               </Button>
               <span className="text-xs text-zinc-500">
                 {currentIndex + 1} / {filteredExercises.length}
@@ -417,7 +417,7 @@ export function ReflexTyping({
                 onClick={onNext || (() => getNextExercise())}
                 disabled={isLast}
               >
-                Next
+                Siguiente
                 <ChevronRight className="w-4 h-4 ml-1" />
               </Button>
             </div>

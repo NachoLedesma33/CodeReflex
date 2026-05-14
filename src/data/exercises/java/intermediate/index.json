@@ -4,7 +4,7 @@
   "reflexCount": 35,
   "guidedCount": 0,
   "totalCount": 35,
-  "tags": ["oop", "generics", "lambdas", "streams", "collections"],
-  "concepts": ["inheritance", "interfaces", "functional-programming", "null-safety", "concurrency"],
-  "lastUpdated": "2026-05-12"
+  "tags": ["poo", "genéricos", "lambdas", "streams", "colecciones"],
+  "concepts": ["herencia", "interfaces", "programación-funcional", "seguridad-nula", "concurrencia"],
+  "lastUpdated": "2026-05-14"
 }
