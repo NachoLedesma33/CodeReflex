@@ -24,22 +24,24 @@ interface StatsPanelProps {
   compact?: boolean;
 }
 
-const ACHIEVEMENTS = [
-  { id: 'first-exercise', name: 'Primeros Pasos', description: 'Completa tu primer ejercicio', icon: '🎯', requirement: 1, category: 'volume' },
-  { id: 'ten-exercises', name: 'Comenzando', description: 'Completa 10 ejercicios', icon: '🚀', requirement: 10, category: 'volume' },
-  { id: 'fifty-exercises', name: 'Dedicado', description: 'Completa 50 ejercicios', icon: '💪', requirement: 50, category: 'volume' },
-  { id: 'wpm-30', name: 'Velocidad Base', description: 'Alcanza 30 WPM', icon: '⚡', requirement: 30, category: 'speed' },
-  { id: 'wpm-50', name: 'Mecanógrafo Rápido', description: 'Alcanza 50 WPM', icon: '🔥', requirement: 50, category: 'speed' },
-  { id: 'wpm-80', name: 'Rayo', description: 'Alcanza 80 WPM', icon: '🌩️', requirement: 80, category: 'speed' },
-  { id: 'accuracy-90', name: 'Precisión', description: 'Logra 90% de precisión', icon: '🎯', requirement: 90, category: 'accuracy' },
-  { id: 'accuracy-99', name: 'Perfección', description: 'Logra 99% de precisión', icon: '💎', requirement: 99, category: 'accuracy' },
-  { id: 'streak-3', name: 'Consistente', description: 'Racha de 3 días', icon: '📅', requirement: 3, category: 'streak' },
-  { id: 'streak-7', name: 'Guerrero Semanal', description: 'Racha de 7 días', icon: '🗓️', requirement: 7, category: 'streak' },
-  { id: 'streak-30', name: 'Maestro Mensual', description: 'Racha de 30 días', icon: '🏆', requirement: 30, category: 'streak' },
-  { id: 'js-master', name: 'Ninja JS', description: 'Completa todos los ejercicios de JS', icon: 'javascript', category: 'language' },
-  { id: 'ts-master', name: 'Maestro TS', description: 'Completa todos los ejercicios de TS', icon: 'typescript', category: 'language' },
-  { id: 'py-master', name: 'Python Pro', description: 'Completa todos los ejercicios de Python', icon: 'python', category: 'language' },
-  { id: 'java-master', name: 'Experto Java', description: 'Completa todos los ejercicios de Java', icon: 'java', category: 'language' },
+import { Achievement } from '@/types';
+
+const ACHIEVEMENTS: Achievement[] = [
+  { id: 'first-exercise', name: 'Primeros Pasos', description: 'Completa tu primer ejercicio', icon: '🎯', requirement: 1, category: 'volume', xpReward: 10 },
+  { id: 'ten-exercises', name: 'Comenzando', description: 'Completa 10 ejercicios', icon: '🚀', requirement: 10, category: 'volume', xpReward: 50 },
+  { id: 'fifty-exercises', name: 'Dedicado', description: 'Completa 50 ejercicios', icon: '💪', requirement: 50, category: 'volume', xpReward: 100 },
+  { id: 'wpm-30', name: 'Velocidad Base', description: 'Alcanza 30 WPM', icon: '⚡', requirement: 30, category: 'speed', xpReward: 25 },
+  { id: 'wpm-50', name: 'Mecanógrafo Rápido', description: 'Alcanza 50 WPM', icon: '🔥', requirement: 50, category: 'speed', xpReward: 50 },
+  { id: 'wpm-80', name: 'Rayo', description: 'Alcanza 80 WPM', icon: '🌩️', requirement: 80, category: 'speed', xpReward: 100 },
+  { id: 'accuracy-90', name: 'Precisión', description: 'Logra 90% de precisión', icon: '🎯', requirement: 90, category: 'accuracy', xpReward: 25 },
+  { id: 'accuracy-99', name: 'Perfección', description: 'Logra 99% de precisión', icon: '💎', requirement: 99, category: 'accuracy', xpReward: 100 },
+  { id: 'streak-3', name: 'Consistente', description: 'Racha de 3 días', icon: '📅', requirement: 3, category: 'streak', xpReward: 30 },
+  { id: 'streak-7', name: 'Guerrero Semanal', description: 'Racha de 7 días', icon: '🗓️', requirement: 7, category: 'streak', xpReward: 75 },
+  { id: 'streak-30', name: 'Maestro Mensual', description: 'Racha de 30 días', icon: '🏆', requirement: 30, category: 'streak', xpReward: 200 },
+  { id: 'js-master', name: 'Ninja JS', description: 'Completa todos los ejercicios de JS', icon: 'javascript', category: 'language', requirement: 0, xpReward: 200 },
+  { id: 'ts-master', name: 'Maestro TS', description: 'Completa todos los ejercicios de TS', icon: 'typescript', category: 'language', requirement: 0, xpReward: 200 },
+  { id: 'py-master', name: 'Python Pro', description: 'Completa todos los ejercicios de Python', icon: 'python', category: 'language', requirement: 0, xpReward: 200 },
+  { id: 'java-master', name: 'Experto Java', description: 'Completa todos los ejercicios de Java', icon: 'java', category: 'language', requirement: 0, xpReward: 200 },
 ];
 
 export function StatsPanel({ className, compact = false }: StatsPanelProps) {

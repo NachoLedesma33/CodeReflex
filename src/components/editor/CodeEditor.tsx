@@ -15,7 +15,6 @@ interface CodeEditorProps {
   blanks?: BlankPosition[];
   mode?: 'read' | 'write';
   onChange?: (code: string) => void;
-  onComplete?: (success: boolean) => void;
   showGhostText?: boolean;
   highlightErrors?: boolean;
   correctPositions?: number[];
@@ -44,7 +43,6 @@ export function CodeEditor({
   blanks,
   mode = 'write',
   onChange,
-  onComplete,
   showGhostText = true,
   highlightErrors = true,
   correctPositions = [],
@@ -55,23 +53,12 @@ export function CodeEditor({
   const monacoRef = useRef<Parameters<OnMount>[1] | null>(null);
   const decorationsRef = useRef<string[]>([]);
   const modeRef = useRef(mode);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   useEffect(() => {
     modeRef.current = mode;
   }, [mode]);
 
-  const checkCompletion = useCallback((code: string) => {
-    if (isCompleted) return;
 
-    const normalizedExpected = expectedCode.replace(/\s+/g, ' ').trim();
-    const normalizedCode = code.replace(/\s+/g, ' ').trim();
-
-    if (normalizedCode === normalizedExpected) {
-      setIsCompleted(true);
-      onComplete?.(true);
-    }
-  }, [expectedCode, isCompleted, onComplete]);
 
   // Store integrations
   const { 
@@ -94,49 +81,49 @@ export function CodeEditor({
     normalizedExpectedRef.current = expectedCode.replace(/\r\n/g, '\n').replace(/\t/g, '  ');
   }, [expectedCode]);
 
-  const updateDecorations = useCallback((overrideCode?: string) => {
-    if (!editorRef.current || !monacoRef.current) return;
-    
+  const updateDecorations = useCallback(() => {
     const editor = editorRef.current;
     const monaco = monacoRef.current;
+    if (!editor || !monaco) return;
+    
     const model = editor.getModel();
     if (!model) return;
 
     if (modeRef.current !== 'write') return;
 
-    // Use LF to ensure consistent indexing with our normalized expected code
-    const modelValue = model.getValue(monaco.editor.EndOfLinePreference.LF);
-    const normalizedExpected = normalizedExpectedRef.current;
-    
-    const decorations: monaco.editor.IModelDeltaDecoration[] = [];
-    const len = Math.min(modelValue.length, normalizedExpected.length);
+    const decorations: import('monaco-editor').editor.IModelDeltaDecoration[] = [];
 
-    for (let i = 0; i < len; i++) {
-      const isCorrect = modelValue[i] === normalizedExpected[i];
-      if (!isCorrect && !highlightErrors) continue;
-
-      const startPos = model.getPositionAt(i);
-      const endPos = model.getPositionAt(i + 1);
-      
+    for (const idx of correctPositions) {
+      const startPos = model.getPositionAt(idx);
+      const endPos = model.getPositionAt(idx + 1);
       if (!startPos || !endPos) continue;
-      
       decorations.push({
-        range: new monaco.Range(
-          startPos.lineNumber,
-          startPos.column,
-          endPos.lineNumber,
-          endPos.column
-        ),
+        range: new monaco.Range(startPos.lineNumber, startPos.column, endPos.lineNumber, endPos.column),
         options: {
-          inlineClassName: isCorrect ? 'correct-char' : 'error-char',
+          inlineClassName: 'correct-char',
           stickiness: monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges
         },
       });
     }
 
+    if (highlightErrors) {
+      for (const idx of errorPositions) {
+        const startPos = model.getPositionAt(idx);
+        const endPos = model.getPositionAt(idx + 1);
+        if (!startPos || !endPos) continue;
+        decorations.push({
+          range: new monaco.Range(startPos.lineNumber, startPos.column, endPos.lineNumber, endPos.column),
+          options: {
+            inlineClassName: 'error-char',
+            stickiness: monaco.editor.TrackedRangeStickiness.NeverGrowsWhenTypingAtEdges
+          },
+        });
+      }
+    }
+
     const oldDecorations = decorationsRef.current;
     decorationsRef.current = editor.deltaDecorations(oldDecorations, decorations);
-  }, [highlightErrors]);
+  }, [correctPositions, errorPositions, highlightErrors]);
 
   // ============================================
   // EDITOR MOUNT
@@ -199,9 +186,6 @@ export function CodeEditor({
     editor.onDidChangeModelContent(() => {
       const value = editor.getValue();
       onChange?.(value);
-      checkCompletion(value);
-      
-      // Usar requestAnimationFrame para asegurar que el modelo se ha estabilizado
       requestAnimationFrame(() => {
         updateDecorations();
       });
@@ -234,7 +218,7 @@ export function CodeEditor({
       
       editorDomNode.addEventListener('paste', handlePaste as any, true);
     }
-  }, [theme, onChange, checkCompletion, updateDecorations]);
+  }, [theme, onChange, updateDecorations]);
 
   // Handle content - read mode shows expected, write mode shows current + ghost
   useEffect(() => {
@@ -249,8 +233,7 @@ export function CodeEditor({
       const currentValue = editorRef.current.getValue();
       if (currentValue !== currentCode) {
         editorRef.current.setValue(currentCode || '');
-        // Forzar actualización de decoraciones al cambiar el código desde afuera
-        updateDecorations(currentCode || '');
+        updateDecorations();
       }
     }
   }, [expectedCode, mode, currentCode, updateDecorations]);

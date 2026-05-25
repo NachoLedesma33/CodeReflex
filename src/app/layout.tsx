@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
@@ -20,7 +20,12 @@ export const metadata: Metadata = {
   description: "Domina la programación a través de la práctica reflex y la resolución de problemas guiados. Prepárate para entrevistas técnicas con ejercicios del mundo real.",
   keywords: ["coding", "programming", "training", "typing", "reflex", "interview", "practice"],
   authors: [{ name: "CodeReflex" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

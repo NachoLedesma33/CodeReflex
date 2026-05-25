@@ -94,7 +94,6 @@ export function ReflexTyping({
     expectedCode,
     blanks,
     enabled: sessionState === 'running',
-    onComplete: handleExerciseComplete,
     debounceMs: 50,
     throttleMs: 30,
   });
@@ -164,11 +163,7 @@ export function ReflexTyping({
     syncText(code);
   }, [sessionState, syncText]);
 
-  const handleEditorComplete = useCallback((success: boolean) => {
-    if (success) {
-      handleExerciseComplete(metrics);
-    }
-  }, [handleExerciseComplete, metrics]);
+
 
   const formatTime = (ms: number): string => {
     const seconds = Math.floor(ms / 1000);
@@ -248,7 +243,6 @@ export function ReflexTyping({
               blanks={blanks}
               mode={sessionState === 'completed' ? 'read' : 'write'}
               onChange={handleCodeChange}
-              onComplete={handleEditorComplete}
               showGhostText={sessionState !== 'completed'}
               highlightErrors={true}
               correctPositions={correctPositions}
@@ -291,16 +285,15 @@ export function ReflexTyping({
                 <div className="flex flex-col gap-3">
                   <div className="grid grid-cols-2 gap-3">
                     <Button 
-                      variant="outline" 
+                      variant="secondary"
                       onClick={onPrevious || (() => getPreviousExercise())}
                       disabled={isFirst}
-                      className="border-zinc-700 hover:bg-zinc-800"
                     >
                       <ChevronLeft className="w-4 h-4 mr-2" />
                       Anterior
                     </Button>
                     <Button 
-                      variant="outline"
+                      variant="secondary"
                       onClick={onNext || (() => getNextExercise())}
                       disabled={isLast}
                       className="border-zinc-700 hover:bg-zinc-800"
