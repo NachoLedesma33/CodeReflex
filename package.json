@@ -14,6 +14,7 @@
     "commit": "node scripts/quick-commit.js"
   },
   "dependencies": {
+    "@fontsource/cascadia-code": "^5.2.3",
     "@monaco-editor/react": "^4.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",

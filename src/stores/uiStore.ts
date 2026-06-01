@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 import { ExerciseType, ProgrammingLanguage, DifficultyLevel } from '@/types';
 
 type Theme = 'dark' | 'light';
-type FontFamily = 'monaco' | 'fira-code' | 'jetbrains-mono';
+type FontFamily = 'cascadia-code' | 'monaco' | 'fira-code' | 'jetbrains-mono';
 
 interface UIState {
   // ============================================
@@ -199,8 +199,8 @@ const initialState = {
   completionSound: true,
   
   // Editor
-  editorFontFamily: 'monaco' as FontFamily,
-  editorFontSize: 14,
+  editorFontFamily: 'cascadia-code' as FontFamily,
+  editorFontSize: 16,
   editorLineHeight: 1.5,
   editorTabSize: 2,
   showLineNumbers: true,
