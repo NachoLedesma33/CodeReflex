@@ -233,9 +233,9 @@ export function GuidedProblem({
 
   const renderMarkdown = (text: string): string => {
     return text
-      .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-zinc-200">$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em class="text-zinc-300">$1</em>')
-      .replace(/`(.+?)`/g, '<code class="bg-zinc-800 px-1 rounded text-blue-400 text-sm">$1</code>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-text-primary">$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em class="text-text-primary">$1</em>')
+      .replace(/`(.+?)`/g, '<code class="bg-bg-elevated px-1 rounded text-blue-400 text-sm">$1</code>')
       .replace(/\n/g, '<br/>');
   };
 
@@ -254,10 +254,10 @@ export function GuidedProblem({
               )}>
                 {exercise.level}
               </span>
-              <span className="text-xs text-zinc-500 uppercase">{exercise.language}</span>
-              <span className="text-xs text-zinc-600">• {exercise.category}</span>
+              <span className="text-xs text-text-muted uppercase">{exercise.language}</span>
+              <span className="text-xs text-text-muted">• {exercise.category}</span>
             </div>
-            <h2 className="text-lg font-semibold text-zinc-100 truncate">{exercise.title}</h2>
+            <h2 className="text-lg font-semibold text-text-primary truncate">{exercise.title}</h2>
           </div>
           <div className="flex items-center gap-2">
             <Button
@@ -269,7 +269,7 @@ export function GuidedProblem({
               {isFavoriteCurrent ? (
                 <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
               ) : (
-                <StarOff className="w-5 h-5 text-zinc-500" />
+                <StarOff className="w-5 h-5 text-text-muted" />
               )}
             </Button>
             <Button
@@ -283,7 +283,7 @@ export function GuidedProblem({
           </div>
         </CardHeader>
 
-        <CardContent className="flex-1 overflow-y-auto space-y-4 p-4">
+        <CardContent className="flex-1 overflow-y-auto custom-scrollbar space-y-4 p-4">
           <div className="flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
               <span className={cn(
@@ -299,7 +299,7 @@ export function GuidedProblem({
                 {phase === 'completed' && '✅ Completado'}
               </span>
             </div>
-            <div className="flex items-center gap-3 text-zinc-500">
+            <div className="flex items-center gap-3 text-text-muted">
               <span className="flex items-center gap-1">
                 <Clock className="w-3 h-3" />
                 {formatTime(elapsedTime)}
@@ -312,7 +312,7 @@ export function GuidedProblem({
               <div className="space-y-2">
                 <button
                   onClick={() => toggleSection('problem')}
-                  className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100 w-full"
+                  className="flex items-center gap-2 text-sm font-medium text-text-primary hover:text-text-primary w-full"
                 >
                   <FileText className="w-4 h-4" />
                   Descripción del Problema
@@ -324,7 +324,7 @@ export function GuidedProblem({
                 </button>
                 {expandedSections.has('problem') && (
                   <div 
-                    className="bg-zinc-800/50 rounded-lg p-4 text-sm text-zinc-400 border border-zinc-700/50"
+                    className="bg-bg-elevated/50 rounded-lg p-4 text-sm text-text-secondary border border-border-strong/50"
                     dangerouslySetInnerHTML={{ __html: renderMarkdown(exercise.description) }}
                   />
                 )}
@@ -334,22 +334,22 @@ export function GuidedProblem({
                 <div className="space-y-2">
                   <button
                     onClick={() => toggleSection('theory')}
-                    className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100 w-full"
-                  >
-                    <BookOpen className="w-4 h-4" />
-                    Teoría y Contexto
-                    {expandedSections.has('theory') ? (
-                      <ChevronUp className="w-4 h-4 ml-auto" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 ml-auto" />
-                    )}
-                  </button>
-                  {expandedSections.has('theory') && (
-                    <div 
-                      className="bg-zinc-800/50 rounded-lg p-4 text-sm text-zinc-400 border border-zinc-700/50"
-                      dangerouslySetInnerHTML={{ __html: renderMarkdown(exercise.context) }}
-                    />
+                  className="flex items-center gap-2 text-sm font-medium text-text-primary hover:text-text-primary w-full"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  Teoría y Contexto
+                  {expandedSections.has('theory') ? (
+                    <ChevronUp className="w-4 h-4 ml-auto" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 ml-auto" />
                   )}
+                </button>
+                {expandedSections.has('theory') && (
+                  <div 
+                    className="bg-bg-elevated/50 rounded-lg p-4 text-sm text-text-secondary border border-border-strong/50"
+                    dangerouslySetInnerHTML={{ __html: renderMarkdown(exercise.context) }}
+                  />
+                )}
                 </div>
               )}
 
@@ -357,31 +357,31 @@ export function GuidedProblem({
                 <div className="space-y-2">
                   <button
                     onClick={() => toggleSection('notes')}
-                    className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100 w-full"
-                  >
-                    <Code2 className="w-4 h-4" />
-                    Notas Técnicas ({technicalNotes.length})
-                    {expandedSections.has('notes') ? (
-                      <ChevronUp className="w-4 h-4 ml-auto" />
-                    ) : (
-                      <ChevronDown className="w-4 h-4 ml-auto" />
-                    )}
-                  </button>
-                  {expandedSections.has('notes') && (
-                    <div className="space-y-2">
-                      {technicalNotes.map((note, i) => (
-                        <div key={note.id || i} className="bg-zinc-800/50 rounded-lg p-3 border border-zinc-700/50">
-                          <div className="text-sm font-medium text-zinc-300 mb-1">{note.title}</div>
-                          <div className="text-xs text-zinc-500">{note.description}</div>
-                          {note.codeExample && (
-                            <pre className="mt-2 bg-zinc-900 p-2 rounded text-xs text-zinc-400 overflow-x-auto">
-                              {note.codeExample}
-                            </pre>
-                          )}
-                        </div>
-                      ))}
-                    </div>
+                  className="flex items-center gap-2 text-sm font-medium text-text-primary hover:text-text-primary w-full"
+                >
+                  <Code2 className="w-4 h-4" />
+                  Notas Técnicas ({technicalNotes.length})
+                  {expandedSections.has('notes') ? (
+                    <ChevronUp className="w-4 h-4 ml-auto" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 ml-auto" />
                   )}
+                </button>
+                {expandedSections.has('notes') && (
+                  <div className="space-y-2">
+                    {technicalNotes.map((note, i) => (
+                      <div key={note.id || i} className="bg-bg-elevated/50 rounded-lg p-3 border border-border-strong/50">
+                        <div className="text-sm font-medium text-text-primary mb-1">{note.title}</div>
+                        <div className="text-xs text-text-muted">{note.description}</div>
+                        {note.codeExample && (
+                          <pre className="mt-2 bg-bg-surface p-2 rounded text-xs text-text-secondary overflow-x-auto">
+                            {note.codeExample}
+                          </pre>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
                 </div>
               )}
 
@@ -390,10 +390,10 @@ export function GuidedProblem({
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => toggleSection('hints')}
-                      className="flex items-center gap-2 text-sm font-medium text-zinc-300 hover:text-zinc-100"
-                    >
-                      <Lightbulb className="w-4 h-4" />
-                      Pistas ({revealedHints}/{hints.length})
+                  className="flex items-center gap-2 text-sm font-medium text-text-primary hover:text-text-primary"
+                >
+                  <Lightbulb className="w-4 h-4" />
+                  Pistas ({revealedHints}/{hints.length})
                     </button>
                     {revealedHints < hints.length && (
                       <Button variant="ghost" size="sm" onClick={revealNextHint}>
@@ -428,8 +428,8 @@ export function GuidedProblem({
 
           {(phase === 'coding' || phase === 'testing' || phase === 'completed') && (
             <div className="space-y-4">
-              <div className="bg-zinc-800/50 rounded-lg p-3 text-sm text-zinc-400 border border-zinc-700/50">
-                <div className="font-medium text-zinc-300 mb-1">Problema:</div>
+              <div className="bg-bg-elevated/50 rounded-lg p-3 text-sm text-text-secondary border border-border-strong/50">
+                <div className="font-medium text-text-primary mb-1">Problema:</div>
                 {exercise.description.split('\n').slice(0, 3).join('\n')}
                 {exercise.description.split('\n').length > 3 && '...'}
               </div>
@@ -469,36 +469,36 @@ export function GuidedProblem({
 
               {testStates.length > 0 && (
                 <div className="space-y-2">
-                  <div className="text-sm font-medium text-zinc-400">Resultados:</div>
+                  <div className="text-sm font-medium text-text-secondary">Resultados:</div>
                   {testStates.map((test, i) => (
                     <div
                       key={test.id}
                       className={cn(
                         'rounded-lg p-3 border',
-                        test.passed === null && 'bg-zinc-800/30 border-zinc-700',
+                        test.passed === null && 'bg-bg-elevated/30 border-border',
                         test.passed === true && 'bg-green-500/10 border-green-500/30',
                         test.passed === false && 'bg-red-500/10 border-red-500/30',
                       )}
                     >
                       <div className="flex items-center gap-2 mb-1">
                         {test.passed === null && (
-                          <Clock className="w-4 h-4 text-zinc-500" />
-                        )}
-                        {test.passed === true && (
-                          <CheckCircle2 className="w-4 h-4 text-green-500" />
-                        )}
-                        {test.passed === false && (
-                          <XCircle className="w-4 h-4 text-red-500" />
-                        )}
-                        <span className="text-sm font-medium text-zinc-300">
-                          Prueba {i + 1}: {test.description}
-                        </span>
-                        {test.isHidden && <EyeOff className="w-3 h-3 text-zinc-600" />}
+                        <Clock className="w-4 h-4 text-text-muted" />
+                      )}
+                      {test.passed === true && (
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                      )}
+                      {test.passed === false && (
+                        <XCircle className="w-4 h-4 text-red-500" />
+                      )}
+                      <span className="text-sm font-medium text-text-primary">
+                        Prueba {i + 1}: {test.description}
+                      </span>
+                      {test.isHidden && <EyeOff className="w-3 h-3 text-text-muted" />}
                       </div>
                       {test.passed !== null && (
                         <div className="text-xs font-mono mt-1">
-                          <span className="text-zinc-500">Esperado: </span>
-                          <span className="text-zinc-400">{test.expected}</span>
+                          <span className="text-text-muted">Esperado: </span>
+                          <span className="text-text-secondary">{test.expected}</span>
                           {test.passed === false && (
                             <>
                               <br />
@@ -516,7 +516,7 @@ export function GuidedProblem({
               {phase === 'completed' && exercise.explanation && (
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <div className="text-sm font-medium text-zinc-400">Explicación de la Solución</div>
+                    <div className="text-sm font-medium text-text-secondary">Explicación de la Solución</div>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -528,7 +528,7 @@ export function GuidedProblem({
                   </div>
                   {showSolution && (
                     <>
-                      <div className="bg-zinc-800/50 rounded-lg p-4 text-sm text-zinc-400 border border-zinc-700/50">
+                      <div className="bg-bg-elevated/50 rounded-lg p-4 text-sm text-text-secondary border border-border-strong/50">
                         <pre className="whitespace-pre-wrap">{exercise.solution}</pre>
                       </div>
                       <div 
@@ -543,7 +543,7 @@ export function GuidedProblem({
           )}
         </CardContent>
 
-        <CardFooter className="pt-2 border-t border-zinc-700">
+        <CardFooter className="pt-2 border-t border-border-strong">
           <div className="flex items-center justify-between w-full">
             <Button
               variant="ghost"
@@ -554,7 +554,7 @@ export function GuidedProblem({
               <ChevronLeft className="w-4 h-4 mr-1" />
               Anterior
             </Button>
-            <span className="text-xs text-zinc-500">
+            <span className="text-xs text-text-muted">
               {currentIndex + 1} / {filteredExercises.length}
             </span>
             <Button

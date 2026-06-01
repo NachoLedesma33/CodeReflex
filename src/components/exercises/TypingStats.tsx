@@ -77,7 +77,7 @@ export function TypingStats({
   return (
     <Card variant="bordered" className={cn('', className)}>
       <CardHeader className="pb-2">
-        <h3 className="text-sm font-medium text-zinc-400">Estadísticas en Vivo</h3>
+        <h3 className="text-sm font-medium text-text-secondary">Estadísticas en Vivo</h3>
       </CardHeader>
       
       <CardContent className="space-y-4">
@@ -127,9 +127,9 @@ export function TypingStats({
 
         {formatWpmHistory.length > 1 && (
           <div className="space-y-2">
-            <div className="flex items-center gap-2 text-xs text-zinc-500">
-              <TrendingUp className="w-3 h-3" />
-              <span>Evolución de WPM</span>
+          <div className="flex items-center gap-2 text-xs text-text-muted">
+            <TrendingUp className="w-3 h-3" />
+            <span>Evolución de WPM</span>
             </div>
             <div className="h-16 flex items-end gap-0.5">
               {formatWpmHistory.map((point, i) => (
@@ -147,7 +147,7 @@ export function TypingStats({
                 />
               ))}
             </div>
-            <div className="flex justify-between text-xs text-zinc-600">
+            <div className="flex justify-between text-xs text-text-muted">
               <span>Inicio</span>
               <span>Actual: {metrics.wpm} WPM</span>
               <span>Pico: {maxWpm} WPM</span>
@@ -157,7 +157,7 @@ export function TypingStats({
 
         {errorPositions.length > 0 && (
           <div className="space-y-2">
-            <div className="text-xs text-zinc-500">Mapa de Errores</div>
+            <div className="text-xs text-text-muted">Mapa de Errores</div>
             <div 
               className="grid gap-0.5"
               style={{ 
@@ -171,27 +171,27 @@ export function TypingStats({
                     'h-6 rounded text-[10px] flex items-center justify-center transition-colors',
                     cell.hasError 
                       ? 'bg-red-500/30 text-red-400' 
-                      : 'bg-zinc-800 text-zinc-600'
+                      : 'bg-bg-elevated text-text-muted'
                   )}
                 >
                   {cell.hasError ? '!' : ''}
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-4 text-xs text-zinc-600">
+            <div className="flex items-center gap-4 text-xs text-text-muted">
               <span className="flex items-center gap-1">
                 <div className="w-3 h-3 rounded bg-red-500/30" />
                 Error
               </span>
               <span className="flex items-center gap-1">
-                <div className="w-3 h-3 rounded bg-zinc-800" />
+                <div className="w-3 h-3 rounded bg-bg-elevated" />
                 Correcto
               </span>
             </div>
           </div>
         )}
 
-        <div className="pt-2 border-t border-zinc-700 text-xs text-zinc-500">
+        <div className="pt-2 border-t border-border-strong text-xs text-text-muted">
           <div className="flex justify-between">
             <span>Caracteres: {metrics.charactersTyped} / {metrics.charactersTyped + metrics.charactersRemaining}</span>
             <span>Pulsaciones: {metrics.totalKeystrokes}</span>
@@ -213,21 +213,21 @@ interface StatCardProps {
 function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
   return (
     <div className={cn(
-      'bg-zinc-800/50 rounded-lg p-2 transition-colors',
+      'bg-bg-elevated/50 rounded-lg p-2 transition-colors',
       highlight && 'ring-1 ring-yellow-500/50'
     )}>
       <div className="flex items-center gap-1.5 mb-1">
         {icon}
-        <span className="text-xs text-zinc-500">{label}</span>
+        <span className="text-xs text-text-muted">{label}</span>
       </div>
       <div className={cn(
         'text-lg font-semibold',
-        highlight ? 'text-yellow-500' : 'text-zinc-100'
+        highlight ? 'text-yellow-500' : 'text-text-primary'
       )}>
         {value}
       </div>
       {subValue && (
-        <div className="text-[10px] text-zinc-500 truncate">{subValue}</div>
+        <div className="text-[10px] text-text-muted truncate">{subValue}</div>
       )}
     </div>
   );

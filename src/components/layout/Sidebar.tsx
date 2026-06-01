@@ -178,7 +178,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
 
   if (isCollapsed) {
     return (
-      <div className={cn('w-12 h-full bg-zinc-900 border-r border-zinc-800', className)}>
+      <div className={cn('w-12 h-full bg-bg-surface border-r border-border', className)}>
         <Button
           variant="ghost"
           size="sm"
@@ -192,9 +192,9 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
   }
 
   return (
-    <div className={cn('w-80 h-full bg-zinc-900 border-r border-zinc-800 flex flex-col', className)}>
-      <div className="p-3 border-b border-zinc-800 flex items-center justify-between">
-        <h2 className="text-sm font-semibold text-zinc-100">Explorador</h2>
+    <div className={cn('w-80 h-full bg-bg-surface border-r border-border flex flex-col', className)}>
+      <div className="p-3 border-b border-border flex items-center justify-between">
+        <h2 className="text-sm font-semibold text-text-primary">Explorador</h2>
         <div className="flex items-center gap-1">
           <Button
             variant="ghost"
@@ -216,17 +216,17 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto custom-scrollbar">
         <div className="p-3 space-y-3">
           <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-text-muted" />
             <input
               type="text"
               placeholder="Buscar ejercicios..."
               value={searchQueryLocal}
               onChange={(e) => setSearchQueryLocal(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-md py-2 pl-9 pr-8 text-sm text-zinc-300 placeholder-zinc-600 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full bg-bg-elevated border border-border-strong rounded-md py-2 pl-9 pr-8 text-sm text-text-primary placeholder-text-muted focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             {searchQueryLocal && (
               <button
@@ -234,7 +234,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                   setSearchQueryLocal('');
                   setSearchQuery('');
                 }}
-                className="absolute right-2.5 top-2.5 text-zinc-500 hover:text-zinc-400"
+                className="absolute right-2.5 top-2.5 text-text-muted hover:text-text-secondary"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -244,7 +244,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
           <div className="space-y-2">
             <button
               onClick={() => toggleSection('filters')}
-              className="flex items-center justify-between w-full text-xs font-medium text-zinc-400 hover:text-zinc-300"
+              className="flex items-center justify-between w-full text-xs font-medium text-text-secondary hover:text-text-primary"
             >
               <span className="flex items-center gap-1">
                 <Filter className="w-3 h-3" />
@@ -260,7 +260,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             {expandedSections.has('filters') && (
               <div className="space-y-3 pl-1">
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Lenguaje</div>
+                  <div className="text-xs text-text-muted">Lenguaje</div>
                   <div className="flex flex-wrap gap-1">
                     {LANGUAGES.map(lang => (
                       <button
@@ -270,7 +270,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                           'px-2 py-1 text-xs rounded-md transition-colors flex items-center gap-1.5',
                           languageFilter === lang.value
                             ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                            : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400 border border-transparent'
+                            : 'bg-bg-elevated text-text-muted hover:text-text-secondary border border-transparent'
                         )}
                       >
                         <LanguageIcon language={lang.value} size={16} />
@@ -281,7 +281,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 </div>
 
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Dificultad</div>
+                  <div className="text-xs text-text-muted">Dificultad</div>
                   <div className="flex flex-wrap gap-1">
                     {LEVELS.map(level => (
                       <button
@@ -291,7 +291,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                           'px-2 py-1 text-xs rounded-md transition-colors',
                           levelFilter === level.value
                             ? level.color
-                            : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
+                            : 'bg-bg-elevated text-text-muted hover:text-text-secondary'
                         )}
                       >
                         {level.label}
@@ -301,7 +301,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 </div>
 
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Modo</div>
+                  <div className="text-xs text-text-muted">Modo</div>
                   <div className="flex gap-1">
                     {MODES.map(m => (
                       <button
@@ -311,7 +311,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                           'flex items-center gap-1.5 px-2 py-1 text-xs rounded-md transition-colors',
                           mode === m.value
                             ? 'bg-purple-500/20 text-purple-400'
-                            : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
+                            : 'bg-bg-elevated text-text-muted hover:text-text-secondary'
                         )}
                       >
                         {m.icon}
@@ -322,8 +322,8 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                 </div>
 
                 <div className="space-y-1.5">
-                  <div className="text-xs text-zinc-600">Categoría</div>
-                  <div className="flex flex-wrap gap-1 max-h-32 overflow-y-auto">
+                  <div className="text-xs text-text-muted">Categoría</div>
+                  <div className="flex flex-wrap gap-1 max-h-32 overflow-y-auto custom-scrollbar">
                     {(() => {
                       // Obtenemos todas las categorías disponibles para el nivel actual (ignorando el filtro de categoría)
                       const availableCategories = [...new Set(
@@ -343,7 +343,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                             'px-2 py-0.5 text-xs rounded-md transition-colors',
                             categoryFilter === cat.value
                               ? 'bg-cyan-500/20 text-cyan-400'
-                              : 'bg-zinc-800 text-zinc-500 hover:text-zinc-400'
+                              : 'bg-bg-elevated text-text-muted hover:text-text-secondary'
                           )}
                         >
                           {cat.label}
@@ -373,12 +373,12 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
           </div>
 
           {currentLevelInfo && (
-            <div className="bg-zinc-800/50 rounded-lg p-3 space-y-2">
+            <div className="bg-bg-elevated/50 rounded-lg p-3 space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-zinc-500">
+                <span className="text-text-muted">
                   Progreso {levelFilter || 'Total'}
                 </span>
-                <span className="text-zinc-400">
+                <span className="text-text-secondary">
                   {currentLevelInfo.completed}/{currentLevelInfo.total}
                 </span>
               </div>
@@ -396,7 +396,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
           <div className="space-y-2">
             <button
               onClick={() => toggleSection('favorites')}
-              className="flex items-center justify-between w-full text-xs font-medium text-zinc-400 hover:text-zinc-300"
+              className="flex items-center justify-between w-full text-xs font-medium text-text-secondary hover:text-text-primary"
             >
               <span className="flex items-center gap-1">
                 <Star className="w-3 h-3" />
@@ -424,7 +424,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                     />
                   ))
                 ) : (
-                  <div className="text-xs text-zinc-600 italic p-2">
+                  <div className="text-xs text-text-muted italic p-2">
                     Sin favoritos aún
                   </div>
                 )}
@@ -435,7 +435,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
           <div className="space-y-2">
             <button
               onClick={() => toggleSection('recommendations')}
-              className="flex items-center justify-between w-full text-xs font-medium text-zinc-400 hover:text-zinc-300"
+              className="flex items-center justify-between w-full text-xs font-medium text-text-secondary hover:text-text-primary"
             >
               <span className="flex items-center gap-1">
                 <TrendingUp className="w-3 h-3" />
@@ -467,7 +467,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
           <div className="space-y-2">
             <button
               onClick={() => toggleSection('list')}
-              className="flex items-center justify-between w-full text-xs font-medium text-zinc-400 hover:text-zinc-300"
+              className="flex items-center justify-between w-full text-xs font-medium text-text-secondary hover:text-text-primary"
             >
               <span className="flex items-center gap-1">
                 <Keyboard className="w-3 h-3" />
@@ -481,11 +481,11 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
             </button>
 
             {expandedSections.has('list') && (
-              <div className="space-y-1 max-h-64 overflow-y-auto">
+              <div className="space-y-1 max-h-64 overflow-y-auto custom-scrollbar">
                 {!categoryFilter && languageFilter && levelFilter ? (
                   <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
-                    <Zap className="w-8 h-8 text-zinc-700 mb-2" />
-                    <p className="text-xs text-zinc-500">Selecciona una categoría para ver los ejercicios</p>
+                    <Zap className="w-8 h-8 text-border-strong mb-2" />
+                    <p className="text-xs text-text-muted">Selecciona una categoría para ver los ejercicios</p>
                   </div>
                 ) : (
                   filteredExercises.map((exercise, index) => (
@@ -507,7 +507,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
         </div>
       </div>
 
-      <div className="p-3 border-t border-zinc-800">
+      <div className="p-3 border-t border-border">
         <Button
           variant="secondary"
           className="w-full"
@@ -547,7 +547,7 @@ function ExerciseItem({
       onClick={onClick}
       className={cn(
         'w-full text-left p-2 rounded-lg transition-colors group cursor-pointer',
-        isActive ? 'bg-blue-500/20 border border-blue-500/30' : 'hover:bg-zinc-800/50'
+        isActive ? 'bg-blue-500/20 border border-blue-500/30' : 'hover:bg-bg-elevated/50'
       )}
     >
       <div className="flex items-start gap-2">
@@ -555,17 +555,17 @@ function ExerciseItem({
           {isCompleted ? (
             <CheckCircle2 className="w-4 h-4 text-green-500" />
           ) : (
-            <Circle className="w-4 h-4 text-zinc-600" />
+            <Circle className="w-4 h-4 text-text-muted" />
           )}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5">
             {index && (
-              <span className="text-[10px] text-zinc-600">{index}.</span>
+              <span className="text-[10px] text-text-muted">{index}.</span>
             )}
             <span className={cn(
               'text-xs font-medium truncate',
-              isActive ? 'text-blue-400' : 'text-zinc-300'
+              isActive ? 'text-blue-400' : 'text-text-primary'
             )}>
               {exercise.title}
             </span>
@@ -574,11 +574,11 @@ function ExerciseItem({
             <span className={cn('px-1.5 py-0.5 text-[10px] rounded', levelColor)}>
               {exercise.level.slice(0, 4)}
             </span>
-            <span className="text-[10px] text-zinc-600">
+            <span className="text-[10px] text-text-muted">
               {exercise.category}
             </span>
             {stats && stats.bestWpm > 0 && (
-              <span className="text-[10px] text-zinc-600 flex items-center gap-0.5">
+              <span className="text-[10px] text-text-muted flex items-center gap-0.5">
                 <Zap className="w-2.5 h-2.5" />
                 {stats.bestWpm}
               </span>
@@ -593,7 +593,7 @@ function ExerciseItem({
             }}
             className="opacity-0 group-hover:opacity-100 transition-opacity p-1"
           >
-            <StarOff className="w-3 h-3 text-zinc-500 hover:text-yellow-500" />
+            <StarOff className="w-3 h-3 text-text-muted hover:text-yellow-500" />
           </button>
         )}
       </div>

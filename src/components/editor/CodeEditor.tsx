@@ -19,6 +19,7 @@ interface CodeEditorProps {
   highlightErrors?: boolean;
   correctPositions?: number[];
   errorPositions?: number[];
+  editorKey?: number;
   className?: string;
 }
 
@@ -30,7 +31,8 @@ const LANGUAGE_MAP: Record<ProgrammingLanguage, string> = {
 };
 
 const FONT_FAMILY_MAP: Record<string, string> = {
-  monaco: 'Menlo, Monaco, "Courier New", monospace',
+  'cascadia-code': '"Cascadia Code", "Cascadia Code PL", "Cascadia Mono", monospace',
+  'monaco': 'Menlo, Monaco, "Courier New", monospace',
   'fira-code': '"Fira Code", "Fira Code Mono", monospace',
   'jetbrains-mono': '"JetBrains Mono", "JetBrains Mono Medium", monospace',
 };
@@ -47,10 +49,12 @@ export function CodeEditor({
   highlightErrors = true,
   correctPositions = [],
   errorPositions = [],
+  editorKey = 0,
   className,
 }: CodeEditorProps) {
   const editorRef = useRef<Parameters<OnMount>[0] | null>(null);
   const monacoRef = useRef<Parameters<OnMount>[1] | null>(null);
+  const [isFocused, setIsFocused] = useState(false);
   const decorationsRef = useRef<string[]>([]);
   const modeRef = useRef(mode);
 
@@ -65,6 +69,7 @@ export function CodeEditor({
     theme, 
     editorFontFamily, 
     editorFontSize, 
+    editorLineHeight,
     showLineNumbers, 
     wordWrap,
     highlightActiveLine,
@@ -182,6 +187,10 @@ export function CodeEditor({
       theme: theme === 'dark' ? 'codereflex-dark' : 'codereflex-light',
     });
 
+    // Track focus for border highlight
+    editor.onDidFocusEditorText(() => setIsFocused(true));
+    editor.onDidBlurEditorText(() => setIsFocused(false));
+
     // Listen for changes
     editor.onDidChangeModelContent(() => {
       const value = editor.getValue();
@@ -220,24 +229,6 @@ export function CodeEditor({
     }
   }, [theme, onChange, updateDecorations]);
 
-  // Handle content - read mode shows expected, write mode shows current + ghost
-  useEffect(() => {
-    if (!editorRef.current) return;
-    
-    if (mode === 'read') {
-      editorRef.current.setValue(expectedCode);
-      editorRef.current.updateOptions({ readOnly: true });
-    } else if (mode === 'write') {
-      editorRef.current.updateOptions({ readOnly: false });
-      // Only update if value actually changed to preserve cursor position
-      const currentValue = editorRef.current.getValue();
-      if (currentValue !== currentCode) {
-        editorRef.current.setValue(currentCode || '');
-        updateDecorations();
-      }
-    }
-  }, [expectedCode, mode, currentCode, updateDecorations]);
-
   useEffect(() => {
     updateDecorations();
   }, [updateDecorations]);
@@ -259,23 +250,66 @@ export function CodeEditor({
 
   return (
     <div 
-      className={cn('relative flex flex-col rounded-lg border border-zinc-700 bg-transparent overflow-hidden', className)}
+      className={cn('relative flex flex-col rounded-lg border bg-transparent overflow-hidden transition-colors duration-200', isFocused ? 'border-zinc-500' : 'border-border-strong', className)}
       style={{ direction: 'ltr' }}
     >
-      {/* Editor with reference always on the right */}
-      <div className="flex flex-1 min-h-0 overflow-hidden">
-        <div className={mode === 'write' && showGhostText ? 'flex-[1_1_60%] min-w-0' : 'w-full'}>
+      {/* Editor with reference - responsive: stack on mobile, side by side on desktop */}
+      <div className="flex flex-1 min-h-0 overflow-hidden flex-col lg:flex-row-reverse">
+        {mode === 'write' && showGhostText && (
+          <div className="w-full lg:w-auto lg:flex-[0_0_40%] max-h-[160px] lg:max-h-none border-t lg:border-t-0 lg:border-l border-border-strong bg-bg-surface/80 flex flex-col">
+            <div className="text-xs text-text-muted px-3 py-1.5 border-b border-border-strong">Reference</div>
+            <div className="flex-1 min-h-0">
+              <Editor
+                height="100%"
+                language={getMonacoLanguage()}
+                value={expectedCode}
+                theme={theme === 'dark' ? 'codereflex-dark' : 'codereflex-light'}
+                options={{
+                  readOnly: true,
+                  domReadOnly: true,
+                  fontFamily: getFontFamily(),
+                  fontLigatures: true,
+                  fontSize: editorFontSize,
+                  lineHeight: editorLineHeight,
+                  minimap: { enabled: false },
+                  scrollBeyondLastLine: false,
+                  lineNumbers: 'off',
+                  folding: false,
+                  overviewRulerLanes: 0,
+                  hideCursorInOverviewRuler: true,
+                  overviewRulerBorder: false,
+                  cursorWidth: 0,
+                  cursorBlinking: 'solid',
+                  renderLineHighlight: 'none',
+                  renderWhitespace: 'none',
+                  contextmenu: false,
+                  automaticLayout: true,
+                  padding: { top: 12, bottom: 12 },
+                  scrollbar: {
+                    vertical: 'auto',
+                    horizontal: 'auto',
+                    verticalScrollbarSize: 8,
+                    horizontalScrollbarSize: 8,
+                  },
+                }}
+              />
+            </div>
+          </div>
+        )}
+        <div className={mode === 'write' && showGhostText ? 'min-h-0 flex-1' : 'w-full'}>
           <Editor
           height="100%"
           language={getMonacoLanguage()}
-          value={currentCode}
+          key={mode === 'write' ? `${expectedCode}-${editorKey}` : 'read'}
+          {...(mode === 'write' ? { defaultValue: currentCode } : { value: expectedCode })}
           onMount={handleEditorMount}
           theme={theme === 'dark' ? 'codereflex-dark' : 'codereflex-light'}
           options={{
             readOnly: mode === 'read',
             fontFamily: getFontFamily(),
+            fontLigatures: true,
             fontSize: editorFontSize,
-            lineHeight: 1.6,
+            lineHeight: editorLineHeight,
             lineNumbers: showLineNumbers ? 'on' : 'off',
             wordWrap: wordWrap ? 'on' : 'off',
             minimap: { enabled: false },
@@ -318,19 +352,6 @@ export function CodeEditor({
           }}
         />
         </div>
-        {mode === 'write' && showGhostText && (
-          <div className="flex-[0_0_40%] border-l border-zinc-700 bg-zinc-900/80 flex flex-col">
-            <div className="text-xs text-zinc-500 px-3 py-2 border-b border-zinc-700">Reference</div>
-            <div className="flex-1 overflow-auto p-3">
-              <pre 
-                className="text-xs font-mono whitespace-pre"
-                style={{ fontFamily: getFontFamily() }}
-              >
-                {expectedCode}
-              </pre>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

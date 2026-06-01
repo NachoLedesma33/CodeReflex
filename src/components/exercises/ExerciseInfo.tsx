@@ -64,7 +64,7 @@ export function ExerciseInfo({
       if (line.startsWith('```')) {
         if (inCodeBlock) {
           elements.push(
-            <pre key={`code-${i}`} className="bg-zinc-800 p-3 rounded-lg text-sm text-zinc-300 overflow-x-auto my-2">
+            <pre key={`code-${i}`} className="bg-bg-elevated p-3 rounded-lg text-sm text-text-primary overflow-x-auto my-2">
               <code>{codeContent}</code>
             </pre>
           );
@@ -83,27 +83,27 @@ export function ExerciseInfo({
       }
 
       if (line.startsWith('# ')) {
-        elements.push(<h1 key={i} className="text-xl font-bold text-zinc-100 mt-4 mb-2">{line.slice(2)}</h1>);
+        elements.push(<h1 key={i} className="text-xl font-bold text-text-primary mt-4 mb-2">{line.slice(2)}</h1>);
       } else if (line.startsWith('## ')) {
-        elements.push(<h2 key={i} className="text-lg font-semibold text-zinc-200 mt-3 mb-2">{line.slice(3)}</h2>);
+        elements.push(<h2 key={i} className="text-lg font-semibold text-text-primary mt-3 mb-2">{line.slice(3)}</h2>);
       } else if (line.startsWith('### ')) {
-        elements.push(<h3 key={i} className="text-md font-medium text-zinc-300 mt-2 mb-1">{line.slice(4)}</h3>);
+        elements.push(<h3 key={i} className="text-md font-medium text-text-primary mt-2 mb-1">{line.slice(4)}</h3>);
       } else if (line.startsWith('- ') || line.startsWith('* ')) {
-        elements.push(<li key={i} className="text-zinc-400 ml-4 list-disc">{line.slice(2)}</li>);
+        elements.push(<li key={i} className="text-text-secondary ml-4 list-disc">{line.slice(2)}</li>);
       } else if (/^\d+\.\s/.test(line)) {
-        elements.push(<li key={i} className="text-zinc-400 ml-4 list-decimal">{line.replace(/^\d+\.\s/, '')}</li>);
+        elements.push(<li key={i} className="text-text-secondary ml-4 list-decimal">{line.replace(/^\d+\.\s/, '')}</li>);
       } else if (line.startsWith('> ')) {
-        elements.push(<blockquote key={i} className="border-l-2 border-zinc-600 pl-3 text-zinc-500 italic my-2">{line.slice(2)}</blockquote>);
+        elements.push(<blockquote key={i} className="border-l-2 border-border-strong pl-3 text-text-muted italic my-2">{line.slice(2)}</blockquote>);
       } else if (line.trim() === '') {
         elements.push(<br key={i} />);
       } else {
         const formattedLine = line
-          .replace(/\*\*(.+?)\*\*/g, '<strong class="text-zinc-200 font-semibold">$1</strong>')
-          .replace(/\*(.+?)\*/g, '<em class="text-zinc-300">$1</em>')
-          .replace(/`(.+?)`/g, '<code class="bg-zinc-800 px-1 rounded text-blue-400 text-sm">$1</code>');
+          .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-primary font-semibold">$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em class="text-text-primary">$1</em>')
+          .replace(/`(.+?)`/g, '<code class="bg-bg-elevated px-1 rounded text-blue-400 text-sm">$1</code>');
         
         elements.push(
-          <p key={i} className="text-zinc-400 my-1" dangerouslySetInnerHTML={{ __html: formattedLine }} />
+          <p key={i} className="text-text-secondary my-1" dangerouslySetInnerHTML={{ __html: formattedLine }} />
         );
       }
     });
@@ -126,10 +126,10 @@ export function ExerciseInfo({
               )}>
                 {exercise.level}
               </span>
-              <span className="text-xs text-zinc-500 uppercase">{exercise.language}</span>
-              <span className="text-xs text-zinc-600">• {exercise.category}</span>
+              <span className="text-xs text-text-muted uppercase">{exercise.language}</span>
+              <span className="text-xs text-text-muted">• {exercise.category}</span>
             </div>
-            <h2 className="text-lg font-semibold text-zinc-100">{exercise.title}</h2>
+            <h2 className="text-lg font-semibold text-text-primary">{exercise.title}</h2>
           </div>
         </div>
       </CardHeader>
@@ -137,11 +137,11 @@ export function ExerciseInfo({
       <CardContent className="space-y-4">
         {exercise.description && (
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs text-zinc-500">
+            <div className="flex items-center gap-2 text-xs text-text-muted">
               <FileText className="w-3 h-3" />
               <span>Descripción</span>
             </div>
-            <div className="text-sm text-zinc-400">
+            <div className="text-sm text-text-secondary">
               {renderMarkdown(exercise.description)}
             </div>
           </div>
@@ -151,7 +151,7 @@ export function ExerciseInfo({
           <div className="space-y-1">
             <button
               onClick={() => toggleSection('context')}
-              className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-400 transition-colors w-full"
+              className="flex items-center gap-2 text-xs text-text-muted hover:text-text-secondary transition-colors w-full"
             >
               <span>📚 Contexto Real</span>
               {expandedSections.has('context') ? (
@@ -161,7 +161,7 @@ export function ExerciseInfo({
               )}
             </button>
             {expandedSections.has('context') && (
-              <div className="bg-zinc-800/50 rounded-lg p-3 text-sm text-zinc-400 border border-zinc-700/50">
+              <div className="bg-bg-elevated/50 rounded-lg p-3 text-sm text-text-secondary border border-border-strong/50">
                 {renderMarkdown(exercise.context)}
               </div>
             )}
@@ -172,7 +172,7 @@ export function ExerciseInfo({
           <div className="space-y-2">
             <button
               onClick={() => toggleSection('concepts')}
-              className="flex items-center gap-2 text-xs text-zinc-500 hover:text-zinc-400 transition-colors w-full"
+              className="flex items-center gap-2 text-xs text-text-muted hover:text-text-secondary transition-colors w-full"
             >
               <BookOpen className="w-3 h-3" />
               <span>Conceptos</span>
@@ -199,7 +199,7 @@ export function ExerciseInfo({
 
         {exercise.tags && exercise.tags.length > 0 && (
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs text-zinc-500">
+            <div className="flex items-center gap-2 text-xs text-text-muted">
               <Tag className="w-3 h-3" />
               <span>Etiquetas</span>
             </div>
@@ -207,7 +207,7 @@ export function ExerciseInfo({
               {exercise.tags.map((tag, i) => (
                 <span
                   key={i}
-                  className="px-2 py-0.5 text-xs bg-zinc-800 text-zinc-500 rounded"
+                  className="px-2 py-0.5 text-xs bg-bg-elevated text-text-muted rounded"
                 >
                   #{tag}
                 </span>
@@ -219,21 +219,21 @@ export function ExerciseInfo({
         {(exercise.timeComplexity || exercise.spaceComplexity) && (
           <div className="grid grid-cols-2 gap-3">
             {exercise.timeComplexity && (
-              <div className="bg-zinc-800/50 rounded-lg p-2">
-                <div className="flex items-center gap-1.5 text-xs text-zinc-500 mb-1">
+              <div className="bg-bg-elevated/50 rounded-lg p-2">
+                <div className="flex items-center gap-1.5 text-xs text-text-muted mb-1">
                   <Clock className="w-3 h-3" />
                   <span>Tiempo</span>
                 </div>
-                <code className="text-sm text-zinc-300 font-mono">{exercise.timeComplexity}</code>
+                <code className="text-sm text-text-primary font-mono">{exercise.timeComplexity}</code>
               </div>
             )}
             {exercise.spaceComplexity && (
-              <div className="bg-zinc-800/50 rounded-lg p-2">
-                <div className="flex items-center gap-1.5 text-xs text-zinc-500 mb-1">
+              <div className="bg-bg-elevated/50 rounded-lg p-2">
+                <div className="flex items-center gap-1.5 text-xs text-text-muted mb-1">
                   <HardDrive className="w-3 h-3" />
                   <span>Espacio</span>
                 </div>
-                <code className="text-sm text-zinc-300 font-mono">{exercise.spaceComplexity}</code>
+                <code className="text-sm text-text-primary font-mono">{exercise.spaceComplexity}</code>
               </div>
             )}
           </div>
@@ -241,7 +241,7 @@ export function ExerciseInfo({
 
         {exercise.prerequisites && exercise.prerequisites.length > 0 && (
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs text-zinc-500">
+            <div className="flex items-center gap-2 text-xs text-text-muted">
               <CheckCircle2 className="w-3 h-3" />
               <span>Prerrequisitos</span>
             </div>
@@ -261,7 +261,7 @@ export function ExerciseInfo({
         {showHints && availableHints.length > 0 && (
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs text-zinc-500">
+              <div className="flex items-center gap-2 text-xs text-text-muted">
                 <Lightbulb className="w-3 h-3" />
                 <span>Pistas ({revealedHints}/{availableHints.length})</span>
               </div>
@@ -284,7 +284,7 @@ export function ExerciseInfo({
                 </div>
               ))}
               {revealedHints === 0 && (
-                <div className="text-xs text-zinc-600 italic">
+                <div className="text-xs text-text-muted italic">
                   Haz clic en &quot;Revelar Pista&quot; si te quedas atascado
                 </div>
               )}
@@ -292,7 +292,7 @@ export function ExerciseInfo({
           </div>
         )}
 
-        <div className="pt-2 text-xs text-zinc-600">
+        <div className="pt-2 text-xs text-text-muted">
           <span>Duración est.: {Math.floor(exercise.estimatedDuration / 60)}min</span>
           <span className="mx-2">•</span>
           <span>Dificultad: {exercise.difficultyScore}/10</span>

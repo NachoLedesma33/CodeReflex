@@ -25,7 +25,7 @@ const LoadingFallback = () => (
   <div className="flex items-center justify-center h-full">
     <div className="flex flex-col items-center gap-3">
       <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
-      <span className="text-sm text-zinc-500">Cargando ejercicio...</span>
+      <span className="text-sm text-text-muted">Cargando ejercicio...</span>
     </div>
   </div>
 );
@@ -94,10 +94,10 @@ export default function Home() {
   if (error) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4 p-8 bg-zinc-900 rounded-lg border border-red-500/30 max-w-md">
+        <div className="flex flex-col items-center gap-4 p-8 bg-bg-surface rounded-lg border border-red-500/30 max-w-md">
           <AlertCircle className="w-12 h-12 text-red-500" />
-          <h2 className="text-lg font-semibold text-zinc-100">Error al cargar ejercicios</h2>
-          <p className="text-sm text-zinc-400 text-center">{error}</p>
+          <h2 className="text-lg font-semibold text-text-primary">Error al cargar ejercicios</h2>
+          <p className="text-sm text-text-secondary text-center">{error}</p>
         </div>
       </div>
     );
@@ -108,7 +108,7 @@ export default function Home() {
       <div className="flex-1 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
-          <span className="text-sm text-zinc-500">Cargando CodeReflex...</span>
+          <span className="text-sm text-text-muted">Cargando CodeReflex...</span>
         </div>
       </div>
     );
@@ -142,16 +142,16 @@ export default function Home() {
             ) : (
               <div className="flex-1 flex items-center justify-center">
                 <div className="flex flex-col items-center gap-4 text-center">
-                  <div className="w-16 h-16 bg-zinc-800 rounded-full flex items-center justify-center">
+                  <div className="w-16 h-16 bg-bg-elevated rounded-full flex items-center justify-center">
                     {mode === 'reflex-typing' ? (
-                      <Keyboard className="w-8 h-8 text-zinc-500" />
+                      <Keyboard className="w-8 h-8 text-text-muted" />
                     ) : (
-                      <BookOpen className="w-8 h-8 text-zinc-500" />
+                      <BookOpen className="w-8 h-8 text-text-muted" />
                     )}
                   </div>
                   <div>
-                    <h3 className="text-lg font-medium text-zinc-300">No hay ejercicios disponibles</h3>
-                    <p className="text-sm text-zinc-500 mt-1">
+                    <h3 className="text-lg font-medium text-text-primary">No hay ejercicios disponibles</h3>
+                    <p className="text-sm text-text-muted mt-1">
                       Selecciona un lenguaje y dificultad en la barra lateral
                     </p>
                   </div>
@@ -161,7 +161,7 @@ export default function Home() {
           </div>
 
           {!zenModeEnabled && activePanel && (
-            <div className="w-80 border-l border-zinc-800 bg-zinc-900 overflow-y-auto">
+            <div className="w-80 border-l border-border bg-bg-surface overflow-y-auto custom-scrollbar">
               {activePanel === 'info' && currentExercise && (
                 <Suspense fallback={<LoadingFallback />}>
                   <ExerciseInfo
@@ -193,7 +193,7 @@ export default function Home() {
           )}
 
           {!zenModeEnabled && !statsPanelCollapsed && (
-            <div className="w-80 border-l border-zinc-800 bg-zinc-900 overflow-y-auto">
+            <div className="w-80 border-l border-border bg-bg-surface overflow-y-auto custom-scrollbar">
               <StatsPanel className="p-4" />
             </div>
           )}
@@ -201,7 +201,7 @@ export default function Home() {
       </div>
 
       {!zenModeEnabled && (
-        <div className="h-8 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between px-4 text-xs text-zinc-600">
+        <div className="h-8 bg-bg-surface border-t border-border flex items-center justify-between px-4 text-xs text-text-muted">
           <div className="flex items-center gap-4">
             <span>
               {currentExercise?.id || 'Ningún ejercicio seleccionado'}
@@ -211,11 +211,11 @@ export default function Home() {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-zinc-500">Atajos:</span>
-            <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-500">Ctrl+B</kbd>
-            <span className="text-zinc-600">Sidebar</span>
-            <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-500">Ctrl+S</kbd>
-            <span className="text-zinc-600">Stats</span>
+            <span className="text-text-muted">Atajos:</span>
+            <kbd className="px-1.5 py-0.5 bg-bg-elevated rounded text-text-muted">Ctrl+B</kbd>
+            <span className="text-text-muted">Sidebar</span>
+            <kbd className="px-1.5 py-0.5 bg-bg-elevated rounded text-text-muted">Ctrl+S</kbd>
+            <span className="text-text-muted">Stats</span>
           </div>
         </div>
       )}

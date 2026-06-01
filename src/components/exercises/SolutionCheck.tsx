@@ -293,7 +293,7 @@ export function SolutionCheck({
     <Card variant="bordered" className={cn('', className)}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-medium text-zinc-400">Validación de Solución</h3>
+          <h3 className="text-sm font-medium text-text-secondary">Validación de Solución</h3>
           <div className={cn(
             'flex items-center gap-1.5 px-2 py-1 rounded-full text-xs font-medium',
             validation.status === 'correct' && 'bg-green-500/20 text-green-400',
@@ -313,7 +313,7 @@ export function SolutionCheck({
       </CardHeader>
 
       <CardContent className="space-y-3">
-        <div className="text-sm text-zinc-300 mb-3">
+        <div className="text-sm text-text-primary mb-3">
           {validation.message}
         </div>
 
@@ -337,11 +337,11 @@ export function SolutionCheck({
                             detail.type === 'structure' ? 'Estructura' : 
                             detail.type === 'format' ? 'Formato' : 'Salida'}
                 </div>
-                <div className="text-xs text-zinc-500 mt-0.5">{detail.message}</div>
+                <div className="text-xs text-text-muted mt-0.5">{detail.message}</div>
                 {!detail.passed && detail.expected && (
                   <div className="text-xs mt-1">
-                    <span className="text-zinc-600">Esperado: </span>
-                    <code className="text-zinc-400">{detail.expected}</code>
+                    <span className="text-text-muted">Esperado: </span>
+                    <code className="text-text-secondary">{detail.expected}</code>
                   </div>
                 )}
                 {!detail.passed && detail.actual && (
@@ -356,8 +356,8 @@ export function SolutionCheck({
         </div>
 
         {testCases.length > 0 && onExecute && (
-          <div className="pt-2 border-t border-zinc-700">
-            <div className="text-xs text-zinc-500 mb-2">
+          <div className="pt-2 border-t border-border-strong">
+            <div className="text-xs text-text-muted mb-2">
               Ejecuta las pruebas para validar la salida
             </div>
           </div>

@@ -142,7 +142,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
   return (
     <Card variant="bordered" className={cn('', className)}>
       <CardHeader className="pb-2">
-        <h3 className="text-sm font-medium text-zinc-400">Tu Progreso</h3>
+        <h3 className="text-sm font-medium text-text-secondary">Tu Progreso</h3>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -174,14 +174,14 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-zinc-500">
-            <span className="flex items-center gap-1">
-              <Star className="w-3 h-3" />
-              Nivel {level.level} - {level.title}
-            </span>
-            <span>{totalXP} / {getXPForLevel(level.level + 1)} XP</span>
-          </div>
-          <div className="h-2 bg-zinc-700 rounded-full overflow-hidden">
+        <div className="flex items-center justify-between text-xs text-text-muted">
+          <span className="flex items-center gap-1">
+            <Star className="w-3 h-3" />
+            Nivel {level.level} - {level.title}
+          </span>
+          <span>{totalXP} / {getXPForLevel(level.level + 1)} XP</span>
+        </div>
+        <div className="h-2 bg-zinc-700 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
               style={{ width: `${Math.min(level.progress, 100)}%` }}
@@ -190,7 +190,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         </div>
 
         <div className="space-y-2">
-          <div className="text-xs text-zinc-500 flex items-center gap-1">
+          <div className="text-xs text-text-muted flex items-center gap-1">
             <BarChart3 className="w-3 h-3" />
             Rendimiento por Lenguaje
           </div>
@@ -219,7 +219,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         </div>
 
         <div className="space-y-2">
-          <div className="text-xs text-zinc-500 flex items-center gap-1">
+          <div className="text-xs text-text-muted flex items-center gap-1">
             <Calendar className="w-3 h-3" />
             Mapa de Actividad (Último Año)
           </div>
@@ -240,7 +240,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
               ))}
             </div>
           </div>
-          <div className="flex items-center gap-2 text-[10px] text-zinc-600">
+          <div className="flex items-center gap-2 text-[10px] text-text-muted">
             <span>Menos</span>
             <div className="w-2 h-2 bg-zinc-800 rounded-sm" />
             <div className="w-2 h-2 bg-green-900 rounded-sm" />
@@ -251,7 +251,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         </div>
 
         <div className="space-y-2">
-          <div className="text-xs text-zinc-500 flex items-center gap-1">
+          <div className="text-xs text-text-muted flex items-center gap-1">
             <Award className="w-3 h-3" />
             Logros ({unlockedAchievements.length}/{ACHIEVEMENTS.length})
           </div>
@@ -274,7 +274,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
                   </div>
               ))
             ) : (
-              <div className="text-xs text-zinc-600 italic">
+              <div className="text-xs text-text-muted italic">
                 ¡Completa ejercicios para desbloquear logros!
               </div>
             )}
@@ -282,13 +282,13 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         </div>
 
         {unlockedAchievements.length < ACHIEVEMENTS.length && (
-          <div className="pt-2 border-t border-zinc-700">
-            <div className="text-xs text-zinc-500 mb-2">Logros Bloqueados</div>
+          <div className="pt-2 border-t border-border-strong">
+            <div className="text-xs text-text-muted mb-2">Logros Bloqueados</div>
             <div className="flex flex-wrap gap-2">
               {ACHIEVEMENTS.filter(a => !unlockedAchievements.find(u => u.id === a.id)).slice(0, 5).map(achievement => (
                   <div
                     key={achievement.id}
-                    className="flex items-center gap-1.5 px-2 py-1 bg-zinc-800 rounded-lg text-xs opacity-50"
+                    className="flex items-center gap-1.5 px-2 py-1 bg-bg-elevated rounded-lg text-xs opacity-50"
                     title={achievement.description}
                   >
                     <span>
@@ -298,11 +298,11 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
                         achievement.icon
                       )}
                     </span>
-                    <span className="text-zinc-500">{achievement.name}</span>
+                    <span className="text-text-muted">{achievement.name}</span>
                   </div>
               ))}
               {ACHIEVEMENTS.length - unlockedAchievements.length > 5 && (
-                <div className="text-xs text-zinc-600 px-2 py-1">
+                <div className="text-xs text-text-muted px-2 py-1">
                   +{ACHIEVEMENTS.length - unlockedAchievements.length - 5} más
                 </div>
               )}
@@ -325,21 +325,21 @@ interface StatCardProps {
 function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
   return (
     <div className={cn(
-      'bg-zinc-800/50 rounded-lg p-2 transition-colors',
+      'bg-bg-elevated/50 rounded-lg p-2 transition-colors',
       highlight && 'ring-1 ring-yellow-500/50'
     )}>
       <div className="flex items-center gap-1.5 mb-1">
         {icon}
-        <span className="text-xs text-zinc-500">{label}</span>
+        <span className="text-xs text-text-muted">{label}</span>
       </div>
       <div className={cn(
         'text-lg font-semibold',
-        highlight ? 'text-yellow-500' : 'text-zinc-100'
+        highlight ? 'text-yellow-500' : 'text-text-primary'
       )}>
         {value}
       </div>
       {subValue && (
-        <div className="text-[10px] text-zinc-500 truncate">{subValue}</div>
+        <div className="text-[10px] text-text-muted truncate">{subValue}</div>
       )}
     </div>
   );
@@ -353,11 +353,11 @@ interface LanguageStatProps {
 
 function LanguageStat({ language, wpm, accuracy }: LanguageStatProps) {
   return (
-    <div className="bg-zinc-800/30 rounded-lg p-2 text-center border border-zinc-800/50 hover:border-zinc-700/50 transition-colors">
+    <div className="bg-bg-elevated/30 rounded-lg p-2 text-center border border-border/50 hover:border-border-strong/50 transition-colors">
       <LanguageIcon language={language} size={20} className="mx-auto mb-1.5" />
-      <div className="text-[10px] text-zinc-500 mb-1 uppercase tracking-wider">{language}</div>
-      <div className="text-sm font-semibold text-zinc-200">{wpm || '-'}</div>
-      <div className="text-[10px] text-zinc-600">BEST WPM</div>
+      <div className="text-[10px] text-text-muted mb-1 uppercase tracking-wider">{language}</div>
+      <div className="text-sm font-semibold text-text-primary">{wpm || '-'}</div>
+      <div className="text-[10px] text-text-muted">BEST WPM</div>
     </div>
   );
 }

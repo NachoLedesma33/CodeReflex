@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import "@fontsource/cascadia-code/latin-400.css";
+import "@fontsource/cascadia-code/latin-700.css";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 
@@ -39,7 +41,12 @@ export default function RootLayout({
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100">
+      <head>
+        <script dangerouslySetInnerHTML={{
+          __html: `(function(){try{var e=localStorage.getItem('codereflex-ui');if(e){var t=JSON.parse(e);if(t&&t.state&&t.state.theme==='dark')document.documentElement.classList.add('dark')}}catch(e){}})()`
+        }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-bg-primary text-text-primary">
         <Providers>
           {children}
         </Providers>

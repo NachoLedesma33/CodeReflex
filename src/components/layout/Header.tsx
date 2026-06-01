@@ -59,7 +59,7 @@ export function Header({ className }: HeaderProps) {
 
   return (
     <header className={cn(
-      'h-14 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between px-4',
+      'h-14 bg-bg-surface border-b border-border flex items-center justify-between px-4',
       className
     )}>
       <div className="flex items-center gap-4">
@@ -67,12 +67,12 @@ export function Header({ className }: HeaderProps) {
           <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
             <Code2 className="w-5 h-5 text-white" />
           </div>
-          <span className="text-lg font-bold text-zinc-100">CodeReflex</span>
+          <span className="text-lg font-bold text-text-primary">CodeReflex</span>
         </div>
 
-        <div className="h-6 w-px bg-zinc-700" />
+        <div className="h-6 w-px bg-border-strong" />
 
-        <div className="flex items-center gap-1 bg-zinc-800 rounded-lg p-1">
+        <div className="flex items-center gap-1 bg-bg-elevated rounded-lg p-1">
           {MODES.map(m => (
             <button
               key={m.value}
@@ -81,7 +81,7 @@ export function Header({ className }: HeaderProps) {
                 'flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-colors',
                 mode === m.value
                   ? 'bg-blue-500/20 text-blue-400'
-                  : 'text-zinc-500 hover:text-zinc-300'
+                  : 'text-text-muted hover:text-text-primary'
               )}
             >
               {m.icon}
@@ -96,22 +96,22 @@ export function Header({ className }: HeaderProps) {
           <div className="flex items-center gap-1.5 px-2 py-1 bg-orange-500/10 rounded-lg">
             <Flame className="w-4 h-4 text-orange-500" />
             <span className="text-sm font-medium text-orange-400">{currentStreak}</span>
-            <span className="text-xs text-zinc-600">/ {longestStreak}</span>
+            <span className="text-xs text-text-muted">/ {longestStreak}</span>
           </div>
 
           <div className="flex items-center gap-1.5 px-2 py-1 bg-yellow-500/10 rounded-lg">
             <Zap className="w-4 h-4 text-yellow-500" />
             <span className="text-sm font-medium text-yellow-400">{totalXP}</span>
-            <span className="text-xs text-zinc-600">XP</span>
+            <span className="text-xs text-text-muted">XP</span>
           </div>
 
-          <div className="flex items-center gap-1.5 px-2 py-1 bg-zinc-800 rounded-lg">
-            <span className="text-xs text-zinc-500">Nvl</span>
-            <span className="text-sm font-medium text-zinc-300">{level}</span>
+          <div className="flex items-center gap-1.5 px-2 py-1 bg-bg-elevated rounded-lg">
+            <span className="text-xs text-text-muted">Nvl</span>
+            <span className="text-sm font-medium text-text-primary">{level}</span>
           </div>
         </div>
 
-        <div className="h-6 w-px bg-zinc-700" />
+        <div className="h-6 w-px bg-border-strong" />
 
         <div className="flex items-center gap-1">
           <Button
@@ -122,9 +122,9 @@ export function Header({ className }: HeaderProps) {
             title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           >
             {theme === 'dark' ? (
-              <Sun className="w-5 h-5 text-zinc-400" />
+              <Sun className="w-5 h-5 text-text-secondary" />
             ) : (
-              <Moon className="w-5 h-5 text-zinc-400" />
+              <Moon className="w-5 h-5 text-text-secondary" />
             )}
           </Button>
 
@@ -136,23 +136,23 @@ export function Header({ className }: HeaderProps) {
               className="p-2"
               title="Ajustes"
             >
-              <Settings className="w-5 h-5 text-zinc-400" />
+              <Settings className="w-5 h-5 text-text-secondary" />
             </Button>
 
             {showSettingsMenu && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-zinc-800 border border-zinc-700 rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 top-full mt-2 w-48 bg-bg-elevated border border-border-strong rounded-lg shadow-lg z-50">
                 <div className="p-2">
-                  <div className="text-xs text-zinc-500 px-2 py-1">
+                  <div className="text-xs text-text-muted px-2 py-1">
                     {totalExercises} ejercicios completados
                   </div>
                 </div>
-                <div className="border-t border-zinc-700">
+                <div className="border-t border-border-strong">
                   <button
                     onClick={() => {
                       setShowResetConfirm(true);
                       setShowSettingsMenu(false);
                     }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-zinc-700/50"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-border-strong/50"
                   >
                     <RotateCcw className="w-4 h-4" />
                     Reiniciar Progreso
@@ -166,12 +166,12 @@ export function Header({ className }: HeaderProps) {
 
       {showResetConfirm && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-4 w-80">
+          <div className="bg-bg-elevated border border-border-strong rounded-lg p-4 w-80">
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-medium text-zinc-100">¿Reiniciar Progreso?</span>
+              <span className="text-sm font-medium text-text-primary">¿Reiniciar Progreso?</span>
             </div>
-            <p className="text-xs text-zinc-400 mb-4">
+            <p className="text-xs text-text-secondary mb-4">
               Esto eliminará permanentemente todo tu progreso, XP, rachas y logros. Esta acción no se puede deshacer.
             </p>
             <div className="flex gap-2">
