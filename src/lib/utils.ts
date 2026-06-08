@@ -49,10 +49,12 @@ export const languageLabels: Record<string, string> = {
   javascript: 'JavaScript',
   typescript: 'TypeScript',
   python: 'Python',
+  java: 'Java',
 };
 
 export const languageIcons: Record<string, string> = {
   javascript: 'JS',
   typescript: 'TS',
   python: 'PY',
+  java: 'JV',
 };

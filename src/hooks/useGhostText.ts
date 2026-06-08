@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { BlankPosition, TypingStyle } from '@/types';
 
 interface GhostTextState {
@@ -47,21 +47,13 @@ export function useGhostText({
   onAcceptSuggestion,
 }: UseGhostTextOptions): UseGhostTextReturn {
   const [filledBlanks, setFilledBlanks] = useState<Map<number, string>>(new Map());
-  const [currentCursorPos, setCurrentCursorPos] = useState(cursorPosition);
-  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const [activeSuggestion, setActiveSuggestion] = useState<string | null>(null);
+  const [suggestionAnchor, setSuggestionAnchor] = useState<{cursor: number; index: number} | null>(null);
 
-  useEffect(() => {
-    setCurrentCursorPos(cursorPosition);
-  }, [cursorPosition]);
+  const selectedSuggestionIndex = suggestionAnchor?.cursor === cursorPosition ? suggestionAnchor.index : -1;
 
-  useEffect(() => {
-    setSelectedSuggestionIndex(-1);
-  }, [currentCursorPos]);
-
-  const updateCursorPosition = useCallback((position: number) => {
-    setCurrentCursorPos(position);
-    setSelectedSuggestionIndex(-1);
+  const updateCursorPosition = useCallback((_position: number) => {
+    setSuggestionAnchor(null);
     setActiveSuggestion(null);
   }, []);
 
@@ -73,12 +65,12 @@ export function useGhostText({
     }
     for (let i = 0; i < blankRanges.length; i++) {
       const blank = blankRanges[i];
-      if (currentCursorPos >= blank.start && currentCursorPos <= blank.end) {
+      if (cursorPosition >= blank.start && cursorPosition <= blank.end) {
         return i;
       }
     }
     return -1;
-  }, [currentCursorPos, blankRanges, typingStyle]);
+  }, [cursorPosition, blankRanges, typingStyle]);
 
   const isInBlank = useMemo(() => currentBlankIndex >= 0, [currentBlankIndex]);
 
@@ -90,9 +82,9 @@ export function useGhostText({
   }, [currentBlankIndex, blankRanges]);
 
   const getNextBlank = useCallback((): BlankPosition | null => {
-    const nextBlanks = blankRanges.filter(b => b.start > currentCursorPos);
+    const nextBlanks = blankRanges.filter(b => b.start > cursorPosition);
     return nextBlanks.length > 0 ? nextBlanks[0] : null;
-  }, [blankRanges, currentCursorPos]);
+  }, [blankRanges, cursorPosition]);
 
   const calculateGhostText = useCallback((): string => {
     if (!enabled || !codeSnippet) return '';
@@ -100,18 +92,18 @@ export function useGhostText({
     let remainingText = '';
 
     if (typingStyle === 'full') {
-      remainingText = codeSnippet.slice(currentCursorPos);
+      remainingText = codeSnippet.slice(cursorPosition);
     } else if (typingStyle === 'fill-blanks') {
       const nextBlank = getNextBlank();
       if (nextBlank) {
-        remainingText = codeSnippet.slice(currentCursorPos, nextBlank.start);
+        remainingText = codeSnippet.slice(cursorPosition, nextBlank.start);
       } else {
-        remainingText = codeSnippet.slice(currentCursorPos);
+        remainingText = codeSnippet.slice(cursorPosition);
       }
     } else if (typingStyle === 'complete-function') {
       const functionMatch = codeSnippet.match(/function\s+\w+\s*\([^)]*\)\s*\{/);
-      if (functionMatch && currentCursorPos >= functionMatch.index! + functionMatch[0].length) {
-        remainingText = codeSnippet.slice(currentCursorPos);
+      if (functionMatch && cursorPosition >= functionMatch.index! + functionMatch[0].length) {
+        remainingText = codeSnippet.slice(cursorPosition);
       }
     }
 
@@ -120,12 +112,12 @@ export function useGhostText({
     }
 
     return remainingText;
-  }, [enabled, codeSnippet, currentCursorPos, typingStyle, getNextBlank, ignoreSpaces]);
+  }, [enabled, codeSnippet, cursorPosition, typingStyle, getNextBlank, ignoreSpaces]);
 
   const autocompleteSuggestions = useMemo(() => {
     if (!enabled || !codeSnippet) return [];
-    return generateSuggestions(codeSnippet, currentCursorPos, typingStyle, filledBlanks);
-  }, [enabled, codeSnippet, currentCursorPos, typingStyle, filledBlanks]);
+    return generateSuggestions(codeSnippet, cursorPosition, typingStyle, filledBlanks);
+  }, [enabled, codeSnippet, cursorPosition, typingStyle, filledBlanks]);
 
   const ghostTextState = useMemo<GhostTextState>(() => {
     const ghostText = calculateGhostText();
@@ -155,19 +147,20 @@ export function useGhostText({
 
   const clearGhost = useCallback(() => {
     setActiveSuggestion(null);
-    setSelectedSuggestionIndex(-1);
+    setSuggestionAnchor(null);
   }, []);
 
   const selectSuggestion = useCallback((index: number) => {
     if (index >= 0 && index < autocompleteSuggestions.length) {
-      setSelectedSuggestionIndex(index);
+      setSuggestionAnchor({ cursor: cursorPosition, index });
       setActiveSuggestion(autocompleteSuggestions[index]);
     }
-  }, [autocompleteSuggestions]);
+  }, [cursorPosition, autocompleteSuggestions]);
 
   const acceptSelectedSuggestion = useCallback((): string | null => {
     if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < autocompleteSuggestions.length) {
       const suggestion = autocompleteSuggestions[selectedSuggestionIndex];
+      setSuggestionAnchor(null);
       onAcceptSuggestion?.(suggestion);
       return suggestion;
     }
@@ -186,22 +179,21 @@ export function useGhostText({
 
   const reset = useCallback(() => {
     setFilledBlanks(new Map());
-    setCurrentCursorPos(0);
-    setSelectedSuggestionIndex(-1);
+    setSuggestionAnchor(null);
     setActiveSuggestion(null);
   }, []);
 
   const getProgress = useCallback(() => {
     if (!codeSnippet) return 0;
     const totalChars = codeSnippet.length;
-    const typedChars = currentCursorPos;
+    const typedChars = cursorPosition;
     return Math.round((typedChars / totalChars) * 100);
-  }, [codeSnippet, currentCursorPos]);
+  }, [codeSnippet, cursorPosition]);
 
   const getRemainingText = useCallback((): string => {
     if (!codeSnippet) return '';
-    return codeSnippet.slice(currentCursorPos);
-  }, [codeSnippet, currentCursorPos]);
+    return codeSnippet.slice(cursorPosition);
+  }, [codeSnippet, cursorPosition]);
 
   return {
     ghostTextState,

@@ -129,11 +129,13 @@ export default function Home() {
               <Suspense fallback={<LoadingFallback />}>
                 {mode === 'reflex-typing' ? (
                   <ReflexTyping
+                    key={currentExercise.id}
                     exercise={currentExercise}
                     className="flex-1"
                   />
                 ) : (
                   <GuidedProblem
+                    key={currentExercise.id}
                     exercise={currentExercise}
                     className="flex-1"
                   />

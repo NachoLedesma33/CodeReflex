@@ -225,7 +225,7 @@ export function CodeEditor({
         }
       };
       
-      editorDomNode.addEventListener('paste', handlePaste as any, true);
+      editorDomNode.addEventListener('paste', handlePaste as EventListener, true);
     }
   }, [theme, onChange, updateDecorations]);
 

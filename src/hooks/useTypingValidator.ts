@@ -163,8 +163,9 @@ export function useTypingValidator({
   }, [enabled, startTime]);
 
   const validationResult = useMemo<ValidationResult>(() => {
-    return validatorRef.current.validate(typedText);
-  }, [typedText]);
+    const v = createOptimizedValidator(normalizedExpectedCode, blanks);
+    return v.validate(typedText);
+  }, [typedText, normalizedExpectedCode, blanks]);
 
   const metrics = useMemo<TypingMetrics>(() => {
     const elapsedTime = liveElapsedTime;

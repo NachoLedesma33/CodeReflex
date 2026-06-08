@@ -28,6 +28,13 @@ interface ReflexFileContent {
   exercises: ReflexSnippet[];
 }
 
+interface GuidedFileContent {
+  language: string;
+  level: string;
+  type: string;
+  problems: GuidedProblem[];
+}
+
 const CACHE_TTL = 5 * 60 * 1000;
 const CONTENT_BASE = '/content';
 
@@ -98,7 +105,7 @@ export class ContentLoader {
           const fileLevel = (level as DifficultyLevel); // El nivel viene del argumento ya que el archivo es nivel-específico
 
           for (const exercise of file.exercises) {
-            const snippet: any = {
+            const snippet = {
               ...exercise,
               language: fileLang,
               level: fileLevel,
@@ -129,11 +136,26 @@ export class ContentLoader {
     }
 
     try {
-      // Guided problems not yet implemented - skip silently
-      console.log('[ContentLoader] Guided problems not available yet, skipping');
-      return [];
-    } catch (error) {
-      console.error('Error loading guided problems:', error);
+      const suffix = LANGUAGE_FILE_MAP[language] || 'JS';
+      const fileName = `${level}${suffix}.json`;
+      const url = `${CONTENT_BASE}/guided/${language}/${fileName}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        return [];
+      }
+
+      const fileData: GuidedFileContent = await response.json();
+      const problems: GuidedProblem[] = (fileData.problems || []).map(p => ({
+        ...p,
+        language,
+        level,
+        exerciseType: 'guided-problem',
+      })) as GuidedProblem[];
+
+      this.cache[key] = { data: problems, timestamp: Date.now() };
+      return problems;
+    } catch {
       return [];
     }
   }
@@ -142,7 +164,7 @@ export class ContentLoader {
     reflexSnippets: ReflexSnippet[];
     guidedProblems: GuidedProblem[];
   }> {
-    const languages: ProgrammingLanguage[] = ['javascript', 'typescript', 'python'];
+    const languages: ProgrammingLanguage[] = ['javascript', 'typescript', 'python', 'java'];
     const levels: DifficultyLevel[] = ['fundamentals', 'intermediate', 'interview', 'advanced'];
 
     const allReflex: ReflexSnippet[] = [];

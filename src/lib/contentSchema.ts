@@ -59,7 +59,7 @@ export const GuidedProblemSchema = z.object({
 });
 
 export const ContentIndexSchema = z.object({
-  language: z.enum(['javascript', 'typescript', 'python']),
+  language: z.enum(['javascript', 'typescript', 'python', 'java']),
   level: z.enum(['fundamentals', 'intermediate', 'interview', 'advanced']),
   type: z.enum(['reflex-snippets', 'guided-problems']),
   totalCount: z.number().int().min(0),
@@ -71,7 +71,7 @@ export const ContentIndexSchema = z.object({
 export const GlobalContentIndexSchema = z.object({
   version: z.string(),
   generatedAt: z.string(),
-  languages: z.array(z.enum(['javascript', 'typescript', 'python'])),
+  languages: z.array(z.enum(['javascript', 'typescript', 'python', 'java'])),
   levels: z.array(z.enum(['fundamentals', 'intermediate', 'interview', 'advanced'])),
   types: z.array(z.enum(['reflex-snippets', 'guided-problems'])),
   totalFiles: z.number().int().min(0),
@@ -93,6 +93,7 @@ export function generateExerciseId(
     javascript: 'js',
     typescript: 'ts',
     python: 'py',
+    java: 'jv',
   };
   const levelMap: Record<string, string> = {
     fundamentals: 'fund',

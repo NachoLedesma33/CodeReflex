@@ -102,22 +102,25 @@ export function GuidedProblem({
     };
   }, [phase, startTime]);
 
-  useEffect(() => {
-    setUserCode('');
-    setTestStates([]);
-    setPhase('reading');
-    setRevealedHints(0);
-    setShowSolution(false);
-    setExecutionResult(null);
-    setElapsedTime(0);
-    setStartTime(null);
-    isCompletedRef.current = false;
-  }, [exercise.id]);
-
   const startCoding = useCallback(() => {
     setPhase('coding');
     setStartTime(Date.now());
   }, []);
+
+  function getMainFunction(code: string): string {
+    const match = code.match(/function\s+(\w+)/);
+    return match ? match[1] : '';
+  }
+
+  const simulateTest = useCallback((input: string): string => {
+    try {
+      const fn = new Function(userCode + `\nreturn ${getMainFunction(exercise.solution || '')}`);
+      const result = fn(input);
+      return String(result);
+    } catch {
+      return 'Error';
+    }
+  }, [userCode, exercise.solution]);
 
   const runTests = useCallback(() => {
     setPhase('testing');
@@ -179,22 +182,7 @@ export function GuidedProblem({
         onComplete?.(result);
       }
     }, 800);
-  }, [tests, userCode, elapsedTime, exercise, completeExercise, addXP, onComplete]);
-
-  const simulateTest = (input: string): string => {
-    try {
-      const fn = new Function(userCode + `\nreturn ${getMainFunction(exercise.solution || '')}`);
-      const result = fn(input);
-      return String(result);
-    } catch {
-      return 'Error';
-    }
-  };
-
-  const getMainFunction = (code: string): string => {
-    const match = code.match(/function\s+(\w+)/);
-    return match ? match[1] : '';
-  };
+  }, [tests, userCode, elapsedTime, exercise, completeExercise, addXP, onComplete, simulateTest]);
 
   const resetProblem = useCallback(() => {
     setUserCode('');

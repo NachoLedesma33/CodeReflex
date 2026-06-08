@@ -143,16 +143,6 @@ export function ReflexTyping({
     }
   }, [isComplete, sessionState, metrics, handleExerciseComplete]);
 
-  useEffect(() => {
-    setCurrentCode('');
-    setSessionState('idle');
-    setSessionSummary(null);
-    setEditorKey(k => k + 1);
-    resetValidator();
-    isCompleteRef.current = false;
-    prevLengthRef.current = 0;
-  }, [exercise.id, resetValidator]);
-
   const startSession = useCallback(() => {
     setSessionState('running');
   }, []);

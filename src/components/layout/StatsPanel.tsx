@@ -55,6 +55,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
     bestWpmByLanguage,
     bestAccuracyByLanguage,
     completedExercises,
+    exerciseStats,
   } = useProgressStore();
 
   const formatTime = (ms: number): string => {
@@ -76,7 +77,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
     return Math.round(accuracies.reduce((a, b) => a + b, 0) / accuracies.length);
   }, [bestAccuracyByLanguage]);
 
-  const level = useMemo(() => {
+  const level = (() => {
     const xpThresholds = [0, 100, 300, 600, 1000, 1500, 2200, 3000, 4000, 5500];
     for (let i = xpThresholds.length - 1; i >= 0; i--) {
       if (totalXP >= xpThresholds[i]) {
@@ -84,7 +85,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
       }
     }
     return { level: 1, title: 'Novato', progress: (totalXP / 100) * 100 };
-  }, [totalXP]);
+  })();
 
   const unlockedAchievements = useMemo(() => {
     return ACHIEVEMENTS.filter(achievement => {
@@ -104,17 +105,24 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
   }, [totalExercises, bestOverallWpm, bestOverallAccuracy, longestStreak]);
 
   const heatmapData = useMemo(() => {
+    const dailyCount: Record<string, number> = {};
+    for (const stat of Object.values(exerciseStats)) {
+      if (stat.completedAt) {
+        const day = stat.completedAt.split('T')[0];
+        dailyCount[day] = (dailyCount[day] || 0) + 1;
+      }
+    }
     const days = [];
     const today = new Date();
     for (let i = 364; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
       const dayStr = date.toISOString().split('T')[0];
-      const count = Math.floor(Math.random() * 5);
+      const count = dailyCount[dayStr] || 0;
       days.push({ date: dayStr, count, level: count === 0 ? 0 : count <= 2 ? 1 : count <= 4 ? 2 : 3 });
     }
     return days;
-  }, []);
+  }, [exerciseStats]);
 
   if (compact) {
     return (
