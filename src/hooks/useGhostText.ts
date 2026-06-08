@@ -52,7 +52,7 @@ export function useGhostText({
 
   const selectedSuggestionIndex = suggestionAnchor?.cursor === cursorPosition ? suggestionAnchor.index : -1;
 
-  const updateCursorPosition = useCallback((_position: number) => {
+  const updateCursorPosition = useCallback(() => {
     setSuggestionAnchor(null);
     setActiveSuggestion(null);
   }, []);
@@ -73,13 +73,6 @@ export function useGhostText({
   }, [cursorPosition, blankRanges, typingStyle]);
 
   const isInBlank = useMemo(() => currentBlankIndex >= 0, [currentBlankIndex]);
-
-  const currentBlank = useMemo(() => {
-    if (currentBlankIndex >= 0 && currentBlankIndex < blankRanges.length) {
-      return blankRanges[currentBlankIndex];
-    }
-    return null;
-  }, [currentBlankIndex, blankRanges]);
 
   const getNextBlank = useCallback((): BlankPosition | null => {
     const nextBlanks = blankRanges.filter(b => b.start > cursorPosition);
@@ -116,8 +109,8 @@ export function useGhostText({
 
   const autocompleteSuggestions = useMemo(() => {
     if (!enabled || !codeSnippet) return [];
-    return generateSuggestions(codeSnippet, cursorPosition, typingStyle, filledBlanks);
-  }, [enabled, codeSnippet, cursorPosition, typingStyle, filledBlanks]);
+    return generateSuggestions(codeSnippet, cursorPosition, typingStyle);
+  }, [enabled, codeSnippet, cursorPosition, typingStyle]);
 
   const ghostTextState = useMemo<GhostTextState>(() => {
     const ghostText = calculateGhostText();
@@ -215,7 +208,6 @@ function generateSuggestions(
   code: string,
   cursorPosition: number,
   typingStyle: TypingStyle,
-  filledBlanks: Map<number, string>
 ): string[] {
   const suggestions: string[] = [];
   const beforeCursor = code.slice(0, cursorPosition);

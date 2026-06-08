@@ -119,13 +119,3 @@ export function validateContentIndex(data: unknown): ContentIndex {
   return ContentIndexSchema.parse(data);
 }
 
-export default {
-  ReflexSnippetSchema,
-  GuidedProblemSchema,
-  ContentIndexSchema,
-  GlobalContentIndexSchema,
-  generateExerciseId,
-  validateReflexSnippet,
-  validateGuidedProblem,
-  validateContentIndex,
-};

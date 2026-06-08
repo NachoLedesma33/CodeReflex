@@ -47,16 +47,6 @@ export function useInitialization(options: InitializationOptions = {}) {
   const setCurrentLanguage = useUIStore(state => state.setCurrentLanguage);
   const setCurrentLevel = useUIStore(state => state.setCurrentLevel);
 
-  const { 
-    totalExercises, 
-    currentStreak, 
-    longestStreak, 
-    bestWpmByLanguage, 
-    bestAccuracyByLanguage,
-    totalXP,
-    addXP,
-  } = useProgressStore();
-
   const initialize = useCallback(async () => {
     if (initializedRef.current) return;
     initializedRef.current = true;
@@ -122,16 +112,14 @@ export function useProgressSync() {
   const previousStreak = useRef(0);
   const previousBestWpm = useRef(0);
 
-  const { totalXP, currentStreak, longestStreak, totalExercises, addXP, bestWpmByLanguage, bestAccuracyByLanguage } = useProgressStore();
-  const loadExercises = useExerciseStore(state => state.loadExercises);
-  const languageFilter = useExerciseStore(state => state.languageFilter);
-  const levelFilter = useExerciseStore(state => state.levelFilter);
+  const { totalXP, currentStreak, totalExercises, addXP, bestWpmByLanguage, bestAccuracyByLanguage } = useProgressStore();
 
   useEffect(() => {
     previousXP.current = totalXP;
     previousExercises.current = totalExercises;
     previousStreak.current = currentStreak;
     previousBestWpm.current = bestWpmByLanguage.javascript || 0;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -160,7 +148,7 @@ export function useProgressSync() {
     };
 
     const stats = useProgressStore.getState();
-    Object.entries(stats.exerciseStats).forEach(([_, exStats]) => {
+    Object.entries(stats.exerciseStats).forEach(([, exStats]) => {
       if (exStats.bestWpm > 0) {
         const lang = extractLanguageFromExerciseId(exStats.exerciseId);
         if (lang) completedByLanguage[lang]++;
@@ -218,7 +206,6 @@ export function useIntelligentPreload() {
   const preloadNextDifficulty = useExerciseStore(state => state.preloadNextDifficulty);
   const levelFilter = useExerciseStore(state => state.levelFilter);
   const languageFilter = useExerciseStore(state => state.languageFilter);
-  const loadedCombinations = useExerciseStore(state => state.loadedCombinations);
 
   const canPreload = levelFilter && levelFilter !== 'advanced';
 
@@ -271,7 +258,6 @@ export function getInitialState() {
 
   try {
     const uiState = localStorage.getItem('codereflex-ui');
-    const progressState = localStorage.getItem('codereflex-progress');
 
     if (uiState) {
       const parsed = JSON.parse(uiState);
@@ -298,11 +284,3 @@ export function clearAllData() {
   localStorage.removeItem('codereflex-cache');
 }
 
-export default {
-  useInitialization,
-  useProgressSync,
-  useIntelligentPreload,
-  useErrorRecovery,
-  getInitialState,
-  clearAllData,
-};

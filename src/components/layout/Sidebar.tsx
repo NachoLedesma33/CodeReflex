@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useExerciseStore } from '@/stores/exerciseStore';
 import { useProgressStore } from '@/stores/progressStore';
 import { useUIStore } from '@/stores/uiStore';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ProgrammingLanguage, DifficultyLevel, ExerciseType, Exercise, ExerciseCategory } from '@/types';
 import { cn } from '@/lib/utils';
@@ -17,11 +16,9 @@ import {
   StarOff,
   CheckCircle2,
   Circle,
-  Play,
   BookOpen,
   Keyboard,
   TrendingUp,
-  RefreshCw,
   Filter,
   X,
   Search,
@@ -98,7 +95,6 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
     allExercises,
     filteredExercises,
     currentExercise,
-    currentIndex,
     languageFilter,
     levelFilter,
     categoryFilter,
@@ -107,12 +103,9 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
     setCategoryFilter,
     setSearchQuery,
     getRandomExercise,
-    applyFilters,
   } = useExerciseStore();
 
   const {
-    completedExercises,
-    favoriteExercises,
     isFavorite,
     toggleFavorite,
     isCompleted,
@@ -122,7 +115,6 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
   const { mode, setMode } = useUIStore();
 
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [showFilters, setShowFilters] = useState(true);
   const [searchQueryLocal, setSearchQueryLocal] = useState('');
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
     new Set(['filters', 'favorites', 'list'])

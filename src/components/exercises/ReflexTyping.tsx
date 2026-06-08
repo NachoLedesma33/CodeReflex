@@ -21,7 +21,6 @@ import {
   RotateCcw,
   Star,
   StarOff,
-  Sparkles,
   Target,
   Trophy,
   Volume2,
@@ -142,10 +141,6 @@ export function ReflexTyping({
       handleExerciseComplete(metrics);
     }
   }, [isComplete, sessionState, metrics, handleExerciseComplete]);
-
-  const startSession = useCallback(() => {
-    setSessionState('running');
-  }, []);
 
   const pauseSession = useCallback(() => {
     setSessionState('paused');

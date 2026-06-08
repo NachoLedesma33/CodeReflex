@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useCallback, useEffect, useRef } from 'react';
-import { Exercise, ExecutionResult, TestResult, TypingMetrics } from '@/types';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
+import { Exercise, ExecutionResult } from '@/types';
 import { useExerciseStore } from '@/stores/exerciseStore';
 import { useProgressStore } from '@/stores/progressStore';
 import { CodeEditor } from '@/components/editor/CodeEditor';
@@ -27,8 +27,6 @@ import {
   StarOff,
   FileText,
   Clock,
-  Zap,
-  Target,
 } from 'lucide-react';
 
 interface GuidedProblemProps {
@@ -62,7 +60,7 @@ export function GuidedProblem({
   const [testStates, setTestStates] = useState<TestState[]>([]);
   const [revealedHints, setRevealedHints] = useState(0);
   const [showSolution, setShowSolution] = useState(false);
-  const [executionResult, setExecutionResult] = useState<ExecutionResult | null>(null);
+  const [, setExecutionResult] = useState<ExecutionResult | null>(null);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
@@ -75,7 +73,7 @@ export function GuidedProblem({
   const { isFavorite, toggleFavorite, completeExercise, addXP } = useProgressStore();
 
   const isFavoriteCurrent = isFavorite(exercise.id);
-  const tests = exercise.tests || [];
+  const tests = useMemo(() => exercise.tests || [], [exercise.tests]);
   const hints = exercise.hints || [];
   const technicalNotes = exercise.technicalNotes || [];
 

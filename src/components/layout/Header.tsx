@@ -36,7 +36,6 @@ export function Header({ className }: HeaderProps) {
     mode,
     toggleTheme,
     setMode,
-    openSettings,
   } = useUIStore();
 
   const {

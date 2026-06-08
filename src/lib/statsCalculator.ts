@@ -429,7 +429,7 @@ export const getRecommendedExercises = (
   // Analyze weak areas
   const languages = computeAllLanguagesPerformance(sessions);
   const weakLanguages = Object.entries(languages)
-    .filter(([_, perf]) => perf.averageAccuracy < 80 || perf.consistency.score < 70)
+    .filter(([, perf]) => perf.averageAccuracy < 80 || perf.consistency.score < 70)
     .map(([lang]) => lang as ProgrammingLanguage);
 
   // Get completed exercise IDs

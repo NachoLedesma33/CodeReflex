@@ -4,9 +4,6 @@ import {
   GuidedProblem, 
   ContentIndex, 
   GlobalContentIndex,
-  validateReflexSnippet,
-  validateGuidedProblem,
-  validateContentIndex,
   GlobalContentIndexSchema
 } from './contentSchema';
 
@@ -37,8 +34,6 @@ interface GuidedFileContent {
 
 const CACHE_TTL = 5 * 60 * 1000;
 const CONTENT_BASE = '/content';
-
-const contentCache: ContentCache = {};
 
 const LANGUAGE_FILE_MAP: Record<string, string> = {
   javascript: 'JS',
@@ -88,11 +83,10 @@ export class ContentLoader {
     try {
       const fileName = this.getReflexFileName(language, level);
       const url = `${CONTENT_BASE}/reflex/${language}/${fileName}`;
-      console.log('[ContentLoader] Loading reflex from:', url);
       const response = await fetch(url);
       
       if (!response.ok) {
-        console.warn(`No file found for ${language}/${level}/reflex: ${fileName}, returning empty array`);
+        this.cache[key] = { data: [], timestamp: Date.now() };
         return [];
       }
 
@@ -142,6 +136,7 @@ export class ContentLoader {
       const response = await fetch(url);
 
       if (!response.ok) {
+        this.cache[key] = { data: [], timestamp: Date.now() };
         return [];
       }
 

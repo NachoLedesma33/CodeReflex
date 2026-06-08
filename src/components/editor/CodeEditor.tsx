@@ -3,7 +3,6 @@
 import { useRef, useEffect, useCallback, useState } from 'react';
 import Editor, { OnMount } from '@monaco-editor/react';
 import { useUIStore } from '@/stores/uiStore';
-import { useProgressStore } from '@/stores/progressStore';
 import { BlankPosition, TypingStyle, ProgrammingLanguage } from '@/types';
 import { cn } from '@/lib/utils';
 
@@ -41,8 +40,6 @@ export function CodeEditor({
   expectedCode,
   currentCode,
   language,
-  typingStyle = 'full',
-  blanks,
   mode = 'write',
   onChange,
   showGhostText = true,
@@ -73,7 +70,6 @@ export function CodeEditor({
     showLineNumbers, 
     wordWrap,
     highlightActiveLine,
-    bracketPairColorization,
   } = useUIStore();
 
   // ============================================

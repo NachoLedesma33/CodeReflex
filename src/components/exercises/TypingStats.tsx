@@ -22,11 +22,6 @@ interface TypingStatsProps {
   className?: string;
 }
 
-interface WPMDataPoint {
-  time: number;
-  wpm: number;
-}
-
 export function TypingStats({
   metrics,
   characterStreak = 0,

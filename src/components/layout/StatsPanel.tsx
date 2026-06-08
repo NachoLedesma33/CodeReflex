@@ -12,11 +12,9 @@ import {
   Zap,
   Trophy,
   Award,
-  BookOpen,
   BarChart3,
   Calendar,
   Star,
-  TrendingUp,
 } from 'lucide-react';
 
 interface StatsPanelProps {
@@ -54,7 +52,6 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
     totalXP,
     bestWpmByLanguage,
     bestAccuracyByLanguage,
-    completedExercises,
     exerciseStats,
   } = useProgressStore();
 
@@ -206,22 +203,18 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
             <LanguageStat
               language="JavaScript"
               wpm={bestWpmByLanguage.javascript}
-              accuracy={bestAccuracyByLanguage.javascript}
             />
             <LanguageStat
               language="TypeScript"
               wpm={bestWpmByLanguage.typescript}
-              accuracy={bestAccuracyByLanguage.typescript}
             />
             <LanguageStat
               language="Python"
               wpm={bestWpmByLanguage.python}
-              accuracy={bestAccuracyByLanguage.python}
             />
             <LanguageStat
               language="Java"
               wpm={bestWpmByLanguage.java || 0}
-              accuracy={bestAccuracyByLanguage.java || 0}
             />
           </div>
         </div>
@@ -356,10 +349,9 @@ function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
 interface LanguageStatProps {
   language: string;
   wpm: number;
-  accuracy: number;
 }
 
-function LanguageStat({ language, wpm, accuracy }: LanguageStatProps) {
+function LanguageStat({ language, wpm }: LanguageStatProps) {
   return (
     <div className="bg-bg-elevated/30 rounded-lg p-2 text-center border border-border/50 hover:border-border-strong/50 transition-colors">
       <LanguageIcon language={language} size={20} className="mx-auto mb-1.5" />

@@ -2,13 +2,11 @@
 
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { useExerciseStore } from '@/stores/exerciseStore';
-import { useProgressStore } from '@/stores/progressStore';
 import { useUIStore } from '@/stores/uiStore';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { StatsPanel } from '@/components/layout/StatsPanel';
-import { Exercise, ExerciseType } from '@/types';
-import { cn } from '@/lib/utils';
+import { Exercise } from '@/types';
 import {
   Loader2,
   Keyboard,
@@ -39,8 +37,6 @@ export default function Home() {
     setCurrentExercise,
   } = useExerciseStore();
 
-  const { isCompleted } = useProgressStore();
-
   const {
     zenModeEnabled,
     statsPanelCollapsed,
@@ -50,7 +46,6 @@ export default function Home() {
     mode,
   } = useUIStore();
 
-  const [showStats, setShowStats] = useState(false);
   const [activePanel, setActivePanel] = useState<'info' | 'stats' | null>(null);
 
   useEffect(() => {

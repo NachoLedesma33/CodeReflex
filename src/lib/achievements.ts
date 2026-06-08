@@ -365,7 +365,6 @@ export function checkAchievements(params: {
 }): AchievementResult {
   const {
     totalExercises,
-    currentStreak,
     longestStreak,
     bestWpm,
     bestAccuracy,
@@ -424,7 +423,7 @@ export function checkAchievements(params: {
   const newXP = previousXP + totalXPAwarded;
   const newLevel = calculateLevel(newXP).level;
 
-  const milestone = detectMilestone(unlocked, previousLevel, newLevel, bestWpm, bestAccuracy, longestStreak);
+  const milestone = detectMilestone(unlocked, previousLevel, newLevel);
 
   return {
     unlocked,
@@ -439,9 +438,6 @@ function detectMilestone(
   unlocked: Achievement[],
   previousLevel: number,
   newLevel: number,
-  bestWpm: number,
-  bestAccuracy: number,
-  longestStreak: number
 ): MilestoneType | null {
   const hasFirstExercise = unlocked.some(a => a.id === 'first-exercise');
   const hasStreak7 = unlocked.some(a => a.id === 'streak-7');
@@ -516,15 +512,3 @@ export function formatMilestoneNotification(
   return messages[milestone] || '🎉 Milestone achieved!';
 }
 
-export default {
-  ACHIEVEMENTS,
-  LEVELS,
-  calculateLevel,
-  checkAchievements,
-  getLevelTitle,
-  getXPForNextLevel,
-  getAchievementsByCategory,
-  getNextAchievementInCategory,
-  formatAchievementNotification,
-  formatMilestoneNotification,
-};

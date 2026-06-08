@@ -113,8 +113,6 @@ export function useTypingValidator({
   onCorrection,
   onComplete,
   onProgress,
-  syncWithStore = false,
-  exerciseId,
 }: UseTypingValidatorOptions): UseTypingValidatorReturn {
   const [typedText, setTypedText] = useState('');
   const [errors, setErrors] = useState<Map<number, string>>(new Map());
@@ -314,7 +312,7 @@ export function useTypingValidator({
 
     debouncedValidation(typedText + text);
     return errorCount === 0;
-  }, [enabled, startTime, expectedCode, typedText.length, errors, emitEvent, debouncedValidation]);
+  }, [enabled, startTime, expectedCode, typedText, errors, emitEvent, debouncedValidation]);
 
   const syncText = useCallback((newText: string) => {
     const normalizedNewText = newText.replace(/\r\n/g, '\n').replace(/\t/g, '  ');

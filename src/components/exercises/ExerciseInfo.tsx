@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Exercise, ExerciseHint } from '@/types';
+import { Exercise } from '@/types';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -58,7 +58,6 @@ export function ExerciseInfo({
     const elements: React.ReactNode[] = [];
     let inCodeBlock = false;
     let codeContent = '';
-    let codeLanguage = '';
 
     lines.forEach((line, i) => {
       if (line.startsWith('```')) {
@@ -72,7 +71,7 @@ export function ExerciseInfo({
           inCodeBlock = false;
         } else {
           inCodeBlock = true;
-          codeLanguage = line.slice(3);
+          codeContent = '';
         }
         return;
       }

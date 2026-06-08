@@ -68,13 +68,6 @@ const calculateStreak = (lastDate: string): number => {
   return -1;
 };
 
-const XP_PER_LEVEL = {
-  fundamentals: 10,
-  intermediate: 25,
-  interview: 50,
-  advanced: 100,
-};
-
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
@@ -152,7 +145,7 @@ export const useProgressStore = create<ProgressState>()(
       },
 
       updateStreak: () => {
-        const { lastActiveDate, currentStreak } = get();
+        const { lastActiveDate } = get();
         const today = new Date().toISOString().split('T')[0];
         
         if (lastActiveDate === today) return;

@@ -66,7 +66,6 @@ interface ExerciseState {
 }
 
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutos
-const EXERCISE_TYPES: ExerciseType[] = ['reflex-typing', 'guided-problem'];
 const DIFFICULTY_ORDER: DifficultyLevel[] = ['fundamentals', 'intermediate', 'interview', 'advanced'];
 
 const applyFilters = (
@@ -209,7 +208,7 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
       return;
     }
 
-    set({ isLoading: true, error: null });
+    set({ isLoading: !state.hasLoadedInitial, error: null });
     
     try {
       const loaded = await fetchFromRepo(lang, lvl);
@@ -383,17 +382,21 @@ export const useExerciseStore = create<ExerciseState>((set, get) => ({
 
   // === FILTROS ===
   setLanguageFilter: async (language) => {
-    set({ languageFilter: language, isLoading: true });
-    get().applyFilters();
+    set({ languageFilter: language });
     await get().loadExercises(language || undefined, undefined);
-    set({ isLoading: false });
+    const { filteredExercises } = get();
+    if (filteredExercises.length > 0) {
+      set({ currentExercise: filteredExercises[0], currentIndex: 0 });
+    }
   },
 
   setLevelFilter: async (level) => {
-    set({ levelFilter: level, isLoading: true });
-    get().applyFilters();
+    set({ levelFilter: level });
     await get().loadExercises(undefined, level || undefined);
-    set({ isLoading: false });
+    const { filteredExercises } = get();
+    if (filteredExercises.length > 0) {
+      set({ currentExercise: filteredExercises[0], currentIndex: 0 });
+    }
   },
 
   setCategoryFilter: (category) => {
