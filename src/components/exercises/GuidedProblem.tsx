@@ -60,7 +60,6 @@ export function GuidedProblem({
   const [testStates, setTestStates] = useState<TestState[]>([]);
   const [revealedHints, setRevealedHints] = useState(0);
   const [showSolution, setShowSolution] = useState(false);
-  const [, setExecutionResult] = useState<ExecutionResult | null>(null);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(
@@ -163,8 +162,6 @@ export function GuidedProblem({
         })),
       };
 
-      setExecutionResult(result);
-
       if (allPassed && !isCompletedRef.current) {
         isCompletedRef.current = true;
         setPhase('completed');
@@ -188,7 +185,6 @@ export function GuidedProblem({
     setPhase('reading');
     setRevealedHints(0);
     setShowSolution(false);
-    setExecutionResult(null);
     setElapsedTime(0);
     setStartTime(null);
     isCompletedRef.current = false;
@@ -221,7 +217,7 @@ export function GuidedProblem({
     return text
       .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-text-primary">$1</strong>')
       .replace(/\*(.+?)\*/g, '<em class="text-text-primary">$1</em>')
-      .replace(/`(.+?)`/g, '<code class="bg-bg-elevated px-1 rounded text-blue-400 text-sm">$1</code>')
+      .replace(/`(.+?)`/g, '<code class="bg-bg-elevated px-1 rounded text-blue-600 dark:text-blue-400 text-sm">$1</code>')
       .replace(/\n/g, '<br/>');
   };
 
@@ -233,10 +229,10 @@ export function GuidedProblem({
             <div className="flex items-center gap-2 mb-2">
               <span className={cn(
                 'px-2 py-0.5 text-xs rounded-full',
-                exercise.level === 'fundamentals' && 'bg-green-500/20 text-green-400',
-                exercise.level === 'intermediate' && 'bg-yellow-500/20 text-yellow-400',
-                exercise.level === 'interview' && 'bg-orange-500/20 text-orange-400',
-                exercise.level === 'advanced' && 'bg-red-500/20 text-red-400',
+                exercise.level === 'fundamentals' && 'bg-green-500/20 text-green-600 dark:text-green-400',
+                exercise.level === 'intermediate' && 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400',
+                exercise.level === 'interview' && 'bg-orange-500/20 text-orange-600 dark:text-orange-400',
+                exercise.level === 'advanced' && 'bg-red-500/20 text-red-600 dark:text-red-400',
               )}>
                 {exercise.level}
               </span>
@@ -253,7 +249,7 @@ export function GuidedProblem({
               className="p-2"
             >
               {isFavoriteCurrent ? (
-                <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                <Star className="w-5 h-5 fill-yellow-600 dark:fill-yellow-500 text-yellow-600 dark:text-yellow-500" />
               ) : (
                 <StarOff className="w-5 h-5 text-text-muted" />
               )}
@@ -274,10 +270,10 @@ export function GuidedProblem({
             <div className="flex items-center gap-2">
               <span className={cn(
                 'px-2 py-1 rounded',
-                phase === 'reading' && 'bg-blue-500/20 text-blue-400',
-                phase === 'coding' && 'bg-yellow-500/20 text-yellow-400',
-                phase === 'testing' && 'bg-purple-500/20 text-purple-400',
-                phase === 'completed' && 'bg-green-500/20 text-green-400',
+                phase === 'reading' && 'bg-blue-500/20 text-blue-600 dark:text-blue-400',
+                phase === 'coding' && 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400',
+                phase === 'testing' && 'bg-purple-500/20 text-purple-600 dark:text-purple-400',
+                phase === 'completed' && 'bg-green-500/20 text-green-600 dark:text-green-400',
               )}>
                 {phase === 'reading' && '📖 Lectura'}
                 {phase === 'coding' && '⌨️ Código'}
@@ -395,8 +391,8 @@ export function GuidedProblem({
                           className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3"
                         >
                           <div className="flex items-start gap-2">
-                            <span className="text-yellow-500 font-mono text-sm">Pista {i + 1}:</span>
-                            <span className="text-sm text-yellow-200">{hint.text}</span>
+                            <span className="text-yellow-600 dark:text-yellow-500 font-mono text-sm">Pista {i + 1}:</span>
+                            <span className="text-sm text-yellow-700 dark:text-yellow-200">{hint.text}</span>
                           </div>
                         </div>
                       ))}
@@ -471,7 +467,7 @@ export function GuidedProblem({
                         <Clock className="w-4 h-4 text-text-muted" />
                       )}
                       {test.passed === true && (
-                        <CheckCircle2 className="w-4 h-4 text-green-500" />
+                        <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-500" />
                       )}
                       {test.passed === false && (
                         <XCircle className="w-4 h-4 text-red-500" />
@@ -489,7 +485,7 @@ export function GuidedProblem({
                             <>
                               <br />
                               <span className="text-zinc-500">Actual: </span>
-                              <span className="text-red-400">{test.actual}</span>
+                              <span className="text-red-600 dark:text-red-400">{test.actual}</span>
                             </>
                           )}
                         </div>
@@ -518,7 +514,7 @@ export function GuidedProblem({
                         <pre className="whitespace-pre-wrap">{exercise.solution}</pre>
                       </div>
                       <div 
-                        className="bg-blue-500/10 rounded-lg p-4 text-sm text-blue-200 border border-blue-500/30"
+                        className="bg-blue-500/10 rounded-lg p-4 text-sm text-blue-700 dark:text-blue-200 border border-blue-500/30"
                         dangerouslySetInnerHTML={{ __html: renderMarkdown(exercise.explanation) }}
                       />
                     </>

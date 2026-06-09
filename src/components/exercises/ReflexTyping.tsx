@@ -210,10 +210,10 @@ export function ReflexTyping({
             <div className="flex items-center gap-2 mb-2">
               <span className={cn(
                 'px-2 py-0.5 text-xs rounded-full',
-                exercise.level === 'fundamentals' && 'bg-green-500/20 text-green-400',
-                exercise.level === 'intermediate' && 'bg-yellow-500/20 text-yellow-400',
-                exercise.level === 'interview' && 'bg-orange-500/20 text-orange-400',
-                exercise.level === 'advanced' && 'bg-red-500/20 text-red-400',
+                exercise.level === 'fundamentals' && 'bg-green-500/20 text-green-600 dark:text-green-400',
+                exercise.level === 'intermediate' && 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400',
+                exercise.level === 'interview' && 'bg-orange-500/20 text-orange-600 dark:text-orange-400',
+                exercise.level === 'advanced' && 'bg-red-500/20 text-red-600 dark:text-red-400',
               )}>
                 {exercise.level}
               </span>
@@ -243,7 +243,7 @@ export function ReflexTyping({
               className="p-2"
             >
               {isFavoriteCurrent ? (
-                <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                <Star className="w-5 h-5 fill-yellow-600 dark:fill-yellow-500 text-yellow-600 dark:text-yellow-500" />
               ) : (
                 <StarOff className="w-5 h-5 text-text-muted" />
               )}
@@ -293,7 +293,7 @@ export function ReflexTyping({
               <div className="bg-bg-surface border border-border-strong rounded-2xl p-8 shadow-2xl max-w-md w-full mx-4 transform animate-in zoom-in slide-in-from-bottom-4 duration-500">
                 <div className="flex items-center justify-center mb-6">
                   <div className="relative">
-                    <Trophy className="w-16 h-16 text-yellow-500" />
+                    <Trophy className="w-16 h-16 text-yellow-600 dark:text-yellow-500" />
                     <div className="absolute -inset-1 bg-yellow-500/20 blur-xl rounded-full" />
                   </div>
                 </div>
@@ -301,19 +301,19 @@ export function ReflexTyping({
                 
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="bg-bg-elevated/50 border border-border-strong/50 rounded-xl p-4 text-center">
-                    <div className="text-3xl font-bold text-yellow-500">{sessionSummary.wpm}</div>
+                    <div className="text-3xl font-bold text-yellow-600 dark:text-yellow-500">{sessionSummary.wpm}</div>
                     <div className="text-[10px] text-text-muted uppercase tracking-wider mt-1">WPM</div>
                   </div>
                   <div className="bg-bg-elevated/50 border border-border-strong/50 rounded-xl p-4 text-center">
-                    <div className="text-3xl font-bold text-green-500">{sessionSummary.accuracy}%</div>
+                    <div className="text-3xl font-bold text-green-600 dark:text-green-500">{sessionSummary.accuracy}%</div>
                     <div className="text-[10px] text-text-muted uppercase tracking-wider mt-1">Precisión</div>
                   </div>
                   <div className="bg-bg-elevated/50 border border-border-strong/50 rounded-xl p-4 text-center">
-                    <div className="text-3xl font-bold text-blue-500">{formatTime(sessionSummary.timeSpent)}</div>
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-500">{formatTime(sessionSummary.timeSpent)}</div>
                     <div className="text-[10px] text-text-muted uppercase tracking-wider mt-1">Tiempo</div>
                   </div>
                   <div className="bg-bg-elevated/50 border border-border-strong/50 rounded-xl p-4 text-center">
-                    <div className="text-3xl font-bold text-red-400">{sessionSummary.errors}</div>
+                    <div className="text-3xl font-bold text-red-600 dark:text-red-400">{sessionSummary.errors}</div>
                     <div className="text-[10px] text-text-muted uppercase tracking-wider mt-1">Errores</div>
                   </div>
                 </div>
@@ -355,21 +355,21 @@ export function ReflexTyping({
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-6">
                   <div className="flex items-center gap-2">
-                    <Zap className="w-4 h-4 text-yellow-500" />
+                    <Zap className="w-4 h-4 text-yellow-600 dark:text-yellow-500" />
                     <span className="text-sm font-medium">{metrics.wpm}</span>
                     <span className="text-xs text-text-muted">WPM</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Target className="w-4 h-4 text-green-500" />
+                    <Target className="w-4 h-4 text-green-600 dark:text-green-500" />
                     <span className="text-sm font-medium">{metrics.accuracy}%</span>
                     <span className="text-xs text-text-muted">Precisión</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-blue-500" />
+                    <Clock className="w-4 h-4 text-blue-600 dark:text-blue-500" />
                     <span className="text-sm font-medium">{formatTime(metrics.elapsedTime)}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-24 h-2 bg-zinc-700 rounded-full overflow-hidden">
+                    <div className="w-24 h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
                       <div
                         className="h-full transition-all duration-300"
                         style={{
@@ -418,7 +418,7 @@ export function ReflexTyping({
           ) : (
             <div className="w-full flex items-center justify-between pt-2">
               <div className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-500" />
+                <Trophy className="w-5 h-5 text-yellow-600 dark:text-yellow-500" />
                 <span className="font-semibold text-text-primary">¡Reto Superado!</span>
               </div>
               <div className="flex items-center gap-4">

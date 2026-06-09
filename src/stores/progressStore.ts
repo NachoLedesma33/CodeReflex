@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ProgrammingLanguage, ExerciseStats, CommonMistake } from '@/types';
+import { checkAchievements } from '@/lib/achievements';
 
 interface ProgressState {
   // Stats generales
@@ -142,6 +143,53 @@ export const useProgressStore = create<ProgressState>()(
           longestStreak: Math.max(get().longestStreak, newStreak),
           lastActiveDate: new Date().toISOString().split('T')[0],
         });
+
+        const completedByLanguage: Record<ProgrammingLanguage, number> = {
+          javascript: 0, typescript: 0, python: 0, java: 0,
+        };
+
+        const langMap: Record<string, ProgrammingLanguage> = {
+          'js-': 'javascript',
+          'ts-': 'typescript',
+          'py-': 'python',
+          'jv-': 'java',
+        };
+
+        const currentStats = get();
+        Object.entries(currentStats.exerciseStats).forEach(([, exStats]) => {
+          if (exStats.bestWpm > 0) {
+            for (const prefix of Object.keys(langMap)) {
+              if (exStats.exerciseId.startsWith(prefix)) {
+                completedByLanguage[langMap[prefix]]++;
+                break;
+              }
+            }
+          }
+        });
+
+        const previousXP = currentStats.totalXP;
+        const achievementResult = checkAchievements({
+          totalExercises: currentStats.totalExercises,
+          currentStreak: currentStats.currentStreak,
+          longestStreak: currentStats.longestStreak,
+          bestWpm: Math.max(...Object.values(currentStats.bestWpmByLanguage)),
+          bestAccuracy: Math.max(...Object.values(currentStats.bestAccuracyByLanguage)),
+          completedByLanguage,
+          totalTimeSpent: currentStats.totalTypingTime,
+          previousXP,
+          unlockedAchievementIds: currentStats.unlockedAchievements,
+        });
+
+        if (achievementResult.unlocked.length > 0) {
+          const newUnlocked = new Set(currentStats.unlockedAchievements);
+          achievementResult.unlocked.forEach(a => newUnlocked.add(a.id));
+          set({ unlockedAchievements: newUnlocked });
+          achievementResult.unlocked.forEach(a => get().addXP(a.xpReward));
+        }
+
+        if (achievementResult.milestone) {
+          console.log('[Milestone]', achievementResult.milestone);
+        }
       },
 
       updateStreak: () => {

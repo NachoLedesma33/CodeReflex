@@ -78,7 +78,7 @@ export function TypingStats({
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           <StatCard
-            icon={<Zap className="w-4 h-4 text-yellow-500" />}
+            icon={<Zap className="w-4 h-4 text-yellow-600 dark:text-yellow-500" />}
             label="WPM"
             value={metrics.wpm}
             subValue={averageWpm > 0 ? `Prom: ${averageWpm}` : undefined}
@@ -86,7 +86,7 @@ export function TypingStats({
           />
           
           <StatCard
-            icon={<Target className="w-4 h-4 text-green-500" />}
+            icon={<Target className="w-4 h-4 text-green-600 dark:text-green-500" />}
             label="Precisión"
             value={`${metrics.accuracy}%`}
             highlight={metrics.accuracy >= 95}
@@ -101,19 +101,19 @@ export function TypingStats({
           />
           
           <StatCard
-            icon={<RotateCcw className="w-4 h-4 text-orange-500" />}
+            icon={<RotateCcw className="w-4 h-4 text-orange-600 dark:text-orange-500" />}
             label="Correcciones"
             value={metrics.corrections}
           />
           
           <StatCard
-            icon={<Clock className="w-4 h-4 text-blue-500" />}
+            icon={<Clock className="w-4 h-4 text-blue-600 dark:text-blue-500" />}
             label="Tiempo"
             value={formatTime(metrics.elapsedTime)}
           />
           
           <StatCard
-            icon={<Flame className="w-4 h-4 text-purple-500" />}
+            icon={<Flame className="w-4 h-4 text-purple-600 dark:text-purple-500" />}
             label="Racha"
             value={characterStreak}
             highlight={characterStreak > 20}
@@ -165,7 +165,7 @@ export function TypingStats({
                   className={cn(
                     'h-6 rounded text-[10px] flex items-center justify-center transition-colors',
                     cell.hasError 
-                      ? 'bg-red-500/30 text-red-400' 
+                      ? 'bg-red-500/30 text-red-600 dark:text-red-400' 
                       : 'bg-bg-elevated text-text-muted'
                   )}
                 >
@@ -217,7 +217,7 @@ function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
       </div>
       <div className={cn(
         'text-lg font-semibold',
-        highlight ? 'text-yellow-500' : 'text-text-primary'
+        highlight ? 'text-yellow-600 dark:text-yellow-500' : 'text-text-primary'
       )}>
         {value}
       </div>

@@ -38,10 +38,10 @@ const LANGUAGES: { value: ProgrammingLanguage; label: string }[] = [
 ];
 
 const LEVELS: { value: DifficultyLevel; label: string; color: string }[] = [
-  { value: 'fundamentals', label: 'Fundamentos', color: 'text-green-400 bg-green-500/20' },
-  { value: 'intermediate', label: 'Intermedio', color: 'text-yellow-400 bg-yellow-500/20' },
-  { value: 'interview', label: 'Entrevista', color: 'text-orange-400 bg-orange-500/20' },
-  { value: 'advanced', label: 'Avanzado', color: 'text-red-400 bg-red-500/20' },
+  { value: 'fundamentals', label: 'Fundamentos', color: 'text-green-600 dark:text-green-400 bg-green-500/20' },
+  { value: 'intermediate', label: 'Intermedio', color: 'text-yellow-600 dark:text-yellow-400 bg-yellow-500/20' },
+  { value: 'interview', label: 'Entrevista', color: 'text-orange-600 dark:text-orange-400 bg-orange-500/20' },
+  { value: 'advanced', label: 'Avanzado', color: 'text-red-600 dark:text-red-400 bg-red-500/20' },
 ];
 
 const MODES: { value: ExerciseType; label: string; icon: React.ReactNode }[] = [
@@ -261,7 +261,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                         className={cn(
                           'px-2 py-1 text-xs rounded-md transition-colors flex items-center gap-1.5',
                           languageFilter === lang.value
-                            ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                            ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400 border border-blue-500/30'
                             : 'bg-bg-elevated text-text-muted hover:text-text-secondary border border-transparent'
                         )}
                       >
@@ -302,7 +302,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                         className={cn(
                           'flex items-center gap-1.5 px-2 py-1 text-xs rounded-md transition-colors',
                           mode === m.value
-                            ? 'bg-purple-500/20 text-purple-400'
+                            ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
                             : 'bg-bg-elevated text-text-muted hover:text-text-secondary'
                         )}
                       >
@@ -334,7 +334,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                           className={cn(
                             'px-2 py-0.5 text-xs rounded-md transition-colors',
                             categoryFilter === cat.value
-                              ? 'bg-cyan-500/20 text-cyan-400'
+                              ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-400'
                               : 'bg-bg-elevated text-text-muted hover:text-text-secondary'
                           )}
                         >
@@ -374,7 +374,7 @@ export function Sidebar({ className, onSelectExercise }: SidebarProps) {
                   {currentLevelInfo.completed}/{currentLevelInfo.total}
                 </span>
               </div>
-              <div className="h-1.5 bg-zinc-700 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-blue-500 transition-all"
                   style={{
@@ -557,7 +557,7 @@ function ExerciseItem({
             )}
             <span className={cn(
               'text-xs font-medium truncate',
-              isActive ? 'text-blue-400' : 'text-text-primary'
+              isActive ? 'text-blue-600 dark:text-blue-400' : 'text-text-primary'
             )}>
               {exercise.title}
             </span>

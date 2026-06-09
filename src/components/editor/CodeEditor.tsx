@@ -246,7 +246,7 @@ export function CodeEditor({
 
   return (
     <div 
-      className={cn('relative flex flex-col rounded-lg border bg-transparent overflow-hidden transition-colors duration-200', isFocused ? 'border-zinc-500' : 'border-border-strong', className)}
+      className={cn('relative flex flex-col rounded-lg border bg-transparent overflow-hidden transition-colors duration-200', isFocused ? 'border-zinc-400 dark:border-zinc-500' : 'border-border-strong', className)}
       style={{ direction: 'ltr' }}
     >
       {/* Editor with reference - responsive: stack on mobile, side by side on desktop */}

@@ -99,7 +99,7 @@ export function ExerciseInfo({
         const formattedLine = line
           .replace(/\*\*(.+?)\*\*/g, '<strong class="text-text-primary font-semibold">$1</strong>')
           .replace(/\*(.+?)\*/g, '<em class="text-text-primary">$1</em>')
-          .replace(/`(.+?)`/g, '<code class="bg-bg-elevated px-1 rounded text-blue-400 text-sm">$1</code>');
+          .replace(/`(.+?)`/g, '<code class="bg-bg-elevated px-1 rounded text-blue-600 dark:text-blue-400 text-sm">$1</code>');
         
         elements.push(
           <p key={i} className="text-text-secondary my-1" dangerouslySetInnerHTML={{ __html: formattedLine }} />
@@ -118,10 +118,10 @@ export function ExerciseInfo({
             <div className="flex items-center gap-2 mb-1">
               <span className={cn(
                 'px-2 py-0.5 text-xs rounded-full',
-                exercise.level === 'fundamentals' && 'bg-green-500/20 text-green-400',
-                exercise.level === 'intermediate' && 'bg-yellow-500/20 text-yellow-400',
-                exercise.level === 'interview' && 'bg-orange-500/20 text-orange-400',
-                exercise.level === 'advanced' && 'bg-red-500/20 text-red-400',
+                exercise.level === 'fundamentals' && 'bg-green-500/20 text-green-600 dark:text-green-400',
+                exercise.level === 'intermediate' && 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400',
+                exercise.level === 'interview' && 'bg-orange-500/20 text-orange-600 dark:text-orange-400',
+                exercise.level === 'advanced' && 'bg-red-500/20 text-red-600 dark:text-red-400',
               )}>
                 {exercise.level}
               </span>
@@ -186,7 +186,7 @@ export function ExerciseInfo({
                 {exercise.concepts.map((concept, i) => (
                   <span
                     key={i}
-                    className="px-2 py-1 text-xs bg-blue-500/20 text-blue-400 rounded"
+                    className="px-2 py-1 text-xs bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded"
                   >
                     {concept}
                   </span>
@@ -248,7 +248,7 @@ export function ExerciseInfo({
               {exercise.prerequisites.map((prereq, i) => (
                 <span
                   key={i}
-                  className="px-2 py-0.5 text-xs bg-purple-500/20 text-purple-400 rounded"
+                  className="px-2 py-0.5 text-xs bg-purple-500/20 text-purple-600 dark:text-purple-400 rounded"
                 >
                   {prereq}
                 </span>
@@ -277,8 +277,8 @@ export function ExerciseInfo({
                   className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-2"
                 >
                   <div className="flex items-start gap-2">
-                    <AlertCircle className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-sm text-yellow-200">{hint.text}</span>
+                    <AlertCircle className="w-4 h-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+                    <span className="text-sm text-yellow-700 dark:text-yellow-200">{hint.text}</span>
                   </div>
                 </div>
               ))}

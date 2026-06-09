@@ -9,8 +9,8 @@
  *   npx tsx scripts/generate-content.ts --all --dry-run
  */
 
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
-import { join, dirname } from 'path';
+import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { join } from 'path';
 import { z } from 'zod';
 
 // ============================================
@@ -27,11 +27,8 @@ const GUIDED_CATEGORIES = [
   'data-structures', 'dynamic-programming', 'graphs', 'trees', 'sorting'
 ];
 
-const LANGUAGES = ['javascript', 'typescript', 'python'] as const;
-const LEVELS = ['fundamentals', 'intermediate', 'interview', 'advanced'] as const;
-
-type Language = typeof LANGUAGES[number];
-type Level = typeof LEVELS[number];
+type Language = 'javascript' | 'typescript' | 'python';
+type Level = 'fundamentals' | 'intermediate' | 'interview' | 'advanced';
 type Category = string;
 
 // ============================================
@@ -502,11 +499,3 @@ async function main() {
 }
 
 main().catch(console.error);
-
-export default {
-  ContentGenerationPipeline,
-  ExerciseGenerator,
-  ContentFileWriter,
-  validateReflex,
-  validateGuided,
-};

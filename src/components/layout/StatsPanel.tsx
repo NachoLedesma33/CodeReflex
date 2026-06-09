@@ -127,15 +127,15 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
         <CardContent className="p-3">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <Flame className="w-4 h-4 text-orange-500" />
+              <Flame className="w-4 h-4 text-orange-600 dark:text-orange-500" />
               <span className="text-sm font-medium">{currentStreak}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-yellow-500" />
+              <Trophy className="w-4 h-4 text-yellow-600 dark:text-yellow-500" />
               <span className="text-sm font-medium">{totalXP} XP</span>
             </div>
             <div className="flex items-center gap-2">
-              <Target className="w-4 h-4 text-green-500" />
+              <Target className="w-4 h-4 text-green-600 dark:text-green-500" />
               <span className="text-sm font-medium">{totalExercises}</span>
             </div>
           </div>
@@ -153,26 +153,26 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <StatCard
-            icon={<Flame className="w-4 h-4 text-orange-500" />}
+            icon={<Flame className="w-4 h-4 text-orange-600 dark:text-orange-500" />}
             label="Racha Actual"
             value={currentStreak}
             subValue={`Mejor: ${longestStreak}`}
             highlight={currentStreak > 0}
           />
           <StatCard
-            icon={<Target className="w-4 h-4 text-green-500" />}
+            icon={<Target className="w-4 h-4 text-green-600 dark:text-green-500" />}
             label="Completados"
             value={totalExercises}
             subValue={`${totalAttempts} intentos`}
           />
           <StatCard
-            icon={<Zap className="w-4 h-4 text-yellow-500" />}
+            icon={<Zap className="w-4 h-4 text-yellow-600 dark:text-yellow-500" />}
             label="Mejor WPM"
             value={bestOverallWpm}
             highlight={bestOverallWpm > 40}
           />
           <StatCard
-            icon={<Clock className="w-4 h-4 text-blue-500" />}
+            icon={<Clock className="w-4 h-4 text-blue-600 dark:text-blue-500" />}
             label="Tiempo Total"
             value={formatTime(totalTypingTime)}
           />
@@ -186,7 +186,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
           </span>
           <span>{totalXP} / {getXPForLevel(level.level + 1)} XP</span>
         </div>
-        <div className="h-2 bg-zinc-700 rounded-full overflow-hidden">
+        <div className="h-2 bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500"
               style={{ width: `${Math.min(level.progress, 100)}%` }}
@@ -231,10 +231,10 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
                   key={i}
                   className={cn(
                     'w-2 h-2 rounded-sm',
-                    day.level === 0 && 'bg-zinc-800',
-                    day.level === 1 && 'bg-green-900',
-                    day.level === 2 && 'bg-green-700',
-                    day.level === 3 && 'bg-green-500',
+                    day.level === 0 && 'bg-zinc-200 dark:bg-zinc-800',
+                    day.level === 1 && 'bg-green-200 dark:bg-green-900',
+                    day.level === 2 && 'bg-green-300 dark:bg-green-700',
+                    day.level === 3 && 'bg-green-400 dark:bg-green-500',
                   )}
                   title={`${day.date}: ${day.count} exercises`}
                 />
@@ -243,10 +243,10 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
           </div>
           <div className="flex items-center gap-2 text-[10px] text-text-muted">
             <span>Menos</span>
-            <div className="w-2 h-2 bg-zinc-800 rounded-sm" />
-            <div className="w-2 h-2 bg-green-900 rounded-sm" />
-            <div className="w-2 h-2 bg-green-700 rounded-sm" />
-            <div className="w-2 h-2 bg-green-500 rounded-sm" />
+            <div className="w-2 h-2 bg-zinc-200 dark:bg-zinc-800 rounded-sm" />
+            <div className="w-2 h-2 bg-green-200 dark:bg-green-900 rounded-sm" />
+            <div className="w-2 h-2 bg-green-300 dark:bg-green-700 rounded-sm" />
+            <div className="w-2 h-2 bg-green-400 dark:bg-green-500 rounded-sm" />
             <span>Más</span>
           </div>
         </div>
@@ -271,7 +271,7 @@ export function StatsPanel({ className, compact = false }: StatsPanelProps) {
                         achievement.icon
                       )}
                     </span>
-                    <span className="text-yellow-200">{achievement.name}</span>
+                    <span className="text-yellow-700 dark:text-yellow-200">{achievement.name}</span>
                   </div>
               ))
             ) : (
@@ -335,7 +335,7 @@ function StatCard({ icon, label, value, subValue, highlight }: StatCardProps) {
       </div>
       <div className={cn(
         'text-lg font-semibold',
-        highlight ? 'text-yellow-500' : 'text-text-primary'
+        highlight ? 'text-yellow-600 dark:text-yellow-500' : 'text-text-primary'
       )}>
         {value}
       </div>

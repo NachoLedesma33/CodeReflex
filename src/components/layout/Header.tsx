@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useUIStore } from '@/stores/uiStore';
 import { useProgressStore } from '@/stores/progressStore';
 import { Button } from '@/components/ui/Button';
@@ -15,10 +14,6 @@ import {
   Zap,
   Keyboard,
   BookOpen,
-  RotateCcw,
-  AlertTriangle,
-  Check,
-  X,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -36,23 +31,14 @@ export function Header({ className }: HeaderProps) {
     mode,
     toggleTheme,
     setMode,
+    openSettings,
   } = useUIStore();
 
   const {
     totalXP,
     currentStreak,
     longestStreak,
-    totalExercises,
-    resetProgress,
   } = useProgressStore();
-
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
-  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
-
-  const handleResetProgress = () => {
-    resetProgress();
-    setShowResetConfirm(false);
-  };
 
   const level = Math.floor(totalXP / 100) + 1;
 
@@ -79,7 +65,7 @@ export function Header({ className }: HeaderProps) {
               className={cn(
                 'flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-md transition-colors',
                 mode === m.value
-                  ? 'bg-blue-500/20 text-blue-400'
+                  ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
                   : 'text-text-muted hover:text-text-primary'
               )}
             >
@@ -93,14 +79,14 @@ export function Header({ className }: HeaderProps) {
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 px-2 py-1 bg-orange-500/10 rounded-lg">
-            <Flame className="w-4 h-4 text-orange-500" />
-            <span className="text-sm font-medium text-orange-400">{currentStreak}</span>
+            <Flame className="w-4 h-4 text-orange-600 dark:text-orange-500" />
+            <span className="text-sm font-medium text-orange-600 dark:text-orange-400">{currentStreak}</span>
             <span className="text-xs text-text-muted">/ {longestStreak}</span>
           </div>
 
           <div className="flex items-center gap-1.5 px-2 py-1 bg-yellow-500/10 rounded-lg">
-            <Zap className="w-4 h-4 text-yellow-500" />
-            <span className="text-sm font-medium text-yellow-400">{totalXP}</span>
+            <Zap className="w-4 h-4 text-yellow-600 dark:text-yellow-500" />
+            <span className="text-sm font-medium text-yellow-600 dark:text-yellow-400">{totalXP}</span>
             <span className="text-xs text-text-muted">XP</span>
           </div>
 
@@ -131,71 +117,15 @@ export function Header({ className }: HeaderProps) {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setShowSettingsMenu(!showSettingsMenu)}
+              onClick={openSettings}
               className="p-2"
               title="Ajustes"
             >
               <Settings className="w-5 h-5 text-text-secondary" />
             </Button>
-
-            {showSettingsMenu && (
-              <div className="absolute right-0 top-full mt-2 w-48 bg-bg-elevated border border-border-strong rounded-lg shadow-lg z-50">
-                <div className="p-2">
-                  <div className="text-xs text-text-muted px-2 py-1">
-                    {totalExercises} ejercicios completados
-                  </div>
-                </div>
-                <div className="border-t border-border-strong">
-                  <button
-                    onClick={() => {
-                      setShowResetConfirm(true);
-                      setShowSettingsMenu(false);
-                    }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-border-strong/50"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                    Reiniciar Progreso
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </div>
-
-      {showResetConfirm && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-bg-elevated border border-border-strong rounded-lg p-4 w-80">
-            <div className="flex items-center gap-2 mb-3">
-              <AlertTriangle className="w-5 h-5 text-yellow-500" />
-              <span className="text-sm font-medium text-text-primary">¿Reiniciar Progreso?</span>
-            </div>
-            <p className="text-xs text-text-secondary mb-4">
-              Esto eliminará permanentemente todo tu progreso, XP, rachas y logros. Esta acción no se puede deshacer.
-            </p>
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowResetConfirm(false)}
-                className="flex-1"
-              >
-                <X className="w-4 h-4 mr-1" />
-                Cancelar
-              </Button>
-              <Button
-                variant="danger"
-                size="sm"
-                onClick={handleResetProgress}
-                className="flex-1"
-              >
-                <Check className="w-4 h-4 mr-1" />
-                Reiniciar
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 }

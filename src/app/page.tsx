@@ -6,6 +6,7 @@ import { useUIStore } from '@/stores/uiStore';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { StatsPanel } from '@/components/layout/StatsPanel';
+import { SettingsPanel } from '@/components/layout/SettingsPanel';
 import { Exercise } from '@/types';
 import {
   Loader2,
@@ -24,9 +25,11 @@ const LoadingFallback = () => (
     <div className="flex flex-col items-center gap-3">
       <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
       <span className="text-sm text-text-muted">Cargando ejercicio...</span>
+      </div>
+
+      <SettingsPanel />
     </div>
-  </div>
-);
+  );
 
 export default function Home() {
   const {
